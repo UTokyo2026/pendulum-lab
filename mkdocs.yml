@@ -1,0 +1,79 @@
+site_name: Wheeled Inverted Pendulum
+site_description: UTokyo Precision Engineering – Inverted Pendulum Fabrication Exercise 2026
+site_author: UTokyo2026
+site_url: https://utokyo2026.github.io/pendulum-lab/
+
+repo_name: UTokyo2026/pendulum-lab
+repo_url: https://github.com/UTokyo2026/pendulum-lab
+
+theme:
+  name: material
+  language: en
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Noto Serif
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - toc.integrate
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/UTokyo2026/pendulum-lab
+
+nav:
+  - Home: index.md
+  - English:
+    - Introduction & Schedule: en/intro.md
+    - Control Overview: en/overview.md
+    - "Week 1: Assembly & Bring-up": en/week1.md
+    - "Week 2: Encoder & Position Control": en/week2.md
+    - "Week 3: Advanced Modeling & Load Testing": en/week3.md
+    - "Week 4: Final Presentation": en/week4.md
+  - 日本語:
+    - はじめに・日程: jp/intro.md
+    - 制御概要: jp/overview.md
+    - Week 1：組立と立ち上げ: jp/week1.md
+    - Week 2：エンコーダと位置制御: jp/week2.md
+    - Week 3：高度なモデル化と負荷試験: jp/week3.md
+    - Week 4：最終発表: jp/week4.md
