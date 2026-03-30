@@ -1,6 +1,6 @@
-# Week 2: エンコーダと位置制御
+# Week 2: エンコーダと位置制御 {#page:w2}
 
-## Week 2 の概要と到達目標
+## Week 2 の概要と到達目標 {#w2-overview}
 
 Week 2 では，ロータリーエンコーダで機体の運動を計測し，その情報を **シミュレーション** と **実機制御** の両方へ活用することに焦点を当てます．具体的には，(1) 自作エンコーダの製作・取付，(2) 制御コードへのエンコーダフィードバック統合，(3) MATLAB/Simulink シミュレーションへの **位置** と **速度** フィードバック追加，を行います．\
 
@@ -14,7 +14,7 @@ Week 2 では，ロータリーエンコーダで機体の運動を計測し，
 
 - 倒立を保ちながら，安定した位置制御（少なくとも発散しない状態）を実現する
 
-## 並列作業
+## 並列作業 {#w2-parallel}
 
 推奨する役割分担は，学生 A（エンコーダ製作・取付），学生 B（コードへのエンコーダフィードバック追加とデバッグ），学生 C（MATLAB/Simulink シミュレーション拡張）です．役割は入れ替えて構いませんが，全員が一連の流れを理解してください．
 
@@ -24,32 +24,44 @@ Week 2 では，ロータリーエンコーダで機体の運動を計測し，
 
 - **学生 C:** Task C（MATLAB/Simulink シミュレーション拡張と比較） --- [第[4.5](#sec:w2-task-c)節参照](#sec:w2-task-c)
 
-## Task A：エンコーダの製作と取り付け（学生A）
+## Task A：エンコーダの製作と取り付け（学生A） {#sec:w2-task-a}
 
 この作業では，機体位置を計測するためのロータリーエンコーダを製作し，機体へ取り付けます．
 
-### ロータリーエンコーダ
+### ロータリーエンコーダ {#w2-rotary-encoder}
 
 倒立振子は，倒立角度だけでなく，位置（または速度）も検出してフィードバックしなければ安定しません． そこで，位置（または速度）の検出方法について考えてみましょう．
 
 最も基本的な方法は，タイヤやモータへロータリーエンコーダを取り付け，回転数を測ることです． 以下ではロータリーエンコーダの仕組みを説明します．
 
-ロータリーエンコーダは，ディスクに描いた白黒パターンをフォトインタラプタで読み取ることで実現できます[^20]． 図[18](#fig:encoder) のように，白黒パターンから数 mm 離した位置へフォトインタラプタを置いてスリットを回転させると，白黒の変化に応じた正弦波状の出力が得られます（距離が近いと矩形波に近づきます）．これを適当な閾値で二値化し，パルスのエッジを数えれば回転角を測れます．これがロータリーエンコーダの基本原理です．
+ロータリーエンコーダは，ディスクに描いた白黒パターンをフォトインタラプタで読み取ることで実現できます[^20]．Figure ([Fig.](#fig:encoder)) のように，白黒パターンから数 mm 離した位置へフォトインタラプタを置いてスリットを回転させると，白黒の変化に応じた正弦波状の出力が得られます（距離が近いと矩形波に近づきます）．これを適当な閾値で二値化し，パルスのエッジを数えれば回転角を測れます．これがロータリーエンコーダの基本原理です．
 
 回転方向が一方向だけならこれで十分ですが，双方向に回る場合は回転方向に関係なくカウントが増えてしまうため使えません．そこで，双方向回転を扱う場合はフォトインタラプタを 2 個使います．
 
-図[19](#fig:encoderAB) のように，2 個のフォトインタラプタをスリットパターンの 1/4 周期（または整数 $n$ に対して $(n+1/4)$ 周期）ずらした位置へ置きます．この 2 つの出力を A 相，B 相と呼びます．A 相と B 相は sin と cos のように 90 度位相がずれていますが，その前後関係は回転方向で変化します．例えば正回転（CW）で B 相が 90 度進むなら，逆回転（CCW）では B 相が 90 度遅れます．
+Figure ([Fig.](#fig:encoderAB)) のように，2 個のフォトインタラプタをスリットパターンの 1/4 周期（または整数 $n$ に対して $(n+1/4)$ 周期）ずらした位置へ置きます．この 2 つの出力を A 相，B 相と呼びます．A 相と B 相は sin と cos のように 90 度位相がずれていますが，その前後関係は回転方向で変化します．例えば正回転（CW）で B 相が 90 度進むなら，逆回転（CCW）では B 相が 90 度遅れます．
 
-したがって，適切に二値化した A 相・B 相に対して図[20](#fig:counting) のような処理を行えば，回転方向も含めて正しく回転角を測れます．図[20](#fig:counting) では A 相のエッジだけを数えており，これは 2 逓倍カウントと呼ばれます（立ち上がりに加えて立ち下がりも数える）．さらに B 相でも同様に数えると分解能は 2 倍になり，これを 4 逓倍カウントと呼びます． エンコーダ分解能をできるだけ高くしたいので，4 逓倍カウントになるようにプログラムしてください．
+したがって，適切に二値化した A 相・B 相に対して Figure ([Fig.](#fig:counting)) のような処理を行えば，回転方向も含めて正しく回転角を測れます．Figure ([Fig.](#fig:counting)) では A 相のエッジだけを数えており，これは 2 逓倍カウントと呼ばれます（立ち上がりに加えて立ち下がりも数える）．さらに B 相でも同様に数えると分解能は 2 倍になり，これを 4 逓倍カウントと呼びます． エンコーダ分解能をできるだけ高くしたいので，4 逓倍カウントになるようにプログラムしてください．
 
-![](../figs/encoder_principle.png)
-*ロータリーエンコーダの基本概念*
+<figure id="fig:encoder">
+<div class="center">
+<img src="../../figs/encoder_principle.png" alt="Basic concept of rotary encoder." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Basic concept of rotary encoder.</figcaption>
+</figure>
 
-![](../figs/encoder2phase.png)
-*2 相化による CW/CCW 回転の計測*
+<figure id="fig:encoderAB">
+<div class="center">
+<img src="../../figs/encoder2phase.png" alt="CW/CCW measurement by two-phase signals (A/B)." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Measurement of CW/CCW rotation by two phases (A/B).</figcaption>
+</figure>
 
-![](../figs/counting.png)
-*A/B 相パルスのカウント（2 逓倍カウントの例）*
+<figure id="fig:counting">
+<div class="center">
+<img src="../../figs/counting.png" alt="Counting A/B phase pulses (example of 2x counting)." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Counting A/B phase pulses (example of 2x counting).</figcaption>
+</figure>
 
 ### ロータリーエンコーダの製作
 
@@ -61,32 +73,44 @@ Week 2 では，ロータリーエンコーダで機体の運動を計測し，
 
 モータ軸に取り付ける場合は，モータ背面からわずかに突き出た軸にスケールを印刷した紙を貼り付けます．両面テープや糊テープをうまく使って貼ってください．しっかり固定するのが難しいですが，ほとんど力がかからないので軽く接着する程度で十分です（その代わりスケールをできるだけ軽くしてください）．モータ側に取り付けると，タイヤに取り付ける場合と比べて，減速比（＝タイヤ半径とモータ先端チューブ半径の比）だけ分解能が上がります．そのため，分割数が粗いスケール（例：90 度ごとに 4 分割）でも十分な性能が得られます．
 
-スケールの分割を細かくするほど分解能は上がりますが，細かいスケールほど高い取付精度が必要です．これは，スケールが細かいほどフォトインタラプタ出力の変化幅が小さくなるためです．取付精度が低いと，回転に伴ってスケール板との距離が変動し，出力のベースラインも揺れてしまいます．すると二値化がうまくできず，エンコーダが動作しなくなります（図[21](#fig:baseline) 参照）．
+スケールの分割を細かくするほど分解能は上がりますが，細かいスケールほど高い取付精度が必要です．これは，スケールが細かいほどフォトインタラプタ出力の変化幅が小さくなるためです．取付精度が低いと，回転に伴ってスケール板との距離が変動し，出力のベースラインも揺れてしまいます．すると二値化がうまくできず，エンコーダが動作しなくなります（Figure ([Fig.](#fig:baseline)) 参照）．
 
-![](../figs/baseline.png)
-*ベースライン変動の例*
+<figure id="fig:baseline">
+<div class="center">
+<img src="../../figs/baseline.png" alt="Example of baseline fluctuation." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Example of baseline fluctuation.</figcaption>
+</figure>
 
-スケールを粗くすると，フォトインタラプタをスケール板から少し離れた位置（5mm 程度？）に置いても十分な信号振幅が得られます．距離が遠いと，多少の距離変動は問題になりません． したがって，スケールを粗くすると作りやすくなりますが，粗いスケールでは制御が粗くなります．バランスをうまくとってください． いずれにしても，スケールの取付精度が重要です．スケール板をホイールにしっかり固定してください（図[22](#fig:encoder_disc) 参照）．
+スケールを粗くすると，フォトインタラプタをスケール板から少し離れた位置（5mm 程度？）に置いても十分な信号振幅が得られます．距離が遠いと，多少の距離変動は問題になりません． したがって，スケールを粗くすると作りやすくなりますが，粗いスケールでは制御が粗くなります．バランスをうまくとってください． いずれにしても，スケールの取付精度が重要です．スケール板をホイールにしっかり固定してください（Figure ([Fig.](#fig:encoder_disc)) 参照）．
 
 また，スケールの分解能を決める際は，フォトインタラプタの配置間隔を念頭に置いてください．配布キットではすでに 2 個のフォトインタラプタが基板に半田付けされています．この配置を考慮してスケールを設計してください．設計は PC で行います．Draw 系ソフトウェアで設計してもよいですし，Excel 等で円グラフを描いてスケールとして使うことも可能です．設計後はプリンタで印刷（プリンタがなければコンビニで印刷可）して切り出します． どうしても印刷できない場合は手描きでも構いません．黒い部分はマジックペンなどで塗りつぶしますが，ペンの種類によっては，見た目には黒くても赤外光を反射しやすいものがあります（＝フォトインタラプタには黒と認識されない）ので注意してください．
 
-![](../figs/encoder_disc.png)
-*エンコーダパターンの例．左は 1/4 周期分ずらした位置に配置した 2 個のフォトインタラプタで共通のスケールを読む設計，右は 2 個のフォトインタラプタを同じ角度（ただし中心からの距離が異なる）に配置し，互いに 1/4 周期ずれた 2 本のスリットをそれぞれ読む設計の例．*
+<figure id="fig:encoder_disc">
+<div class="center">
+<img src="../../figs/encoder_disc.png" alt="Example of encoder pattern." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Example of encoder pattern. Left assumes reading a common scale with two photo-interrupters arranged with a 1/4-period angular shift. Right assumes two photo-interrupters at the same angle (different radius), reading two slits shifted by 1/4 period.</figcaption>
+</figure>
 
 ### フォトインタラプタの半田付け
 
-スケールの読み取りはフォトインタラプタで行います．傾斜センサを参考に，フォトインタラプタをユニバーサル基板の切れ端へ半田付けし，L 字金具などでユニバーサルボードへ取り付けます（図[23](#fig:encoder_setup)）．基板は支給しますので申し出てください． 半田付けの要点は演習中に説明します．特に半田付けに慣れていない人は，説明をよく聞いてから作業してください．
+スケールの読み取りはフォトインタラプタで行います．傾斜センサを参考に，フォトインタラプタをユニバーサル基板の切れ端へ半田付けし，L 字金具などでユニバーサルボードへ取り付けます（Figure ([Fig.](#fig:encoder_setup))）．基板は支給しますので申し出てください． 半田付けの要点は演習中に説明します．特に半田付けに慣れていない人は，説明をよく聞いてから作業してください．
 
-![](../figs/encoder_setup.png)
-*フォトインタラプタの取り付け*
+<figure id="fig:encoder_setup">
+<div class="center">
+<img src="../../figs/encoder_setup.png" alt="Photo-interrupter attachment." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Photo-interrupter attachment.</figcaption>
+</figure>
 
 ### フォトインタラプタの調整と読み取り
 
 機体へ取り付けたら，フォトインタラプタの配線と抵抗をブレッドボードへ接続します．配布回路図には描かれていませんが，傾斜センサと同様の考え方で接続してください． ただし，フォトトランジスタへつなぐ抵抗値は各自の設計に応じて選んでください（参考までに，機体下部の傾斜センサでは 12k$\Omega$ を使っています）．多くの場合，ターゲットまでの距離は傾斜センサより近くなるため反射光量が増えます．その場合，抵抗値を下げないと出力が飽和します（波形の上側が切れて平らになる）．目安としては 1k$\Omega$ から 5k$\Omega$ 程度がよいでしょう．
 
-取り付けと配線が終わったら，簡易オシロスコープでフォトインタラプタ出力を見ながら二値化の閾値を決めます．二値化した 2 つの信号が概ね 90 度位相差になっていることを確認したら，図[20](#fig:counting) を参考にカウントプログラムを書いてください． 位相差は厳密に 90 度である必要はありませんが，エッジの前後関係が入れ替わると回転方向を誤って読んでしまうので注意が必要です（位相差は 0 度より大きく 180 度未満であればよい）．思った位相差が得られない場合は取付位置などを調整してください．必ずタイヤを一周回し，どの位置でも正しく読めることを確認しましょう．
+取り付けと配線が終わったら，簡易オシロスコープでフォトインタラプタ出力を見ながら二値化の閾値を決めます．二値化した 2 つの信号が概ね 90 度位相差になっていることを確認したら，Figure ([Fig.](#fig:counting)) を参考にカウントプログラムを書いてください． 位相差は厳密に 90 度である必要はありませんが，エッジの前後関係が入れ替わると回転方向を誤って読んでしまうので注意が必要です（位相差は 0 度より大きく 180 度未満であればよい）．思った位相差が得られない場合は取付位置などを調整してください．必ずタイヤを一周回し，どの位置でも正しく読めることを確認しましょう．
 
-## Task B：コードへのエンコーダフィードバック追加とデバッグ（学生B）
+## Task B：コードへのエンコーダフィードバック追加とデバッグ（学生B） {#sec:w2-task-b}
 
 []
 
@@ -130,8 +154,14 @@ Week 2 では，ロータリーエンコーダで機体の運動を計測し，
 
 **オシロスコープの使い方：** を mbed に書き込みます（制御パラメータを変更したい場合は .cpp ファイルを自分でコンパイルしても構いません）．書き込みが終わったら，Processing で を開き，三角形の実行ボタンを押してオシロスコープ画面を開きます．画面は上下に分かれており，上段に 3 チャンネル，下段に 3 チャンネルの計 6 チャンネルが表示されます．mbed プログラムで繰り返し周期ごとに 6 つのデータを送ると，送信順に表示されます（上段 R：赤，G：緑，B：青，下段 R：赤，G：緑，B：青の順）．ただし，オシロスコープ画面を起動した直後は正しい順番になっていないことがあります．画面起動後に mbed を一度リセットすると，表示もリセットされて正しい順番になります（フレームの同期が再調整されます）．
 
-![](../figs/fig2026/debug_oscilloscope.png)
-*デバッグツール 3：6チャンネルオシロスコープのリアルタイム制御データ表示（CH1〜CH3：センサ/角度；CH4〜CH6：角速度，フィルタ後角速度，基準線）*
+Figure ([Fig.](#fig:debuger3)) にオシロスコープ画面例を示します．
+
+<figure id="fig:debuger3">
+<div class="center">
+<img src="../../fig2026/debug_oscilloscope.png" alt="Debugging Tool 3: Six-Channel Oscilloscope." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Debugging Tool 3: Six-Channel Oscilloscope showing real-time control data (CH1–CH3: sensor/angle; CH4–CH6: angular velocity, filtered velocity, reference).</figcaption>
+</figure>
 
 は通常，(CH1) フォトインタラプタ 1 出力（上段赤），(CH2) フォトインタラプタ 2 出力（上段緑），(CH3) 両者の差分＝傾斜角相当（上段青），(CH4) 角速度（下段赤），(CH5) フィルタ後角速度（下段緑），(CH6) 128 の基準線（下段青）を表示するよう設計されています．
 
@@ -323,7 +353,7 @@ $$
 
 - 傾斜角は床面からの反射光量で測定しているため，床面の赤外線反射率によって傾斜センサのゲインが変わります．異なる床面で走行する場合は，必要に応じて制御ゲインを微調整してください．
 
-## Task C：エンコーダフィードバックを含む MATLAB シミュレーション（学生C）
+## Task C：エンコーダフィードバックを含む MATLAB シミュレーション（学生C） {#sec:w2-task-c}
 
 ### シミュレーションの役割
 
@@ -333,7 +363,7 @@ MATLAB と Simulink を使うと，コントローラ設計を高速に反復で
 
 さらに，シミュレーションは現代の制御技術者にとって重要な基礎技能です．MATLAB/Simulink のような実務的ツールを用いて，制御対象をモデル化し，解析し，設計する力は，産業界でも研究でも広く使われています．
 
-### MATLAB 環境の準備
+### MATLAB 環境の準備 {#sec:matlab-setup}
 
 ### 東京大学での MATLAB 利用
 
@@ -371,10 +401,14 @@ MATLAB と Simulink を使うと，コントローラ設計を高速に反復で
 
 本演習では，参考用の Simulink/Simscape モデルをマイルストーン例として配布しています．この例の狙いは過度に野心的なものではなく，Simscape Multibody で物理的に意味のあるプラントモデルを作る方法と，*傾斜角* に対するフィードバックループを閉じて PID で倒立振子を安定化する流れを示すことにあります．配布モデルでは，角度安定化までは調整済みですが，位置・速度の制御は学生向け拡張課題として残してあります．
 
-図[25](#fig:simulink_overview) に，このモデル全体の Simscape Multibody 構成を示します．最上位でも実機構成を反映するよう整理されており，カート側は車輪関連部品，"body" 側は振り子本体と付属部品をまとめた剛体アセンブリになっています．これにより，どのパラメータがカート側（車輪半径，車輪慣性，カート質量）に属し，どれが振り子本体側（質量分布，長さ，重心）に属するのかを見分けやすくなっています．
+Figure ([Fig.](#fig:simulink_overview)) に，このモデル全体の Simscape Multibody 構成を示します．最上位でも実機構成を反映するよう整理されており，カート側は車輪関連部品，"body" 側は振り子本体と付属部品をまとめた剛体アセンブリになっています．これにより，どのパラメータがカート側（車輪半径，車輪慣性，カート質量）に属し，どれが振り子本体側（質量分布，長さ，重心）に属するのかを見分けやすくなっています．
 
-![](../figs/fig2026/Sim1.png)
-*配布マイルストーン例の Simscape Multibody 全体図．モデルはカート（車輪関連アセンブリ）と body（振り子関連アセンブリ）に分けられ，ジョイントとフレーム変換で結ばれている．*
+<figure id="fig:simulink_overview">
+<div class="center">
+<img src="../../fig2026/Sim1.png" alt="Overall Simscape Multibody plant diagram (milestone example)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Overall Simscape Multibody plant diagram (milestone example).</figcaption>
+</figure>
 
 ### プラントモデルの考え方
 
@@ -382,13 +416,27 @@ MATLAB と Simulink を使うと，コントローラ設計を高速に反復で
 
 配布モデルでは，カート側と body 側を主に **Brick Solid**（直方体）と **Cylindrical Solid**（円柱）で構成しています．車輪，軸，スペーサは円柱で自然に表せますし，本体板，ブラケット，電子モジュールは直方体で十分近似できます．目標は写真のような形を再現することではなく，支配的な質量と慣性を捉え，シミュレーション上の設計判断が実機でも意味を持つようにすることです．
 
-図[26](#fig:simscape_body_build) は *body* サブアセンブリ，図[27](#fig:simscape_wheel_build) はカート／車輪側サブアセンブリを示しています．
+Figure ([Fig.](#fig:simscape_body_build)) は *body* サブアセンブリ，Figure ([Fig.](#fig:simscape_wheel_build)) はカート／車輪側サブアセンブリを示しています．
 
-| Simscape Multibody における body モデル | Simscape Multibody における wheel モデル |
-|---|---|
-| ![](../figs/fig2026/Sim2.png) | ![](../figs/fig2026/Sim3.png) |
-
-*倒立振子モデルで用いている Simscape Multibody サブアセンブリ．*
+<figure id="fig:simscape_subassemblies">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Body model in Simscape Multibody</th>
+<th>Wheel model in Simscape Multibody</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img id="fig:simscape_body_build" src="../../fig2026/Sim2.png" alt="Body model in Simscape Multibody" /></td>
+<td><img id="fig:simscape_wheel_build" src="../../fig2026/Sim3.png" alt="Wheel model in Simscape Multibody" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Body and wheel subassemblies used in the multibody plant model.</figcaption>
+</figure>
 
 これらの剛体を一体のアセンブリとしてつなぐために，モデルでは **Rigid Transform** ブロックを用います．Rigid Transform は 2 つの座標系の間の固定平行移動と固定回転を定義するブロックであり，カート座標系に対する車輪配置，振り子本体とその基準座標系のオフセット，ブレッドボードや電池など補助質量の配置に広く使われます．実際に重要なのは，車輪や body の *質量* と *サイズ*，そしてブレッドボード回路や電池モジュールに割り当てた質量・寸法です．これらが慣性を決め，ひいては安定化コントローラをどれだけ "攻めた" 設定にできるかへ強く影響します．
 
@@ -400,15 +448,25 @@ MATLAB と Simulink を使うと，コントローラ設計を高速に反復で
 
 実機では，傾斜角は床面反射光を見ている 2 個のフォトリフレクタ（フォトインタラプタ型センサ）から推定しています．また，車輪と床面の相互作用も「床面摩擦そのものを直接測る」わけではなく，モータ駆動と床反力の結果として現れます．マイルストーンモデルでは，まず制御の本質へ集中するため，これらを抽象化しています．すなわち，傾斜角は Revolute Joint の角度から直接取り出し，カートと床面の相互作用は Prismatic Joint の座標で表します．このようにすることで，機械的拘束を保ったまま素直にフィードバックループを閉じられます．
 
-図[29](#fig:simscape_joints_actuation) は，配布モデルで角度ジョイントと並進ジョイントがどのように設定されているかを示しています．Revolute Joint からは body 角度（必要なら角速度も）を取り出せます．Prismatic Joint からはカート位置と速度が得られます．さらに，マイルストーン例では Prismatic Joint を駆動点としても使っており，その運動／力を駆動することで body を安定化するカート運動を実現しています．位置制御を入れるなら当然ここからカート位置を読みますし，速度制御を入れるなら速度を直接使うか，後述する課題のようにエンコーダ相当の量子化を通して推定しても構いません．
+Figure ([Fig.](#fig:simscape_joints_actuation)) は，配布モデルで角度ジョイントと並進ジョイントがどのように設定されているかを示しています．Revolute Joint からは body 角度（必要なら角速度も）を取り出せます．Prismatic Joint からはカート位置と速度が得られます．さらに，マイルストーン例では Prismatic Joint を駆動点としても使っており，その運動／力を駆動することで body を安定化するカート運動を実現しています．位置制御を入れるなら当然ここからカート位置を読みますし，速度制御を入れるなら速度を直接使うか，後述する課題のようにエンコーダ相当の量子化を通して推定しても構いません．
 
-![](../figs/fig2026/Sim5.png)
-*配布多体系モデルにおけるジョイント構成．body 角度は **Revolute Joint**（ヒンジ）から取得し，床面方向のカート移動は **Prismatic Joint** で表す．Prismatic Joint は駆動点としても，外側ループ用の位置／速度信号源としても利用できる．*
+<figure id="fig:simscape_joints_actuation">
+<div class="center">
+<img src="../../fig2026/Sim5.png" alt="Joint configuration in the provided multibody model." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Joint configuration in the provided multibody model.</figcaption>
+</figure>
 
 これらの信号が取り出せるようになると，コントローラブロックで安定化ループを閉じられます．マイルストーン例では，主フィードバック信号として振り子の傾斜角だけを使っており，いわば *角度のみの安定化器* です．位置ループや速度ループは，学生が体系的に拡張できるよう，あえて初期状態では入れていません．
 
-![](../figs/fig2026/Sim4.png)
-*マイルストーン例で用いる PID コントローラサブシステム．配布コントローラは傾斜角を制御して倒立を安定化する．PID パラメータは手動でも PID Tuner でも調整できる．*
+Figure ([Fig.](#fig:simulink_highlevel)) に，高レベルの PID コントローラサブシステムを示します．
+
+<figure id="fig:simulink_highlevel">
+<div class="center">
+<img src="../../fig2026/Sim4.png" alt="PID controller subsystem used in the milestone example." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>PID controller subsystem used in the milestone example.</figcaption>
+</figure>
 
 ### シミュレーションの実行
 
@@ -429,7 +487,7 @@ $$
 
 ### PID パラメータの確認と調整
 
-ゲインを変更するには，コントローラサブシステム（図[30](#fig:simulink_highlevel)）を開き，角度制御に対応する PID ブロックをダブルクリックします．ブロック設定画面から $K_p$，$K_d$，微分フィルタ係数 $N$ を変更できます．配布モデルには一応動く初期パラメータが入っていますが，この課題で重要なのは，質量や慣性といった物理パラメータが，制御をどれだけ強くできるかにどう効くかを理解することです．したがって，自分で意図的にゲインを変え，時間応答がどう変わるかを見てください．
+ゲインを変更するには，コントローラサブシステム（Figure ([Fig.](#fig:simulink_highlevel))）を開き，角度制御に対応する PID ブロックをダブルクリックします．ブロック設定画面から $K_p$，$K_d$，微分フィルタ係数 $N$ を変更できます．配布モデルには一応動く初期パラメータが入っていますが，この課題で重要なのは，質量や慣性といった物理パラメータが，制御をどれだけ強くできるかにどう効くかを理解することです．したがって，自分で意図的にゲインを変え，時間応答がどう変わるかを見てください．
 
 より系統的に調整したい場合は **PID Tuner** を使って構いません．PID ブロックの設定画面から PID Tuner を開き，**Tune** を押すと，動作点でプラントを線形化して設計方針に応じたゲイン候補を提示してくれます．この演習では，目標応答速度を実機のサンプリング時間から想定される制御帯域に合わせるのがよいでしょう．調整後は，得られたゲインを PID ブロックへ戻してシミュレーションに反映してください．
 
@@ -437,8 +495,14 @@ $$
 
 シミュレーション実行後は，角度スコープを見て本当に安定化できているかを評価します．良い結果では，角度が適度なオーバーシュートの範囲内で 0（直立）へ戻り，平衡点へ近づくにつれて制御入力も小さくなります．もし制御入力スコープがあるなら，駆動信号が長時間飽和していないかも確認してください．飽和が続く場合は，ゲインが攻めすぎているか，あるいは質量・慣性パラメータを見直す必要がある可能性があります．
 
-![](../figs/fig2026/Sim6.png)
-*倒立振子シミュレーション結果の例（Sim6）．*
+Figure ([Fig.](#fig:simulation_result)) にシミュレーション結果例を示します．
+
+<figure id="fig:simulation_result">
+<div class="center">
+<img src="../../fig2026/Sim6.png" alt="Screenshot of the simulation result (Sim6)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Screenshot of a simulation result (Sim6).</figcaption>
+</figure>
 
 ### 何を見るべきか
 

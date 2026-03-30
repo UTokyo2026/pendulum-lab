@@ -1,8 +1,8 @@
-# Purpose of the Exercise
+# Purpose of the Exercise {#overview-purpose}
 
 <figure id="fig:pendulum_image">
 <div class="center">
-<img src="../../figs/pendulum_image.png" alt="Wheeled inverted pendulum platform." />
+<img src="../../figs/pendulum_image.png" alt="Wheeled inverted pendulum platform." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Wheeled inverted pendulum platform (example).</figcaption>
 </figure>
@@ -32,15 +32,15 @@ Although wheeled inverted pendulum kits are commercially available, we will not 
 
     - **On the day**: Installation of the programming environment and assembly of the mechanism will be explained on the day of the exercise.
 
-# Overview of Inverted Pendulum Control
+# Overview of Inverted Pendulum Control {#overview-control}
 
-## Model of the Inverted Pendulum
+## Model of the Inverted Pendulum {#overview-model}
 
 First, let's consider the overview of the control of the wheeled inverted pendulum. Figure ([Fig.](#fig:model)) is a simplified model of the inverted pendulum. The pendulum (= body of the inverted pendulum, mass $m_p$, moment of inertia $j_p$) stands from the axis of the tires (mass $m_w$, moment of inertia $j_w$). There is a motor between the tire and the pendulum, and when the motor is driven, opposite torques ($\pm\tau$) are generated on both. Let the horizontal center position of the tire be $x$. For simplicity, assume there is no friction or loss other than the friction acting on the tire from the ground. We want to control the angle of the inverted pendulum $\theta$ and the tire position $x$ (= body position).
 
 <figure id="fig:model">
 <div class="center">
-<img src="../../figs/model.png" alt="Simplified model of the wheeled inverted pendulum." />
+<img src="../../figs/model.png" alt="Simplified model of the wheeled inverted pendulum." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Simplified model of the wheeled inverted pendulum.</figcaption>
 </figure>
@@ -49,7 +49,7 @@ Consider the equations of motion for the pendulum and the tire separately as sho
 
 <figure id="fig:model_disassembled">
 <div class="center">
-<img src="../../figs/model_disassembled.png" alt="Forces and torques on the disassembled model." />
+<img src="../../figs/model_disassembled.png" alt="Forces and torques on the disassembled model." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Forces and torques (disassembled view).</figcaption>
 </figure>
@@ -127,7 +127,7 @@ $$
 \label{eq:hor}
 $$
 
-## Control of Pendulum Angle
+## Control of Pendulum Angle {#overview-angle-control}
 
 Ultimately, we want to control both the pendulum rotation angle $\theta$ and the body position $x$ simultaneously. However, first, we focus only on the pendulum rotation angle $\theta$ and consider controlling it so that $\theta=0$, that is, simply inverting the pendulum. To do this, find $\ddot{x}$ from equation \(\eqref{eq:hor}\), substitute it into equation \(\eqref{eq:rot}\), and obtain a differential equation for $\theta$ only.
 
@@ -148,7 +148,7 @@ This equation represents the same situation as a pendulum with mass $m_p$ and mo
 
 <figure id="fig:simple_pendulum">
 <div class="center">
-<img src="../../figs/simple_pendulum.png" alt="Equivalent pendulum (angle dynamics only)." />
+<img src="../../figs/simple_pendulum.png" alt="Equivalent pendulum (angle dynamics only)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Equivalent pendulum (angle dynamics only).</figcaption>
 </figure>
@@ -157,7 +157,7 @@ Let's consider the behavior of the pendulum in Figure ([Fig.](#fig:simple_pendul
 
 <figure id="fig:spring">
 <div class="center">
-<img src="../../figs/spring.png" alt="Spring-mass system analogy." />
+<img src="../../figs/spring.png" alt="Spring-mass system analogy." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Spring-mass system analogy.</figcaption>
 </figure>
@@ -166,12 +166,12 @@ Thus, the inverted pendulum can be interpreted as unstable because it has a nega
 
 <figure id="fig:stabilize">
 <div class="center">
-<img src="../../figs/stabilize.png" alt="Stabilization via virtual spring and damper." />
+<img src="../../figs/stabilize.png" alt="Stabilization via virtual spring and damper." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Stabilization via virtual spring and damper (control interpretation).</figcaption>
 </figure>
 
-## PD Control
+## PD Control {#overview-pd-control}
 
 We consider a method to virtually realize a spring and damper by feedback control. Since the total force of the spring and damper can be expressed as $K_p \theta + K_d \dot{\theta}$, if the pendulum angle $\theta$ (and its derivative $\dot{\theta}$) is known, we can make the motor generate torque such that:
 
@@ -195,7 +195,7 @@ $$
 
 Here, $K = K_p - m_pgl$ is the spring constant of the combined spring of \"negative spring due to gravity\" and \"positive spring due to control\". From this equation, it can be seen that the PD-controlled inverted pendulum moves in the same way as a spring-mass-damper system with spring constant $K$ and damping coefficient $K_d$. That is, if an angle deviated from the equilibrium point ($\theta=0$) is given as an initial value, it converges to the equilibrium point $\theta=0$ while performing damped oscillation. Since it is the same as a normal spring-mass-damper system, increasing the spring constant ($\approx$ proportional gain) increases the oscillation frequency, and increasing the derivative gain increases damping, causing the oscillation to decay quickly.
 
-## Is this enough to invert?
+## Is this enough to invert? {#overview-is-this-enough}
 
 If you are lucky, controlling the motor torque based on equation \(\eqref{eq:pd}\) alone will keep the inverted pendulum stable. However, in reality, there are many cases where this alone cannot invert it (it inverts for a short time but does not last). The causes are offsets in the inclination sensor that measures the inclination angle $\theta$, and disturbances (forces applied from outside the system, such as wind or desk vibration).
 
@@ -203,7 +203,7 @@ For example, if there is even a slight offset (= deviation in output value) in t
 
 To prevent this, it is necessary not only to control by looking at the angle but also to detect the position of the inverted pendulum ($\propto$ amount of tire rotation) and add PD control for the positional deviation. We will discuss this point again later.
 
-## Motor Torque
+## Motor Torque {#overview-motor-torque}
 
 In order to perform control based on equation \(\eqref{eq:pd}\), there is one more thing to consider. It is about the motor torque. When we drive a motor, we do so by applying a voltage across the motor terminals. If this voltage is changed, the generated torque of the motor also changes, but what is the relationship between voltage and generated torque?
 
@@ -211,7 +211,7 @@ An equivalent circuit model of a DC motor is shown in Figure ([Fig.](#fig:motor)
 
 <figure id="fig:motor">
 <div class="center">
-<img src="../../figs/motor_model.png" alt="Equivalent circuit model of a DC motor." />
+<img src="../../figs/motor_model.png" alt="Equivalent circuit model of a DC motor." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Equivalent circuit model of a DC motor.</figcaption>
 </figure>

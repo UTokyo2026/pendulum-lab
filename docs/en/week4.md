@@ -1,6 +1,6 @@
-# Week 4: Final Presentation
+# Week 4: Final Presentation {#page:w4}
 
-## Week 4 Overview & Objectives
+## Week 4 Overview & Objectives {#w4-overview}
 
 Week 4 is the final wrap-up. You will present your design and results, demonstrate a working system, and answer technical questions. The key is to provide a coherent evidence chain:\
 **modeling assumptions** $\rightarrow$ **controller design** $\rightarrow$ **implementation** $\rightarrow$ **validation (simulation and hardware)** $\rightarrow$ **lessons learned**.\

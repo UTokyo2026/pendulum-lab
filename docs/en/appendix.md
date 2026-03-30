@@ -1,4 +1,4 @@
-# Appendix
+# Appendix {#page:appendix}
 
 This page collects the appendices referenced throughout the text.
 

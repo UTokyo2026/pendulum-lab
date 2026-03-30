@@ -1,6 +1,6 @@
-# Week 2: Encoder & Position Control
+# Week 2: Encoder & Position Control {#page:w2}
 
-## Week 2 Overview & Objectives
+## Week 2 Overview & Objectives {#w2-overview}
 
 Week 2 focuses on measuring the cart motion using a rotary encoder and using that information for both **simulation** and **real hardware control**. You will (1) build and install your own encoder, (2) integrate encoder feedback into the control code, and (3) extend the MATLAB/Simulink simulation to include **position** and **velocity** feedback.\
 
@@ -14,7 +14,7 @@ Week 2 focuses on measuring the cart motion using a rotary encoder and using th
 
 - Achieve stable position control (or at least bounded drift) while maintaining inversion
 
-## Parallel Tasks
+## Parallel Tasks {#w2-parallel}
 
 Recommended parallel roles: Student A (encoder fabrication/installation), Student B (encoder feedback in code + debugging), Student C (MATLAB/Simulink simulation extension). Roles can be rotated, but all students should understand the end-to-end flow.
 
@@ -24,7 +24,7 @@ Recommended parallel roles: Student A (encoder fabrication/installation), Studen
 
 - **Student C:** Task C (MATLAB/Simulink simulation extension and comparison) --- [see Section [4.5](#sec:w2-task-c)](#sec:w2-task-c)
 
-## Task A: Encoder Fabrication and Installation (Student A)
+## Task A: Encoder Fabrication and Installation (Student A) {#sec:w2-task-a}
 
 This task focuses on fabricating and installing a rotary encoder for cart position measurement.
 
@@ -38,7 +38,7 @@ A rotary encoder can be realized by reading a black and white pattern drawn on a
 
 <figure id="fig:encoder">
 <div class="center">
-<img src="../../figs/encoder_principle.png" alt="Basic concept of rotary encoder." />
+<img src="../../figs/encoder_principle.png" alt="Basic concept of rotary encoder." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Basic concept of rotary encoder.</figcaption>
 </figure>
@@ -49,7 +49,7 @@ As shown in Figure ([Fig.](#fig:encoderAB)), two photo-interrupters are placed a
 
 <figure id="fig:encoderAB">
 <div class="center">
-<img src="../../figs/encoder2phase.png" alt="CW/CCW measurement by two-phase signals (A/B)." />
+<img src="../../figs/encoder2phase.png" alt="CW/CCW measurement by two-phase signals (A/B)." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Measurement of CW/CCW rotation by two phases (A/B).</figcaption>
 </figure>
@@ -58,7 +58,7 @@ Therefore, by performing calculation like Figure ([Fig.](#fig:counting)) for A-p
 
 <figure id="fig:counting">
 <div class="center">
-<img src="../../figs/counting.png" alt="Counting A/B phase pulses (example of 2x counting)." />
+<img src="../../figs/counting.png" alt="Counting A/B phase pulses (example of 2x counting)." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Counting A/B phase pulses (example of 2x counting).</figcaption>
 </figure>
@@ -77,7 +77,7 @@ The finer the pattern division number of the scale, the higher the resolution as
 
 <figure id="fig:baseline">
 <div class="center">
-<img src="../../figs/baseline.png" alt="Example of baseline fluctuation." />
+<img src="../../figs/baseline.png" alt="Example of baseline fluctuation." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Example of baseline fluctuation.</figcaption>
 </figure>
@@ -88,7 +88,7 @@ Also, when deciding resolution of scale, keep photo-interrupter arrangement inte
 
 <figure id="fig:encoder_disc">
 <div class="center">
-<img src="../../figs/encoder_disc.png" alt="Example of encoder pattern." />
+<img src="../../figs/encoder_disc.png" alt="Example of encoder pattern." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Example of encoder pattern. Left assumes reading a common scale with two photo-interrupters arranged with a 1/4-period angular shift. Right assumes two photo-interrupters at the same angle (different radius), reading two slits shifted by 1/4 period.</figcaption>
 </figure>
@@ -99,7 +99,7 @@ Reading of scale is done by photo-interrupter. Referencing the inclination angle
 
 <figure id="fig:encoder_setup">
 <div class="center">
-<img src="../../figs/encoder_setup.png" alt="Photo-interrupter attachment." />
+<img src="../../figs/encoder_setup.png" alt="Photo-interrupter attachment." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Photo-interrupter attachment.</figcaption>
 </figure>
@@ -110,7 +110,7 @@ After attachment to machine, connect wiring and resistors of photo-interrupter t
 
 After completion of attachment and wiring, determine threshold for binarization while looking at photo-interrupter output with simple oscilloscope. After confirming that phases of two binarized signals are shifted by roughly 90 degrees, write counting program referring to Figure ([Fig.](#fig:counting)). Phase difference does not need to be perfectly 90 degrees, but if order of edges is swapped, rotation direction will be read wrongly, so care is needed (Phase difference just needs to be larger than 0 degrees and less than 180 degrees). If desired phase difference is not obtained, adjust mounting position etc. (Make sure to rotate tire once and confirm readable at any position).
 
-## Task B: Add Encoder Feedback to Code and Debug (Student B)
+## Task B: Add Encoder Feedback to Code and Debug (Student B) {#sec:w2-task-b}
 
 []
 
@@ -158,7 +158,7 @@ An example oscilloscope screen is shown in Figure ([Fig.](#fig:debuger3)).
 
 <figure id="fig:debuger3">
 <div class="center">
-<img src="../../fig2026/debug_oscilloscope.png" alt="Debugging Tool 3: Six-Channel Oscilloscope." />
+<img src="../../fig2026/debug_oscilloscope.png" alt="Debugging Tool 3: Six-Channel Oscilloscope." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Debugging Tool 3: Six-Channel Oscilloscope showing real-time control data (CH1–CH3: sensor/angle; CH4–CH6: angular velocity, filtered velocity, reference).</figcaption>
 </figure>
@@ -353,7 +353,7 @@ Here are some adjustment points.
 
 - Since inclination angle is measured by reflected light amount from floor surface, gain of inclination sensor changes depending on infrared reflectance of floor surface. When moving on different floor surface, fine-tune control gain as necessary.
 
-## Task C: MATLAB Simulation with Encoder Feedback (Student C)
+## Task C: MATLAB Simulation with Encoder Feedback (Student C) {#sec:w2-task-c}
 
 ### Role of Simulation
 
@@ -363,7 +363,7 @@ MATLAB and Simulink enable rapid iteration through controller designs. You can a
 
 Beyond this experiment, simulation is an essential skill for modern control engineers. The ability to model, simulate, and analyze control systems using professional tools like MATLAB/Simulink is widely used in industry and research, making this a valuable learning experience in its own right.
 
-### Setting Up MATLAB Environment
+### Setting Up MATLAB Environment {#sec:matlab-setup}
 
 ### Accessing MATLAB at the University of Tokyo
 
@@ -405,7 +405,7 @@ Figure ([Fig.](#fig:simulink_overview)) shows the overall Simscape Multibody dia
 
 <figure id="fig:simulink_overview">
 <div class="center">
-<img src="../../fig2026/Sim1.png" alt="Overall Simscape Multibody plant diagram (milestone example)." />
+<img src="../../fig2026/Sim1.png" alt="Overall Simscape Multibody plant diagram (milestone example)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Overall Simscape Multibody plant diagram of the provided milestone example. The model is organized into the cart (wheel-related assembly) and the body (pendulum-related assembly), connected by joints and frame transforms.</figcaption>
 </figure>
@@ -452,7 +452,7 @@ Figure ([Fig.](#fig:simscape_joints_actuation)) highlights how the angle joint a
 
 <figure id="fig:simscape_joints_actuation">
 <div class="center">
-<img src="../../fig2026/Sim5.png" alt="Joint configuration in the provided multibody model." />
+<img src="../../fig2026/Sim5.png" alt="Joint configuration in the provided multibody model." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Joint configuration in the provided multibody model. The body angle is obtained from a <strong>Revolute Joint</strong> (hinge), while cart translation along the ground direction is modeled by a <strong>Prismatic Joint</strong>. The prismatic joint can also be used as the actuation point and as a source of position/velocity signals for outer-loop control.</figcaption>
 </figure>
@@ -463,7 +463,7 @@ The high-level PID controller subsystem is shown in Figure ([Fig.](#fig:simulink
 
 <figure id="fig:simulink_highlevel">
 <div class="center">
-<img src="../../fig2026/Sim4.png" alt="PID controller subsystem used in the milestone example." />
+<img src="../../fig2026/Sim4.png" alt="PID controller subsystem used in the milestone example." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>PID controller subsystem used in the milestone example. The provided controller stabilizes the inverted pendulum by regulating the tilt angle. PID parameters can be tuned manually or with the PID Tuner workflow.</figcaption>
 </figure>
@@ -499,7 +499,7 @@ An example simulation result is shown in Figure ([Fig.](#fig:simulation_result))
 
 <figure id="fig:simulation_result">
 <div class="center">
-<img src="../../fig2026/Sim6.png" alt="Screenshot of the simulation result (Sim6)." />
+<img src="../../fig2026/Sim6.png" alt="Screenshot of the simulation result (Sim6)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Screenshot of a simulation result (Sim6).</figcaption>
 </figure>

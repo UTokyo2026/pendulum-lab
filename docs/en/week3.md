@@ -1,6 +1,6 @@
-# Week 3: Advanced Modeling & Load Testing
+# Week 3: Advanced Modeling & Load Testing {#page:w3}
 
-## Week 3 Overview & Objectives
+## Week 3 Overview & Objectives {#w3-overview}
 
 Week 3 focuses on bridging the gap between an ideal simulation and real hardware by (1) improving the simulation model (wheel dynamics + ground friction), (2) performing controlled **load tests** on the real system, and (3) systematically tuning and comparing controllers (PID vs. at least one advanced method such as LQR or MPC).\
 
@@ -23,7 +23,7 @@ Week 3 focuses on bridging the gap between an ideal simulation and real hardwar
     
     - **Work on a clear floor and keep hands away from moving wheels.** Prepare a "catch" posture to prevent hard impacts when the system falls.
 
-## Parallel Tasks
+## Parallel Tasks {#w3-parallel}
 
 Recommended parallel roles: Student A (hardware load attachment + load testing), Student B (simulation model enhancement), Student C (MATLAB tuning + controller comparison). Roles can be rotated, but keep a single shared test log (same naming and metrics).\
 
@@ -33,7 +33,7 @@ Recommended parallel roles: Student A (hardware load attachment + load testing),
 
 - **Student C:** Task C (PID tuning + advanced controller comparison) --- [see Section [5.5](#sec:w3-task-c)](#sec:w3-task-c)
 
-## Task A: Load Attachment and Hardware Tests (Student A)
+## Task A: Load Attachment and Hardware Tests (Student A) {#sec:w3-task-a}
 
 This task adds controlled load to the cart/pendulum and evaluates stability and performance on real hardware.
 
@@ -66,7 +66,7 @@ This task adds controlled load to the cart/pendulum and evaluates stability and 
 
 - If available, screenshots/plots of key signals (angle, control input, encoder-based motion) for at least one baseline and one loaded trial
 
-## Task B: Extend Simulation (Wheel Dynamics + Ground Friction) (Student B)
+## Task B: Extend Simulation (Wheel Dynamics + Ground Friction) (Student B) {#sec:w3-task-b}
 
 This task improves the simulation so it can explain observed differences between Week 2 simulation and hardware.
 
@@ -91,7 +91,7 @@ This task improves the simulation so it can explain observed differences between
 
 - Save plots in a consistent format so they can be included in the Week 3 group report
 
-## Task C: PID Tuning and Controller Comparison (Student C)
+## Task C: PID Tuning and Controller Comparison (Student C) {#sec:w3-task-c}
 
 This task tunes PID gains in MATLAB under load and compares with at least one alternative controller.
 

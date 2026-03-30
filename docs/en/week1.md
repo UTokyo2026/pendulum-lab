@@ -1,6 +1,6 @@
-# Week 1: Assembly & Bring-up
+# Week 1: Assembly & Bring-up {#page:w1}
 
-## Week 1 Overview & Objectives
+## Week 1 Overview & Objectives {#w1-overview}
 
 Week 1 focuses on building and bringing up the hardware platform for the inverted pendulum. The work proceeds in two parts: (1) three **parallel tasks** that can be done simultaneously by different students, and (2) a **team bring-up** process where the circuit is assembled and verified step-by-step.
 
@@ -18,7 +18,7 @@ Week 1 focuses on building and bringing up the hardware platform for the inverte
 
 **Parallel tasks (recommended roles):** Student A (mechanical), Student B (microcontroller), Student C (Fritzing/wiring design). Roles can be rotated, but all students should participate in the stage-by-stage bring-up and verification.
 
-## Electronic Components Explanation
+## Electronic Components Explanation {#w1-electronic-components}
 
 Next, we will assemble the electronic circuit, but before that, we will explain the parts to be used. The specific circuit assembly work is described later in this Week 1 section, so please read the explanation first.
 
@@ -31,7 +31,7 @@ Next, we will assemble the electronic circuit, but before that, we will explain 
     
     - Even if discharged, do not touch the IC/LSI terminals directly with your fingers just in case.
 
-### Resistor and Capacitor Markings (Value & Polarity)
+### Resistor and Capacitor Markings (Value & Polarity) {#sec:passive_markings}
 
 #### Resistors: how to identify the resistance value
 
@@ -72,7 +72,7 @@ A photo-interrupter is an optical element combining an LED and a phototransistor
 
 <figure id="fig:interrupter">
 <div class="center">
-<img src="../../figs/photo_interrupters.png" alt="Photo-interrupters (reflective and transmissive types)." />
+<img src="../../figs/photo_interrupters.png" alt="Photo-interrupters (reflective and transmissive types)." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Photo-interrupters (reflective and transmissive types).</figcaption>
 </figure>
@@ -81,7 +81,7 @@ The basic circuit of a photo-interrupter is shown in Figure ([Fig.](#fig:pi_circ
 
 <figure id="fig:pi_circuit">
 <div class="center">
-<img src="../../figs/pi_circuit.png" alt="Basic photo-interrupter circuit diagram." />
+<img src="../../figs/pi_circuit.png" alt="Basic photo-interrupter circuit diagram." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Basic photo-interrupter circuit diagram.</figcaption>
 </figure>
@@ -110,11 +110,11 @@ A three-terminal regulator is an IC that takes a fluctuating voltage as input an
 
 Actually, mbed's board is also equipped with a 3.3V three-terminal regulator (you can see a chip called LD33), and stabilized 3.3V is output from the VOUT pin on the upper right (see Figure ([Fig.](#fig:mbed_pin))). You can use this voltage, but due to the size of the breadboard, this pin cannot be accessed, so we will install a regulator ourselves this time.
 
-## Parallel Assembly Tasks
+## Parallel Assembly Tasks {#w1-parallel-assembly}
 
 The following three tasks can be performed in parallel. Each task produces outputs that will be used in the team circuit assembly and bring-up.
 
-### Task A: Mechanical Assembly (Student A)
+### Task A: Mechanical Assembly (Student A) {#sec:w1-mechanical-assembly}
 
 Now that you understand the outline of control, let's look at the assembly of the inverted pendulum **(Actual assembly will be done on the day of the exercise, but please read through it in advance).**[^7] The parts used here are as follows[^8] (electrical parts are excluded as they are explained separately in this Week 1 section).
 
@@ -140,7 +140,7 @@ First, attach the inclination sensor (No. 6) to the bottom of the universal boar
 
 <figure id="fig:angle_sensor">
 <div class="center">
-<img src="../../figs/angle_sensor.png" alt="Inclination sensor attachment (bottom view)." />
+<img src="../../figs/angle_sensor.png" alt="Inclination sensor attachment (bottom view)." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Inclination sensor attachment (bottom view).</figcaption>
 </figure>
@@ -151,7 +151,7 @@ Next, attach the DC motor (No. 3). Use the motor bracket (No. 4) to attach it to
 
 <figure id="fig:motor_setup">
 <div class="center">
-<img src="../../figs/motor_tire.png" alt="Motor bracket and motor–tire contact (example)." />
+<img src="../../figs/motor_tire.png" alt="Motor bracket and motor–tire contact (example)." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Motor bracket and motor–tire contact (example).</figcaption>
 </figure>
@@ -174,12 +174,12 @@ Up to this point, the basic mechanical structure is complete. A completed exampl
 
 <figure id="fig:machine">
 <div class="center">
-<img src="../../figs/assembled.png" alt="Assembled platform example (Week 1 stage)." />
+<img src="../../figs/assembled.png" alt="Assembled platform example (Week 1 stage)." style="max-width: 560px; width: 100%; height: auto;" />
 </div>
 <figcaption>Assembled platform example (Week 1 stage).</figcaption>
 </figure>
 
-### Task B: Microcontroller Setup (Student B)
+### Task B: Microcontroller Setup (Student B) {#sec:w1-microcontroller-setup}
 
 The microcontroller used this time is a series called mbed[^10]. The feature of mbed is that the development environment using C/C++ language is prepared on the cloud (online), and you can start development immediately by signing up. Also, writing a program to the microcontroller is as simple as connecting the mbed via USB (recognized as a USB drive by the computer) and copying the compiled program, making it easier to handle compared to other microcontrollers. There are various microcontroller boards in the mbed series, but this time we will use the most standard LPC1768.
 
@@ -203,9 +203,9 @@ In the compiler screen menu, select \"File\" $\rightarrow$ \"New Project\" and c
 </thead>
 <tbody>
 <tr>
-<td><img src="../../fig2026/keil_new_project.png" alt="Create new project" /></td>
-<td><img src="../../fig2026/keil_editor.png" alt="Select example template" /></td>
-<td><img src="../../fig2026/keil_build.png" alt="Compile button" /></td>
+<td><img src="../../fig2026/keil_new_project.png" alt="Create new project" style="max-width: 260px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/keil_editor.png" alt="Select example template" style="max-width: 260px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/keil_build.png" alt="Compile button" style="max-width: 260px; width: 100%; height: auto;" /></td>
 </tr>
 </tbody>
 </table>
@@ -227,7 +227,7 @@ Generally, these functions are not all used at the same time, so in this board (
 
 <figure id="fig:mbed_pin">
 <div class="center">
-<img src="../../figs/pinout.png" alt="Pinout of mbed LPC1768 (source: https://os.mbed.com/platforms/mbed-LPC1768/)." />
+<img src="../../figs/pinout.png" alt="Pinout of mbed LPC1768 (source: https://os.mbed.com/platforms/mbed-LPC1768/)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Pinout of mbed LPC1768 (source: https://os.mbed.com/platforms/mbed-LPC1768/).</figcaption>
 </figure>
@@ -332,7 +332,7 @@ Serial communication is invaluable for debugging control programs. You can print
 
 However, be cautious when using printf inside interrupt service routines, as it can take significant time and may disrupt timing-critical control loops. For time-critical debugging, consider toggling a digital output pin and observing it with an oscilloscope instead. For more details on Serial communication, refer to the mbed Serial API documentation.
 
-### Task C: Breadboard Wiring Design (Student C)
+### Task C: Breadboard Wiring Design (Student C) {#sec:w1-breadboard-wiring-design}
 
 #### How to use Breadboard
 
@@ -340,14 +340,14 @@ A breadboard is a board often used for prototyping electrical circuits, allowing
 
 <figure id="fig:breadboard">
 <div class="center">
-<img src="../../figs/breadboard.png" alt="Breadboard overview." />
+<img src="../../figs/breadboard.png" alt="Breadboard overview." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Breadboard overview.</figcaption>
 </figure>
 
 <figure id="fig:breadboard_sample">
 <div class="center">
-<img src="../../figs/breadboard_sample.png" alt="Example wiring on a breadboard." />
+<img src="../../figs/breadboard_sample.png" alt="Example wiring on a breadboard." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Example wiring on a breadboard.</figcaption>
 </figure>
@@ -400,7 +400,7 @@ Before starting the team circuit assembly, confirm that:
 
 - The Fritzing design includes **all modules** and all required nets are routed and checked
 
-## Circuit Assembly (Team Collaboration)
+## Circuit Assembly (Team Collaboration) {#sec:w1-circuit-assembly}
 
 This part is performed as a team. To minimize the risk of errors and facilitate debugging, we assemble and test the circuit in three stages.
 
@@ -575,8 +575,8 @@ This versatile tool is essential for verifying sensor operation, detecting mecha
 </thead>
 <tbody>
 <tr>
-<td><img src="../../fig2026/debug_motor_controller.png" alt="Debugging Tool 1: Motor Controller GUI" /></td>
-<td><img src="../../fig2026/debug_analog_visualizer.png" alt="Debugging Tool 2: Analog Input Visualizer" /></td>
+<td><img src="../../fig2026/debug_motor_controller.png" alt="Debugging Tool 1: Motor Controller GUI" style="max-width: 360px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/debug_analog_visualizer.png" alt="Debugging Tool 2: Analog Input Visualizer" style="max-width: 360px; width: 100%; height: auto;" /></td>
 </tr>
 </tbody>
 </table>
@@ -636,7 +636,7 @@ An implementation example of the complete circuit is shown in Figure ([Fig.](#fi
 
 <figure id="fig:circuit_sample">
 <div class="center">
-<img src="../../figs/circuit_sample.png" alt="Complete circuit implementation example." />
+<img src="../../figs/circuit_sample.png" alt="Complete circuit implementation example." style="max-width: 900px; width: 100%; height: auto;" />
 </div>
 <figcaption>Complete circuit implementation example.</figcaption>
 </figure>
@@ -653,7 +653,8 @@ With the complete circuit assembled, you can now test the integrated control sys
 
 This is the primary tool for tuning control parameters and debugging the complete inverted pendulum system. See the file for detailed usage instructions, communication protocol, and how to modify the programs.
 
-#### Team Final Task: Stand-up Experiment (Pre-Encoder)
+<a id="sec:inverted-experiment"></a>
+#### Team Final Task: Stand-up Experiment (Pre-Encoder) {#sec:w1-standup-pre-encoder}
 
 At the end of Week 1 (before adding wheel encoders), your goal is to make the cart **stand** (balance upright) using **angle-only feedback** (P-only is sufficient for Week 1). You will use plotter6ch (**Debugging Tool 3**) and tune gains so the system can stand without violent vibration.
 
@@ -706,7 +707,7 @@ At the end of Week 1 (before adding wheel encoders), your goal is to make the c
 
 *Avoid high-frequency rattling.* It can cause overheating and burnout of electronic parts and motors, and may loosen screws. If rattling occurs, *turn off the battery box immediately*.
 
-## Week 1 Submission
+## Week 1 Submission {#w1-submission}
 
 !!! note "Submission"
     By the end of Week 1, your cart should be able to **stand** (balance upright)---congratulations on reaching this milestone!

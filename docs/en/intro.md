@@ -1,4 +1,4 @@
-# Introduction
+# Introduction {#page:intro}
 
 This page is a hub for course logistics and evaluation.
 

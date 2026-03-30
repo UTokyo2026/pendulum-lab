@@ -1,6 +1,11 @@
-# 演習の目的
+# 演習の目的 {#overview-purpose}
 
-![](../figs/pendulum_image.png)
+<figure id="fig:pendulum_image">
+<div class="center">
+<img src="../../figs/pendulum_image.png" alt="Wheeled inverted pendulum platform." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Wheeled inverted pendulum platform (example).</figcaption>
+</figure>
 
 本演習では，自走式倒立振子を（ほぼ）一から製作することを通じて，
 
@@ -19,13 +24,27 @@
 
 自走式倒立振子は演習教材キットなども市販されていますが，本演習ではあえてそうしたキットは用いず，*基礎的なパーツのみを用いて自ら倒立振子を組み上げていくことで，その構成や仕組みをより深く理解することをめざします．*また，フィードバック制御においてはセンサがとても重要になりますが，センサを（よりプリミティブなセンサ素子を使って）自作することにより，*センサの難しさや重要性を体感してもらいたいと思います*．
 
-# 倒立振子制御の概要
+# 倒立振子制御の概要 {#overview-control}
 
-## 倒立振子のモデル
+## 倒立振子のモデル {#overview-model}
 
-はじめに，自走式倒立振子の制御の概要について考えます． 図[\[fig:model\]](#fig:model)は簡略化した倒立振子のモデルです．タイヤ（質量$m_w$，慣性モーメント$j_w$）の軸から振り子（＝倒立振子の本体，質量$m_p$，慣性モーメント$j_p$）が立っています．タイヤと振り子の間にはモータがあり，モータを駆動すると両者に互いに逆向きのトルク（$\pm\tau$）が生じます．水平方向のタイヤ中心位置を$x$とします．簡単のため地面からタイヤに働く摩擦以外には，摩擦・損失は無いものとします．我々が制御したいのは，倒立振子の角度$\theta$とタイヤ位置$x$（＝本体位置）です．
+はじめに，自走式倒立振子の制御の概要について考えます．Figure ([Fig.](#fig:model)) は簡略化した倒立振子のモデルです．タイヤ（質量$m_w$，慣性モーメント$j_w$）の軸から振り子（＝倒立振子の本体，質量$m_p$，慣性モーメント$j_p$）が立っています．タイヤと振り子の間にはモータがあり，モータを駆動すると両者に互いに逆向きのトルク（$\pm\tau$）が生じます．水平方向のタイヤ中心位置を$x$とします．簡単のため地面からタイヤに働く摩擦以外には，摩擦・損失は無いものとします．我々が制御したいのは，倒立振子の角度$\theta$とタイヤ位置$x$（＝本体位置）です．
 
-図[1](#fig:model_disassembled)のように，振り子とタイヤに分けて，それぞれの運動方程式を考えます．まず，振り子の運動方程式は次のように書けます（$H$と$V$はタイヤと振り子の間に働く力の水平成分と鉛直成分）．
+<figure id="fig:model">
+<div class="center">
+<img src="../../figs/model.png" alt="Simplified model of the wheeled inverted pendulum." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Simplified model of the wheeled inverted pendulum.</figcaption>
+</figure>
+
+Figure ([Fig.](#fig:model_disassembled)) のように，振り子とタイヤに分けて，それぞれの運動方程式を考えます．まず，振り子の運動方程式は次のように書けます（$H$と$V$はタイヤと振り子の間に働く力の水平成分と鉛直成分）．
+
+<figure id="fig:model_disassembled">
+<div class="center">
+<img src="../../figs/model_disassembled.png" alt="Forces and torques on the disassembled model." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Forces and torques (disassembled view).</figcaption>
+</figure>
 
 <a id="eq:pH"></a>
 $$
@@ -66,12 +85,6 @@ $$
 
 となります．ただし，$F$は地面から受ける摩擦力（これによってタイヤが進む）であり，タイヤと地面の間の滑りはない（$x=r\phi$）ものとします．これら一連の式から，内力$H, V$と摩擦力$F$を消去して，振り子角度$\theta$と位置$x$だけで表した式を求めます．
 
-| 簡略モデル | 各部に働く力とトルク |
-|---|---|
-| ![](../figs/model.png) | ![](../figs/model_disassembled.png) |
-
-*各部に働く力とトルク*
-
 まず，式\(\eqref{eq:pH}\)，\(\eqref{eq:pV}\)から得られる$H,V$を式\(\eqref{eq:pR}\)に代入すると次式が得られます．
 
 <a id="eq:rotation0"></a>
@@ -104,7 +117,7 @@ $$
 \frac{\tau}{r} = \left( (m_p+m_w)+\frac{j_w}{r^2}\right)\ddot{x} + m_pl\ddot{\theta} \label{eq:hor}
 $$
 
-## 振り子角度の制御
+## 振り子角度の制御 {#overview-angle-control}
 
 最終的には振り子の回転角$\theta$と本体位置$x$の両者を同時に制御したいのですが，まずは振り子の回転角$\theta$のみに注目し，$\theta=0$となるように制御する，すなわち，振り子を倒立させることだけを考えます．そのために，式\(\eqref{eq:hor}\)から$\ddot{x}$を求めて式\(\eqref{eq:rot}\)に代入し，$\theta$のみの微分方程式を得ます．
 $$
@@ -118,19 +131,34 @@ I\ddot{\theta} - m_p gl \theta = -A \tau
 \label{eq:simple}
 $$
 
-となります．この式が表すものは，図[\[fig:simple_pendulum\]](#fig:simple_pendulum)のように，質量$m_p$，軸周りの慣性モーメント$I$の振り子が固定された軸上に設置され，モータから$A\tau$のトルクを受けている状況と同じです．
+となります．この式が表すものは，Figure ([Fig.](#fig:simple_pendulum)) のように，質量$m_p$，軸周りの慣性モーメント$I$の振り子が固定された軸上に設置され，モータから$A\tau$のトルクを受けている状況と同じです．
 
-図[\[fig:simple_pendulum\]](#fig:simple_pendulum)の振り子の振る舞いについて考えてみます．モータからのトルクが無い（＝制御しない）状態では，上の式\(\eqref{eq:simple}\)は$I \ddot{\theta} = m_pgl\theta$となります．これは，形式的にはバネの式と同じですので，図[\[fig:spring\]](#fig:spring)のバネ・質点系と比べてみましょう．図[\[fig:spring\]](#fig:spring)のバネ・質点系の運動方程式は$m\ddot{x}=-kx$となりますが，この式と比較すると，**倒立振子はバネ係数が$-m_pgl$のバネ・質点系と等価**であることがわかります．ただし，バネ係数（$-m_pgl$）が負であるため，バネとは真逆の不安定な動作をします（つりあい点から少しでも離れると，さらに離れるように力が働く）．
+<figure id="fig:simple_pendulum">
+<div class="center">
+<img src="../../figs/simple_pendulum.png" alt="Equivalent pendulum (angle dynamics only)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Equivalent pendulum (angle dynamics only).</figcaption>
+</figure>
 
-このように，倒立振子は負のバネ係数を持つために不安定であると解釈できます．そこで，図[2](#fig:stabilize)のように鉛直軸との間にバネをつけてトータルの合成バネ係数（＝もともとの負のバネ係数＋新たにつけた正のバネ係数）を正にすることを考えてみます．合成バネ係数が正になれば，振り子は鉛直軸付近で単振動をするようになるはずです．さらに，ダンパ（＝ダッシュポッド：速度に比例する反力を生じる）もつければ，振動を減衰させて鉛直軸に沿って倒立振子を倒立させることができるはずです．とはいえ，本物のバネとダンパをつける訳には行かないので，バネおよびダンパと等価な働きをフィードバック制御により実現してみましょう．
+Figure ([Fig.](#fig:simple_pendulum)) の振り子の振る舞いについて考えてみます．モータからのトルクが無い（＝制御しない）状態では，上の式\(\eqref{eq:simple}\)は$I \ddot{\theta} = m_pgl\theta$となります．これは，形式的にはバネの式と同じですので，Figure ([Fig.](#fig:spring)) のバネ・質点系と比べてみましょう．Figure ([Fig.](#fig:spring)) のバネ・質点系の運動方程式は$m\ddot{x}=-kx$となりますが，この式と比較すると，**倒立振子はバネ係数が$-m_pgl$のバネ・質点系と等価**であることがわかります．ただし，バネ係数（$-m_pgl$）が負であるため，バネとは真逆の不安定な動作をします（つりあい点から少しでも離れると，さらに離れるように力が働く）．
 
-| 等価振り子 | バネ・質点系 | バネとダンパによる安定化 |
-|---|---|---|
-| ![](../figs/simple_pendulum.png) | ![](../figs/spring.png) | ![](../figs/stabilize.png) |
+<figure id="fig:spring">
+<div class="center">
+<img src="../../figs/spring.png" alt="Spring-mass system analogy." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Spring-mass system analogy.</figcaption>
+</figure>
 
-*バネとダンパによる安定化*
+このように，倒立振子は負のバネ係数を持つために不安定であると解釈できます．そこで，Figure ([Fig.](#fig:stabilize)) のように鉛直軸との間にバネをつけてトータルの合成バネ係数（＝もともとの負のバネ係数＋新たにつけた正のバネ係数）を正にすることを考えてみます．合成バネ係数が正になれば，振り子は鉛直軸付近で単振動をするようになるはずです．さらに，ダンパ（＝ダッシュポッド：速度に比例する反力を生じる）もつければ，振動を減衰させて鉛直軸に沿って倒立振子を倒立させることができるはずです．とはいえ，本物のバネとダンパをつける訳には行かないので，バネおよびダンパと等価な働きをフィードバック制御により実現してみましょう．
 
-## PD制御
+<figure id="fig:stabilize">
+<div class="center">
+<img src="../../figs/stabilize.png" alt="Stabilization via virtual spring and damper." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Stabilization via virtual spring and damper (control interpretation).</figcaption>
+</figure>
+
+## PD制御 {#overview-pd-control}
 
 フィードバック制御により，バネとダンパを仮想的に実現する方法を考えます． バネとダンパが生み出す合力は $K_p \theta + K_d \dot{\theta}$ と書けますので，振り子角度 $\theta$（およびその微分 $\dot{\theta}$）がわかれば，モータが次のようなトルクを発生するようにすればよいことになります．
 
@@ -154,7 +182,7 @@ $$
 
 と表せます．ここで，$K = K_p - m_pgl$ は，「重力による負のバネ」と「制御による正のバネ」を合成したときのバネ係数です．この式から，PD 制御された倒立振子は，バネ係数 $K$，減衰係数 $K_d$ のバネ・質点・ダンパ系と同じように運動することがわかります．すなわち，平衡点（$\theta=0$）からずれた角度を初期値として与えると，減衰振動しながら平衡点 $\theta=0$ へ収束します．通常のバネ・質点・ダンパ系と同様に，バネ係数（$\approx$ 比例ゲイン）を大きくすると振動数が上がり，微分ゲインを大きくすると減衰が強くなって振動が速く収まります．
 
-## これだけで倒立できるか？
+## これだけで倒立できるか？ {#overview-is-this-enough}
 
 運がよければ，式\(\eqref{eq:pd}\) に基づいてモータトルクを制御するだけで倒立を保てるかもしれません．しかし実際には，これだけでは倒立しないことが多くあります（短時間は立っても持続しない）． その主な原因は，傾斜角 $\theta$ を測る傾斜センサのオフセット，および外乱（風や机の振動など，系の外から加わる力）です．
 
@@ -162,19 +190,24 @@ $$
 
 これを防ぐには，角度だけを見て制御するのではなく，倒立振子の位置（$\propto$ タイヤの回転量）も検出し，その位置ずれに対する PD 制御を加える必要があります．この点については後であらためて説明します．
 
-## モータのトルク
+## モータのトルク {#overview-motor-torque}
 
 式\(\eqref{eq:pd}\) に基づく制御を行うためには，もうひとつ考えておくべきことがあります．それがモータのトルクです．モータを駆動するとき，我々はモータ端子間に電圧を加えます．この電圧を変えればモータの発生トルクも変わりますが，電圧と発生トルクはどのような関係になっているのでしょうか．
 
-[図（PDF）：motor_model](../assets/text2026_jp.pdf)
+Figure ([Fig.](#fig:motor)) は DC モータの等価回路モデルです．モータ内部には磁場を作るための巻線があり，そこには抵抗 $R$ とインダクタンス $L$ があります．また，モータには発電機と同じ作用もあるため，回転すると回転速度に比例した電圧が発生し，これを*逆起電力*と呼びます．逆起電力は印加電圧とは逆向きに生じます．
 
-図[\[fig:motor\]](#fig:motor) は DC モータの等価回路モデルです．モータ内部には磁場を作るための巻線があり，そこには抵抗 $R$ とインダクタンス $L$ があります．また，モータには発電機と同じ作用もあるため，回転すると回転速度に比例した電圧が発生し，これを*逆起電力*と呼びます．逆起電力は印加電圧とは逆向きに生じます．
+<figure id="fig:motor">
+<div class="center">
+<img src="../../figs/motor_model.png" alt="Equivalent circuit model of a DC motor." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Equivalent circuit model of a DC motor.</figcaption>
+</figure>
 
 モータトルクは巻線が作る磁場の強さに比例し，磁場の強さは巻線に流れる電流に比例します．したがって，発生トルクは巻線電流に比例します（$\tau=\kappa i$）．この比例係数 $\kappa$ をモータの「トルク定数」と呼びます．
 
 つまり，我々が決めてモータに与えるのは **電圧** ですが，トルクに比例するのは **電流** です．両者が単純に比例していれば話は簡単ですが，実際には逆起電力やコイルのインピーダンスの影響があるため，単純比例にはなりません．そこで両者の関係を求めてみましょう．
 
-図[\[fig:motor\]](#fig:motor) の等価回路から，電流（ラプラス変換して $I(s)$）と印加電圧（同様に $V(s)$）の関係式を導くと，
+Figure ([Fig.](#fig:motor)) の等価回路から，電流（ラプラス変換して $I(s)$）と印加電圧（同様に $V(s)$）の関係式を導くと，
 $$
 I(s) = \frac{V(s) - \kappa \Omega_m(s)}{R+sL}
 $$
