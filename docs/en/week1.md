@@ -24,12 +24,12 @@ Next, we will assemble the electronic circuit, but before that, we will explain 
 
 !!! warning
     - Semiconductor parts (ICs like microcontrollers, LSIs) are easily destroyed by static electricity (especially in dry winter). Be careful not to touch the pins with bare hands.
-
-- *Your body is charged!* Before assembling the electronic circuit, touch a large conductor (such as a door or metal part of a desk) to discharge your body.
-
-- Once discharged, be careful not to get charged during work. Moving your hips on a chair or taking off a sweater generates static electricity, so try to stay still as much as possible.
-
-- Even if discharged, do not touch the IC/LSI terminals directly with your fingers just in case.
+    
+    - *Your body is charged!* Before assembling the electronic circuit, touch a large conductor (such as a door or metal part of a desk) to discharge your body.
+    
+    - Once discharged, be careful not to get charged during work. Moving your hips on a chair or taking off a sweater generates static electricity, so try to stay still as much as possible.
+    
+    - Even if discharged, do not touch the IC/LSI terminals directly with your fingers just in case.
 
 ### Resistor and Capacitor Markings (Value & Polarity)
 
@@ -86,7 +86,7 @@ The basic circuit of a photo-interrupter is shown in Figure [3](#fig:pi_circuit)
 <figcaption>Circuit Diagram</figcaption>
 </figure>
 
-Note that if a current exceeding the absolute maximum rating (50mA this time) flows, the LED will burn out in an instant. Be careful never to [connect directly to the power supply without a resistor] (The distributed inclination sensor has a $100\Omega$ resistor soldered to the tip of the wiring from the beginning so that this does not happen).
+Note that if a current exceeding the absolute maximum rating (50mA this time) flows, the LED will burn out in an instant. Be careful never to **connect directly to the power supply without a resistor** (The distributed inclination sensor has a $100\Omega$ resistor soldered to the tip of the wiring from the beginning so that this does not happen).
 
 On the side of the phototransistor receiving light, connect a resistor to the emitter to read the voltage (a resistor can be attached to the collector side, but the output voltage is inverted). When light enters the phototransistor, current flows between the collector and emitter. This current is converted to voltage by flowing through the external resistor. The obtained voltage is roughly proportional to the amount of incident light. The value of the external resistor is determined while looking at the datasheet and actual situation. For the same amount of incident light, a larger resistance value yields a larger voltage, but since output cannot exceed the power supply voltage, set an appropriate resistance value so that the output does not saturate.
 
@@ -106,7 +106,7 @@ Also, if the reflectance of the floor surface changes, the sensitivity of the se
 
 This time, batteries are used as the power source for the entire inverted pendulum, but if a large current is drawn from the battery, the generated voltage drops due to internal resistance. In this circuit, a large current flows along with the motor drive, so the output voltage of the battery fluctuates violently according to the motor operation. If the photo-interrupter is driven using this fluctuating voltage, large noise will be superimposed on the sensor output, so the voltage for driving the photo-interrupter is stabilized using a three-terminal regulator.
 
-A three-terminal regulator is an IC that takes a fluctuating voltage as input and outputs a constant voltage (lower than that). Various model numbers of three-terminal regulators are sold, but basically, the last two digits of the model number represent the output voltage. This time, we use a regulator with model number LD33 (precisely LD1117V33) [^6]. The output voltage is 3.3V. All photo-interrupter related voltages should use the output of this three-terminal regulator. On the other hand, since we want to separate the power supply for the motor and the photo-interrupter, [*take the power supply for the motor driver [directly from the battery], not from the three-terminal regulator.*]{style="color: warnRed"}
+A three-terminal regulator is an IC that takes a fluctuating voltage as input and outputs a constant voltage (lower than that). Various model numbers of three-terminal regulators are sold, but basically, the last two digits of the model number represent the output voltage. This time, we use a regulator with model number LD33 (precisely LD1117V33) [^6]. The output voltage is 3.3V. All photo-interrupter related voltages should use the output of this three-terminal regulator. On the other hand, since we want to separate the power supply for the motor and the photo-interrupter, ***take the power supply for the motor driver directly from the battery**, not from the three-terminal regulator.*
 
 Actually, mbed's board is also equipped with a 3.3V three-terminal regulator (you can see a chip called LD33), and stabilized 3.3V is output from the VOUT pin on the upper right (see Figure [9](#fig:mbed_pin)). You can use this voltage, but due to the size of the breadboard, this pin cannot be accessed, so we will install a regulator ourselves this time.
 
@@ -141,17 +141,17 @@ First, attach the inclination sensor (No. 6) to the bottom of the universal boar
 <figure id="fig:machine" data-latex-placement="b">
 <div class="minipage">
 <div class="center">
-<img src="angle_sensor.png" style="width:45mm" />
+![](../figs/angle_sensor.png)
 </div>
 </div>
 <div class="minipage">
 <div class="center">
-<img src="motor_tire.png" style="width:45mm" />
+![](../figs/motor_tire.png)
 </div>
 </div>
 <div class="minipage">
 <div class="center">
-<img src="assembled.png" style="width:60mm" />
+![](../figs/assembled.png)
 </div>
 </div>
 <figcaption>Completion image</figcaption>
@@ -161,13 +161,13 @@ First, attach the inclination sensor (No. 6) to the bottom of the universal boar
 
 Next, attach the DC motor (No. 3). Use the motor bracket (No. 4) to attach it to the universal board (No. 1) (attach it to the same surface as the axle. See Figure [\[fig:motor_setup\]](#fig:motor_setup)). The screws for attaching the bracket to the board are slightly smaller M2 screws. The screw heads are small, so it might be difficult to turn them with the screwdriver included in the kit, but try to secure them.
 
-When fixing the DC motor, adjust it so that the rubber roller of the DC motor touches the tire \"lightly\". [The point is to adjust it so that it is [*touching lightly*], as driving will not be possible if pressed too strongly.]{style="color: warnRed"} However, since the tire is not a perfect circle, if adjusted too lightly, the roller may slip partially when the tire is rotated. Rotate the tire once to confirm that the roller is always in contact.
+When fixing the DC motor, adjust it so that the rubber roller of the DC motor touches the tire \"lightly\". **The point is to adjust it so that it is *touching lightly***, as driving will not be possible if pressed too strongly. However, since the tire is not a perfect circle, if adjusted too lightly, the roller may slip partially when the tire is rotated. Rotate the tire once to confirm that the roller is always in contact.
 
 #### Attaching the Breadboard
 
 Screw the No. 2 universal board with the breadboard onto the No. 1 universal board. Bolts should be protruding from this No. 2 board. Do not remove these bolts as it is difficult to reattach them (of course, remove/attach the \"nuts\" during installation). The No. 1 board should have screws for motor attachment, so make sure they do not interfere (overlap) (if forced to screw while overlapping, the board will crack). Also, since the battery box will be attached in the next part, decide the position of the board while considering the mounting position of the battery box.
 
-The microcontroller should already be attached to the breadboard. Attach the universal board so that the microcontroller is on the upper side (USB port facing up). [*Do not remove the microcontroller on the breadboard, as the pins may break.*]{style="color: warnRed"}
+The microcontroller should already be attached to the breadboard. Attach the universal board so that the microcontroller is on the upper side (USB port facing up). *Do not remove the microcontroller on the breadboard, as the pins may break.*
 
 #### Attaching the Battery Box
 
@@ -191,15 +191,15 @@ In the compiler screen menu, select \"File\" $\rightarrow$ \"New Project\" and c
 
 <figure id="fig:keil_interface" data-latex-placement="h">
 <figure id="fig:keil_new">
-<img src="fig2026/keil_new_project.png" />
+![](../figs/fig2026/keil_new_project.png)
 <figcaption>Create new project</figcaption>
 </figure>
 <figure id="fig:keil_template">
-<img src="fig2026/keil_editor.png" />
+![](../figs/fig2026/keil_editor.png)
 <figcaption>Select example template</figcaption>
 </figure>
 <figure id="fig:keil_compile">
-<img src="fig2026/keil_build.png" />
+![](../figs/fig2026/keil_build.png)
 <figcaption>Compile button</figcaption>
 </figure>
 <figcaption>Keil Studio Cloud interface: creating and compiling a project</figcaption>
@@ -219,7 +219,7 @@ Generally, these functions are not all used at the same time, so in this board (
 
 <figure id="fig:mbed_pin" data-latex-placement="h">
 <div class="center">
-<img src="pinout.png" />
+![](../figs/pinout.png)
 </div>
 <figcaption>Pinout of mbed LPC1768 (https://os.mbed.com/platforms/mbed-LPC1768/)</figcaption>
 </figure>
@@ -282,7 +282,7 @@ The interrupt processing function must definitely finish within the interrupt pe
 
 Function calls can be written in one line from the perspective of writing a program, so we tend to imagine that the execution time is short, but some functions have unexpectedly long processing times. Easy calling of such functions from within an interrupt processing function causes the interrupt processing to break down. Specifically, string processing functions such as 'sprintf()', memory processing functions such as 'malloc()', and mathematical functions such as 'sin()' have long execution times and tend to cause trouble.
 
-Also, [*since function calls themselves have large processing overhead, it is safer not to define and call functions yourself excessively.*]{style="color: warnRed"} Although there is an idea to group multiple processes into a function to improve program readability, in such cases, it is better to use inline functions or macro definitions if possible (these have no overhead at the time of calling).
+Also, *since function calls themselves have large processing overhead, it is safer not to define and call functions yourself excessively.* Although there is an idea to group multiple processes into a function to improve program readability, in such cases, it is better to use inline functions or macro definitions if possible (these have no overhead at the time of calling).
 
 #### Serial communication & debugging
 
@@ -338,7 +338,7 @@ A breadboard is a board often used for prototyping electrical circuits, allowing
 </div>
 <div class="minipage">
 <div class="center">
-<img src="breadboard_sample.png" style="width:75mm" />
+![](../figs/breadboard_sample.png)
 </div>
 </div>
 <figcaption>Wiring Example</figcaption>
@@ -358,11 +358,11 @@ Figure [13](#fig:fritzing_setup_and_examples) shows example circuit views for t
 
 <figure id="fig:fritzing_setup_and_examples" data-latex-placement="htbp">
 <figure id="fig:fritzing_motor_driver_schematic">
-<img src="fig2026/fz2.png" style="height:75mm" />
+![](../figs/fig2026/fz2.png)
 <figcaption>example in <em>Schematic View</em>.</figcaption>
 </figure>
 <figure id="fig:fritzing_motor_driver_breadboard">
-<img src="fig2026/fz3.png" style="height:75mm" />
+![](../figs/fig2026/fz3.png)
 <figcaption>corresponding <em>Breadboard View</em> wiring.</figcaption>
 </figure>
 <figcaption>Fritzing example circuit views for this experiment.</figcaption>
@@ -392,21 +392,21 @@ This part is performed as a team. To minimize the risk of errors and facilitate 
 
 !!! warning
     - Before turning on the power switch, check carefully that there are no mistakes in the wiring around the power supply at least!
-
-- If there is a mistake in the wiring around the power supply (connecting plus and minus in reverse, short circuit, etc.), [*the circuit will be destroyed at the same time as switch on*]{style="color: warnRed"}.
-
-- It is dangerous to turn on the switch and see what happens, so check well in advance instead of taking a chance. Especially, pay attention to [*power connection to microcontroller/motor driver*]{style="color: warnRed"} and [*polarity of electrolytic capacitor*]{style="color: warnRed"}.
-
-- Disconnect power before rewiring. Never move wires on a powered breadboard.
-
-- Keep the motor power (battery) and sensor power (3.3V regulator) separated as instructed.
+    
+    - If there is a mistake in the wiring around the power supply (connecting plus and minus in reverse, short circuit, etc.), *the circuit will be destroyed at the same time as switch on*.
+    
+    - It is dangerous to turn on the switch and see what happens, so check well in advance instead of taking a chance. Especially, pay attention to *power connection to microcontroller/motor driver* and *polarity of electrolytic capacitor*.
+    
+    - Disconnect power before rewiring. Never move wires on a powered breadboard.
+    
+    - Keep the motor power (battery) and sensor power (3.3V regulator) separated as instructed.
 
 **Soldering and continuity checks.** During circuit assembly, you will use a soldering iron to solder resistors and DuPont wires (or leads) to make robust connections. Before powering the circuit, you can use a multimeter in continuity mode (buzzer) to verify.
 
 !!! warning
     - Unplug the soldering iron after use, and let it cool down before storing it or leaving the bench.
-
-- Never leave a powered soldering iron unattended.
+    
+    - Never leave a powered soldering iron unattended.
 
 ### Assembly strategy (3 stages)
 
@@ -450,15 +450,15 @@ In this first stage, you will assemble the power supply circuit, motor driver (D
 
 Wire the circuit according to the motor driver section of the sample circuit diagram[^17]. Key points to remember:
 
-- In the sample circuit diagram, capacitors are inserted between the power pins of mbed and motor driver and GND. This is called a bypass capacitor (bypass cap), which has the role of softening power supply voltage fluctuations due to voltage drops in wiring (which also has resistance) and stabilizing IC operation. [*It is an iron rule to install this bypass capacitor right next to the power pin (adjacent hole)*]{style="color: warnRed"}. Even if it is the same on the circuit diagram, installing it far away makes the bypass capacitor meaningless.
+- In the sample circuit diagram, capacitors are inserted between the power pins of mbed and motor driver and GND. This is called a bypass capacitor (bypass cap), which has the role of softening power supply voltage fluctuations due to voltage drops in wiring (which also has resistance) and stabilizing IC operation. *It is an iron rule to install this bypass capacitor right next to the power pin (adjacent hole)*. Even if it is the same on the circuit diagram, installing it far away makes the bypass capacitor meaningless.
 
-- Similarly, [*install the capacitor connected to the three-terminal regulator in the immediate hole*]{style="color: warnRed"}.
+- Similarly, *install the capacitor connected to the three-terminal regulator in the immediate hole*.
 
 - Connect the three-terminal regulator output (3.3V) to one vertical power rail on the breadboard
 
 - Connect GND (battery black wire) to the other vertical power rail
 
-- Pay careful attention to [*electrolytic capacitor polarity*]{style="color: warnRed"} (the stripe indicates negative side)
+- Pay careful attention to *electrolytic capacitor polarity* (the stripe indicates negative side)
 
 - See Section [3.2.1](#sec:passive_markings) for capacitor markings (e.g., `0.1u`/`104`) and which capacitors are polarized vs. non-polarized.
 
@@ -550,11 +550,11 @@ This versatile tool is essential for verifying sensor operation, detecting mecha
 
 <figure id="fig:debugtools12" data-latex-placement="htbp">
 <figure id="fig:debuger1">
-<img src="fig2026/debug_motor_controller.png" />
+![](../figs/fig2026/debug_motor_controller.png)
 <figcaption>Debugging Tool 1: Motor Controller GUI</figcaption>
 </figure>
 <figure id="fig:debuger2">
-<img src="fig2026/debug_analog_visualizer.png" />
+![](../figs/fig2026/debug_analog_visualizer.png)
 <figcaption>Debugging Tool 2: Analog Input Visualizer</figcaption>
 </figure>
 <figcaption>Processing GUI interfaces for Debugging Tools 1 and 2</figcaption>
@@ -596,9 +596,9 @@ Your circuit should now include all components according to the complete sample 
 
 #### General Notes on Circuit Assembly
 
-- [*The simpler the circuit looks, the better it works*]{style="color: warnRed"}. Electronic circuits, especially analog circuits, change characteristics with slight wiring methods. Circuits that look beautiful = simple circuits tend to have better characteristics.
+- *The simpler the circuit looks, the better it works*. Electronic circuits, especially analog circuits, change characteristics with slight wiring methods. Circuits that look beautiful = simple circuits tend to have better characteristics.
 
-- [*Since breadboards have large contact resistance, fewer wires allow more stable operation*]{style="color: warnRed"}. Avoid daisy-chaining multiple jumper wires when a single wire would suffice.
+- *Since breadboards have large contact resistance, fewer wires allow more stable operation*. Avoid daisy-chaining multiple jumper wires when a single wire would suffice.
 
 - Again, try not to touch the pins of IC/LSI (Resistors, capacitors, LEDs, three-terminal regulators are fine to touch).
 
@@ -612,7 +612,7 @@ An implementation example of the complete circuit is shown in Figure [17](#fig:c
 
 <figure id="fig:circuit_sample" data-latex-placement="hbt">
 <div class="center">
-<img src="circuit_sample.png" style="width:100mm" />
+![](../figs/circuit_sample.png)
 </div>
 <figcaption>Complete Circuit Implementation Example</figcaption>
 </figure>
@@ -633,7 +633,7 @@ This is the primary tool for tuning control parameters and debugging the complet
 
 At the end of Week 1 (before adding wheel encoders), your goal is to make the cart **stand** (balance upright) using **angle-only feedback** (P-only is sufficient for Week 1). You will use plotter6ch (**Debugging Tool 3**) and tune gains so the system can stand without violent vibration.
 
-**Expectation (Week 1):** In principle, you should be able to achieve a basic stand-up with only a gentle nudge and small gain adjustments. If the result is not good enough yet, do not worry---you can preview the more detailed tuning procedure in Week 2 (including angular velocity, filtering, and adding D gain): [[see Section [4.4](#sec:w2-task-b)]{style="color: brandD"}](#sec:w2-task-b). **Quick workflow:**
+**Expectation (Week 1):** In principle, you should be able to achieve a basic stand-up with only a gentle nudge and small gain adjustments. If the result is not good enough yet, do not worry---you can preview the more detailed tuning procedure in Week 2 (including angular velocity, filtering, and adding D gain): [see Section [4.4](#sec:w2-task-b)](#sec:w2-task-b). **Quick workflow:**
 
 1.  Flash to mbed (or compile after changing `#define` gains).
 
@@ -643,10 +643,10 @@ At the end of Week 1 (before adding wheel encoders), your goal is to make the c
 
 !!! warning
     - While the battery box is ON, the motor may keep running. Turn it OFF when not actively testing.
-
-- USB powers *mbed only*. If the motor does not move or sensor outputs look strange, double-check the battery box switch.
-
-- If high-frequency rattling/shivering occurs, [*turn off the battery box immediately*]{style="color: warnRed"} to avoid overheating and damage.
+    
+    - USB powers *mbed only*. If the motor does not move or sensor outputs look strange, double-check the battery box switch.
+    
+    - If high-frequency rattling/shivering occurs, *turn off the battery box immediately* to avoid overheating and damage.
 
 **Zeroing (recommended before connecting the motor):**
 
@@ -666,7 +666,7 @@ At the end of Week 1 (before adding wheel encoders), your goal is to make the c
 
 - Verify motor wiring direction: if the cart moves *in the direction it is falling*, it is correct. If it moves the opposite way (tries to fall by itself), turn off power and swap the motor wires (or the two wires between mbed and motor driver).
 
-- While testing, [gently support]{style="color: warnRed"} the top of the machine (or the USB cable) so it does not fall, but do not hinder its motion.
+- While testing, gently support the top of the machine (or the USB cable) so it does not fall, but do not hinder its motion.
 
 **KP gain adjustment guideline:**
 
@@ -680,43 +680,43 @@ At the end of Week 1 (before adding wheel encoders), your goal is to make the c
 
 5.  Increasing further results in violent vibration.
 
-[*Avoid high-frequency rattling.*]{style="color: warnRed"} It can cause overheating and burnout of electronic parts and motors, and may loosen screws. If rattling occurs, [*turn off the battery box immediately*]{style="color: warnRed"}.
+*Avoid high-frequency rattling.* It can cause overheating and burnout of electronic parts and motors, and may loosen screws. If rattling occurs, *turn off the battery box immediately*.
 
 ## Week 1 Submission
 
 !!! note "Submission"
     By the end of Week 1, your cart should be able to **stand** (balance upright)---congratulations on reaching this milestone!
+    
+      --------------------------------------------------------------------------------------------------------------------------------------------------
+      **Deliverable**                 **Max**  **Scoring guide**
+      ------------------------------ --------- ---------------------------------------------------------------------------------------------------------
+      Standing demonstration            20     **20 pts:** upright $\geq$15 s, full system in frame.\
+                                               **12 pts:** upright achieved but $<$15 s or marginal stability.\
+                                               **0 pts:** upright not achieved.
+    
+      Safety & assembly visibility       5     **5 pts:** complete assembly clearly visible---mechanical structure, breadboard, and wiring all shown.\
+                                               **0 pts:** assembly not visible in the video.
+    
+      Video clarity                      5     **5 pts:** all key parts unobscured throughout the recording.\
+                                               **3 pts:** key behavior still identifiable despite partial obstruction.\
+                                               **0 pts:** footage unusable (major parts obscured or out of frame).
+      --------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    *Optional attachments*: Fritzing (`.fzz`/images), photos, or debugging tool screenshots/logs.
 
-  --------------------------------------------------------------------------------------------------------------------------------------------------
-  **Deliverable**                 **Max**  **Scoring guide**
-  ------------------------------ --------- ---------------------------------------------------------------------------------------------------------
-  Standing demonstration            20     **20 pts:** upright $\geq$`<!-- -->`{=html}15 s, full system in frame.\
-                                           **12 pts:** upright achieved but $<$`<!-- -->`{=html}15 s or marginal stability.\
-                                           **0 pts:** upright not achieved.
-
-  Safety & assembly visibility       5     **5 pts:** complete assembly clearly visible---mechanical structure, breadboard, and wiring all shown.\
-                                           **0 pts:** assembly not visible in the video.
-
-  Video clarity                      5     **5 pts:** all key parts unobscured throughout the recording.\
-                                           **3 pts:** key behavior still identifiable despite partial obstruction.\
-                                           **0 pts:** footage unusable (major parts obscured or out of frame).
-  --------------------------------------------------------------------------------------------------------------------------------------------------
-
-*Optional attachments*: Fritzing (`.fzz`/images), photos, or debugging tool screenshots/logs.
-
-[^3]: Appendix [\[app:circuit\]](#app:circuit){reference-type="ref" reference="app:circuit"}: Circuit example.
-[^4]: Appendix [\[app:drv8832\]](#app:drv8832){reference-type="ref" reference="app:drv8832"}: DRV8832 datasheet (Texas Instruments).
-[^5]: Appendix [\[app:tpr105f\]](#app:tpr105f){reference-type="ref" reference="app:tpr105f"}: TPR-105F datasheet.
-[^6]: Appendix [\[app:ld1117v33\]](#app:ld1117v33){reference-type="ref" reference="app:ld1117v33"}: LD1117V33 datasheet.
+[^3]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
+[^4]: Appendix [\[app:drv8832\]](#app:drv8832): DRV8832 datasheet (Texas Instruments).
+[^5]: Appendix [\[app:tpr105f\]](#app:tpr105f): TPR-105F datasheet.
+[^6]: Appendix [\[app:ld1117v33\]](#app:ld1117v33): LD1117V33 datasheet.
 [^7]: A video demonstration of the mechanical assembly process is available in the course materials repository:
-[^8]: For a complete parts list with detailed specifications and quantities, see Appendix [\[app:partslist\]](#app:partslist){reference-type="ref" reference="app:partslist"}.
-[^9]: Appendix [\[app:re280ra\]](#app:re280ra){reference-type="ref" reference="app:re280ra"}: RE-280RA datasheet (Mabuchi Motor).
+[^8]: For a complete parts list with detailed specifications and quantities, see Appendix [\[app:partslist\]](#app:partslist).
+[^9]: Appendix [\[app:re280ra\]](#app:re280ra): RE-280RA datasheet (Mabuchi Motor).
 [^10]: There are various other microcontroller series such as Arduino, Raspberry PI, PIC, etc.
 [^11]: Keil Studio Cloud: <https://studio.keil.arm.com/>
 [^12]: Access the course materials repository at <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
-[^13]: Processing is a free, open-source software for visual programming. You can download it from <https://processing.org/>. As of 2026, the currently available major release is Processing 4. For more instructions, see Appendix [\[app:processing\]](#app:processing){reference-type="ref" reference="app:processing"}.
+[^13]: Processing is a free, open-source software for visual programming. You can download it from <https://processing.org/>. As of 2026, the currently available major release is Processing 4. For more instructions, see Appendix [\[app:processing\]](#app:processing).
 [^14]: Fritzing installers (shared Google Drive): <https://drive.google.com/drive/folders/1CwJ8srD090W6hOeP39BXLUZOVy883Kn2?usp=sharing>
-[^15]: Appendix [\[app:circuit\]](#app:circuit){reference-type="ref" reference="app:circuit"}: Circuit example.
-[^17]: Appendix [\[app:circuit\]](#app:circuit){reference-type="ref" reference="app:circuit"}: Circuit example.
-[^18]: Appendix [\[app:circuit\]](#app:circuit){reference-type="ref" reference="app:circuit"}: Circuit example.
-[^19]: Appendix [\[app:circuit\]](#app:circuit){reference-type="ref" reference="app:circuit"}: Circuit example.
+[^15]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
+[^17]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
+[^18]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
+[^19]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.

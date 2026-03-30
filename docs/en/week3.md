@@ -16,22 +16,22 @@ Week 3 focuses on bridging the gap between an ideal simulation and real hardwar
 
 !!! warning
     - **Secure the load firmly.** If the load falls off, it can damage the hardware or injure people.
-
-- **Avoid prolonged high-frequency rattling.** If you hear harsh buzzing/rattling or see violent vibration, [turn off the battery immediately] (risk of overheating or loosening screws).
-
-- **Start from conservative gains.** Add load increases required torque and makes saturation/tripping more likely.
-
-- **Work on a clear floor and keep hands away from moving wheels.** Prepare a "catch" posture to prevent hard impacts when the system falls.
+    
+    - **Avoid prolonged high-frequency rattling.** If you hear harsh buzzing/rattling or see violent vibration, **turn off the battery immediately** (risk of overheating or loosening screws).
+    
+    - **Start from conservative gains.** Add load increases required torque and makes saturation/tripping more likely.
+    
+    - **Work on a clear floor and keep hands away from moving wheels.** Prepare a "catch" posture to prevent hard impacts when the system falls.
 
 ## Parallel Tasks
 
 Recommended parallel roles: Student A (hardware load attachment + load testing), Student B (simulation model enhancement), Student C (MATLAB tuning + controller comparison). Roles can be rotated, but keep a single shared test log (same naming and metrics).\
 
-- **Student A:** Task A (load attachment and hardware tests) --- [[see Section [5.3](#sec:w3-task-a)]{style="color: brandD"}](#sec:w3-task-a)
+- **Student A:** Task A (load attachment and hardware tests) --- [see Section [5.3](#sec:w3-task-a)](#sec:w3-task-a)
 
-- **Student B:** Task B (extend simulation: wheel dynamics + friction) --- [[see Section [5.4](#sec:w3-task-b)]{style="color: brandD"}](#sec:w3-task-b)
+- **Student B:** Task B (extend simulation: wheel dynamics + friction) --- [see Section [5.4](#sec:w3-task-b)](#sec:w3-task-b)
 
-- **Student C:** Task C (PID tuning + advanced controller comparison) --- [[see Section [5.5](#sec:w3-task-c)]{style="color: brandD"}](#sec:w3-task-c)
+- **Student C:** Task C (PID tuning + advanced controller comparison) --- [see Section [5.5](#sec:w3-task-c)](#sec:w3-task-c)
 
 ## Task A: Load Attachment and Hardware Tests (Student A)
 
@@ -123,21 +123,22 @@ This task tunes PID gains in MATLAB under load and compares with at least one al
 
 !!! note "Submission"
     Your work should show a clear progression: **enhanced model** $\rightarrow$ **tuned control** $\rightarrow$ **validated under load on real hardware**. Submit a **single group report** containing:
+    
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      **Deliverable**                **Max**  **Scoring guide**
+      ----------------------------- --------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      Enhanced simulation results       6     **6 pts:** model includes wheel inertia + ground friction + numerical parameter values, all documented.\
+                                              **4 pts:** two of the three elements included.\
+                                              **2 pts:** one of the three elements included.\
+                                              **0 pts:** no enhancement over Week 2 model.
+    
+      Load test video                   7     **7 pts:** stable inversion $\geq$5 s under load; load mass and attachment location clearly identified (caption/overlay).\
+                                              **5 pts:** stable under load but load mass/location not quantified.\
+                                              **2 pts:** load test attempted with documentation but stability not achieved.\
+                                              **0 pts:** not submitted.
+    
+      Controller comparison             7     **7 pts:** PID metrics reported (rise time, overshoot, settling time) *and* a structurally different controller (LQR / state feedback / feedforward) compared using the same metrics.\
+                                              **4 pts:** PID only, or alternative from the same family (e.g., PID variant).\
+                                              **2 pts:** qualitative discussion only (no quantitative metrics).
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Deliverable**                **Max**  **Scoring guide**
-  ----------------------------- --------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  Enhanced simulation results       6     **6 pts:** model includes wheel inertia + ground friction + numerical parameter values, all documented.\
-                                          **4 pts:** two of the three elements included.\
-                                          **2 pts:** one of the three elements included.\
-                                          **0 pts:** no enhancement over Week 2 model.
-
-  Load test video                   7     **7 pts:** stable inversion $\geq$`<!-- -->`{=html}5 s under load; load mass and attachment location clearly identified (caption/overlay).\
-                                          **5 pts:** stable under load but load mass/location not quantified.\
-                                          **2 pts:** load test attempted with documentation but stability not achieved.\
-                                          **0 pts:** not submitted.
-
-  Controller comparison             7     **7 pts:** PID metrics reported (rise time, overshoot, settling time) *and* a structurally different controller (LQR / state feedback / feedforward) compared using the same metrics.\
-                                          **4 pts:** PID only, or alternative from the same family (e.g., PID variant).\
-                                          **2 pts:** qualitative discussion only (no quantitative metrics).
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

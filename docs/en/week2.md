@@ -18,11 +18,11 @@ Week 2 focuses on measuring the cart motion using a rotary encoder and using th
 
 Recommended parallel roles: Student A (encoder fabrication/installation), Student B (encoder feedback in code + debugging), Student C (MATLAB/Simulink simulation extension). Roles can be rotated, but all students should understand the end-to-end flow.
 
-- **Student A:** Task A (encoder fabrication/installation) --- [[see Section [4.3](#sec:w2-task-a)]{style="color: brandD"}](#sec:w2-task-a)
+- **Student A:** Task A (encoder fabrication/installation) --- [see Section [4.3](#sec:w2-task-a)](#sec:w2-task-a)
 
-- **Student B:** Task B (encoder feedback in code, debugging, and position control) --- [[see Section [4.4](#sec:w2-task-b)]{style="color: brandD"}](#sec:w2-task-b)
+- **Student B:** Task B (encoder feedback in code, debugging, and position control) --- [see Section [4.4](#sec:w2-task-b)](#sec:w2-task-b)
 
-- **Student C:** Task C (MATLAB/Simulink simulation extension and comparison) --- [[see Section [4.5](#sec:w2-task-c)]{style="color: brandD"}](#sec:w2-task-c)
+- **Student C:** Task C (MATLAB/Simulink simulation extension and comparison) --- [see Section [4.5](#sec:w2-task-c)](#sec:w2-task-c)
 
 ## Task A: Encoder Fabrication and Installation (Student A)
 
@@ -69,7 +69,7 @@ Therefore, by performing calculation like Figure [20](#fig:counting) for A-phase
 
 When producing an encoder, first decide the installation location of the scale and the resolution of the scale. Installation locations are generally \"attach to motor shaft\" or \"attach to tire (wheel)\". When attaching to the tire, remove the tire from the shaft once (remove 1 nut in the center of the tire. Do not remove other screws), and stick paper printed with scale on the inside of the wheel with double-sided tape. However, if the paper is flimsy, the distance between the scale and photo-interrupter fluctuates, so it is better to stick the scale on a prepared plastic plate (green disk) and stick the whole plate to the wheel.
 
-[*Note that tires will be reused by the next group, so perform work within the range where original state can be restored.*]{style="color: warnRed"}
+*Note that tires will be reused by the next group, so perform work within the range where original state can be restored.*
 
 When attaching to the motor shaft, attach paper printed with scale to the shaft slightly protruding behind the motor. In this case, use double-sided tape or tape glue skillfully to stick. It is difficult to stick firmly, but since almost no force is applied, light adhesion is sufficient (instead, make the scale as light as possible). When installing on the motor side, resolution increases by the reduction ratio (= ratio of tire radius and motor tip tube radius) compared to installing on the tire. Therefore, even a scale with coarse division number (e.g., 4 divisions every 90 degrees) provides sufficient performance.
 
@@ -88,7 +88,7 @@ Also, when deciding resolution of scale, keep photo-interrupter arrangement inte
 
 <figure id="fig:encoder_disc" data-latex-placement="bth">
 <div class="center">
-<img src="encoder_disc.png" style="width:100mm" />
+![](../figs/encoder_disc.png)
 </div>
 <figcaption>Example of encoder pattern. Left assumes reading common scale with 2 photo-interrupters arranged shifted by 1/4 period angle. Right assumes 2 photo-interrupters placed at same angle (but different distance from center), reading 2 slits shifted by 1/4 period from each other.</figcaption>
 </figure>
@@ -99,7 +99,7 @@ Reading of scale is done by photo-interrupter. Referencing inclination angle sen
 
 <figure id="fig:encoder_setup" data-latex-placement="bth">
 <div class="center">
-<img src="encoder_setup.png" style="width:55mm" />
+![](../figs/encoder_setup.png)
 </div>
 <figcaption>Photo-interrupter attachment</figcaption>
 </figure>
@@ -116,7 +116,7 @@ After completion of attachment and wiring, determine threshold for binarization 
 
 #### How this relates to the weekly schedule
 
-**Week 1:** your goal is to achieve a basic stand-up using **P-only** angle feedback (see [[see Section [\[sec:w1-standup-pre-encoder\]](#sec:w1-standup-pre-encoder)]{style="color: brandD"}](#sec:w1-standup-pre-encoder)). **Week 2 and beyond:** continue tuning and improvements (including angular velocity, filtering, and adding D gain). This section provides the detailed procedure and safety notes.
+**Week 1:** your goal is to achieve a basic stand-up using **P-only** angle feedback (see [see Section [\[sec:w1-standup-pre-encoder\]](#sec:w1-standup-pre-encoder)](#sec:w1-standup-pre-encoder)). **Week 2 and beyond:** continue tuning and improvements (including angular velocity, filtering, and adding D gain). This section provides the detailed procedure and safety notes.
 
 ### Using the Complete Control Program
 
@@ -155,7 +155,7 @@ This time, a 6-channel oscilloscope is prepared to monitor the state of mbed in 
 **Using the Oscilloscope:** Flash to mbed (or compile the .cpp file yourself if you want to modify control parameters). After installation is complete, open in Processing and press the triangular run button to open the oscilloscope screen. The screen is divided into top and bottom. 3 pieces of data in the upper half, 3 pieces of data in the lower half, a total of 6 pieces of data are displayed. If 6 pieces of data are sent every repetition period in the mbed program, they are displayed in the order sent (Upper screen R: Red, G: Green, B: Blue, Lower screen Red, Green, Blue order). However, immediately after launching the oscilloscope screen, it may not be in the correct order. By resetting mbed once after launching the screen, the display is also reset to the correct order (this re-synchronizes the frame alignment).
 
 <figure id="fig:debuger3" data-latex-placement="htbp">
-<img src="fig2026/debug_oscilloscope.png" style="width:90.0%" />
+![](../figs/fig2026/debug_oscilloscope.png)
 <figcaption>Debugging Tool 3: Six-Channel Oscilloscope showing real-time control data (CH1–CH3: sensor/angle; CH4–CH6: angular velocity, filtered velocity, reference)</figcaption>
 </figure>
 
@@ -167,13 +167,13 @@ The program is designed to display: (CH1) output of photo-interrupter 1 (Upper s
 
 It's finally the experiment, but before that, let's understand the power supply mechanism of this board.
 
-The battery box supplies power to the entire board (mbed + motor + photo-interrupter), and turning on the battery box activates the entire inverted pendulum (at this time, the LED on the board lights up). [*Since the motor continues to operate while the battery box is on, please [turn off the battery box frequently] except when necessary = when doing inverted experiments.*]{style="color: warnRed"}
+The battery box supplies power to the entire board (mbed + motor + photo-interrupter), and turning on the battery box activates the entire inverted pendulum (at this time, the LED on the board lights up). ***Since the motor continues to operate while the battery box is on, please turn off the battery box frequently** except when necessary = when doing inverted experiments.*
 
-On the other hand, even when the battery box is off, connecting mbed to a PC with a USB cable [supplies power to mbed only via USB cable]{style="color: warnRed"} (Power is not supplied to the motor and photo-interrupter from USB). At this time, the red LED on the board should be off, but since the blue LED of mbed shines brightly, there are cases where experiments are done without realizing that the battery box power switch is off. If the photo-interrupter output is strange or the motor does not move, check the battery box switch.
+On the other hand, even when the battery box is off, connecting mbed to a PC with a USB cable supplies power to mbed only via USB cable (Power is not supplied to the motor and photo-interrupter from USB). At this time, the red LED on the board should be off, but since the blue LED of mbed shines brightly, there are cases where experiments are done without realizing that the battery box power switch is off. If the photo-interrupter output is strange or the motor does not move, check the battery box switch.
 
 ### Zeroing the Inclination Sensor
 
-Since it is troublesome if the motor moves in this work, [*disconnect the connection between the motor and the motor driver*]{style="color: warnRed"}. With the USB cable connected to mbed, zero the sensor with the following procedure.
+Since it is troublesome if the motor moves in this work, *disconnect the connection between the motor and the motor driver*. With the USB cable connected to mbed, zero the sensor with the following procedure.
 
 - Reset with the reset switch in the center of mbed (= Program start).
 
@@ -197,7 +197,7 @@ Lucky people might invert perfectly with just this. If it does not invert perfec
 
 ### Gain Adjustment
 
-Next, let's change the P gain and see the machine response. People who can invert at this point should lower the P gain once (to about half or less for now). Check the operation of the machine while [gently holding the top of the machine or the USB cable so as not to hinder the movement of the machine (and not to fall)]{style="color: warnRed"}.
+Next, let's change the P gain and see the machine response. People who can invert at this point should lower the P gain once (to about half or less for now). Check the operation of the machine while gently holding the top of the machine or the USB cable so as not to hinder the movement of the machine (and not to fall).
 
 1.  When P gain is low, relaxed (= about 1, 2Hz) simple harmonic oscillation is seen.
 
@@ -211,9 +211,9 @@ Next, let's change the P gain and see the machine response. People who can inver
 
 The state of 3 above is ideal, so adjust the gain to become state 3 after changing the gain from small to large. In the case of a machine with little friction, vibration may not completely disappear with P control alone. In that case, adjust to the gain where vibration is minimized.
 
-Note that relaxed vibrations seen in 1 and 2 are not particularly harmful (just low stability), but high frequency vibrations in 4 and 5 can lead to [*heat generation and burnout of electronic parts and motors*]{style="color: warnRed"} due to excessive current. Also, there is a risk that screws loosen due to vibration and the machine breaks, so avoid this state as much as possible.
+Note that relaxed vibrations seen in 1 and 2 are not particularly harmful (just low stability), but high frequency vibrations in 4 and 5 can lead to *heat generation and burnout of electronic parts and motors* due to excessive current. Also, there is a risk that screws loosen due to vibration and the machine breaks, so avoid this state as much as possible.
 
-[*If rattling vibration occurs, turn off the switch immediately.*]{style="color: warnRed"}
+*If rattling vibration occurs, turn off the switch immediately.*
 
 ### Calculation of Angular Velocity
 
@@ -258,13 +258,13 @@ y[n] =  b_0 x[n] + b_1 x[n-1] - a_1 y[n-1]
 
 This completes it. Line 1 is filter calculation, and lines 2 and 3 save input and output ($x[n], y[n]$) in this cycle so that they can be referenced as previous values ($x[n-1]$, $y[n-1]$) in the next cycle.
 
-Once the program is written, let's see how the angular velocity signal changes before and after the filter on the oscilloscope screen. Modify the program to output values before and after the filter to the oscilloscope. If the filter is working correctly, you should be able to confirm that noise is reduced. Note that it is fine if some noise remains in the filter result. If you filter so much that noise becomes completely invisible, you have over-filtered. In that case, I think there will be a large delay in the signal. Filtering always causes time delay, but if it is obviously delayed visually, it is over-filtered. [Increase] the cutoff frequency to weaken the filter effect.
+Once the program is written, let's see how the angular velocity signal changes before and after the filter on the oscilloscope screen. Modify the program to output values before and after the filter to the oscilloscope. If the filter is working correctly, you should be able to confirm that noise is reduced. Note that it is fine if some noise remains in the filter result. If you filter so much that noise becomes completely invisible, you have over-filtered. In that case, I think there will be a large delay in the signal. Filtering always causes time delay, but if it is obviously delayed visually, it is over-filtered. **Increase** the cutoff frequency to weaken the filter effect.
 
 ### Inversion adding Derivative Control
 
 Once angular velocity can be calculated, let's add D gain and perform PD control. Multiply D gain by the angular velocity passed through the filter to match equation ([\[eq:pd\]](#eq:pd)). For a machine that is already stable with only P control, adding D gain may not look like stability has increased, but the effect of D gain should appear in response to disturbance. To give a disturbance, lightly poke the inverted machine with a finger. Without D gain, it will recover the inverted state while wobbling, but with appropriate D gain, the vibration converges quickly (depending on the machine, the effect may not be very visible).
 
-Let's actually change the magnitude of D gain and see the response. The magnitude of D gain (here) is roughly several tenths (1/20?) of P gain. Note that [theoretically, the larger the D gain, the better the vibration should dampen, but in reality, if the D gain is too large, the vibration increases instead, so be careful]{style="color: warnRed"}[^25]. If the machine is shivering, it is possible that D gain is too large, so try lowering D gain (depending on the machine, D gain 0 might be best).
+Let's actually change the magnitude of D gain and see the response. The magnitude of D gain (here) is roughly several tenths (1/20?) of P gain. Note that theoretically, the larger the D gain, the better the vibration should dampen, but in reality, if the D gain is too large, the vibration increases instead, so be careful[^25]. If the machine is shivering, it is possible that D gain is too large, so try lowering D gain (depending on the machine, D gain 0 might be best).
 
 ### Summary so far
 
@@ -282,7 +282,7 @@ Correct sign of gain $K_x$ is unknown whether positive or negative (depends on s
 
 Once correct sign is known, change magnitude of proportional gain and check change in response. While gently supporting machine by hand, try operating it with intention of reading movement of inverted pendulum. If gain is small, it oscillates slowly and largely, and if large, it oscillates fast and finely. In inclination angle control mentioned before, machine might have been stilled only with proportional gain, but regarding position control here, only oscillating response can be obtained with proportional gain alone (and due to signal delay and back EMF influence, oscillation amplitude gradually increases).
 
-Note that, as in inclination angle control experiment, excessive gain causes violent vibration. Violent vibration may lead to damage of parts, so [*if violent vibration occurs, turn off power switch immediately*]{style="color: warnRed"}.
+Note that, as in inclination angle control experiment, excessive gain causes violent vibration. Violent vibration may lead to damage of parts, so *if violent vibration occurs, turn off power switch immediately*.
 
 In many cases, around where it oscillates slowly (about 0.5Hz?) is just right proportional gain, so aim there and adjust. Since this vibration will be suppressed by derivative control set next, it is important that frequency of this vibration is within range where derivative control works (about 1/10 or less of cutoff frequency of low-pass filter). People with high resolution encoder can set cutoff frequency of velocity filter high, and can dampen up to higher frequency, so it is okay to adjust to faster vibration (response of position becomes more agile that way). Perform adjustment keeping your own encoder performance and velocity low-pass filter characteristics in mind.
 
@@ -372,7 +372,7 @@ Figure [25](#fig:simulink_overview) shows the overall Simscape Multibody diagra
 
 <figure id="fig:simulink_overview" data-latex-placement="h">
 <div class="center">
-<img src="fig2026/Sim1.png" style="width:95.0%" />
+![](../figs/fig2026/Sim1.png)
 </div>
 <figcaption>Overall Simscape Multibody plant diagram of the provided milestone example. The model is organized into the cart (wheel-related assembly) and the body (pendulum-related assembly), connected by joints and frame transforms.</figcaption>
 </figure>
@@ -388,11 +388,11 @@ Figure [26](#fig:simscape_body_build) shows the rigid *body* subassembly, while
 <figure id="fig:simscape_subassemblies" data-latex-placement="h">
 <div class="center">
 <figure id="fig:simscape_body_build">
-<img src="fig2026/Sim2.png" />
+![](../figs/fig2026/Sim2.png)
 <figcaption>Body model in Simscape Multibody.</figcaption>
 </figure>
 <figure id="fig:simscape_wheel_build">
-<img src="fig2026/Sim3.png" />
+![](../figs/fig2026/Sim3.png)
 <figcaption>Wheel model in Simscape Multibody.</figcaption>
 </figure>
 </div>
@@ -413,7 +413,7 @@ Figure [29](#fig:simscape_joints_actuation) highlights how the angle joint and 
 
 <figure id="fig:simscape_joints_actuation" data-latex-placement="h">
 <div class="center">
-<img src="fig2026/Sim5.png" style="width:95.0%" />
+![](../figs/fig2026/Sim5.png)
 </div>
 <figcaption>Joint configuration in the provided multibody model. The body angle is obtained from a <strong>Revolute Joint</strong> (hinge), while cart translation along the ground direction is modeled by a <strong>Prismatic Joint</strong>. The prismatic joint can also be used as the actuation point and as a source of position/velocity signals for outer-loop control.</figcaption>
 </figure>
@@ -422,7 +422,7 @@ With these signals available, the controller block closes the stabilizing loop. 
 
 <figure id="fig:simulink_highlevel" data-latex-placement="h">
 <div class="center">
-<img src="fig2026/Sim4.png" style="width:95.0%" />
+![](../figs/fig2026/Sim4.png)
 </div>
 <figcaption>PID controller subsystem used in the milestone example. The provided controller stabilizes the inverted pendulum by regulating the tilt angle. PID parameters can be tuned manually or with the PID Tuner workflow.</figcaption>
 </figure>
@@ -455,7 +455,7 @@ After running the simulation, use the angle scope to evaluate whether the invert
 
 <figure id="fig:simulation_result" data-latex-placement="h">
 <div class="center">
-<img src="fig2026/Sim6.png" style="width:130mm" />
+![](../figs/fig2026/Sim6.png)
 </div>
 <figcaption>Screenshot of the inverted pendulum walking (Sim6).</figcaption>
 </figure>
@@ -535,27 +535,27 @@ Such defects are often caused by poor handling of jumper wires. Be careful not t
 
 !!! note "Submission"
     Your system should demonstrate encoder-based position/velocity sensing and improved stability with position control. Submit a **single group report** containing:
-
-  -----------------------------------------------------------------------------------------------------------------------------------------------
-  **Deliverable**                **Max**  **Scoring guide**
-  ----------------------------- --------- -------------------------------------------------------------------------------------------------------
-  Position-control video            8     **8 pts:** inversion $\geq$`<!-- -->`{=html}10 s within $\pm$`<!-- -->`{=html}0.5 m of set-point.\
-                                          **5 pts:** inversion held but position drift is large.\
-                                          **0 pts:** inversion lost within 5 s.
-
-  Encoder A/B plots                 7     **7 pts:** A/B waveforms clearly labeled *and* direction reversal verified (CW vs. CCW phase shift).\
-                                          **5 pts:** waveforms shown but direction not verified.\
-                                          **2 pts:** pulse count only, no phase analysis.\
-                                          **0 pts:** not submitted.
-
-  Sim vs. hardware comparison       5     **5 pts:** $x(t)$ and $\dot{x}(t)$ plots for both sim and hardware, *with* discrepancy explained.\
-                                          **3 pts:** plots included but no explanation of differences.\
-                                          **1 pt:** qualitative description only (no plots).
-  -----------------------------------------------------------------------------------------------------------------------------------------------
+    
+      -----------------------------------------------------------------------------------------------------------------------------------------------
+      **Deliverable**                **Max**  **Scoring guide**
+      ----------------------------- --------- -------------------------------------------------------------------------------------------------------
+      Position-control video            8     **8 pts:** inversion $\geq$10 s within $\pm$0.5 m of set-point.\
+                                              **5 pts:** inversion held but position drift is large.\
+                                              **0 pts:** inversion lost within 5 s.
+    
+      Encoder A/B plots                 7     **7 pts:** A/B waveforms clearly labeled *and* direction reversal verified (CW vs. CCW phase shift).\
+                                              **5 pts:** waveforms shown but direction not verified.\
+                                              **2 pts:** pulse count only, no phase analysis.\
+                                              **0 pts:** not submitted.
+    
+      Sim vs. hardware comparison       5     **5 pts:** $x(t)$ and $\dot{x}(t)$ plots for both sim and hardware, *with* discrepancy explained.\
+                                              **3 pts:** plots included but no explanation of differences.\
+                                              **1 pt:** qualitative description only (no plots).
+      -----------------------------------------------------------------------------------------------------------------------------------------------
 
 [^20]: This time we use a reflective photo-interrupter so it is a black and white pattern, but generally transmissive photo-interrupters and slit disks are often used
 [^21]: Access the course materials repository at <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
-[^22]: Appendix [\[app:processing\]](#app:processing){reference-type="ref" reference="app:processing"}: Processing Oscilloscope Manual.
+[^22]: Appendix [\[app:processing\]](#app:processing): Processing Oscilloscope Manual.
 [^23]: A video demonstration of the debugging and tuning process is available in the course materials repository:
 [^24]: If using Matlab, freqz(b,a) or bode(tf(b,a,sampling time)) allows checking the frequency response of the filter.
 [^25]: In a 1st order LPF, phase delays by 90 degrees in high frequency band. Considering the case where inclination angle changes sinusoidally, its derivative (= angular velocity) must be advanced by 90 degrees phase relative to inclination angle, but at high frequencies, phase delays by 90 degrees due to the filter, so passing the differentiation result through the filter results in the same phase as the original inclination angle. This is no longer differentiation. Therefore, at high frequencies, even if intending to do derivative control, it is actually the same as doing proportional control. Thus, easily increasing derivative gain makes proportional gain substantially large in high frequency band, resulting in oscillatory and unstable response.\

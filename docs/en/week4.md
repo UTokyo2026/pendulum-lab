@@ -25,57 +25,23 @@ Week 4 is the final wrap-up. You will present your design and results, demonstr
 
 !!! note "Submission"
     Submit the following package and deliver a live presentation:
-
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  **Deliverable**       **Max**  **Scoring guide**
-  -------------------- --------- -------------------------------------------------------------------------------------------------------------------------------------------------
-  Slides (PDF)            10     **10 pts:** all four elements covered with supporting data: (1) theory, (2) design, (3) validation (sim + hardware), (4) lessons learned.\
-                                 **7 pts:** three of the four elements covered.\
-                                 **3 pts:** $\leq$`<!-- -->`{=html}2 elements, or text-only slides without data.
-
-  Final demo video        10     **10 pts:** stable run $\geq$`<!-- -->`{=html}10 s with clear enable/disable sequence (a few seconds shown before and after enabling control).\
-                                 **6 pts:** stable run but enable/disable sequence unclear or missing.\
-                                 **2 pts:** demo fails but failure is honestly documented.\
-                                 **0 pts:** not submitted.
-
-  Presentation & Q&A      10     **5 pts:** $\geq$`<!-- -->`{=html}2 technical questions answered correctly during Q&A.\
-                                 **5 pts:** answers are consistent with the submitted materials (slides, video, report).\
-                                 Partial credit applied within each sub-criterion.
-  --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-::: center
-**List of Appendices**
-
-::: list
-**Appendix **
-
-Parts List
-
-RE-280RA datasheet (Mabuchi Motor)
-
-Processing Oscilloscope Manual
-
-Circuit example
-
-DRV8832 datasheet (Texas Instruments)
-
-TPR-105F datasheet
-
-LD1117V33 datasheet
-
-[]
-
-[]
-
-[]
-
-[]
-
-[]
-
-[]
-
-[]
+    
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+      **Deliverable**       **Max**  **Scoring guide**
+      -------------------- --------- -------------------------------------------------------------------------------------------------------------------------------------------------
+      Slides (PDF)            10     **10 pts:** all four elements covered with supporting data: (1) theory, (2) design, (3) validation (sim + hardware), (4) lessons learned.\
+                                     **7 pts:** three of the four elements covered.\
+                                     **3 pts:** $\leq$2 elements, or text-only slides without data.
+    
+      Final demo video        10     **10 pts:** stable run $\geq$10 s with clear enable/disable sequence (a few seconds shown before and after enabling control).\
+                                     **6 pts:** stable run but enable/disable sequence unclear or missing.\
+                                     **2 pts:** demo fails but failure is honestly documented.\
+                                     **0 pts:** not submitted.
+    
+      Presentation & Q&A      10     **5 pts:** $\geq$2 technical questions answered correctly during Q&A.\
+                                     **5 pts:** answers are consistent with the submitted materials (slides, video, report).\
+                                     Partial credit applied within each sub-criterion.
+      --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 [^1]: Course materials repository: <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
 

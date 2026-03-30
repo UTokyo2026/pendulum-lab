@@ -1,12 +1,8 @@
 # Purpose of the Exercise
 
-:::: wrapfigure
 r45mm
 
-::: center
 ![image](../figs/pendulum_image.png)
-
-::::
 
 In this exercise, by building a wheeled inverted pendulum (almost) from scratch, we aim to master:
 
@@ -22,7 +18,7 @@ An inverted pendulum is literally a pendulum that is inverted. An inverted pendu
 
 There are two types of inverted pendulums: one with a pendulum attached to a linear stage, and one where the pendulum itself travels. The latter corresponds to the wheeled inverted pendulum in this exercise. The principle of the wheeled inverted pendulum is used in mobility devices represented by Segway and wheeled robots.
 
-Although wheeled inverted pendulum kits are commercially available, we will not use such kits in this exercise. Instead, we aim to [*understand the configuration and mechanism more deeply by building the inverted pendulum ourselves using only basic parts.*]{style="color: warnRed"} Also, since sensors are very important in feedback control, we would like you to [*experience the difficulty and importance of sensors*]{style="color: warnRed"} by making your own sensors (using more primitive sensor elements).
+Although wheeled inverted pendulum kits are commercially available, we will not use such kits in this exercise. Instead, we aim to *understand the configuration and mechanism more deeply by building the inverted pendulum ourselves using only basic parts.* Also, since sensors are very important in feedback control, we would like you to *experience the difficulty and importance of sensors* by making your own sensors (using more primitive sensor elements).
 
 # Overview of Inverted Pendulum Control
 
@@ -77,7 +73,7 @@ I\ddot{\theta} - m_p gl \theta = -A \tau
 \label{eq:simple}
 \end{equation}$$ This equation represents the same situation as a pendulum with mass $m_p$ and moment of inertia $I$ around the axis fixed on a shaft, receiving torque $A\tau$ from a motor, as shown in Figure [\[fig:simple_pendulum\]](#fig:simple_pendulum).
 
-Let's consider the behavior of the pendulum in Figure [\[fig:simple_pendulum\]](#fig:simple_pendulum). When there is no torque from the motor (= no control), equation ([\[eq:simple\]](#eq:simple)) becomes $I \ddot{\theta} = m_pgl\theta$. Formally, this is the same as the spring equation, so let's compare it with the spring-mass system in Figure [\[fig:spring\]](#fig:spring). The equation of motion for the spring-mass system in Figure [\[fig:spring\]](#fig:spring) is $m\ddot{x}=-kx$. Comparing this with the previous equation, we can see that [**the inverted pendulum is equivalent to a spring-mass system with a spring constant of $-m_pgl$.**]{style="color: warnRed"} However, since the spring constant ($-m_pgl$) is negative, it performs an unstable operation exactly opposite to a spring (if it moves slightly away from the equilibrium point, a force acts to move it further away).
+Let's consider the behavior of the pendulum in Figure [\[fig:simple_pendulum\]](#fig:simple_pendulum). When there is no torque from the motor (= no control), equation ([\[eq:simple\]](#eq:simple)) becomes $I \ddot{\theta} = m_pgl\theta$. Formally, this is the same as the spring equation, so let's compare it with the spring-mass system in Figure [\[fig:spring\]](#fig:spring). The equation of motion for the spring-mass system in Figure [\[fig:spring\]](#fig:spring) is $m\ddot{x}=-kx$. Comparing this with the previous equation, we can see that **the inverted pendulum is equivalent to a spring-mass system with a spring constant of $-m_pgl$.** However, since the spring constant ($-m_pgl$) is negative, it performs an unstable operation exactly opposite to a spring (if it moves slightly away from the equilibrium point, a force acts to move it further away).
 
 Thus, the inverted pendulum can be interpreted as unstable because it has a negative spring constant. Therefore, let's consider attaching a spring between it and the vertical axis as shown in Figure [2](#fig:stabilize) so that the total combined spring constant (= original negative spring constant + newly attached positive spring constant) becomes positive. If the combined spring constant becomes positive, the pendulum should perform simple harmonic motion near the vertical axis. Furthermore, if a damper (= dashpot: produces a reaction force proportional to velocity) is also attached, the oscillation can be damped, and the inverted pendulum can be made to stand along the vertical axis. However, since we cannot attach a real spring and damper, let's realize the function equivalent to a spring and damper by feedback control.
 
@@ -126,13 +122,9 @@ To prevent this, it is necessary not only to control by looking at the angle but
 
 In order to perform control based on equation ([\[eq:pd\]](#eq:pd)), there is one more thing to consider. It is about the motor torque. When we drive a motor, we do so by applying a voltage across the motor terminals. If this voltage is changed, the generated torque of the motor also changes, but what is the relationship between voltage and generated torque?
 
-:::: wrapfigure
 r60mm
 
-::: center
 ![image](../figs/motor_model.png)
-
-::::
 
 Figure [\[fig:motor\]](#fig:motor) is an equivalent circuit model of a DC motor. Inside the motor, there is a winding for generating a magnetic field, which has resistance $R$ and inductance $L$. Also, since the motor has the same action as a generator, when the motor rotates, a voltage proportional to the rotation speed called *counter electromotive force* (counter EMF) is generated in the opposite direction to the applied voltage.
 
