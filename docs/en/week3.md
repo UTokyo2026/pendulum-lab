@@ -14,25 +14,24 @@ Week 3 focuses on bridging the gap between an ideal simulation and real hardwar
 
 - Compare simulation vs hardware performance using consistent metrics and plots
 
-::: cautionbox
-- **Secure the load firmly.** If the load falls off, it can damage the hardware or injure people.
+!!! warning
+    - **Secure the load firmly.** If the load falls off, it can damage the hardware or injure people.
 
 - **Avoid prolonged high-frequency rattling.** If you hear harsh buzzing/rattling or see violent vibration, [turn off the battery immediately] (risk of overheating or loosening screws).
 
 - **Start from conservative gains.** Add load increases required torque and makes saturation/tripping more likely.
 
 - **Work on a clear floor and keep hands away from moving wheels.** Prepare a "catch" posture to prevent hard impacts when the system falls.
-:::
 
 ## Parallel Tasks
 
 Recommended parallel roles: Student A (hardware load attachment + load testing), Student B (simulation model enhancement), Student C (MATLAB tuning + controller comparison). Roles can be rotated, but keep a single shared test log (same naming and metrics).\
 
-- **Student A:** Task A (load attachment and hardware tests) --- [[see Section [5.3](#sec:w3-task-a)]](#sec:w3-task-a)
+- **Student A:** Task A (load attachment and hardware tests) --- [[see Section [5.3](#sec:w3-task-a)]{style="color: brandD"}](#sec:w3-task-a)
 
-- **Student B:** Task B (extend simulation: wheel dynamics + friction) --- [[see Section [5.4](#sec:w3-task-b)]](#sec:w3-task-b)
+- **Student B:** Task B (extend simulation: wheel dynamics + friction) --- [[see Section [5.4](#sec:w3-task-b)]{style="color: brandD"}](#sec:w3-task-b)
 
-- **Student C:** Task C (PID tuning + advanced controller comparison) --- [[see Section [5.5](#sec:w3-task-c)]](#sec:w3-task-c)
+- **Student C:** Task C (PID tuning + advanced controller comparison) --- [[see Section [5.5](#sec:w3-task-c)]{style="color: brandD"}](#sec:w3-task-c)
 
 ## Task A: Load Attachment and Hardware Tests (Student A)
 
@@ -80,7 +79,7 @@ This task improves the simulation so it can explain observed differences between
 ### B2. Add a friction model
 
 - Implement at least one friction effect such as:\
-  **viscous friction** ($F=-b\dot$) and/or **Coulomb friction** ($F=-F_c\,\mathrm(\dot)$), or an equivalent block in Simulink
+  **viscous friction** ($F=-b\dot{x}$) and/or **Coulomb friction** ($F=-F_c\,\mathrm{sgn}(\dot{x})$), or an equivalent block in Simulink
 
 - Document assumptions: which friction terms are used, parameter values, and how you selected/estimated them
 
@@ -122,8 +121,8 @@ This task tunes PID gains in MATLAB under load and compares with at least one al
 
 ## Week 3 Submission
 
-::: submissionbox
-Your work should show a clear progression: **enhanced model** $\rightarrow$ **tuned control** $\rightarrow$ **validated under load on real hardware**. Submit a **single group report** containing:
+!!! note "Submission"
+    Your work should show a clear progression: **enhanced model** $\rightarrow$ **tuned control** $\rightarrow$ **validated under load on real hardware**. Submit a **single group report** containing:
 
   --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   **Deliverable**                **Max**  **Scoring guide**
@@ -133,7 +132,7 @@ Your work should show a clear progression: **enhanced model** $\rightarrow$ **tu
                                           **2 pts:** one of the three elements included.\
                                           **0 pts:** no enhancement over Week 2 model.
 
-  Load test video                   7     **7 pts:** stable inversion $\geq$`<!-- -->`5 s under load; load mass and attachment location clearly identified (caption/overlay).\
+  Load test video                   7     **7 pts:** stable inversion $\geq$`<!-- -->`{=html}5 s under load; load mass and attachment location clearly identified (caption/overlay).\
                                           **5 pts:** stable under load but load mass/location not quantified.\
                                           **2 pts:** load test attempted with documentation but stability not achieved.\
                                           **0 pts:** not submitted.
@@ -142,5 +141,3 @@ Your work should show a clear progression: **enhanced model** $\rightarrow$ **tu
                                           **4 pts:** PID only, or alternative from the same family (e.g., PID variant).\
                                           **2 pts:** qualitative discussion only (no quantitative metrics).
   --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-:::
-

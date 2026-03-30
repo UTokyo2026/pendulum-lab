@@ -1,5 +1,5 @@
-::: tcolorbox
-:::
+!!! warning
+    :::
 
 # 授業日程
 
@@ -7,25 +7,16 @@
 
 **凡例：** ; ; ; ; **バッジ：** `C#-W#` = コホート/週，`OFF` = 休講．
 
-::: minipage
 **2026年4月**
-:::
 
-::: minipage
 **2026年5月**
-:::
 
-::: minipage
 **2026年6月**
-:::
 
-::: minipage
 **2026年7月**
-:::
 
 # 週ごとの課題と進め方
 
-::: tabular
 \|c\|L4.5cm\|L7cm\|L3.5cm\| **週** & **内容** & **担当の目安** & **提出物**\
 **Week 0** & **事前準備とテキスト学習**\
 - テキストと理論背景の確認\
@@ -34,23 +25,23 @@
 - テキスト全体に目を通す\
 - PC 環境を整える
 
-**学生A：** ハードウェアキット内容の確認（[[付録[\[app:partslist\]](#app:partslist)参照]](#app:partslist)）\
-**学生B：** Keil Studio Cloud の準備と Processing の導入（[[第[3.3.2](#sec:w1-microcontroller-setup)節参照]](#sec:w1-microcontroller-setup); [[付録[\[app:processing\]](#app:processing)参照]](#app:processing)）\
-**学生C：** Fritzing と MATLAB の準備（[[第[3.3.3](#sec:w1-breadboard-wiring-design)節参照]](#sec:w1-breadboard-wiring-design); [[第[4.5.2](#sec:matlab-setup)節参照]](#sec:matlab-setup)） & なし\
+**学生A：** ハードウェアキット内容の確認（[[付録[\[app:partslist\]](#app:partslist)参照]{style="color: brandD"}](#app:partslist)）\
+**学生B：** Keil Studio Cloud の準備と Processing の導入（[[第[3.3.2](#sec:w1-microcontroller-setup)節参照]{style="color: brandD"}](#sec:w1-microcontroller-setup); [[付録[\[app:processing\]](#app:processing)参照]{style="color: brandD"}](#app:processing)）\
+**学生C：** Fritzing と MATLAB の準備（[[第[3.3.3](#sec:w1-breadboard-wiring-design)節参照]{style="color: brandD"}](#sec:w1-breadboard-wiring-design); [[第[4.5.2](#sec:matlab-setup)節参照]{style="color: brandD"}](#sec:matlab-setup)） & なし\
 **Week 1** & **組立と立ち上げ**\
 - 機械組立\
 - マイコンの立ち上げとデバッグ\
 - ブレッドボード配線設計（Fritzing）\
 - 統合作業とデバッグ & **Step 1（個別）：**\
-- **学生A：** 機械組立（[[第[3.3.1](#sec:w1-mechanical-assembly)節参照]](#sec:w1-mechanical-assembly)）\
-- **学生B：** マイコン立ち上げとデバッグ（[[第[3.3.2](#sec:w1-microcontroller-setup)節参照]](#sec:w1-microcontroller-setup)）\
-- **学生C：** Fritzing による配線設計（[[第[3.3.3](#sec:w1-breadboard-wiring-design)節参照]](#sec:w1-breadboard-wiring-design)）\
-**Step 2（全員）：** 統合とデバッグ（[[第[3.4](#sec:w1-circuit-assembly)節参照]](#sec:w1-circuit-assembly)） & - 倒立デモ動画\
+- **学生A：** 機械組立（[[第[3.3.1](#sec:w1-mechanical-assembly)節参照]{style="color: brandD"}](#sec:w1-mechanical-assembly)）\
+- **学生B：** マイコン立ち上げとデバッグ（[[第[3.3.2](#sec:w1-microcontroller-setup)節参照]{style="color: brandD"}](#sec:w1-microcontroller-setup)）\
+- **学生C：** Fritzing による配線設計（[[第[3.3.3](#sec:w1-breadboard-wiring-design)節参照]{style="color: brandD"}](#sec:w1-breadboard-wiring-design)）\
+**Step 2（全員）：** 統合とデバッグ（[[第[3.4](#sec:w1-circuit-assembly)節参照]{style="color: brandD"}](#sec:w1-circuit-assembly)） & - 倒立デモ動画\
 **Week 2** & **エンコーダと位置制御**\
 - エンコーダの製作と信号確認\
-- 位置制御の導入とシミュレーション比較 & **学生A：** エンコーダのハードウェア（[[第[4.3](#sec:w2-task-a)節参照]](#sec:w2-task-a)）\
-**学生B：** mbed 側の読み取りと制御（[[第[4.4](#sec:w2-task-b)節参照]](#sec:w2-task-b)）\
-**学生C：** シミュレーションと比較（[[第[4.5](#sec:w2-task-c)節参照]](#sec:w2-task-c)） & **グループレポート：**\
+- 位置制御の導入とシミュレーション比較 & **学生A：** エンコーダのハードウェア（[[第[4.3](#sec:w2-task-a)節参照]{style="color: brandD"}](#sec:w2-task-a)）\
+**学生B：** mbed 側の読み取りと制御（[[第[4.4](#sec:w2-task-b)節参照]{style="color: brandD"}](#sec:w2-task-b)）\
+**学生C：** シミュレーションと比較（[[第[4.5](#sec:w2-task-c)節参照]{style="color: brandD"}](#sec:w2-task-c)） & **グループレポート：**\
 - 位置制御の動画\
 - エンコーダ A/B 波形\
 - シミュレーションと実機の比較\
@@ -79,59 +70,58 @@
 - スライド\
 - 最終デモ動画\
 - 発表と質疑応答\
-:::
 
+[]
 
 # 評価基準
 
-::: tabular
 \|C1.35cm\|L3.0cm\|L3.3cm\|L7.4cm\| **週** & **提出物** & **評価項目** & **配点基準**\
 
 **W0**\
-(0 pts)
-& 事前準備確認 & 完了のみ & 提出物なし．\
-& & 倒立の成立 (20点) & **[20]** --- 15 秒以上の倒立，かつ全体が画角内\
-**[12]** --- 倒立は達成したが15 秒未満，または安定性が不十分\
-**[0]** --- 倒立未達\
-& & 組立状態の確認 (5点) & **[5]** --- 機械，ブレッドボード，配線が確認できる\
-**[0]** --- 確認できない\
-& & 動画の明瞭さ (5点) & **[5]** --- 重要部分が終始見えている\
-**[3]** --- 一部遮蔽はあるが挙動は判別可能\
-**[0]** --- 判読不能\
-& & 位置制御 (8点) & **[8]** --- $\pm$`<!-- -->`0.5 m 以内で10 秒以上倒立\
-**[5]** --- 倒立は維持したが位置ずれが大きい\
-**[0]** --- 5 秒以内に倒立を失う\
-& & エンコーダ (7点) & **[7]** --- A/B 波形にラベルがあり，回転方向反転まで確認\
-**[5]** --- 波形はあるが方向確認が不十分\
-**[2]** --- パルス数のみで位相解析なし\
-**[0]** --- 未提出\
-& & シミュレーション比較 (5点) & **[5]** --- $x(t)$, $\dot(t)$ の比較図があり，差の説明もある\
-**[3]** --- 比較図はあるが説明がない\
-**[1]** --- 定性的説明のみ\
-& & 拡張モデル (6点) & **[6]** --- 車輪慣性，摩擦，数値パラメータが明示されている\
-**[4]** --- 3要素中2つを満たす\
-**[2]** --- 3要素中1つのみ\
-**[0]** --- Week 2 から拡張なし\
-& & 負荷試験 (7点) & **[7]** --- 5 秒以上安定し，負荷質量と位置も明記\
-**[5]** --- 安定はしたが負荷条件が不十分\
-**[2]** --- 試行はあり，記録もある\
-**[0]** --- 未提出\
-& & 制御比較 (7点) & **[7]** --- PID 指標と別構造の制御法を同一指標で比較\
-**[4]** --- PID のみ，または同系統の比較のみ\
-**[2]** --- 定性的議論のみ\
-& & スライド (10点) & **[10]** --- 理論，設計，検証，学びの4要素がデータ付きである\
-**[7]** --- 4要素中3つを満たす\
-**[3]** --- 2要素以下，または文字中心\
-& & デモ動画 (10点) & **[10]** --- 10 秒以上安定し，ON/OFF の流れも明確\
-**[6]** --- 安定はしたが ON/OFF の流れが不明瞭\
-**[2]** --- 失敗していても正直に記録されている\
-**[0]** --- 未提出\
-& & 質疑応答 (10点) & **[5]** --- 技術的質問に2問以上正しく答えられる\
-**[5]** --- 回答が提出資料と整合している\
-*各項目内で部分点を与えることがあります．*\
-:::
+[(0 pts)]{style="color: brandD"}
 
-# [※※※ [演習前に読んでください] ※※※]
+& 事前準備確認 & 完了のみ & 提出物なし．\
+& & 倒立の成立 (20点) & **[20]{style="color: brandD"}** --- 15 秒以上の倒立，かつ全体が画角内\
+**[12]{style="color: brandD"}** --- 倒立は達成したが15 秒未満，または安定性が不十分\
+**[0]{style="color: brandD"}** --- 倒立未達\
+& & 組立状態の確認 (5点) & **[5]{style="color: brandD"}** --- 機械，ブレッドボード，配線が確認できる\
+**[0]{style="color: brandD"}** --- 確認できない\
+& & 動画の明瞭さ (5点) & **[5]{style="color: brandD"}** --- 重要部分が終始見えている\
+**[3]{style="color: brandD"}** --- 一部遮蔽はあるが挙動は判別可能\
+**[0]{style="color: brandD"}** --- 判読不能\
+& & 位置制御 (8点) & **[8]{style="color: brandD"}** --- $\pm$`<!-- -->`{=html}0.5 m 以内で10 秒以上倒立\
+**[5]{style="color: brandD"}** --- 倒立は維持したが位置ずれが大きい\
+**[0]{style="color: brandD"}** --- 5 秒以内に倒立を失う\
+& & エンコーダ (7点) & **[7]{style="color: brandD"}** --- A/B 波形にラベルがあり，回転方向反転まで確認\
+**[5]{style="color: brandD"}** --- 波形はあるが方向確認が不十分\
+**[2]{style="color: brandD"}** --- パルス数のみで位相解析なし\
+**[0]{style="color: brandD"}** --- 未提出\
+& & シミュレーション比較 (5点) & **[5]{style="color: brandD"}** --- $x(t)$, $\dot{x}(t)$ の比較図があり，差の説明もある\
+**[3]{style="color: brandD"}** --- 比較図はあるが説明がない\
+**[1]{style="color: brandD"}** --- 定性的説明のみ\
+& & 拡張モデル (6点) & **[6]{style="color: brandD"}** --- 車輪慣性，摩擦，数値パラメータが明示されている\
+**[4]{style="color: brandD"}** --- 3要素中2つを満たす\
+**[2]{style="color: brandD"}** --- 3要素中1つのみ\
+**[0]{style="color: brandD"}** --- Week 2 から拡張なし\
+& & 負荷試験 (7点) & **[7]{style="color: brandD"}** --- 5 秒以上安定し，負荷質量と位置も明記\
+**[5]{style="color: brandD"}** --- 安定はしたが負荷条件が不十分\
+**[2]{style="color: brandD"}** --- 試行はあり，記録もある\
+**[0]{style="color: brandD"}** --- 未提出\
+& & 制御比較 (7点) & **[7]{style="color: brandD"}** --- PID 指標と別構造の制御法を同一指標で比較\
+**[4]{style="color: brandD"}** --- PID のみ，または同系統の比較のみ\
+**[2]{style="color: brandD"}** --- 定性的議論のみ\
+& & スライド (10点) & **[10]{style="color: brandD"}** --- 理論，設計，検証，学びの4要素がデータ付きである\
+**[7]{style="color: brandD"}** --- 4要素中3つを満たす\
+**[3]{style="color: brandD"}** --- 2要素以下，または文字中心\
+& & デモ動画 (10点) & **[10]{style="color: brandD"}** --- 10 秒以上安定し，ON/OFF の流れも明確\
+**[6]{style="color: brandD"}** --- 安定はしたが ON/OFF の流れが不明瞭\
+**[2]{style="color: brandD"}** --- 失敗していても正直に記録されている\
+**[0]{style="color: brandD"}** --- 未提出\
+& & 質疑応答 (10点) & **[5]{style="color: brandD"}** --- 技術的質問に2問以上正しく答えられる\
+**[5]{style="color: brandD"}** --- 回答が提出資料と整合している\
+*各項目内で部分点を与えることがあります．*\
+
+# [※※※ [演習前に読んでください] ※※※]{style="color: warnRed"}
 
 - **本テキストの予習**：演習実施前に，本テキストを読んで，作業の概要や理論的背景を理解しておいてください．テキストを読まずにいきなり作業をすると，演習続行が困難になるような致命的ミスにつながります．
 
@@ -141,3 +131,4 @@
 
 - **作業は当日**：プログラム環境のインストール，機構の組み立て等については，演習当日に説明します．
 
+[^1]: Course materials repository: <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
