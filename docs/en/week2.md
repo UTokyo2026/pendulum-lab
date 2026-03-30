@@ -34,33 +34,33 @@ The inverted pendulum will not be stable unless position (or velocity) is detect
 
 The most basic position detection method is to attach a rotary encoder to the tire or motor to measure the number of rotations. Below, the mechanism of the rotary encoder is explained.
 
-A rotary encoder can be realized by reading a black and white pattern drawn on a disk with a photo-interrupter[^20]. As shown in Figure [18](#fig:encoder), if a photo-interrupter is placed at a position several mm away from a pattern painted in black and white and the slit is rotated, a sine wave-like output corresponding to the change in black and white is obtained from the photo-interrupter (it becomes close to a rectangular wave if the distance is close). If binarized with an appropriate threshold and replaced with rectangular pulses, the rotation angle can be measured by counting edges (changes in value). This is the basic principle of a rotary encoder.
+A rotary encoder can be realized by reading a black and white pattern drawn on a disk with a photo-interrupter[^20]. As shown in Figure ([Fig.](#fig:encoder)), if a photo-interrupter is placed at a position several mm away from a pattern painted in black and white and the slit is rotated, a sine wave-like output corresponding to the change in black and white is obtained from the photo-interrupter (it becomes close to a rectangular wave if the distance is close). If binarized with an appropriate threshold and replaced with rectangular pulses, the rotation angle can be measured by counting edges (changes in value). This is the basic principle of a rotary encoder.
+
+<figure id="fig:encoder">
+<div class="center">
+<img src="../../figs/encoder_principle.png" alt="Basic concept of rotary encoder." />
+</div>
+<figcaption>Basic concept of rotary encoder.</figcaption>
+</figure>
 
 Now, if the rotation direction is determined to be only one direction, this is fine, but when rotating in both directions, the above mechanism counts up regardless of the rotation direction, so it is useless. Therefore, when rotating in both directions, two photo-interrupters are used.
 
-As shown in Figure [19](#fig:encoderAB), two photo-interrupters are placed at positions shifted by 1/4 period of the slit pattern (or $(n+1/4)$ period where $n$ is an integer). The outputs of these two interrupters are called A-phase signal and B-phase signal. A-phase signal and B-phase signal are shifted in phase by 90 degrees like the relationship of sin and cos, but the way of phase shift changes depending on the rotation direction. If B-phase leads by 90 degrees in positive rotation (Clockwise, CW rotation), B-phase lags by 90 degrees in reverse rotation (Counter-Clockwise, CCW rotation).
+As shown in Figure ([Fig.](#fig:encoderAB)), two photo-interrupters are placed at positions shifted by 1/4 period of the slit pattern (or $(n+1/4)$ period where $n$ is an integer). The outputs of these two interrupters are called A-phase signal and B-phase signal. A-phase signal and B-phase signal are shifted in phase by 90 degrees like the relationship of sin and cos, but the way of phase shift changes depending on the rotation direction. If B-phase leads by 90 degrees in positive rotation (Clockwise, CW rotation), B-phase lags by 90 degrees in reverse rotation (Counter-Clockwise, CCW rotation).
 
-Therefore, by performing calculation like Figure [20](#fig:counting) for A-phase and B-phase signals pulsed with appropriate threshold, rotation angle can be measured correctly including rotation direction. In Figure [20](#fig:counting), only edges of A-phase pulse are counted, which is called 2x counting (Counting rising edge is basic, counting falling edge too makes it 2x). Furthermore, doing similar counting for B-phase pulse doubles resolution (this is called 4x counting). Since we want to make encoder resolution as high as possible, program it to do 4x counting.
-
-<figure id="fig:encoder" data-latex-placement="bht">
+<figure id="fig:encoderAB">
 <div class="center">
-![](../figs/encoder_principle.png)
+<img src="../../figs/encoder2phase.png" alt="CW/CCW measurement by two-phase signals (A/B)." />
 </div>
-<figcaption>Basic concept of Rotary Encoder</figcaption>
+<figcaption>Measurement of CW/CCW rotation by two phases (A/B).</figcaption>
 </figure>
 
-<figure id="fig:encoderAB" data-latex-placement="bht">
-<div class="center">
-![](../figs/encoder2phase.png)
-</div>
-<figcaption>Measurement of CW/CCW rotation by 2 phases</figcaption>
-</figure>
+Therefore, by performing calculation like Figure ([Fig.](#fig:counting)) for A-phase and B-phase signals pulsed with appropriate threshold, rotation angle can be measured correctly including rotation direction. In Figure ([Fig.](#fig:counting)), only edges of A-phase pulse are counted, which is called 2x counting (Counting rising edge is basic, counting falling edge too makes it 2x). Furthermore, doing similar counting for B-phase pulse doubles resolution (this is called 4x counting). Since we want to make encoder resolution as high as possible, program it to do 4x counting.
 
-<figure id="fig:counting" data-latex-placement="bht">
+<figure id="fig:counting">
 <div class="center">
-![](../figs/counting.png)
+<img src="../../figs/counting.png" alt="Counting A/B phase pulses (example of 2x counting)." />
 </div>
-<figcaption>Counting A/B phase pulses (Example of 2x counting)</figcaption>
+<figcaption>Counting A/B phase pulses (example of 2x counting).</figcaption>
 </figure>
 
 ### Fabrication of Rotary Encoder
@@ -73,42 +73,42 @@ When producing an encoder, first decide the installation location of the scale a
 
 When attaching to the motor shaft, attach paper printed with scale to the shaft slightly protruding behind the motor. In this case, use double-sided tape or tape glue skillfully to stick. It is difficult to stick firmly, but since almost no force is applied, light adhesion is sufficient (instead, make the scale as light as possible). When installing on the motor side, resolution increases by the reduction ratio (= ratio of tire radius and motor tip tube radius) compared to installing on the tire. Therefore, even a scale with coarse division number (e.g., 4 divisions every 90 degrees) provides sufficient performance.
 
-The finer the pattern division number of the scale, the higher the resolution as a sensor, but fine scale requires high installation accuracy. This is because the finer the scale, the smaller the output change width of the photo-interrupter. If scale installation accuracy is low, distance between photo-interrupter and scale plate fluctuates with rotation, and baseline of photo-interrupter output also fluctuates. Therefore, with a fine scale, signal cannot be binarized well, and encoder does not work (see Figure [21](#fig:baseline). If baseline fluctuates, threshold set according to a specific place cannot perform binarization at other places).
+The finer the pattern division number of the scale, the higher the resolution as a sensor, but fine scale requires high installation accuracy. This is because the finer the scale, the smaller the output change width of the photo-interrupter. If scale installation accuracy is low, distance between photo-interrupter and scale plate fluctuates with rotation, and baseline of photo-interrupter output also fluctuates. Therefore, with a fine scale, signal cannot be binarized well, and encoder does not work (see Figure ([Fig.](#fig:baseline)). If baseline fluctuates, threshold set according to a specific place cannot perform binarization at other places).
 
-<figure id="fig:baseline" data-latex-placement="bht">
+<figure id="fig:baseline">
 <div class="center">
-![](../figs/baseline.png)
+<img src="../../figs/baseline.png" alt="Example of baseline fluctuation." />
 </div>
-<figcaption>Example of baseline fluctuation</figcaption>
+<figcaption>Example of baseline fluctuation.</figcaption>
 </figure>
 
-If scale is made coarse, sufficient signal amplitude is obtained even if photo-interrupter is placed somewhat away (about 5mm?) from scale plate. If distance is far, slight distance fluctuation does not matter. So, making scale coarse makes it easy to make, but coarse scale makes control rough. Find a good balance. In any case, scale installation accuracy is important. Fix the scale plate firmly to the wheel (see Figure [22](#fig:encoder_disc)).
+If scale is made coarse, sufficient signal amplitude is obtained even if photo-interrupter is placed somewhat away (about 5mm?) from scale plate. If distance is far, slight distance fluctuation does not matter. So, making scale coarse makes it easy to make, but coarse scale makes control rough. Find a good balance. In any case, scale installation accuracy is important. Fix the scale plate firmly to the wheel (see Figure ([Fig.](#fig:encoder_disc))).
 
 Also, when deciding resolution of scale, keep photo-interrupter arrangement interval in mind. In the distributed kit, 2 photo-interrupters are already soldered on the board. Design the scale keeping this arrangement in mind. Design is done on a PC. You can design with Draw type software, or draw a pie chart in Excel etc. and use it as a scale. After designing, print with a printer (convenience stores can print if no printer) and cut out. If printing is absolutely impossible, draw manually. Black parts are filled with magic pen etc., but depending on the pen, even if it looks black, it may reflect infrared light easily (= not recognized as black by photo-interrupter), so be careful.
 
-<figure id="fig:encoder_disc" data-latex-placement="bth">
+<figure id="fig:encoder_disc">
 <div class="center">
-![](../figs/encoder_disc.png)
+<img src="../../figs/encoder_disc.png" alt="Example of encoder pattern." />
 </div>
-<figcaption>Example of encoder pattern. Left assumes reading common scale with 2 photo-interrupters arranged shifted by 1/4 period angle. Right assumes 2 photo-interrupters placed at same angle (but different distance from center), reading 2 slits shifted by 1/4 period from each other.</figcaption>
+<figcaption>Example of encoder pattern. Left assumes reading a common scale with two photo-interrupters arranged with a 1/4-period angular shift. Right assumes two photo-interrupters at the same angle (different radius), reading two slits shifted by 1/4 period.</figcaption>
 </figure>
 
 ### Soldering Photo-interrupter
 
-Reading of scale is done by photo-interrupter. Referencing inclination angle sensor, solder photo-interrupter to (scrap of) universal board, and attach to universal board with L-bracket etc. (see Fig. 21). Board will be supplied so please ask. Points of soldering work will be explained in the exercise. Please listen to explanation well before doing (especially those not used to soldering work). (See Figure [23](#fig:encoder_setup)).
+Reading of scale is done by photo-interrupter. Referencing the inclination angle sensor, solder a photo-interrupter to a (scrap) universal board, and attach it to the universal board with an L-bracket etc. (see Figure ([Fig.](#fig:baseline))). Boards will be supplied, so please ask. Points of soldering work will be explained in the exercise. Please listen to the explanation well before doing it (especially those not used to soldering work). (See Figure ([Fig.](#fig:encoder_setup)).)
 
-<figure id="fig:encoder_setup" data-latex-placement="bth">
+<figure id="fig:encoder_setup">
 <div class="center">
-![](../figs/encoder_setup.png)
+<img src="../../figs/encoder_setup.png" alt="Photo-interrupter attachment." />
 </div>
-<figcaption>Photo-interrupter attachment</figcaption>
+<figcaption>Photo-interrupter attachment.</figcaption>
 </figure>
 
 ### Adjustment and Reading of Photo-interrupter
 
 After attachment to machine, connect wiring and resistors of photo-interrupter to breadboard. Although not drawn in distributed circuit diagram, connect in same way as inclination sensor. However, select resistor value connected to phototransistor according to your own design. (By the way, resistance value of inclination angle sensor at bottom of machine is 12k$\Omega$). In many cases, distance to target will be closer than inclination angle sensor, so reflected light amount will increase. In that case, output saturates unless resistance value is reduced (when looking at output waveform, upper side is cut off and becomes flat). As a guide, around 1k$\Omega$ to 5k$\Omega$ is good.
 
-After completion of attachment and wiring, determine threshold for binarization while looking at photo-interrupter output with simple oscilloscope. After confirming that phases of two binarized signals are shifted by roughly 90 degrees, write counting program referring to Figure [20](#fig:counting). Phase difference does not need to be perfectly 90 degrees, but if order of edges is swapped, rotation direction will be read wrongly, so care is needed (Phase difference just needs to be larger than 0 degrees and less than 180 degrees). If desired phase difference is not obtained, adjust mounting position etc. (Make sure to rotate tire once and confirm readable at any position).
+After completion of attachment and wiring, determine threshold for binarization while looking at photo-interrupter output with simple oscilloscope. After confirming that phases of two binarized signals are shifted by roughly 90 degrees, write counting program referring to Figure ([Fig.](#fig:counting)). Phase difference does not need to be perfectly 90 degrees, but if order of edges is swapped, rotation direction will be read wrongly, so care is needed (Phase difference just needs to be larger than 0 degrees and less than 180 degrees). If desired phase difference is not obtained, adjust mounting position etc. (Make sure to rotate tire once and confirm readable at any position).
 
 ## Task B: Add Encoder Feedback to Code and Debug (Student B)
 
@@ -154,9 +154,13 @@ This time, a 6-channel oscilloscope is prepared to monitor the state of mbed in 
 
 **Using the Oscilloscope:** Flash to mbed (or compile the .cpp file yourself if you want to modify control parameters). After installation is complete, open in Processing and press the triangular run button to open the oscilloscope screen. The screen is divided into top and bottom. 3 pieces of data in the upper half, 3 pieces of data in the lower half, a total of 6 pieces of data are displayed. If 6 pieces of data are sent every repetition period in the mbed program, they are displayed in the order sent (Upper screen R: Red, G: Green, B: Blue, Lower screen Red, Green, Blue order). However, immediately after launching the oscilloscope screen, it may not be in the correct order. By resetting mbed once after launching the screen, the display is also reset to the correct order (this re-synchronizes the frame alignment).
 
-<figure id="fig:debuger3" data-latex-placement="htbp">
-![](../figs/fig2026/debug_oscilloscope.png)
-<figcaption>Debugging Tool 3: Six-Channel Oscilloscope showing real-time control data (CH1–CH3: sensor/angle; CH4–CH6: angular velocity, filtered velocity, reference)</figcaption>
+An example oscilloscope screen is shown in Figure ([Fig.](#fig:debuger3)).
+
+<figure id="fig:debuger3">
+<div class="center">
+<img src="../../fig2026/debug_oscilloscope.png" alt="Debugging Tool 3: Six-Channel Oscilloscope." />
+</div>
+<figcaption>Debugging Tool 3: Six-Channel Oscilloscope showing real-time control data (CH1–CH3: sensor/angle; CH4–CH6: angular velocity, filtered velocity, reference).</figcaption>
 </figure>
 
 The program is designed to display: (CH1) output of photo-interrupter 1 (Upper screen Red), (CH2) output of photo-interrupter 2 (Upper screen Green), (CH3) the difference between both outputs = equivalent to inclination angle (Upper screen Blue), (CH4) angular velocity = derivative of inclination angle (Lower screen Red), (CH5) filtered angular velocity (Lower screen Green), and (CH6) reference line at 128 (Lower screen Blue).
@@ -217,40 +221,58 @@ Note that relaxed vibrations seen in 1 and 2 are not particularly harmful (just 
 
 ### Calculation of Angular Velocity
 
-Next, add derivative control. Derivative control feeds back the derivative of inclination angle = inclination angular velocity, so first calculate the angular velocity. Since mathematically strict differentiation cannot be performed, the difference between the previous angle and the current angle is used as an approximate value of differentiation. That is, $$\begin{equation}
+Next, add derivative control. Derivative control feeds back the derivative of inclination angle = inclination angular velocity, so first calculate the angular velocity. Since mathematically strict differentiation cannot be performed, the difference between the previous angle and the current angle is used as an approximate value of differentiation. That is,
+$$
 \dot{\theta} \simeq \frac{\theta - \theta_1}{T_s}
-\end{equation}$$ where $\theta_1$ is the inclination angle in the previous process, and $T_s$ is the repetition time (sampling period). This process is already implemented in the program (line 79-80 in the `int0()` function).
+\label{eq:theta_diff}
+$$
+where $\theta_1$ is the inclination angle in the previous process, and $T_s$ is the repetition time (sampling period). This process is already implemented in the program (line 79-80 in the `int0()` function).
 
 Since differentiation (difference) has the effect of amplifying high-frequency signals, the angular velocity obtained above contains a lot of high-frequency noise. If used for feedback as it is, fine vibration occurs due to noise (makes a \"shhh\" sound). In this state, a large current flows through the motor, which is not good for the circuit, so apply a low-pass filter (LPF) within the program to remove high-frequency noise.
 
 There are two types of digital filters that can be realized by programs: IIR (Infinite Impulse Response) and FIR (Finite Impulse Response), but since phase delay is a problem in feedback control, a filter with as little phase delay as possible is preferred. Since FIR tends to introduce extra phase delay in the high frequency region, we use IIR, where phase delay is easy to grasp, to make a filter this time.
 
-The higher the order of the filter, the better the cutoff performance, but the higher the order, the more the phase delay increases. Therefore, here we use the \"first-order low-pass filter (first-order lag filter)\" which is the simplest and has the least phase delay. The pulse transfer function of the first-order low-pass filter obtained by bilinear transform is: $$\begin{equation}
+The higher the order of the filter, the better the cutoff performance, but the higher the order, the more the phase delay increases. Therefore, here we use the \"first-order low-pass filter (first-order lag filter)\" which is the simplest and has the least phase delay. The pulse transfer function of the first-order low-pass filter obtained by bilinear transform is:
+$$
 F(z) = \frac{1+z^{-1}}{(1+\frac{2T}{T_s})+(1-\frac{2T}{T_s})z^{-1}}
 \label{eq:firstorder}
-\end{equation}$$ where $T$ is the time constant of the first-order lag, and $T_s$ is the sampling period. The reciprocal of the time constant $T$ is the cutoff angular frequency (rad/s). Decide an appropriate cutoff frequency and calculate the filter coefficients (be careful about the relationship between \"Hz\" and \"rad/s\").
+$$
+where $T$ is the time constant of the first-order lag, and $T_s$ is the sampling period. The reciprocal of the time constant $T$ is the cutoff angular frequency (rad/s). Decide an appropriate cutoff frequency and calculate the filter coefficients (be careful about the relationship between \"Hz\" and \"rad/s\").
 
 Matlab may be used to calculate filter coefficients. In Matlab,
 
     [b,a] = butter(1,0.01);
 
-Typing this gives the coefficients of a 1st order low-pass filter. Here, the 1st argument of butter (function to find Butterworth filter) is \"filter order\", and the 2nd is \"cutoff frequency normalized by Nyquist frequency\" (= ratio to Nyquist frequency. Nyquist frequency is half of sampling frequency). Equation ([\[eq:firstorder\]](#eq:firstorder)) does not apply frequency pre-warping, so manual calculation with this equation causes a slight shift in cutoff frequency due to frequency distortion of bilinear transform, but Matlab's butter function performs frequency pre-warping, so the specified cutoff frequency is obtained.
+Typing this gives the coefficients of a 1st order low-pass filter. Here, the 1st argument of butter (function to find Butterworth filter) is \"filter order\", and the 2nd is \"cutoff frequency normalized by Nyquist frequency\" (= ratio to Nyquist frequency. Nyquist frequency is half of sampling frequency). Equation \(\eqref{eq:firstorder}\) does not apply frequency pre-warping, so manual calculation with this equation causes a slight shift in cutoff frequency due to frequency distortion of bilinear transform, but Matlab's butter function performs frequency pre-warping, so the specified cutoff frequency is obtained.
 
 Note that in a first-order lag filter, phase starts to delay from a frequency 1/10 to 1/5 of the cutoff frequency[^24]. The process of differentiation advances the phase of a sine wave by 90 degrees (differentiating sin becomes cos with phase advanced by 90 degrees), so if phase delays, it does not become correct differentiation processing. Considering the vibration frequency of the machine in the proportional control of the previous section (which needs to be suppressed by derivative control), set the cutoff frequency of the filter to 10 times or more (at least 5 times or more) that frequency so that correct differentiation is obtained at that frequency.
 
 For example, if vibrating at about 2Hz, set the cutoff frequency to e.g. 20Hz (= 40$\pi$ rad/s) or more. Afterwards, adjust as necessary while observing the state of response in actual inverted experiments.
 
-To turn the obtained pulse transfer function into a program, proceed as follows. First, make the transfer function a rational polynomial (fraction of polynomials) with respect to $z^{-1}$, and divide the denominator and numerator so that the constant term of the denominator becomes $1$. Let the coefficients of the polynomial obtained thereby be $b_0, b_1, b_2, ...$ for the numerator, and $a_0 = 1, a_1, a_2, ...$ for the denominator. Since it is a 1st order filter this time, the numerator is only $b_0, b_1$, and the denominator is only $a_0 = 1, a_1$. Note that if calculated with Matlab, these coefficients are obtained directly. At this time, the transfer function is: $$\begin{equation}
+To turn the obtained pulse transfer function into a program, proceed as follows. First, make the transfer function a rational polynomial (fraction of polynomials) with respect to $z^{-1}$, and divide the denominator and numerator so that the constant term of the denominator becomes $1$. Let the coefficients of the polynomial obtained thereby be $b_0, b_1, b_2, ...$ for the numerator, and $a_0 = 1, a_1, a_2, ...$ for the denominator. Since it is a 1st order filter this time, the numerator is only $b_0, b_1$, and the denominator is only $a_0 = 1, a_1$. Note that if calculated with Matlab, these coefficients are obtained directly. At this time, the transfer function is:
+$$
 F(z) = \frac{b_0 + b_1 z^{-1}}{1 + a_1 z^{-1}} = \frac{Y(z)}{X(z)}
-\end{equation}$$ where $X(z)$ is the signal input to the filter (Z transform), and $Y(z)$ is the filter output (Z transform). Recall that the transfer function is the ratio of input and output (Z transform).
+\label{eq:firstorder_tf}
+$$
+where $X(z)$ is the signal input to the filter (Z transform), and $Y(z)$ is the filter output (Z transform). Recall that the transfer function is the ratio of input and output (Z transform).
 
-Rearrange this and inverse Z transform to fix into a program. $$\begin{eqnarray}
-(1+a_1 z^{-1})Y(z) = (b_0 + b_1 z^{-1})X(z) \\
-Y(z) + a_1 z^{-1} Y(z) = b_0 X(z) + b_1 z^{-1}X(z)
-\end{eqnarray}$$ Inverse Z transform: $$\begin{eqnarray}
-y[n] + a_1 y[n-1] = b_0 x[n] + b_1 x[n-1] \\
-y[n] =  b_0 x[n] + b_1 x[n-1] - a_1 y[n-1]
-\end{eqnarray}$$ Just write this as a program. Showing only the main part (variable declaration omitted. Left side is line number for explanation):
+Rearrange this and inverse Z transform to fix into a program.
+$$
+\begin{aligned}
+(1+a_1 z^{-1})Y(z) &= (b_0 + b_1 z^{-1})X(z) \\
+Y(z) + a_1 z^{-1} Y(z) &= b_0 X(z) + b_1 z^{-1}X(z)
+\end{aligned}
+\label{eq:firstorder_rearrange}
+$$
+Inverse Z transform:
+$$
+\begin{aligned}
+y[n] + a_1 y[n-1] &= b_0 x[n] + b_1 x[n-1] \\
+y[n] &=  b_0 x[n] + b_1 x[n-1] - a_1 y[n-1]
+\end{aligned}
+\label{eq:firstorder_time}
+$$
+Just write this as a program. Showing only the main part (variable declaration omitted. Left side is line number for explanation):
 
     1:    y = b0 * x + b1 * x1 - a1 * y1;
     2:    x1 = x;
@@ -262,7 +284,7 @@ Once the program is written, let's see how the angular velocity signal changes b
 
 ### Inversion adding Derivative Control
 
-Once angular velocity can be calculated, let's add D gain and perform PD control. Multiply D gain by the angular velocity passed through the filter to match equation ([\[eq:pd\]](#eq:pd)). For a machine that is already stable with only P control, adding D gain may not look like stability has increased, but the effect of D gain should appear in response to disturbance. To give a disturbance, lightly poke the inverted machine with a finger. Without D gain, it will recover the inverted state while wobbling, but with appropriate D gain, the vibration converges quickly (depending on the machine, the effect may not be very visible).
+Once angular velocity can be calculated, let's add D gain and perform PD control. Multiply D gain by the angular velocity passed through the filter to match equation \(\eqref{eq:pd}\). For a machine that is already stable with only P control, adding D gain may not look like stability has increased, but the effect of D gain should appear in response to disturbance. To give a disturbance, lightly poke the inverted machine with a finger. Without D gain, it will recover the inverted state while wobbling, but with appropriate D gain, the vibration converges quickly (depending on the machine, the effect may not be very visible).
 
 Let's actually change the magnitude of D gain and see the response. The magnitude of D gain (here) is roughly several tenths (1/20?) of P gain. Note that theoretically, the larger the D gain, the better the vibration should dampen, but in reality, if the D gain is too large, the vibration increases instead, so be careful[^25]. If the machine is shivering, it is possible that D gain is too large, so try lowering D gain (depending on the machine, D gain 0 might be best).
 
@@ -274,9 +296,12 @@ Up to this point, you should arrive without problems if you make it as explained
 
 ### Position Control
 
-Once position can be read, similarly to inclination angle control, first apply only proportional gain ($K_x$) to position (and add it to manipulated variable of inclination angle control) to control. Specifically, motor voltage is $$\begin{equation}
+Once position can be read, similarly to inclination angle control, first apply only proportional gain ($K_x$) to position (and add it to manipulated variable of inclination angle control) to control. Specifically, motor voltage is
+$$
 v_m = K_p \theta + K_d \dot{\theta} + K_x x + K_v \dot{x}
-\end{equation}$$ (At this point, position derivative gain $K_v$ is zero).
+\label{eq:vm_pos}
+$$
+(At this point, position derivative gain $K_v$ is zero).
 
 Correct sign of gain $K_x$ is unknown whether positive or negative (depends on setting of each rotary encoder). Try it for now, and if machine oscillates back and forth, sign is correct. If it runs away in one direction without oscillating, sign of position gain is reverse (or rather, encoder output is reverse), so change sign and try again (fixing encoder program is also fine).
 
@@ -296,13 +321,21 @@ In this case, magnitude of derivative gain (velocity gain $K_v$) will be about s
 
 Since resolution of position sensor (= encoder) is low this time, it will be difficult to completely suppress vibration as long as differential value of encoder is used as velocity. It is sufficient if adjusted to extent that vibration does not diverge (sways with constant amplitude).
 
-If you want to improve performance more, try estimating machine velocity by another means without using differential of encoder. Specifically, use applied voltage to motor. In steady state, that is, state where velocity is constant, if friction is ignored, motor torque becomes zero. Looking at equation ([\[eq:motor_simple_equiv\]](#eq:motor_simple_equiv)), when motor torque is zero, applied voltage and back EMF (= proportional to velocity) match. Therefore, motor rotation speed (= machine velocity) should be estimable from applied voltage. However, this is story in steady state, so it does not hold when velocity is fluctuating. But if used thinking well around there, better control should be possible than relying only on encoder. Note that when estimating velocity in this way, it is better to build velocity control system instead of position control system (that is, P control on average value of back EMF instead of PD control on machine position). In this case, ignore explanation in next section.
+If you want to improve performance more, try estimating machine velocity by another means without using differential of encoder. Specifically, use applied voltage to motor. Ignoring inductance and back EMF compensation, a simple DC motor model is:
+$$
+\tau = \kappa \frac{v- \kappa\omega_m}{R}
+\label{eq:motor_simple_equiv}
+$$
+In steady state, that is, state where velocity is constant, if friction is ignored, motor torque becomes zero. Looking at equation \(\eqref{eq:motor_simple_equiv}\), when motor torque is zero, applied voltage and back EMF (= proportional to velocity) match. Therefore, motor rotation speed (= machine velocity) should be estimable from applied voltage. However, this is story in steady state, so it does not hold when velocity is fluctuating. But if used thinking well around there, better control should be possible than relying only on encoder. Note that when estimating velocity in this way, it is better to build velocity control system instead of position control system (that is, P control on average value of back EMF instead of PD control on machine position). In this case, ignore explanation in next section.
 
 ### Let's Run
 
-Once it can invert at approximately constant position, run it. When running, change target position of control little by little. Specifically, command value of motor voltage is as follows. $$\begin{equation}
+Once it can invert at approximately constant position, run it. When running, change target position of control little by little. Specifically, command value of motor voltage is as follows.
+$$
 v_m = K_p \theta + K_d \dot{\theta} + K_x (x - x_{ref}) + K_v \dot{x}
-\end{equation}$$ $x_{ref}$ in formula is target position of control. Since PD control regarding position is applied, machine is in state equivalent to being connected to target position with spring and damper. Therefore, if this target position $x_{ref}$ is changed little by little in program, inverted pendulum should move as if pulled to target position (like walking a dog. However, since it is image of pulling with spring, vibration due to spring occurs. Tends to be like moving big and resting a little). For example, increasing target position by $0.001$ every time in control loop, if control frequency is 2000Hz, it should advance 2 encoder pulses per second.
+\label{eq:vm_run}
+$$
+$x_{ref}$ in formula is target position of control. Since PD control regarding position is applied, machine is in state equivalent to being connected to target position with spring and damper. Therefore, if this target position $x_{ref}$ is changed little by little in program, inverted pendulum should move as if pulled to target position (like walking a dog. However, since it is image of pulling with spring, vibration due to spring occurs. Tends to be like moving big and resting a little). For example, increasing target position by $0.001$ every time in control loop, if control frequency is 2000Hz, it should advance 2 encoder pulses per second.
 
 Note that immediately after starting inverted control, attitude control of machine is not yet sufficiently stable, so it is better to program to start changing target value after waiting about 1 second after starting inverted control.
 
@@ -368,11 +401,11 @@ During the MATLAB installation process, make sure to select these products. If y
 
 This course provides a reference Simulink/Simscape model as a milestone example. The goal of the example is intentionally modest: it demonstrates how to build a physically meaningful plant model in Simscape Multibody, and how to stabilize an inverted pendulum by closing a feedback loop on the *tilt angle* using a PID controller. In the provided setup, the controller is tuned to balance the pendulum, while position and speed regulation are left as an extension task for students.
 
-Figure [25](#fig:simulink_overview) shows the overall Simscape Multibody diagram of the plant used in the example. Even at this top level, the model is organized to mirror the real hardware: the cart is represented with wheel-related components and the "body" (the pendulum and its attached parts) is represented as a separate rigid assembly. This separation makes it easy to identify what parameters belong to the cart (wheel radius, wheel inertia, cart mass) versus what belongs to the pendulum body (mass distribution, length, and center of mass).
+Figure ([Fig.](#fig:simulink_overview)) shows the overall Simscape Multibody diagram of the plant used in the example. Even at this top level, the model is organized to mirror the real hardware: the cart is represented with wheel-related components and the "body" (the pendulum and its attached parts) is represented as a separate rigid assembly. This separation makes it easy to identify what parameters belong to the cart (wheel radius, wheel inertia, cart mass) versus what belongs to the pendulum body (mass distribution, length, and center of mass).
 
-<figure id="fig:simulink_overview" data-latex-placement="h">
+<figure id="fig:simulink_overview">
 <div class="center">
-![](../figs/fig2026/Sim1.png)
+<img src="../../fig2026/Sim1.png" alt="Overall Simscape Multibody plant diagram (milestone example)." />
 </div>
 <figcaption>Overall Simscape Multibody plant diagram of the provided milestone example. The model is organized into the cart (wheel-related assembly) and the body (pendulum-related assembly), connected by joints and frame transforms.</figcaption>
 </figure>
@@ -383,20 +416,26 @@ The plant is built in Simscape Multibody by assembling 3D rigid bodies, joints, 
 
 In the provided model, the cart and the body are constructed primarily using two standard solid blocks: **Brick Solid** (rectangular block) and **Cylindrical Solid** (cylinder). Wheels, shafts, and spacers are naturally represented by cylindrical solids, while the body plate, brackets, and electronic modules are well approximated by brick solids. The objective is not photorealistic geometry; rather, it is to capture the dominant mass and inertia so that control design decisions made in simulation remain meaningful on hardware.
 
-Figure [26](#fig:simscape_body_build) shows the rigid *body* subassembly, while Figure [27](#fig:simscape_wheel_build) shows the *wheel* subassembly used for the cart/wheel-related part of the plant.
+Figure ([Fig.](#fig:simscape_body_build)) shows the rigid *body* subassembly, while Figure ([Fig.](#fig:simscape_wheel_build)) shows the *wheel* subassembly used for the cart/wheel-related part of the plant.
 
-<figure id="fig:simscape_subassemblies" data-latex-placement="h">
+<figure id="fig:simscape_subassemblies">
 <div class="center">
-<figure id="fig:simscape_body_build">
-![](../figs/fig2026/Sim2.png)
-<figcaption>Body model in Simscape Multibody.</figcaption>
-</figure>
-<figure id="fig:simscape_wheel_build">
-![](../figs/fig2026/Sim3.png)
-<figcaption>Wheel model in Simscape Multibody.</figcaption>
-</figure>
+<table>
+<thead>
+<tr>
+<th>Body model in Simscape Multibody</th>
+<th>Wheel model in Simscape Multibody</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img id="fig:simscape_body_build" src="../../fig2026/Sim2.png" alt="Body model in Simscape Multibody" /></td>
+<td><img id="fig:simscape_wheel_build" src="../../fig2026/Sim3.png" alt="Wheel model in Simscape Multibody" /></td>
+</tr>
+</tbody>
+</table>
 </div>
-<figcaption>Simscape Multibody subassemblies used in the inverted pendulum model.</figcaption>
+<figcaption>Simscape Multibody subassemblies used in the milestone model (body and wheel).</figcaption>
 </figure>
 
 To connect these solid parts into a coherent rigid assembly, the model uses the **Rigid Transform** block. Rigid Transform defines a fixed relative translation and rotation between two frames, and is used throughout the model to place wheels relative to the cart frame, to set offsets between the pendulum body and its reference frame, and to position auxiliary masses such as the breadboard and the battery. In practice, the most important parameters in these blocks are the *mass* and *size* of the wheel and body solids, and the mass/size assigned to the breadboard circuit and battery modules. These parameters shape the inertia and therefore strongly affect how "aggressive" the stabilizing controller must be.
@@ -409,20 +448,22 @@ The physical model contains joints that define how bodies move relative to each 
 
 In the real hardware, the tilt angle is estimated from two photo-reflectors (photo-interrupter style sensors) that observe the reflected infrared light from the ground surface. The interaction between the wheel and ground is also not "measured" as wheel-ground friction; instead, the cart motion is the result of the motor drive and the ground reaction. To keep the milestone model focused and controllable, the simulation abstracts these realities: the tilt angle is taken directly from the Revolute Joint angle, and the cart-ground interaction is represented by the Prismatic Joint coordinate. This makes it straightforward to close a feedback loop while still reflecting the essential mechanical constraints of the system.
 
-Figure [29](#fig:simscape_joints_actuation) highlights how the angle joint and the translation joint are configured in the provided model. The Revolute Joint provides the body angle (and, if enabled, angular velocity). The Prismatic Joint provides the cart position (and velocity). In addition, the Prismatic Joint is used as the actuation point in the milestone example: by driving the prismatic motion/force (depending on the actuation setting), the model produces cart motion that stabilizes the body. If you later implement position control, you will naturally read cart position from the Prismatic Joint, and if you implement velocity control you will either read prismatic velocity directly or estimate it through encoder-like quantization (see the assignment at the end of this section).
+Figure ([Fig.](#fig:simscape_joints_actuation)) highlights how the angle joint and the translation joint are configured in the provided model. The Revolute Joint provides the body angle (and, if enabled, angular velocity). The Prismatic Joint provides the cart position (and velocity). In addition, the Prismatic Joint is used as the actuation point in the milestone example: by driving the prismatic motion/force (depending on the actuation setting), the model produces cart motion that stabilizes the body. If you later implement position control, you will naturally read cart position from the Prismatic Joint, and if you implement velocity control you will either read prismatic velocity directly or estimate it through encoder-like quantization (see the assignment at the end of this section).
 
-<figure id="fig:simscape_joints_actuation" data-latex-placement="h">
+<figure id="fig:simscape_joints_actuation">
 <div class="center">
-![](../figs/fig2026/Sim5.png)
+<img src="../../fig2026/Sim5.png" alt="Joint configuration in the provided multibody model." />
 </div>
 <figcaption>Joint configuration in the provided multibody model. The body angle is obtained from a <strong>Revolute Joint</strong> (hinge), while cart translation along the ground direction is modeled by a <strong>Prismatic Joint</strong>. The prismatic joint can also be used as the actuation point and as a source of position/velocity signals for outer-loop control.</figcaption>
 </figure>
 
 With these signals available, the controller block closes the stabilizing loop. In the milestone example, the controller uses only the pendulum tilt angle as the primary feedback signal, i.e., it is an *angle-only* stabilizer. Position and speed loops are intentionally left out of the default configuration so that students can extend the model systematically.
 
-<figure id="fig:simulink_highlevel" data-latex-placement="h">
+The high-level PID controller subsystem is shown in Figure ([Fig.](#fig:simulink_highlevel)).
+
+<figure id="fig:simulink_highlevel">
 <div class="center">
-![](../figs/fig2026/Sim4.png)
+<img src="../../fig2026/Sim4.png" alt="PID controller subsystem used in the milestone example." />
 </div>
 <figcaption>PID controller subsystem used in the milestone example. The provided controller stabilizes the inverted pendulum by regulating the tilt angle. PID parameters can be tuned manually or with the PID Tuner workflow.</figcaption>
 </figure>
@@ -437,15 +478,16 @@ To observe stabilization, set a small initial tilt angle in the Revolute Joint (
 
 The milestone controller focuses on balancing and therefore uses only the pendulum angle as feedback. In its simplest form, this is a PD law based on the angle $\theta$ and angular velocity $\dot{\theta}$:
 
-$$\begin{equation}
+$$
 u = K_p \theta + K_d \dot{\theta}
-\end{equation}$$
+\label{eq:pd}
+$$
 
 Here, $u$ represents the actuation signal that drives the cart motion in the model. The proportional term provides the restoring tendency toward upright posture, while the derivative term provides damping that suppresses oscillation. In practice, angular velocity feedback is often filtered to reduce sensitivity to measurement noise; the Simulink PID block provides an internal derivative filter parameter for this purpose.
 
 ### Accessing and Adjusting PID Parameters
 
-To modify the gains, open the controller subsystem (Figure [30](#fig:simulink_highlevel)) and double-click the PID block responsible for angle control. The block dialog exposes $K_p$, $K_d$, and the derivative filter coefficient $N$. The provided model contains one working parameter set as a starting point; however, you should still change gains deliberately and observe how the time response changes, because the most valuable outcome of this task is understanding the relationship between physical parameters (mass/inertia) and control aggressiveness.
+To modify the gains, open the controller subsystem (Figure ([Fig.](#fig:simulink_highlevel))) and double-click the PID block responsible for angle control. The block dialog exposes $K_p$, $K_d$, and the derivative filter coefficient $N$. The provided model contains one working parameter set as a starting point; however, you should still change gains deliberately and observe how the time response changes, because the most valuable outcome of this task is understanding the relationship between physical parameters (mass/inertia) and control aggressiveness.
 
 If you want to tune more systematically, use the **PID Tuner** workflow. From the PID block dialog, select the tuning method that opens PID Tuner and click **Tune**. PID Tuner linearizes the plant at an operating point and proposes gains based on a chosen design focus. In this experiment, it is recommended to set the target response speed to match the real control bandwidth implied by your sample time. After tuning, use the button that updates the tuned gains back to the PID block so the simulation runs with the new parameters.
 
@@ -453,11 +495,13 @@ If you want to tune more systematically, use the **PID Tuner** workflow. From th
 
 After running the simulation, use the angle scope to evaluate whether the inverted pendulum is truly stabilized. A good stabilization run shows the angle converging back to zero (upright) with bounded overshoot, and the control effort decreasing as the system approaches equilibrium. If the model contains a control input scope, check that the actuation signal does not remain saturated for long periods; persistent saturation typically indicates gains that are too aggressive or a plant configuration that requires re-checking mass/inertia parameters.
 
-<figure id="fig:simulation_result" data-latex-placement="h">
+An example simulation result is shown in Figure ([Fig.](#fig:simulation_result)).
+
+<figure id="fig:simulation_result">
 <div class="center">
-![](../figs/fig2026/Sim6.png)
+<img src="../../fig2026/Sim6.png" alt="Screenshot of the simulation result (Sim6)." />
 </div>
-<figcaption>Screenshot of the inverted pendulum walking (Sim6).</figcaption>
+<figcaption>Screenshot of a simulation result (Sim6).</figcaption>
 </figure>
 
 ### What to Look For
@@ -515,9 +559,12 @@ Pay special attention to path where large current flows around driver. Tracing c
 
 According to datasheet (not simplified version distributed, but formal datasheet issued by TI[^27]), motor driver used this time has protection circuit that works when current exceeds 1.3A and trips (cuts off circuit and makes current 0A). When actually connecting motor and measuring, it has been confirmed that it trips at around average current 1.1A probably because motor current is pulsating. Since motor stops when tripping, the control program sets upper limit of motor voltage so as not to trip driver (see `VLIMIT` definition in ). Let's consider this upper limit value.
 
-Relationship between voltage $V$ applied by motor driver to motor and current $I$ actually flowing in motor is expressed as follows if inductance of motor winding is ignored. $$\begin{equation}
+Relationship between voltage $V$ applied by motor driver to motor and current $I$ actually flowing in motor is expressed as follows if inductance of motor winding is ignored.
+$$
 V = (R_m + R_c) I + \kappa\omega_m
-\end{equation}$$ where $R_m$ is winding resistance of motor, $R_c$ is resistance of motor drive circuit, $\kappa$ is back EMF constant ($\approx$ torque constant), $\omega_m$ is motor rotation speed (rad/s). In this motor, winding resistance $R_m$ (fluctuates depending on how brush inside motor hits = angle of motor shaft) is estimated to be about 0.7$\Omega$ on average, and back EMF constant $\kappa$ about 2.7mV s/rad. Circuit resistance $R_c$ is about 0.5$\Omega$ (Assume ON resistance of driver 0.45$\Omega$ + resistance of breadboard 0.05$\Omega$). Most current flows when motor rotation speed is zero where back EMF disappears, but to keep motor current $I$ at this time below 1.1A, it is understood that driver output voltage $V$ should be limited to 1.32V or less.
+\label{eq:motor_voltage_current}
+$$
+where $R_m$ is winding resistance of motor, $R_c$ is resistance of motor drive circuit, $\kappa$ is back EMF constant ($\approx$ torque constant), $\omega_m$ is motor rotation speed (rad/s). In this motor, winding resistance $R_m$ (fluctuates depending on how brush inside motor hits = angle of motor shaft) is estimated to be about 0.7$\Omega$ on average, and back EMF constant $\kappa$ about 2.7mV s/rad. Circuit resistance $R_c$ is about 0.5$\Omega$ (Assume ON resistance of driver 0.45$\Omega$ + resistance of breadboard 0.05$\Omega$). Most current flows when motor rotation speed is zero where back EMF disappears, but to keep motor current $I$ at this time below 1.1A, it is understood that driver output voltage $V$ should be limited to 1.32V or less.
 
 Motor driver is designed to output 4 times voltage applied to VSET pin to motor. Therefore, upper limit of voltage applied to VSET is 1.32/4=0.33V. VSET pin is connected to p18 (AnalogOut) of mbed, but to suppress voltage of p18 to 0.33V, upper limit of value written to p18 in program is $0.33/3.3=0.1$ (1.0 corresponds to maximum value of DA converter = 3.3V). For this reason, the control program sets `VLIMIT = 0.1` by default. (Note that since there are individual differences in drivers and motors, people whose driver trips immediately should try lowering this upper limit value a little).
 
@@ -555,9 +602,17 @@ Such defects are often caused by poor handling of jumper wires. Be careful not t
 
 [^20]: This time we use a reflective photo-interrupter so it is a black and white pattern, but generally transmissive photo-interrupters and slit disks are often used
 [^21]: Access the course materials repository at <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
-[^22]: Appendix [\[app:processing\]](#app:processing): Processing Oscilloscope Manual.
+[^22]: Appendix [app:processing](appendix.md#app:processing): Processing Oscilloscope Manual.
 [^23]: A video demonstration of the debugging and tuning process is available in the course materials repository:
 [^24]: If using Matlab, freqz(b,a) or bode(tf(b,a,sampling time)) allows checking the frequency response of the filter.
 [^25]: In a 1st order LPF, phase delays by 90 degrees in high frequency band. Considering the case where inclination angle changes sinusoidally, its derivative (= angular velocity) must be advanced by 90 degrees phase relative to inclination angle, but at high frequencies, phase delays by 90 degrees due to the filter, so passing the differentiation result through the filter results in the same phase as the original inclination angle. This is no longer differentiation. Therefore, at high frequencies, even if intending to do derivative control, it is actually the same as doing proportional control. Thus, easily increasing derivative gain makes proportional gain substantially large in high frequency band, resulting in oscillatory and unstable response.\
-[^26]: Ratio of P gain and D gain is easy to understand when compared with standard form of 2nd order lag. If spring constant and damping coefficient are $K_p$ and $K_d$, transfer function from external force to position is $$\begin{equation}
+[^26]: Ratio of P gain and D gain is easy to understand when compared with standard form of 2nd order lag. If spring constant and damping coefficient are $K_p$ and $K_d$, transfer function from external force to position is
+$$
+\frac{X(s)}{F(s)}=\frac{1}{ms^2+K_d s+K_p}=\frac{1/m}{s^2+(K_d/m)s+K_p/m}
+$$
+On the other hand, standard form is
+$$
+G(s)=\frac{\omega_n^2}{s^2+2\zeta \omega_n s+\omega_n^2}
+$$
+Comparing both, it can be seen that $K_d/K_p = 2\zeta/\omega_n$.
 [^27]: <https://www.tij.co.jp/product/jp/DRV8832#tech-docs>

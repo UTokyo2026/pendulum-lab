@@ -44,61 +44,39 @@ Week 4 は最終まとめです．各自の設計と結果を発表し，実際
                                    各小項目内で部分点を与えることがあります．
       ---------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-[^1]: Course materials repository: <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
+## 参考リンク
 
-[^2]: 逆起電力と速度の比例係数は通常「逆起電力定数」と呼ばれますが，SI 単位系で揃えると逆起電力定数とトルク定数は同じ値になります．これはエネルギー保存を考えて計算すると確認できます．
+- Course materials repository: <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
+- 逆起電力と速度の比例係数は通常「逆起電力定数」と呼ばれますが，SI 単位系で揃えると逆起電力定数とトルク定数は同じ値になります．これはエネルギー保存を考えて計算すると確認できます．
+- Appendix [app:circuit](appendix.md#app:circuit): 回路例．
+- Appendix [app:drv8832](appendix.md#app:drv8832): DRV8832 データシート（Texas Instruments）．
+- Appendix [app:tpr105f](appendix.md#app:tpr105f): TPR-105F データシート．
+- Appendix [app:ld1117v33](appendix.md#app:ld1117v33): LD1117V33 データシート．
+- 機械組立の動画例は course materials repository 内にあります．
+- 型番，仕様，個数を含む完全な部品表は Appendix [app:partslist](appendix.md#app:partslist) を参照してください．
+- Appendix [app:re280ra](appendix.md#app:re280ra): RE-280RA データシート（Mabuchi Motor）．
+- ほかにも Arduino，Raspberry PI，PIC などさまざまな系列があります．
+- Keil Studio Cloud: <https://studio.keil.arm.com/>
+- Processing は視覚的プログラミング用の無料オープンソースソフトウェアです．<https://processing.org/> からダウンロードできます．2026 年時点で最新の主要リリースは Processing 4 です．詳細は Appendix [app:processing](appendix.md#app:processing) を参照してください．
+- Fritzing インストーラ（共有 Google Drive）: <https://drive.google.com/drive/folders/1CwJ8srD090W6hOeP39BXLUZOVy883Kn2?usp=sharing>
+- 回路組立の動画例は course materials repository 内にあります．
+- 今回は反射型フォトインタラプタを使うので白黒パターンですが，一般的には透過型フォトインタラプタとスリットディスクを用いることも多いです．
+- Appendix [app:processing](appendix.md#app:processing): Processing オシロスコープマニュアル．
+- デバッグと調整の動画例は course materials repository 内にあります．
+- Matlab を使う場合，freqz(b,a) または bode(tf(b,a,サンプリング時間)) でフィルタの周波数特性を確認できます．
+- 1 次 LPF では高周波帯域で位相が 90 度遅れます．傾斜角が正弦波状に変化する場合を考えると，その微分（＝角速度）は傾斜角より 90 度位相が進んでいる必要がありますが，高周波ではフィルタで 90 度遅れるため，微分結果をフィルタに通すと元の傾斜角と同じ位相になります．これはもはや微分ではありません．したがって，高周波域では微分制御のつもりでも実際には比例制御と同じことになり，高周波帯域で実質的な比例ゲインが大きくなって振動しやすく不安定になります．\
+  なお，2 次フィルタでは位相が最大 180 度遅れますが，180 度遅れは信号を反転させるのと同じです．よって，180 度遅れた信号に微分ゲインを掛けると，本来の D 制御（＝ダンパ）とは正反対の動作（速度を増やす方向）になります．
+- P ゲインと D ゲインの比率は，2次遅れの標準形と比較すると理解しやすいです．ばね定数と減衰係数をそれぞれ \(K_p\)，\(K_d\) とすると，外力から位置への伝達関数は
 
-[^3]: Appendix [\[app:circuit\]](#app:circuit): 回路例．
+$$
+\\frac{X(s)}{F(s)}=\\frac{1}{ms^2+K_d s+K_p}=\\frac{1/m}{s^2+(K_d/m)s+K_p/m}
+$$
 
-[^4]: Appendix [\[app:drv8832\]](#app:drv8832): DRV8832 データシート（Texas Instruments）．
+  一方，標準形は
 
-[^5]: Appendix [\[app:tpr105f\]](#app:tpr105f): TPR-105F データシート．
+$$
+G(s)=\\frac{\\omega_n^2}{s^2+2\\zeta \\omega_n s+\\omega_n^2}
+$$
 
-[^6]: Appendix [\[app:ld1117v33\]](#app:ld1117v33): LD1117V33 データシート．
-
-[^7]: 機械組立の動画例は course materials repository 内の にあります．
-
-[^8]: 型番，仕様，個数を含む完全な部品表は Appendix [\[app:partslist\]](#app:partslist) を参照してください．
-
-[^9]: Appendix [\[app:re280ra\]](#app:re280ra): RE-280RA データシート（Mabuchi Motor）．
-
-[^10]: ほかにも Arduino，Raspberry PI，PIC などさまざまな系列があります．
-
-[^11]: Keil Studio Cloud: <https://studio.keil.arm.com/>
-
-[^12]: Course materials repository: <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
-
-[^13]: Processing は視覚的プログラミング用の無料オープンソースソフトウェアです．<https://processing.org/> からダウンロードできます．2026 年時点で最新の主要リリースは Processing 4 です．詳細は Appendix [\[app:processing\]](#app:processing) を参照してください．
-
-[^14]: Fritzing インストーラ（共有 Google Drive）: <https://drive.google.com/drive/folders/1CwJ8srD090W6hOeP39BXLUZOVy883Kn2?usp=sharing>
-
-[^15]: Appendix [\[app:circuit\]](#app:circuit): 回路例．
-
-[^16]: 回路組立の動画例は course materials repository 内の にあります．
-
-[^17]: Appendix [\[app:circuit\]](#app:circuit): 回路例．
-
-[^18]: Appendix [\[app:circuit\]](#app:circuit): 回路例．
-
-[^19]: Appendix [\[app:circuit\]](#app:circuit): 回路例．
-
-[^20]: 今回は反射型フォトインタラプタを使うので白黒パターンですが，一般的には透過型フォトインタラプタとスリットディスクを用いることも多いです
-
-[^21]: course materials repository: <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
-
-[^22]: Appendix [\[app:processing\]](#app:processing): Processing オシロスコープマニュアル．
-
-[^23]: デバッグと調整の動画例は course materials repository 内の にあります．
-
-[^24]: Matlab を使う場合，freqz(b,a) または bode(tf(b,a,サンプリング時間)) でフィルタの周波数特性を確認できます．
-
-[^25]: 1 次 LPF では高周波帯域で位相が 90 度遅れます．傾斜角が正弦波状に変化する場合を考えると，その微分（＝角速度）は傾斜角より 90 度位相が進んでいる必要がありますが，高周波ではフィルタで 90 度遅れるため，微分結果をフィルタに通すと元の傾斜角と同じ位相になります．これはもはや微分ではありません．したがって，高周波域では微分制御のつもりでも実際には比例制御と同じことになり，高周波帯域で実質的な比例ゲインが大きくなって振動しやすく不安定になります．\
-    なお，2 次フィルタでは位相が最大 180 度遅れますが，180 度遅れは信号を反転させるのと同じです．よって，180 度遅れた信号に微分ゲインを掛けると，本来の D 制御（＝ダンパ）とは正反対の動作（速度を増やす方向）になります．
-
-[^26]: P ゲインと D ゲインの比率は，2次遅れの標準形と比較すると理解しやすいです．ばね定数と減衰係数をそれぞれ $K_p$，$K_d$ とすると，外力から位置への伝達関数は $$\begin{equation}
-    \frac{X(s)}{F(s)}=\frac{1}{ms^2+K_d s+K_p}=\frac{1/m}{s^2+(K_d/m)s+K_p/m} \nonumber
-    \end{equation}$$ 一方，標準形は $$\begin{equation}
-    G(s)=\frac{\omega_n^2}{s^2+2\zeta \omega_n s+\omega_n^2} \nonumber
-    \end{equation}$$ 両者を比較すると，$K_d/K_p = 2\zeta/\omega_n$ であることがわかります．たとえば減衰比 $\zeta=0.5$（少しオーバーシュートする程度）の場合，D ゲインと P ゲインの比率は固有角振動数 $\omega_n$ になります．最初の振り子角度制御では固有振動が数 Hz だったので角振動数は約 20 rad/s だったはずですが，位置制御では固有振動が 0.1 Hz 程度なので角振動数は約 1 rad/s です．したがって P ゲインと D ゲインは同程度のオーダーになります．
-
-[^27]: <https://www.tij.co.jp/product/jp/DRV8832#tech-docs>
+  両者を比較すると，\(K_d/K_p = 2\\zeta/\\omega_n\) であることがわかります．たとえば減衰比 \(\\zeta=0.5\)（少しオーバーシュートする程度）の場合，D ゲインと P ゲインの比率は固有角振動数 \(\\omega_n\) になります．最初の振り子角度制御では固有振動が数 Hz だったので角振動数は約 20 rad/s だったはずですが，位置制御では固有振動が 0.1 Hz 程度なので角振動数は約 1 rad/s です．したがって P ゲインと D ゲインは同程度のオーダーになります．
+- <https://www.tij.co.jp/product/jp/DRV8832#tech-docs>

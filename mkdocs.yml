@@ -8,17 +8,18 @@ repo_url: https://github.com/UTokyo2026/pendulum-lab
 
 theme:
   name: material
+  custom_dir: overrides
   language: en
   palette:
     - scheme: default
-      primary: indigo
-      accent: deep orange
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
     - scheme: slate
-      primary: indigo
-      accent: deep orange
+      primary: custom
+      accent: custom
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
@@ -29,8 +30,8 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
+    - navigation.expand
     - navigation.top
-    - navigation.footer
     - toc.integrate
     - search.highlight
     - search.suggest
@@ -55,7 +56,13 @@ markdown_extensions:
   - footnotes
 
 extra_javascript:
+  - javascripts/figure-refs.js
+  - javascripts/mathjax-config.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - stylesheets/extra.css
+  - stylesheets/figure-numbering.css
 
 extra:
   social:
@@ -65,12 +72,16 @@ extra:
 nav:
   - Home: index.md
   - English:
-    - Introduction & Schedule: en/intro.md
+    - Introduction: en/intro.md
+    - Calendar: en/calendar.md
+    - Course Schedule: en/course_schedule.md
+    - Grading Criteria: en/grading.md
     - Control Overview: en/overview.md
     - "Week 1: Assembly & Bring-up": en/week1.md
     - "Week 2: Encoder & Position Control": en/week2.md
     - "Week 3: Advanced Modeling & Load Testing": en/week3.md
     - "Week 4: Final Presentation": en/week4.md
+    - Appendix: en/appendix.md
   - 日本語:
     - はじめに・日程: jp/intro.md
     - 制御概要: jp/overview.md
@@ -78,3 +89,4 @@ nav:
     - Week 2：エンコーダと位置制御: jp/week2.md
     - Week 3：高度なモデル化と負荷試験: jp/week3.md
     - Week 4：最終発表: jp/week4.md
+    - 付録: jp/appendix.md

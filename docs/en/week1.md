@@ -68,22 +68,22 @@ For other details regarding the motor driver, refer to the circuit example [^3] 
 
 In the inverted pendulum of this exercise, all sensors (= inclination sensor, rotary encoder. However, the rotary encoder will be described later) are realized with photo-interrupters. Photo-interrupters can be obtained very cheaply, and the ones used this time are sold for about 40 yen each in Akihabara. For the convenience of the exercise, an inclination sensor using photo-interrupters is prepared in advance, but the rotary encoder described later will be made by each of you.
 
-A photo-interrupter is an optical element combining an LED and a phototransistor. In many cases, wavelengths in the infrared region are used, so the light cannot be seen directly. As shown in Figure [\[fig:interrupter\]](#fig:interrupter), there are reflective and transmissive types of photo-interrupters, which detect the presence of an object by the presence or absence of reflected light or transmitted light, respectively. Especially in the case of the reflective type, since the amount of reflected light changes depending on the reflectance ($\approx$ color) of the object surface and the distance to the object (see Fig.7 of the datasheet), it can also be used as a color sensor (discriminating gray scale) or a distance sensor. This time, we apply this function as a distance sensor to realize an inclination sensor. (In the rotary encoder described later, the photo-interrupter reads the black and white pattern on the scale surface.)
+A photo-interrupter is an optical element combining an LED and a phototransistor. In many cases, wavelengths in the infrared region are used, so the light cannot be seen directly. As shown in Figure ([Fig.](#fig:interrupter)), there are reflective and transmissive types of photo-interrupters, which detect the presence of an object by the presence or absence of reflected light or transmitted light, respectively. Especially in the case of the reflective type, since the amount of reflected light changes depending on the reflectance ($\approx$ color) of the object surface and the distance to the object (see Fig.7 of the datasheet), it can also be used as a color sensor (discriminating gray scale) or a distance sensor. This time, we apply this function as a distance sensor to realize an inclination sensor. (In the rotary encoder described later, the photo-interrupter reads the black and white pattern on the scale surface.)
 
-The basic circuit of a photo-interrupter is shown in Figure [3](#fig:pi_circuit). First, the LED must be lit. Looking at the datasheet [^5], the forward voltage $V_F$ (1.2V) and the typical current value for lighting (20mA) are displayed. The forward voltage is the voltage drop across the LED during operation. This time, since the 3.3V of the three-terminal regulator described later is used as the power supply voltage (VCC), if the forward voltage is 1.2V, the difference of 2.1V must be dropped by a resistor connected in series. To drop 2.1V at a current value of 20mA, Ohm's law tells us that $R=2.1\textrm{V}/20\textrm{mA}=105\Omega$ is good, but since a $105\Omega$ resistor is not sold, we use a close value of $100\Omega$. See Section [3.2.1](#sec:passive_markings) for how to identify resistor values by color code or multimeter.
+<figure id="fig:interrupter">
+<div class="center">
+<img src="../../figs/photo_interrupters.png" alt="Photo-interrupters (reflective and transmissive types)." />
+</div>
+<figcaption>Photo-interrupters (reflective and transmissive types).</figcaption>
+</figure>
 
-<figure id="fig:pi_circuit" data-latex-placement="bht">
-<div class="minipage">
+The basic circuit of a photo-interrupter is shown in Figure ([Fig.](#fig:pi_circuit)). First, the LED must be lit. Looking at the datasheet [^5], the forward voltage $V_F$ (1.2V) and the typical current value for lighting (20mA) are displayed. The forward voltage is the voltage drop across the LED during operation. This time, since the 3.3V of the three-terminal regulator described later is used as the power supply voltage (VCC), if the forward voltage is 1.2V, the difference of 2.1V must be dropped by a resistor connected in series. To drop 2.1V at a current value of 20mA, Ohm's law tells us that $R=2.1\textrm{V}/20\textrm{mA}=105\Omega$ is good, but since a $105\Omega$ resistor is not sold, we use a close value of $100\Omega$. See Section [3.2.1](#sec:passive_markings) for how to identify resistor values by color code or multimeter.
+
+<figure id="fig:pi_circuit">
 <div class="center">
-![](../figs/photo_interrupters.png)
+<img src="../../figs/pi_circuit.png" alt="Basic photo-interrupter circuit diagram." />
 </div>
-</div>
-<div class="minipage">
-<div class="center">
-![](../figs/pi_circuit.png)
-</div>
-</div>
-<figcaption>Circuit Diagram</figcaption>
+<figcaption>Basic photo-interrupter circuit diagram.</figcaption>
 </figure>
 
 Note that if a current exceeding the absolute maximum rating (50mA this time) flows, the LED will burn out in an instant. Be careful never to **connect directly to the power supply without a resistor** (The distributed inclination sensor has a $100\Omega$ resistor soldered to the tip of the wiring from the beginning so that this does not happen).
@@ -108,7 +108,7 @@ This time, batteries are used as the power source for the entire inverted pendul
 
 A three-terminal regulator is an IC that takes a fluctuating voltage as input and outputs a constant voltage (lower than that). Various model numbers of three-terminal regulators are sold, but basically, the last two digits of the model number represent the output voltage. This time, we use a regulator with model number LD33 (precisely LD1117V33) [^6]. The output voltage is 3.3V. All photo-interrupter related voltages should use the output of this three-terminal regulator. On the other hand, since we want to separate the power supply for the motor and the photo-interrupter, ***take the power supply for the motor driver directly from the battery**, not from the three-terminal regulator.*
 
-Actually, mbed's board is also equipped with a 3.3V three-terminal regulator (you can see a chip called LD33), and stabilized 3.3V is output from the VOUT pin on the upper right (see Figure [9](#fig:mbed_pin)). You can use this voltage, but due to the size of the breadboard, this pin cannot be accessed, so we will install a regulator ourselves this time.
+Actually, mbed's board is also equipped with a 3.3V three-terminal regulator (you can see a chip called LD33), and stabilized 3.3V is output from the VOUT pin on the upper right (see Figure ([Fig.](#fig:mbed_pin))). You can use this voltage, but due to the size of the breadboard, this pin cannot be accessed, so we will install a regulator ourselves this time.
 
 ## Parallel Assembly Tasks
 
@@ -136,30 +136,25 @@ The universal board with wheels (No. 1) will be the center of assembly. Below, p
 
 #### Attaching the Inclination Sensor
 
-First, attach the inclination sensor (No. 6) to the bottom of the universal board with wheels (No. 1). Use the L-bracket (No. 7) to attach it as shown in Figure [\[fig:angle_sensor\]](#fig:angle_sensor).
+First, attach the inclination sensor (No. 6) to the bottom of the universal board with wheels (No. 1). Use the L-bracket (No. 7) to attach it as shown in Figure ([Fig.](#fig:angle_sensor)).
 
-<figure id="fig:machine" data-latex-placement="b">
-<div class="minipage">
+<figure id="fig:angle_sensor">
 <div class="center">
-![](../figs/angle_sensor.png)
+<img src="../../figs/angle_sensor.png" alt="Inclination sensor attachment (bottom view)." />
 </div>
-</div>
-<div class="minipage">
-<div class="center">
-![](../figs/motor_tire.png)
-</div>
-</div>
-<div class="minipage">
-<div class="center">
-![](../figs/assembled.png)
-</div>
-</div>
-<figcaption>Completion image</figcaption>
+<figcaption>Inclination sensor attachment (bottom view).</figcaption>
 </figure>
 
 #### Attaching the DC Motor
 
-Next, attach the DC motor (No. 3). Use the motor bracket (No. 4) to attach it to the universal board (No. 1) (attach it to the same surface as the axle. See Figure [\[fig:motor_setup\]](#fig:motor_setup)). The screws for attaching the bracket to the board are slightly smaller M2 screws. The screw heads are small, so it might be difficult to turn them with the screwdriver included in the kit, but try to secure them.
+Next, attach the DC motor (No. 3). Use the motor bracket (No. 4) to attach it to the universal board (No. 1) (attach it to the same surface as the axle. See Figure ([Fig.](#fig:motor_setup))). The screws for attaching the bracket to the board are slightly smaller M2 screws. The screw heads are small, so it might be difficult to turn them with the screwdriver included in the kit, but try to secure them.
+
+<figure id="fig:motor_setup">
+<div class="center">
+<img src="../../figs/motor_tire.png" alt="Motor bracket and motor–tire contact (example)." />
+</div>
+<figcaption>Motor bracket and motor–tire contact (example).</figcaption>
+</figure>
 
 When fixing the DC motor, adjust it so that the rubber roller of the DC motor touches the tire \"lightly\". **The point is to adjust it so that it is *touching lightly***, as driving will not be possible if pressed too strongly. However, since the tire is not a perfect circle, if adjusted too lightly, the roller may slip partially when the tire is rotated. Rotate the tire once to confirm that the roller is always in contact.
 
@@ -175,7 +170,14 @@ Finally, attach the battery box (No. 5) to the universal board (No. 1) with doub
 
 Note that double-sided tape is surprisingly strong. If you stick a large amount, you won't be able to peel it off. Two strips of about 5 cm length on the top and bottom are sufficient.
 
-Up to this point, the basic mechanical structure is complete. A completed example is shown in Figure [4](#fig:machine).
+Up to this point, the basic mechanical structure is complete. A completed example is shown in Figure ([Fig.](#fig:machine)).
+
+<figure id="fig:machine">
+<div class="center">
+<img src="../../figs/assembled.png" alt="Assembled platform example (Week 1 stage)." />
+</div>
+<figcaption>Assembled platform example (Week 1 stage).</figcaption>
+</figure>
 
 ### Task B: Microcontroller Setup (Student B)
 
@@ -187,22 +189,28 @@ First, access the Keil Studio Cloud[^11] and create an account. After signing up
 
 #### Compile a sample program
 
-In the compiler screen menu, select \"File\" $\rightarrow$ \"New Project\" and create a new program using mbed_blinky as a template (see Figure [8](#fig:keil_interface)). Specifically, select \"**Mbed2-example-blink**\" at the bottom of Example Project, and set the Project Name as you like. A new program with code to blink an LED will be created, so \"Compile\" it as is. Compilation can be done by clicking the icon that looks like a hammer. When compilation is finished, an executable file (extension .bin) is downloaded, so write this to the USB drive (mbed). Just drag and drop it perfectly.
+In the compiler screen menu, select \"File\" $\rightarrow$ \"New Project\" and create a new program using mbed_blinky as a template (see Figure ([Fig.](#fig:keil_interface))). Specifically, select \"**Mbed2-example-blink**\" at the bottom of Example Project, and set the Project Name as you like. A new program with code to blink an LED will be created, so \"Compile\" it as is. Compilation can be done by clicking the icon that looks like a hammer. When compilation is finished, an executable file (extension .bin) is downloaded, so write this to the USB drive (mbed). Just drag and drop it perfectly.
 
-<figure id="fig:keil_interface" data-latex-placement="h">
-<figure id="fig:keil_new">
-![](../figs/fig2026/keil_new_project.png)
-<figcaption>Create new project</figcaption>
-</figure>
-<figure id="fig:keil_template">
-![](../figs/fig2026/keil_editor.png)
-<figcaption>Select example template</figcaption>
-</figure>
-<figure id="fig:keil_compile">
-![](../figs/fig2026/keil_build.png)
-<figcaption>Compile button</figcaption>
-</figure>
-<figcaption>Keil Studio Cloud interface: creating and compiling a project</figcaption>
+<figure id="fig:keil_interface">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Create new project</th>
+<th>Select example template</th>
+<th>Compile button</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../fig2026/keil_new_project.png" alt="Create new project" /></td>
+<td><img src="../../fig2026/keil_editor.png" alt="Select example template" /></td>
+<td><img src="../../fig2026/keil_build.png" alt="Compile button" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Keil Studio Cloud workflow: create a project, pick an example template, and compile.</figcaption>
 </figure>
 
 After writing the program, press the button in the center of the microcontroller board (this is the reset switch). Then, the newest file in the USB drive (= the file written last) is executed.
@@ -215,13 +223,13 @@ In the sample program, if the left LED among the 4 LEDs lined up at the bottom o
 
 The microcontroller board used this time has various input/output functions. For example, 26 channels of digital signal I/O, 1 channel of analog voltage output by built-in DA converter, and 6 channels of voltage input by AD converter are available. Besides this, there are 6 channels of PWM (Pulse Width Modulation) signal output, etc., but assigning all these functions to individual pins would require a huge number of pins and the board would become huge.
 
-Generally, these functions are not all used at the same time, so in this board (and microcontrollers in general), multiple functions are assigned to one pin, and the function of the pin is selected from the program as needed. This function assignment is shown in Figure [9](#fig:mbed_pin).
+Generally, these functions are not all used at the same time, so in this board (and microcontrollers in general), multiple functions are assigned to one pin, and the function of the pin is selected from the program as needed. This function assignment is shown in Figure ([Fig.](#fig:mbed_pin)).
 
-<figure id="fig:mbed_pin" data-latex-placement="h">
+<figure id="fig:mbed_pin">
 <div class="center">
-![](../figs/pinout.png)
+<img src="../../figs/pinout.png" alt="Pinout of mbed LPC1768 (source: https://os.mbed.com/platforms/mbed-LPC1768/)." />
 </div>
-<figcaption>Pinout of mbed LPC1768 (https://os.mbed.com/platforms/mbed-LPC1768/)</figcaption>
+<figcaption>Pinout of mbed LPC1768 (source: https://os.mbed.com/platforms/mbed-LPC1768/).</figcaption>
 </figure>
 
 The pins available for user signal I/O are the 26 pins labeled \"pXX\" (XX is a number) in the outermost columns on the left and right. All these pins can be used for digital signal input or output. Also, by specifying from the program, functions written next to the pin name can be used. For example, looking at pin p18 at the bottom left, you can see that it has AnalogIn and AnalogOut functions. That is, a total of 4 functions: digital signal input, digital signal output, analog signal input, and analog signal output are assigned to this pin. Among these 4 functions, if you want to use the analog signal output function, in the program:
@@ -293,7 +301,7 @@ Serial communication (UART) is one of the most important debugging tools when de
 To use serial communication in your program, you need to create a Serial object using pins USBTX and USBRX, which are connected to the USB interface. A simple example would be:
 
     Serial pc(USBTX, USBRX);
-
+    
     int main() {
         pc.baud(9600);  // Set baud rate to 9600 bps
         pc.printf("Hello, World!\n");
@@ -328,23 +336,23 @@ However, be cautious when using printf inside interrupt service routines, as it 
 
 #### How to use Breadboard
 
-A breadboard is a board often used for prototyping electrical circuits, allowing simple circuit construction without soldering. Figure [\[fig:breadboard\]](#fig:breadboard) shows the outline of a breadboard. In a breadboard, 5 holes lined up horizontally are electrically connected, and wiring is done utilizing this. The 5 holes on the right and left sides of the board are independent of each other.
+A breadboard is a board often used for prototyping electrical circuits, allowing simple circuit construction without soldering. Figure ([Fig.](#fig:breadboard)) shows the outline of a breadboard. In a breadboard, 5 holes lined up horizontally are electrically connected, and wiring is done utilizing this. The 5 holes on the right and left sides of the board are independent of each other.
 
-<figure id="fig:breadboard_sample" data-latex-placement="hbt">
-<div class="minipage">
+<figure id="fig:breadboard">
 <div class="center">
-![](../figs/breadboard.png)
+<img src="../../figs/breadboard.png" alt="Breadboard overview." />
 </div>
-</div>
-<div class="minipage">
-<div class="center">
-![](../figs/breadboard_sample.png)
-</div>
-</div>
-<figcaption>Wiring Example</figcaption>
+<figcaption>Breadboard overview.</figcaption>
 </figure>
 
-For example, mbed should already be inserted on the breadboard. If you want to connect something to a pin of mbed, just insert a wire or leg of a resistor into the hole immediately next to that pin (see Figure [10](#fig:breadboard_sample)).
+<figure id="fig:breadboard_sample">
+<div class="center">
+<img src="../../figs/breadboard_sample.png" alt="Example wiring on a breadboard." />
+</div>
+<figcaption>Example wiring on a breadboard.</figcaption>
+</figure>
+
+For example, mbed should already be inserted on the breadboard. If you want to connect something to a pin of mbed, just insert a wire or leg of a resistor into the hole immediately next to that pin (see Figure ([Fig.](#fig:breadboard_sample))).
 
 Also, lines for power supply voltage are prepared on the breadboard. The holes lined up vertically at both ends of the board are electrically connected in one vertical column respectively. There is one column on the right and left, so use them as GND and 3.3V respectively. For this purpose, connect the output pin (3.3V) of the three-terminal regulator to some hole in the right column (any is fine) with a wire. Similarly, connect the left column to GND (black wire coming from the battery).
 
@@ -354,18 +362,26 @@ Because breadboard wiring can become visually complex and error-prone, we recomm
 
 For this experiment, we provide custom Fritzing parts for the *Microcontroller*, *Motor Driver*, and *Photo Reflector* modules. These parts must be **imported into Fritzing first** and then placed from the parts library.
 
-Figure [13](#fig:fritzing_setup_and_examples) shows example circuit views for this experiment. Before placing parts and routing wires, open the *View* menu in Fritzing and uncheck *Align to Grid*; grid alignment is not convenient for the component placement and wiring in this setup. We also provide an example design where the **motor driver section is already wired** (Figures [11](#fig:fritzing_motor_driver_schematic) and [12](#fig:fritzing_motor_driver_breadboard)). Use it as a reference, and see the Circuit Assembly subsection in Week 1 for the detailed parts list and step-by-step procedure. A full sample circuit is also given in the appendix[^15] for reference whether you use Fritzing or not.
+Figure ([Fig.](#fig:fritzing_setup_and_examples)) shows example circuit views for this experiment. Before placing parts and routing wires, open the *View* menu in Fritzing and uncheck *Align to Grid*; grid alignment is not convenient for the component placement and wiring in this setup. We also provide an example design where the **motor driver section is already wired** (Figures ([Fig.](#fig:fritzing_motor_driver_schematic)) and ([Fig.](#fig:fritzing_motor_driver_breadboard))). Use it as a reference, and see the Circuit Assembly subsection in Week 1 for the detailed parts list and step-by-step procedure. A full sample circuit is also given in the appendix[^15] for reference whether you use Fritzing or not.
 
-<figure id="fig:fritzing_setup_and_examples" data-latex-placement="htbp">
-<figure id="fig:fritzing_motor_driver_schematic">
-![](../figs/fig2026/fz2.png)
-<figcaption>example in <em>Schematic View</em>.</figcaption>
-</figure>
-<figure id="fig:fritzing_motor_driver_breadboard">
-![](../figs/fig2026/fz3.png)
-<figcaption>corresponding <em>Breadboard View</em> wiring.</figcaption>
-</figure>
-<figcaption>Fritzing example circuit views for this experiment.</figcaption>
+<figure id="fig:fritzing_setup_and_examples">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Example in <em>Schematic View</em></th>
+<th>Corresponding <em>Breadboard View</em> wiring</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img id="fig:fritzing_motor_driver_schematic" src="../../fig2026/fz2.png" alt="Example in Schematic View" /></td>
+<td><img id="fig:fritzing_motor_driver_breadboard" src="../../fig2026/fz3.png" alt="Corresponding Breadboard View wiring" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Example Fritzing schematic and breadboard views (motor driver section pre-wired).</figcaption>
 </figure>
 
 When using Fritzing, start by importing all provided custom parts, then create a new sketch and place **all modules that will be mounted on your panel** (microcontroller, motor driver, photo reflector, regulator, battery connector, etc.).
@@ -444,7 +460,7 @@ In this first stage, you will assemble the power supply circuit, motor driver (D
 
 - Jumper wires
 
-*Note: For detailed part numbers, specifications, and quantities, refer to Appendix [\[app:partslist\]](#app:partslist).*
+*Note: For detailed part numbers, specifications, and quantities, refer to Appendix [app:partslist](appendix.md#app:partslist).*
 
 #### Wiring Instructions
 
@@ -548,16 +564,24 @@ We provide an example program () that reads and processes sensor signals. This p
 
 This versatile tool is essential for verifying sensor operation, detecting mechanical issues, and confirming signal quality. For angle sensors, you can manually move the pendulum and observe the sensor readings in real time. For encoders, you can rotate the wheel and observe the quadrature signals. The frame-based protocol ensures reliable data transmission by using header bytes to synchronize the data stream between mbed and PC visualization.
 
-<figure id="fig:debugtools12" data-latex-placement="htbp">
-<figure id="fig:debuger1">
-![](../figs/fig2026/debug_motor_controller.png)
-<figcaption>Debugging Tool 1: Motor Controller GUI</figcaption>
-</figure>
-<figure id="fig:debuger2">
-![](../figs/fig2026/debug_analog_visualizer.png)
-<figcaption>Debugging Tool 2: Analog Input Visualizer</figcaption>
-</figure>
-<figcaption>Processing GUI interfaces for Debugging Tools 1 and 2</figcaption>
+<figure id="fig:debug_tools">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Debugging Tool 1: Motor Controller GUI</th>
+<th>Debugging Tool 2: Analog Input Visualizer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../fig2026/debug_motor_controller.png" alt="Debugging Tool 1: Motor Controller GUI" /></td>
+<td><img src="../../fig2026/debug_analog_visualizer.png" alt="Debugging Tool 2: Analog Input Visualizer" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Debugging GUIs for motor control and analog input visualization.</figcaption>
 </figure>
 
 #### Verification Checklist
@@ -588,7 +612,7 @@ Your circuit should now include all components according to the complete sample 
 
 - All bypass capacitors are installed adjacent to IC power pins
 
-- Wire routing is neat and organized (see Figure [17](#fig:circuit_sample))
+- Wire routing is neat and organized (example shown below)
 
 - No wires are at risk of short circuits
 
@@ -608,13 +632,13 @@ Your circuit should now include all components according to the complete sample 
 
 - Follow color conventions: red for positive power, black for GND (0V).
 
-An implementation example of the complete circuit is shown in Figure [17](#fig:circuit_sample).
+An implementation example of the complete circuit is shown in Figure ([Fig.](#fig:circuit_sample)).
 
-<figure id="fig:circuit_sample" data-latex-placement="hbt">
+<figure id="fig:circuit_sample">
 <div class="center">
-![](../figs/circuit_sample.png)
+<img src="../../figs/circuit_sample.png" alt="Complete circuit implementation example." />
 </div>
-<figcaption>Complete Circuit Implementation Example</figcaption>
+<figcaption>Complete circuit implementation example.</figcaption>
 </figure>
 
 #### Integration Testing
@@ -704,19 +728,19 @@ At the end of Week 1 (before adding wheel encoders), your goal is to make the c
     
     *Optional attachments*: Fritzing (`.fzz`/images), photos, or debugging tool screenshots/logs.
 
-[^3]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
-[^4]: Appendix [\[app:drv8832\]](#app:drv8832): DRV8832 datasheet (Texas Instruments).
-[^5]: Appendix [\[app:tpr105f\]](#app:tpr105f): TPR-105F datasheet.
-[^6]: Appendix [\[app:ld1117v33\]](#app:ld1117v33): LD1117V33 datasheet.
+[^3]: Appendix [app:circuit](appendix.md#app:circuit): Circuit example.
+[^4]: Appendix [app:drv8832](appendix.md#app:drv8832): DRV8832 datasheet (Texas Instruments).
+[^5]: Appendix [app:tpr105f](appendix.md#app:tpr105f): TPR-105F datasheet.
+[^6]: Appendix [app:ld1117v33](appendix.md#app:ld1117v33): LD1117V33 datasheet.
 [^7]: A video demonstration of the mechanical assembly process is available in the course materials repository:
-[^8]: For a complete parts list with detailed specifications and quantities, see Appendix [\[app:partslist\]](#app:partslist).
-[^9]: Appendix [\[app:re280ra\]](#app:re280ra): RE-280RA datasheet (Mabuchi Motor).
+[^8]: For a complete parts list with detailed specifications and quantities, see Appendix [app:partslist](appendix.md#app:partslist).
+[^9]: Appendix [app:re280ra](appendix.md#app:re280ra): RE-280RA datasheet (Mabuchi Motor).
 [^10]: There are various other microcontroller series such as Arduino, Raspberry PI, PIC, etc.
 [^11]: Keil Studio Cloud: <https://studio.keil.arm.com/>
 [^12]: Access the course materials repository at <https://github.com/UTokyo2026/UTokyo-Control-Practice-2026>
-[^13]: Processing is a free, open-source software for visual programming. You can download it from <https://processing.org/>. As of 2026, the currently available major release is Processing 4. For more instructions, see Appendix [\[app:processing\]](#app:processing).
+[^13]: Processing is a free, open-source software for visual programming. You can download it from <https://processing.org/>. As of 2026, the currently available major release is Processing 4. For more instructions, see Appendix [app:processing](appendix.md#app:processing).
 [^14]: Fritzing installers (shared Google Drive): <https://drive.google.com/drive/folders/1CwJ8srD090W6hOeP39BXLUZOVy883Kn2?usp=sharing>
-[^15]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
-[^17]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
-[^18]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
-[^19]: Appendix [\[app:circuit\]](#app:circuit): Circuit example.
+[^15]: Appendix [app:circuit](appendix.md#app:circuit): Circuit example.
+[^17]: Appendix [app:circuit](appendix.md#app:circuit): Circuit example.
+[^18]: Appendix [app:circuit](appendix.md#app:circuit): Circuit example.
+[^19]: Appendix [app:circuit](appendix.md#app:circuit): Circuit example.
