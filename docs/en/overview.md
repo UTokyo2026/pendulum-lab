@@ -38,12 +38,12 @@ Consider the equations of motion for the pendulum and the tire separately as sho
 <figure id="fig:model_disassembled" data-latex-placement="tb">
 <div class="minipage">
 <div class="center">
-<embed src="model.eps" />
+![](../figs/model.png)
 </div>
 </div>
 <div class="minipage">
 <div class="center">
-<embed src="model_disassembled.eps" />
+![](../figs/model_disassembled.png)
 </div>
 </div>
 <figcaption>Forces and torques</figcaption>
@@ -80,17 +80,17 @@ Thus, the inverted pendulum can be interpreted as unstable because it has a nega
 <figure id="fig:stabilize" data-latex-placement="bhtp">
 <div class="minipage">
 <div class="center">
-<embed src="simple_pendulum.eps" />
+![](../figs/simple_pendulum.png)
 </div>
 </div>
 <div class="minipage">
 <div class="center">
-<embed src="spring.eps" />
+![](../figs/spring.png)
 </div>
 </div>
 <div class="minipage">
 <div class="center">
-<embed src="stabilize.eps" />
+![](../figs/stabilize.png)
 </div>
 </div>
 <figcaption>Stabilization</figcaption>

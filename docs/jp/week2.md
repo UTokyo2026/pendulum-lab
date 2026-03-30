@@ -44,21 +44,21 @@ Week 2 では，ロータリーエンコーダで機体の運動を計測し，
 
 <figure id="fig:encoder" data-latex-placement="bht">
 <div class="center">
-<embed src="encoder_principle.eps" />
+![](../figs/encoder_principle.png)
 </div>
 <figcaption>ロータリーエンコーダの基本概念</figcaption>
 </figure>
 
 <figure id="fig:encoderAB" data-latex-placement="bht">
 <div class="center">
-<embed src="encoder2phase.eps" />
+![](../figs/encoder2phase.png)
 </div>
 <figcaption>2 相化による CW/CCW 回転の計測</figcaption>
 </figure>
 
 <figure id="fig:counting" data-latex-placement="bht">
 <div class="center">
-<embed src="counting.eps" />
+![](../figs/counting.png)
 </div>
 <figcaption>A/B 相パルスのカウント（2 逓倍カウントの例）</figcaption>
 </figure>
@@ -77,7 +77,7 @@ Week 2 では，ロータリーエンコーダで機体の運動を計測し，
 
 <figure id="fig:baseline" data-latex-placement="bht">
 <div class="center">
-<embed src="baseline.eps" />
+![](../figs/baseline.png)
 </div>
 <figcaption>ベースライン変動の例</figcaption>
 </figure>

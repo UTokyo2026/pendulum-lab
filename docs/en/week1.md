@@ -75,12 +75,12 @@ The basic circuit of a photo-interrupter is shown in Figure [3](#fig:pi_circuit)
 <figure id="fig:pi_circuit" data-latex-placement="bht">
 <div class="minipage">
 <div class="center">
-<embed src="photo_interrupters.eps" />
+![](../figs/photo_interrupters.png)
 </div>
 </div>
 <div class="minipage">
 <div class="center">
-<embed src="pi_circuit.eps" />
+![](../figs/pi_circuit.png)
 </div>
 </div>
 <figcaption>Circuit Diagram</figcaption>
@@ -333,7 +333,7 @@ A breadboard is a board often used for prototyping electrical circuits, allowing
 <figure id="fig:breadboard_sample" data-latex-placement="hbt">
 <div class="minipage">
 <div class="center">
-<embed src="breadboard.eps" />
+![](../figs/breadboard.png)
 </div>
 </div>
 <div class="minipage">

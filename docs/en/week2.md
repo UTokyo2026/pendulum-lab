@@ -44,21 +44,21 @@ Therefore, by performing calculation like Figure [20](#fig:counting) for A-phase
 
 <figure id="fig:encoder" data-latex-placement="bht">
 <div class="center">
-<embed src="encoder_principle.eps" />
+![](../figs/encoder_principle.png)
 </div>
 <figcaption>Basic concept of Rotary Encoder</figcaption>
 </figure>
 
 <figure id="fig:encoderAB" data-latex-placement="bht">
 <div class="center">
-<embed src="encoder2phase.eps" />
+![](../figs/encoder2phase.png)
 </div>
 <figcaption>Measurement of CW/CCW rotation by 2 phases</figcaption>
 </figure>
 
 <figure id="fig:counting" data-latex-placement="bht">
 <div class="center">
-<embed src="counting.eps" />
+![](../figs/counting.png)
 </div>
 <figcaption>Counting A/B phase pulses (Example of 2x counting)</figcaption>
 </figure>
@@ -77,7 +77,7 @@ The finer the pattern division number of the scale, the higher the resolution as
 
 <figure id="fig:baseline" data-latex-placement="bht">
 <div class="center">
-<embed src="baseline.eps" />
+![](../figs/baseline.png)
 </div>
 <figcaption>Example of baseline fluctuation</figcaption>
 </figure>
