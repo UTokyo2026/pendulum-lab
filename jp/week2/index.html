@@ -1,0 +1,2184 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UTokyo Precision Engineering – Inverted Pendulum Fabrication Exercise 2026">
+      
+      
+        <meta name="author" content="UTokyo2026">
+      
+      
+        <link rel="canonical" href="https://utokyo2026.github.io/pendulum-lab/jp/week2/">
+      
+      
+        <link rel="prev" href="../week1/">
+      
+      
+        <link rel="next" href="../week3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Week 2：エンコーダと位置制御 - Wheeled Inverted Pendulum</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Serif";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/figure-numbering.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#page:w2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-header__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wheeled Inverted Pendulum
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Week 2：エンコーダと位置制御
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      <div class="md-header__tabs" aria-label="Tabs">
+        <ul class="md-tabs__list">
+          
+            
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../en/intro/" class="md-tabs__link">
+          
+  
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+          
+            
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../intro/" class="md-tabs__link">
+          
+  
+  
+  日本語
+
+        </a>
+      </li>
+    
+  
+
+          
+        </ul>
+      </div>
+    
+
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-nav__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Wheeled Inverted Pendulum
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/UTokyo2026/pendulum-lab" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    UTokyo2026/pendulum-lab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/grading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grading Criteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1: Assembly & Bring-up
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2: Encoder & Position Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3: Advanced Modeling & Load Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4: Final Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日本語
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    日本語
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    はじめに・日程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    制御概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1：組立と立ち上げ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2：エンコーダと位置制御
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2：エンコーダと位置制御
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#w2-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Week 2 の概要と到達目標
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w2-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        並列作業
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec:w2-task-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task A：エンコーダの製作と取り付け（学生A）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task A：エンコーダの製作と取り付け（学生A）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w2-rotary-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ロータリーエンコーダ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ロータリーエンコーダの製作
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        スケールの設置
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        フォトインタラプタの半田付け
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        フォトインタラプタの調整と読み取り
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec:w2-task-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task B：コードへのエンコーダフィードバック追加とデバッグ（学生B）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task B：コードへのエンコーダフィードバック追加とデバッグ（学生B）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        週間スケジュールとの関係
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        完成版制御プログラムの利用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        通信の準備
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        初期設定
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        いよいよ実験．でもその前に
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_10" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        傾斜センサの原点合わせ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_11" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        倒立を試す（比例制御）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_12" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ゲインの調整
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_13" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        角速度の計算
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_14" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        微分制御も加えて倒立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ここまでのまとめ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_16" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        位置制御
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_17" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        速度の計算と微分ゲインの追加
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_18" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        走らせよう
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_19" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        後は工夫次第
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec:w2-task-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task C：エンコーダフィードバックを含む MATLAB シミュレーション（学生C）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task C：エンコーダフィードバックを含む MATLAB シミュレーション（学生C）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_20" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        シミュレーションの役割
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec:matlab-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MATLAB 環境の準備
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        東京大学での MATLAB 利用
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_21" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        必要なツールボックス
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#simulink" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Simulink モデルの構築
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_22" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラントモデルの考え方
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_23" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        コントローラ内部の構成
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_24" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        シミュレーションの実行
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PD コントローラ設計とパラメータ調整
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pid" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PID パラメータの確認と調整
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_25" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        シミュレーション結果の解析
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_26" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        何を見るべきか
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_27" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        発展課題
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_28" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        シミュレーションから実機へ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_29" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        離散化
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        パラメータの移し替え
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_31" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        シミュレーションと実機の差
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_32" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        課題：エンコーダ相当の信号を用いた位置・速度ループの追加
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_33" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        補足：トラブルシューティングと高速化
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="補足：トラブルシューティングと高速化">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        補足1：あれっ？ モータが弱くなったな？ と思ったら
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        補足2：高速化のために
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        補足3：ジャンパ線の不良
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#week-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Week 2 提出物
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3：高度なモデル化と負荷試験
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4：最終発表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    付録
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="page:w2">Week 2: エンコーダと位置制御<a class="headerlink" href="#page:w2" title="Permanent link">&para;</a></h1>
+<h2 id="w2-overview">Week 2 の概要と到達目標<a class="headerlink" href="#w2-overview" title="Permanent link">&para;</a></h2>
+<p>Week 2 では，ロータリーエンコーダで機体の運動を計測し，その情報を <strong>シミュレーション</strong> と <strong>実機制御</strong> の両方へ活用することに焦点を当てます．具体的には，(1) 自作エンコーダの製作・取付，(2) 制御コードへのエンコーダフィードバック統合，(3) MATLAB/Simulink シミュレーションへの <strong>位置</strong> と <strong>速度</strong> フィードバック追加，を行います．\</p>
+<p><strong>到達目標：</strong></p>
+<ul>
+<li>
+<p>ロータリーエンコーダを製作・取付し，A/B 相波形と回転方向が正しいことを確認する</p>
+</li>
+<li>
+<p>エンコーダに基づく位置／速度フィードバックを制御プログラムへ追加し，波形ツールでデバッグする</p>
+</li>
+<li>
+<p>シミュレーションへ <span class="arithmatex">\(x\)</span> と <span class="arithmatex">\(\dot{x}\)</span> のフィードバックを追加し，実機と比較する</p>
+</li>
+<li>
+<p>倒立を保ちながら，安定した位置制御（少なくとも発散しない状態）を実現する</p>
+</li>
+</ul>
+<h2 id="w2-parallel">並列作業<a class="headerlink" href="#w2-parallel" title="Permanent link">&para;</a></h2>
+<p>推奨する役割分担は，学生 A（エンコーダ製作・取付），学生 B（コードへのエンコーダフィードバック追加とデバッグ），学生 C（MATLAB/Simulink シミュレーション拡張）です．役割は入れ替えて構いませんが，全員が一連の流れを理解してください．</p>
+<ul>
+<li>
+<p><strong>学生 A:</strong> Task A（エンコーダ製作・取付） --- <a href="#sec:w2-task-a">第[4.3](#sec:w2-task-a)節参照</a></p>
+</li>
+<li>
+<p><strong>学生 B:</strong> Task B（コードへのエンコーダフィードバック追加・デバッグ・位置制御） --- <a href="#sec:w2-task-b">第[4.4](#sec:w2-task-b)節参照</a></p>
+</li>
+<li>
+<p><strong>学生 C:</strong> Task C（MATLAB/Simulink シミュレーション拡張と比較） --- <a href="#sec:w2-task-c">第[4.5](#sec:w2-task-c)節参照</a></p>
+</li>
+</ul>
+<h2 id="sec:w2-task-a">Task A：エンコーダの製作と取り付け（学生A）<a class="headerlink" href="#sec:w2-task-a" title="Permanent link">&para;</a></h2>
+<p>この作業では，機体位置を計測するためのロータリーエンコーダを製作し，機体へ取り付けます．</p>
+<h3 id="w2-rotary-encoder">ロータリーエンコーダ<a class="headerlink" href="#w2-rotary-encoder" title="Permanent link">&para;</a></h3>
+<p>倒立振子は，倒立角度だけでなく，位置（または速度）も検出してフィードバックしなければ安定しません． そこで，位置（または速度）の検出方法について考えてみましょう．</p>
+<p>最も基本的な方法は，タイヤやモータへロータリーエンコーダを取り付け，回転数を測ることです． 以下ではロータリーエンコーダの仕組みを説明します．</p>
+<p>ロータリーエンコーダは，ディスクに描いた白黒パターンをフォトインタラプタで読み取ることで実現できます<sup id="fnref:20"><a class="footnote-ref" href="#fn:20">1</a></sup>．Figure (<a href="#fig:encoder">Fig.</a>) のように，白黒パターンから数 mm 離した位置へフォトインタラプタを置いてスリットを回転させると，白黒の変化に応じた正弦波状の出力が得られます（距離が近いと矩形波に近づきます）．これを適当な閾値で二値化し，パルスのエッジを数えれば回転角を測れます．これがロータリーエンコーダの基本原理です．</p>
+<p>回転方向が一方向だけならこれで十分ですが，双方向に回る場合は回転方向に関係なくカウントが増えてしまうため使えません．そこで，双方向回転を扱う場合はフォトインタラプタを 2 個使います．</p>
+<p>Figure (<a href="#fig:encoderAB">Fig.</a>) のように，2 個のフォトインタラプタをスリットパターンの 1/4 周期（または整数 <span class="arithmatex">\(n\)</span> に対して <span class="arithmatex">\((n+1/4)\)</span> 周期）ずらした位置へ置きます．この 2 つの出力を A 相，B 相と呼びます．A 相と B 相は sin と cos のように 90 度位相がずれていますが，その前後関係は回転方向で変化します．例えば正回転（CW）で B 相が 90 度進むなら，逆回転（CCW）では B 相が 90 度遅れます．</p>
+<p>したがって，適切に二値化した A 相・B 相に対して Figure (<a href="#fig:counting">Fig.</a>) のような処理を行えば，回転方向も含めて正しく回転角を測れます．Figure (<a href="#fig:counting">Fig.</a>) では A 相のエッジだけを数えており，これは 2 逓倍カウントと呼ばれます（立ち上がりに加えて立ち下がりも数える）．さらに B 相でも同様に数えると分解能は 2 倍になり，これを 4 逓倍カウントと呼びます． エンコーダ分解能をできるだけ高くしたいので，4 逓倍カウントになるようにプログラムしてください．</p>
+<figure id="fig:encoder">
+<div class="center">
+<img src="../../figs/encoder_principle.png" alt="Basic concept of rotary encoder." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Basic concept of rotary encoder.</figcaption>
+</figure>
+
+<figure id="fig:encoderAB">
+<div class="center">
+<img src="../../figs/encoder2phase.png" alt="CW/CCW measurement by two-phase signals (A/B)." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Measurement of CW/CCW rotation by two phases (A/B).</figcaption>
+</figure>
+
+<figure id="fig:counting">
+<div class="center">
+<img src="../../figs/counting.png" alt="Counting A/B phase pulses (example of 2x counting)." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Counting A/B phase pulses (example of 2x counting).</figcaption>
+</figure>
+
+<h3 id="_1">ロータリーエンコーダの製作<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h3>
+<h3 id="_2">スケールの設置<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h3>
+<p>エンコーダを製作する場合，まずスケールの設置場所と分解能を決めます．設置場所として一般的なのは「モータ軸に取り付ける」か「タイヤ（ホイール）に取り付ける」かです．タイヤへ取り付ける場合は，一度タイヤを軸から外し（中央のナット 1 個だけ外す．他のねじは外さないこと），スケールを印刷した紙をホイール内側へ両面テープで貼り付けます．ただし，紙が柔らかいとスケールとフォトインタラプタの距離が変動するため，用意されたプラスチック板（緑色の円板）へスケールを貼ってから，その板ごとホイールへ貼る方がよいでしょう．</p>
+<p><em>タイヤは次の班が再利用するので，原状復帰できる範囲で工作してください．</em></p>
+<p>モータ軸に取り付ける場合は，モータ背面からわずかに突き出た軸にスケールを印刷した紙を貼り付けます．両面テープや糊テープをうまく使って貼ってください．しっかり固定するのが難しいですが，ほとんど力がかからないので軽く接着する程度で十分です（その代わりスケールをできるだけ軽くしてください）．モータ側に取り付けると，タイヤに取り付ける場合と比べて，減速比（＝タイヤ半径とモータ先端チューブ半径の比）だけ分解能が上がります．そのため，分割数が粗いスケール（例：90 度ごとに 4 分割）でも十分な性能が得られます．</p>
+<p>スケールの分割を細かくするほど分解能は上がりますが，細かいスケールほど高い取付精度が必要です．これは，スケールが細かいほどフォトインタラプタ出力の変化幅が小さくなるためです．取付精度が低いと，回転に伴ってスケール板との距離が変動し，出力のベースラインも揺れてしまいます．すると二値化がうまくできず，エンコーダが動作しなくなります（Figure (<a href="#fig:baseline">Fig.</a>) 参照）．</p>
+<figure id="fig:baseline">
+<div class="center">
+<img src="../../figs/baseline.png" alt="Example of baseline fluctuation." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Example of baseline fluctuation.</figcaption>
+</figure>
+
+<p>スケールを粗くすると，フォトインタラプタをスケール板から少し離れた位置（5mm 程度？）に置いても十分な信号振幅が得られます．距離が遠いと，多少の距離変動は問題になりません． したがって，スケールを粗くすると作りやすくなりますが，粗いスケールでは制御が粗くなります．バランスをうまくとってください． いずれにしても，スケールの取付精度が重要です．スケール板をホイールにしっかり固定してください（Figure (<a href="#fig:encoder_disc">Fig.</a>) 参照）．</p>
+<p>また，スケールの分解能を決める際は，フォトインタラプタの配置間隔を念頭に置いてください．配布キットではすでに 2 個のフォトインタラプタが基板に半田付けされています．この配置を考慮してスケールを設計してください．設計は PC で行います．Draw 系ソフトウェアで設計してもよいですし，Excel 等で円グラフを描いてスケールとして使うことも可能です．設計後はプリンタで印刷（プリンタがなければコンビニで印刷可）して切り出します． どうしても印刷できない場合は手描きでも構いません．黒い部分はマジックペンなどで塗りつぶしますが，ペンの種類によっては，見た目には黒くても赤外光を反射しやすいものがあります（＝フォトインタラプタには黒と認識されない）ので注意してください．</p>
+<figure id="fig:encoder_disc">
+<div class="center">
+<img src="../../figs/encoder_disc.png" alt="Example of encoder pattern." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Example of encoder pattern. Left assumes reading a common scale with two photo-interrupters arranged with a 1/4-period angular shift. Right assumes two photo-interrupters at the same angle (different radius), reading two slits shifted by 1/4 period.</figcaption>
+</figure>
+
+<h3 id="_3">フォトインタラプタの半田付け<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<p>スケールの読み取りはフォトインタラプタで行います．傾斜センサを参考に，フォトインタラプタをユニバーサル基板の切れ端へ半田付けし，L 字金具などでユニバーサルボードへ取り付けます（Figure (<a href="#fig:encoder_setup">Fig.</a>)）．基板は支給しますので申し出てください． 半田付けの要点は演習中に説明します．特に半田付けに慣れていない人は，説明をよく聞いてから作業してください．</p>
+<figure id="fig:encoder_setup">
+<div class="center">
+<img src="../../figs/encoder_setup.png" alt="Photo-interrupter attachment." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Photo-interrupter attachment.</figcaption>
+</figure>
+
+<h3 id="_4">フォトインタラプタの調整と読み取り<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<p>機体へ取り付けたら，フォトインタラプタの配線と抵抗をブレッドボードへ接続します．配布回路図には描かれていませんが，傾斜センサと同様の考え方で接続してください． ただし，フォトトランジスタへつなぐ抵抗値は各自の設計に応じて選んでください（参考までに，機体下部の傾斜センサでは 12k<span class="arithmatex">\(\Omega\)</span> を使っています）．多くの場合，ターゲットまでの距離は傾斜センサより近くなるため反射光量が増えます．その場合，抵抗値を下げないと出力が飽和します（波形の上側が切れて平らになる）．目安としては 1k<span class="arithmatex">\(\Omega\)</span> から 5k<span class="arithmatex">\(\Omega\)</span> 程度がよいでしょう．</p>
+<p>取り付けと配線が終わったら，簡易オシロスコープでフォトインタラプタ出力を見ながら二値化の閾値を決めます．二値化した 2 つの信号が概ね 90 度位相差になっていることを確認したら，Figure (<a href="#fig:counting">Fig.</a>) を参考にカウントプログラムを書いてください． 位相差は厳密に 90 度である必要はありませんが，エッジの前後関係が入れ替わると回転方向を誤って読んでしまうので注意が必要です（位相差は 0 度より大きく 180 度未満であればよい）．思った位相差が得られない場合は取付位置などを調整してください．必ずタイヤを一周回し，どの位置でも正しく読めることを確認しましょう．</p>
+<h2 id="sec:w2-task-b">Task B：コードへのエンコーダフィードバック追加とデバッグ（学生B）<a class="headerlink" href="#sec:w2-task-b" title="Permanent link">&para;</a></h2>
+<p>[]</p>
+<h4 id="_5">週間スケジュールとの関係<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h4>
+<p><strong>Week 1:</strong> <strong>角度の P 制御のみ</strong> で基本的な倒立を達成することが目標でした（<a href="#sec:w1-standup-pre-encoder">第[[sec:w1-standup-pre-encoder]](#sec:w1-standup-pre-encoder)節参照</a> 参照）．<strong>Week 2 以降:</strong> 角速度，フィルタ，D ゲイン追加を含めて，さらに調整と改良を進めます．この節ではその詳細手順と安全上の注意をまとめます．</p>
+<h3 id="_6">完成版制御プログラムの利用<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
+<p>倒立振子の完成版制御プログラムは <sup id="fnref:21"><a class="footnote-ref" href="#fn:21">2</a></sup> に置いてあります．これは単なるデバッグツールではなく，PD 制御，センサ読み取り，モータ制御，リアルタイム可視化まで含んだ <strong>倒立振子制御の完成例</strong> です．</p>
+<p><strong>クイックスタート（事前コンパイル済みバイナリを使う場合）：</strong></p>
+<ol>
+<li>
+<p>を mbed にドラッグ＆ドロップで書き込む</p>
+</li>
+<li>
+<p>mbed のリセットボタンを押す</p>
+</li>
+<li>
+<p>1 秒の待機後にプログラムが起動する</p>
+</li>
+</ol>
+<p><strong>プログラムの理解と変更：</strong></p>
+<p>制御の仕組みを理解したい場合やパラメータを調整したい場合は，Keil Studio Cloud で を開いてください．プログラム構成は概ね次の通りです．</p>
+<ul>
+<li>
+<p><strong>3--11 行目</strong>: 制御パラメータ（<code>SAMP_FREQ</code>, <code>VLIMIT</code>, <code>VOFFSET</code>, <code>KP</code>, <code>KD</code>）</p>
+</li>
+<li>
+<p><strong>17--30 行目</strong>: ピン定義（LED，モータ，センサ）</p>
+</li>
+<li>
+<p><strong>70--132 行目</strong>: <code>int0()</code> 割り込み関数（メイン制御ループ）</p>
+</li>
+<li>
+<p><strong>134--161 行目</strong>: <code>main()</code> 関数（初期化と起動）</p>
+</li>
+</ul>
+<p>制御パラメータを変えたい場合は，ファイル冒頭の <code>#define</code> を書き換え，再コンパイルして mbed に書き込みます．初期状態では比例制御のみ（<code>KP = 1.0</code>, <code>KD = 0.0</code>）です．微分制御はこの節の後半で追加します．</p>
+<p>プログラムを変更したら「Save」と「Compile」を押してください．エラーがなければ実行ファイル（<code>.bin</code>）がダウンロードされ，それを mbed に書き込めます．初期確認だけなら，事前コンパイル済みの をそのまま使って構いません．</p>
+<h3 id="_7">通信の準備<a class="headerlink" href="#_7" title="Permanent link">&para;</a></h3>
+<p>今回は，mbed の状態をリアルタイムに監視するために 6 チャンネルオシロスコープを用意しています．まず Appendix の説明<sup id="fnref:22"><a class="footnote-ref" href="#fn:22">3</a></sup> に従って Processing をインストールしてください．オシロスコープ本体は にあります．</p>
+<p><strong>オシロスコープの仕組み：</strong> mbed プログラム（）は 2000 Hz で制御ループを実行します．各繰り返しで，センサ読み取り，制御出力計算，モータ制御，そして 230400 baud の USB シリアルで 6 チャンネルのデータを PC へ送信します．データはフレームベースのプロトコルで送信され，各フレームは 2 バイトのヘッダ（0xAA 0x55）に続いて 6 バイトのデータ（各 0〜255）で構成されます．Processing プログラム（）はシリアルポートを継続的に読み込み，ヘッダパターンを探してデータストリームと同期し，6 バイトのデータを取り出してリアルタイムでプロットします．このプロトコルにより，一部のバイトが壊れたり失われたりしても確実にデータを伝送できます．</p>
+<p><strong>オシロスコープの使い方：</strong> を mbed に書き込みます（制御パラメータを変更したい場合は .cpp ファイルを自分でコンパイルしても構いません）．書き込みが終わったら，Processing で を開き，三角形の実行ボタンを押してオシロスコープ画面を開きます．画面は上下に分かれており，上段に 3 チャンネル，下段に 3 チャンネルの計 6 チャンネルが表示されます．mbed プログラムで繰り返し周期ごとに 6 つのデータを送ると，送信順に表示されます（上段 R：赤，G：緑，B：青，下段 R：赤，G：緑，B：青の順）．ただし，オシロスコープ画面を起動した直後は正しい順番になっていないことがあります．画面起動後に mbed を一度リセットすると，表示もリセットされて正しい順番になります（フレームの同期が再調整されます）．</p>
+<p>Figure (<a href="#fig:debuger3">Fig.</a>) にオシロスコープ画面例を示します．</p>
+<figure id="fig:debuger3">
+<div class="center">
+<img src="../../fig2026/debug_oscilloscope.png" alt="Debugging Tool 3: Six-Channel Oscilloscope." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Debugging Tool 3: Six-Channel Oscilloscope showing real-time control data (CH1–CH3: sensor/angle; CH4–CH6: angular velocity, filtered velocity, reference).</figcaption>
+</figure>
+
+<p>は通常，(CH1) フォトインタラプタ 1 出力（上段赤），(CH2) フォトインタラプタ 2 出力（上段緑），(CH3) 両者の差分＝傾斜角相当（上段青），(CH4) 角速度（下段赤），(CH5) フィルタ後角速度（下段緑），(CH6) 128 の基準線（下段青）を表示するよう設計されています．</p>
+<h3 id="_8">初期設定<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<h3 id="_9">いよいよ実験．でもその前に<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h3>
+<p>いよいよ実験ですが，その前にこの基板の電源の仕組みを理解しておきましょう．</p>
+<p>電池ボックスは基板全体（mbed + モータ + フォトインタラプタ）へ電源を供給します．電池ボックスを ON にすると倒立振子全体が起動し，基板上の LED も点灯します．<em><strong>電池ボックスが ON の間はモータが回り続けることがあるので，倒立実験中以外は こまめに OFF</strong> にしてください．</em></p>
+<p>一方で，電池ボックスが OFF でも，USB ケーブルで PC に接続すると mbed 本体だけは USB から給電されます（モータやフォトインタラプタには USB からは給電されません）．このとき基板上の赤 LED は消えているはずですが，mbed 側の青 LED は明るく点くので，電池ボックスのスイッチが OFF のまま気づかず実験してしまうことがあります．フォトインタラプタ出力がおかしい，あるいはモータが動かないときは，まず電池ボックスのスイッチを確認してください．</p>
+<h3 id="_10">傾斜センサの原点合わせ<a class="headerlink" href="#_10" title="Permanent link">&para;</a></h3>
+<p>この作業中にモータが動くと困るので，<em>モータとモータドライバの接続を外して</em>おいてください．mbed に USB ケーブルを接続した状態で，以下の手順でセンサの原点合わせをします．</p>
+<ul>
+<li>
+<p>mbed 中央のリセットスイッチでリセットする（＝プログラム開始）．</p>
+</li>
+<li>
+<p>プログラムは起動後 1 秒間アイドル状態になるように設定されているので，その間に電池ボックスのスイッチを ON にする．</p>
+</li>
+<li>
+<p>機体を手で支えながら垂直に立てる．</p>
+</li>
+<li>
+<p>オシロスコープ上段画面に表示される傾斜角（青線）が，垂直状態のときにおよそ 0（＝画面中央）になっていることを確認する（プログラムから 128 を足して送信しているため，センサ出力が 0 のときオシロスコープの線が画面中央に来る）．中央にない場合は，センサを取り付けている L 字金具の曲げ角度を微調整する（ユニバーサルボードは割れやすいので，基板に力をかけず，金具の両端を持って調整すること）．</p>
+</li>
+</ul>
+<h3 id="_11">倒立を試す（比例制御）<a class="headerlink" href="#_11" title="Permanent link">&para;</a></h3>
+<p>センサ調整が終わったら，いよいよ倒立を試します<sup id="fnref:23"><a class="footnote-ref" href="#fn:23">4</a></sup>．初期プログラムでは P ゲインのみが設定されており（<code>KP = 1.0</code>, <code>KD = 0.0</code>），比例制御だけが働きます．</p>
+<ul>
+<li>
+<p>電池ボックスの電源を切り，モータとモータドライバを再接続する．USB ケーブルは接続したままでよい．</p>
+</li>
+<li>
+<p>モータ接続後，mbed をリセットし，1 秒以内に電池ボックスのスイッチを ON にして，機体を垂直に立てる．制御はリセットの 1 秒後に開始される．</p>
+</li>
+<li>
+<p>軽く機体を手で支えながら機体の反応を観察する．転倒しないようやさしく支えつつ，倒立振子がどちらへ動こうとするかを確認する．倒れた方向へ動けば正しい．傾きとは逆方向へ動く（自ら倒れようとする）なら，モータの接続が逆なので，電源を切ってモータとドライバを結ぶ 2 本の線（または mbed とモータドライバを結ぶ 2 本の線）を入れ替える．</p>
+</li>
+</ul>
+<p>運が良ければこれだけで完璧に倒立できることもあります．そうでなければ，単振動のような動きになるでしょう．比例制御はバネと等価なので，摩擦などの損失がなければ単振動になります．</p>
+<h3 id="_12">ゲインの調整<a class="headerlink" href="#_12" title="Permanent link">&para;</a></h3>
+<p>次に P ゲインを変えて機体応答を見てみましょう．この時点ですでに倒立できている人は，いったん P ゲインを半分以下くらいまで下げてください．機体の動きを妨げないように，かつ転倒しないように，上部や USB ケーブルをやさしく支えながら 動作を確認します．</p>
+<ol>
+<li>
+<p>P ゲインが低い場合，ゆったりした（約 1〜2 Hz の）単振動が見られる．</p>
+</li>
+<li>
+<p>P ゲインを上げる（＝バネを硬くする）と，振動周波数が上がり振動振幅が小さくなる．</p>
+</li>
+<li>
+<p>ある程度上げると，振動がほぼない状態で安定する（少しビリビリする振動は残ってもよい）．</p>
+</li>
+<li>
+<p>ゲインを上げすぎると，ガタガタするような高周波振動（この機体では 5 Hz 程度以上のイメージ）が現れる．</p>
+</li>
+<li>
+<p>さらに上げると，激しい振動になる．</p>
+</li>
+</ol>
+<p>上記 3. の状態が理想ですので，小さい値から大きい値まで一通り試したうえで，3. に近くなるようにゲインを調整してください．摩擦が少ない機体では，P 制御だけでは振動が完全には消えないこともあります．その場合は，振動が最も小さくなる点に合わせてください．</p>
+<p>1 や 2 に見られるようなゆったりした振動は，安定性が低いだけで大きな害はありません．しかし 4 や 5 の高周波振動は，過大電流によって <em>電子部品やモータの発熱・焼損</em> につながる恐れがあります．また，振動でねじが緩んで機体が壊れる危険もあるため，この状態はできるだけ避けてください．</p>
+<p><em>ガタガタ振動が起きたら，すぐにスイッチを切ってください．</em></p>
+<h3 id="_13">角速度の計算<a class="headerlink" href="#_13" title="Permanent link">&para;</a></h3>
+<p>次に，微分制御を追加します．微分制御は傾斜角の微分＝傾斜角速度をフィードバックするので，まず角速度を計算します．数学的に厳密な微分は行えないため，前回の角度と今回の角度の差を微分の近似値として使います．すなわち，
+$$
+\dot{\theta} \simeq \frac{\theta - \theta_1}{T_s}
+\label{eq:theta_diff}
+$$
+ここで <span class="arithmatex">\(\theta_1\)</span> は前回処理時の傾斜角，<span class="arithmatex">\(T_s\)</span> は繰り返し時間（サンプリング周期）です．この処理は プログラムの <code>int0()</code> 関数 79〜80 行目にすでに実装されています．</p>
+<p>差分（微分）は高周波信号を増幅する効果があるため，上記で求めた角速度には高周波ノイズが多く含まれています．そのままフィードバックに使うと，ノイズによる微細な振動（「シュー」という音）が発生します．この状態ではモータに大電流が流れて回路に良くないため，プログラム内でローパスフィルタ（LPF）を適用して高周波ノイズを除去します．</p>
+<p>プログラムで実現できるディジタルフィルタには IIR（Infinite Impulse Response，無限インパルス応答）と FIR（Finite Impulse Response，有限インパルス応答）の 2 種類がありますが，フィードバック制御では位相遅れが問題になるため，なるべく位相遅れの少ないフィルタが望ましいです．FIR は高周波域で余分な位相遅れを生じやすいため，今回は位相遅れを把握しやすい IIR でフィルタを作ります．</p>
+<p>フィルタの次数を上げるほどカットオフ性能は良くなりますが，次数が上がると位相遅れも増えます．そこで，最もシンプルで位相遅れが最小の「1 次ローパスフィルタ（1 次遅れフィルタ）」を使います．双一次変換で求めた 1 次ローパスフィルタのパルス伝達関数は，
+$$
+F(z) = \frac{1+z^{-1}}{(1+\frac{2T}{T_s})+(1-\frac{2T}{T_s})z^{-1}}
+\label{eq:firstorder}
+$$
+ここで <span class="arithmatex">\(T\)</span> は 1 次遅れの時定数，<span class="arithmatex">\(T_s\)</span> はサンプリング周期です．時定数 <span class="arithmatex">\(T\)</span> の逆数がカットオフ角周波数（rad/s）になります．適切なカットオフ周波数を決めてフィルタ係数を計算してください（「Hz」と「rad/s」の関係に注意）．</p>
+<p>フィルタ係数の計算には Matlab が使えます．Matlab で</p>
+<div class="highlight"><pre><span></span><code>[b,a] = butter(1,0.01);
+</code></pre></div>
+<p>と入力すると 1 次ローパスフィルタの係数が求まります．ここで butter（Butterworth フィルタを求める関数）の第 1 引数は「フィルタ次数」，第 2 引数は「ナイキスト周波数で正規化したカットオフ周波数」（＝ナイキスト周波数に対する比，ナイキスト周波数はサンプリング周波数の半分）です．式<span class="arithmatex">\(\eqref{eq:firstorder}\)</span>は周波数プリワーピングを行わないため，この式で手計算すると双一次変換の周波数歪みによりカットオフ周波数がわずかにずれますが，Matlab の butter 関数は周波数プリワーピングを行うため，指定したカットオフ周波数が正確に得られます．</p>
+<p>1 次遅れフィルタでは，カットオフ周波数の 1/10〜1/5 の周波数から位相遅れが始まることに注意してください<sup id="fnref:24"><a class="footnote-ref" href="#fn:24">5</a></sup>．微分の処理は正弦波の位相を 90 度進める働きがあります（sin を微分すると cos になり，位相が 90 度進む）が，位相遅れがあると正しい微分にならなくなります．前節の比例制御での機体振動周波数（微分制御で抑えるべき振動）を考慮して，その周波数で正しい微分が得られるよう，フィルタのカットオフ周波数を振動周波数の 10 倍以上（最低でも 5 倍以上）に設定してください．</p>
+<p>例えば，約 2 Hz で振動している場合，カットオフ周波数を例えば 20 Hz（＝ 40<span class="arithmatex">\(\pi\)</span> rad/s）以上に設定します．その後，実際の倒立実験で応答状態を見ながら適宜調整してください．</p>
+<p>求めたパルス伝達関数をプログラムにするには，次の手順で進めます．まず，伝達関数を <span class="arithmatex">\(z^{-1}\)</span> に関する有理多項式（多項式の分数）にし，分母の定数項が 1 になるよう分母・分子を割ります．こうして得られた多項式の係数を，分子は <span class="arithmatex">\(b_0, b_1, b_2, \ldots\)</span>，分母は <span class="arithmatex">\(a_0=1, a_1, a_2, \ldots\)</span> とします．今回は 1 次フィルタなので，分子は <span class="arithmatex">\(b_0, b_1\)</span>，分母は <span class="arithmatex">\(a_0=1, a_1\)</span> だけです．Matlab で計算するとこれらの係数が直接得られます．このとき伝達関数は，
+$$
+F(z) = \frac{b_0 + b_1 z^{-1}}{1 + a_1 z^{-1}} = \frac{Y(z)}{X(z)}
+\label{eq:firstorder_tf}
+$$
+ここで <span class="arithmatex">\(X(z)\)</span> はフィルタへの入力信号（Z 変換），<span class="arithmatex">\(Y(z)\)</span> はフィルタ出力（Z 変換）です．伝達関数は入力と出力の比（Z 変換）であることを思い出してください．</p>
+<p>これを整理して逆 Z 変換し，プログラムにします．
+$$
+\begin{aligned}
+(1+a_1 z^{-1})Y(z) &amp;= (b_0 + b_1 z^{-1})X(z) \
+Y(z) + a_1 z^{-1} Y(z) &amp;= b_0 X(z) + b_1 z^{-1}X(z)
+\end{aligned}
+\label{eq:firstorder_rearrange}
+$$
+逆 Z 変換すると，
+$$
+\begin{aligned}
+y[n] + a_1 y[n-1] &amp;= b_0 x[n] + b_1 x[n-1] \
+y[n] &amp;=  b_0 x[n] + b_1 x[n-1] - a_1 y[n-1]
+\end{aligned}
+\label{eq:firstorder_time}
+$$
+これをそのままプログラムに書くだけです．主要部のみ示します（変数宣言省略，左の数字は説明用の行番号）．</p>
+<div class="highlight"><pre><span></span><code>1:    y = b0 * x + b1 * x1 - a1 * y1;
+2:    x1 = x;
+3:    y1 = y;
+</code></pre></div>
+<p>これで完成です．1 行目がフィルタ計算，2 行目と 3 行目は今回の入出力（<span class="arithmatex">\(x[n], y[n]\)</span>）を保存して，次回の周期で前回値（<span class="arithmatex">\(x[n-1]\)</span>, <span class="arithmatex">\(y[n-1]\)</span>）として参照できるようにします．</p>
+<p>プログラムができたら，フィルタ前後の角速度信号がオシロスコープ画面でどう変化するかを確認しましょう．フィルタ前後の値をオシロスコープへ出力するようプログラムを変更してください．フィルタが正しく動作していれば，ノイズが低減されていることを確認できるはずです．フィルタ結果に若干のノイズが残っていても構いません．ノイズが完全に見えなくなるほど強くフィルタをかけると，過フィルタになっています．その場合，信号に大きな遅れが生じているはずです．フィルタをかけると必ず時間遅れが生じますが，視覚的に明らかに遅れているようなら過フィルタです．カットオフ周波数を<strong>上げて</strong>フィルタ効果を弱めてください．</p>
+<h3 id="_14">微分制御も加えて倒立<a class="headerlink" href="#_14" title="Permanent link">&para;</a></h3>
+<p>角速度が計算できたら，D ゲインを加えて PD 制御を行いましょう．フィルタを通した角速度に D ゲインを掛けて，式<span class="arithmatex">\(\eqref{eq:pd}\)</span>に合わせてください． P 制御だけですでに安定している機体では，D ゲインを加えても安定性が増したように見えないかもしれませんが，外乱に対する応答に D ゲインの効果が現れるはずです． 外乱を加えるには，倒立した機体を指で軽く突いてください．D ゲインなしでは，倒立状態に戻る際にフラフラと振動しますが，適切な D ゲインがあれば振動が素早く収束します（機体によっては効果が見えにくいこともあります）．</p>
+<p>実際に D ゲインの大きさを変えて応答を見てみましょう．D ゲインの大きさ（ここでは）は P ゲインの数分の一から 1/20 程度が目安です． 理論的には D ゲインが大きいほど振動が収まるはずですが，実際には D ゲインが大きすぎると逆に振動が増えるので注意してください<sup id="fnref:25"><a class="footnote-ref" href="#fn:25">6</a></sup>． 機体がビリビリしている場合，D ゲインが大きすぎる可能性があるので，D ゲインを下げてみてください（機体によっては D ゲイン 0 が最適なこともあります）．</p>
+<h3 id="_15">ここまでのまとめ<a class="headerlink" href="#_15" title="Permanent link">&para;</a></h3>
+<p>激しい振動なしに倒立し，外乱への応答がなめらかになれば，ひとまず完成です．位置フィードバックをかけていないため，倒立振子が徐々に逃げてしまう（そして転倒する）のは避けられません．</p>
+<p>ここまでは説明通りに作れば問題なく到達できるはずですが，実習の本番はここからです．ここからは，自分で考えながら製作を進めてください．</p>
+<h3 id="_16">位置制御<a class="headerlink" href="#_16" title="Permanent link">&para;</a></h3>
+<p>位置が読めるようになったら，傾斜角制御と同様に，まず位置に対して比例ゲイン（<span class="arithmatex">\(K_x\)</span>）だけを加えて（傾斜角制御の操作量に足して）制御してみましょう．具体的にはモータ電圧は
+$$
+v_m = K_p \theta + K_d \dot{\theta} + K_x x + K_v \dot{x}
+\label{eq:vm_pos}
+$$
+となります（この時点では位置微分ゲイン <span class="arithmatex">\(K_v\)</span> はゼロ）．</p>
+<p>ゲイン <span class="arithmatex">\(K_x\)</span> の正しい符号は正か負かわかりません（各自のロータリーエンコーダの設定に依存します）．とりあえず試してみて，機体が前後に振動するなら符号は正しいです．振動せずに一方向に走り去る場合は位置ゲインの符号が逆（または，エンコーダ出力が逆）ですので，符号を変えて再試行してください（エンコーダプログラムを修正しても構いません）．</p>
+<p>正しい符号がわかったら，比例ゲインの大きさを変えながら応答の変化を見てみましょう．機体をやさしく手で支えながら，倒立振子の動きを読む意識で操作してみてください．ゲインが小さいとゆっくり大きく振動し，大きいと速く細かく振動します．先の傾斜角制御では比例ゲインだけで静止できたこともあったかもしれませんが，ここでの位置制御では，比例ゲインだけでは振動応答しか得られません（さらに，信号遅れや逆起電力の影響で振動振幅が徐々に増大します）．</p>
+<p>傾斜角制御実験と同様，ゲインを大きくしすぎると激しい振動になります．激しい振動は部品の破損につながるため，<em>激しい振動が起きたら直ちに電源スイッチを切ってください</em>．</p>
+<p>多くの場合，ゆっくり振動している付近（約 0.5 Hz？）が適切な比例ゲインですので，そこを目標に調整してください．この振動は次に設定する微分制御で抑制されますが，その振動周波数が微分制御の効く範囲（ローパスフィルタのカットオフ周波数の 1/10 以下程度）に入っていることが重要です．分解能の高いエンコーダがある人は速度フィルタのカットオフ周波数を高く設定でき，より高い周波数まで減衰させられるので，速めの振動に調整しても構いません（その方が位置の応答が素早くなります）．自分のエンコーダ性能と速度ローパスフィルタの特性を念頭に置いて調整してください．</p>
+<p>一般に，倒立振子の位置制御は次のような興味深い動作をします．機体を右へ移動させたい場合，位置制御系（<span class="arithmatex">\(K_x\)</span> と <span class="arithmatex">\(K_v\)</span> による制御）は逆に左方向へタイヤを回そうとします．タイヤが左へ動くと，慣性により機体は右へ倒れます．すると傾斜角制御系（<span class="arithmatex">\(K_p\)</span> と <span class="arithmatex">\(K_d\)</span>）がこの傾きを補正するためにタイヤを右へ回し，結果として機体は右へ進みます．つまり位置制御系は，直感とは逆に，目標位置から離れる方向へ動けと指令を出しています．しかし，傾斜角制御系が支配的なので，結果的に位置制御系が指令した方向と逆へ動くというわけです．自分が作った倒立振子がどのような動作をするか確認してみましょう．</p>
+<h3 id="_17">速度の計算と微分ゲインの追加<a class="headerlink" href="#_17" title="Permanent link">&para;</a></h3>
+<p>最後に速度を計算して微分制御を加えます．速度の計算はエンコーダ出力を微分（差分）して求めますが，今回作ったエンコーダの出力はごくたまにしか変化しません（タイヤが少なくとも目盛り1つ分回転しないとカウントされない）．そのため，単純に前の値との差分を取ると，エンコーダ出力が変化したときだけインパルスが出る奇妙な速度信号になります．これを滑らかにするためにローパスフィルタをかけます．角度の微分と違い，かなり強いフィルタをかける必要があるため，2次のローパスフィルタを使いカットオフ周波数を低く設定してください（MATLABの <code>butter</code> 関数で設計します）．ただし，カットオフを低く設定すると制御できる運動周波数も低くなります．機体位置の振動周波数が制御可能な周波数範囲内に収まるように位置ゲインを低く設定する必要があります（その結果，位置制御のばね定数が小さくなり，機体が完全には止まらずにふらふらすることは避けられません）．</p>
+<p>この場合，微分ゲイン（速度ゲイン <span class="arithmatex">\(K_v\)</span>）の大きさは比例ゲインと同程度かその数分の一になります．<sup id="fnref:26"><a class="footnote-ref" href="#fn:26">7</a></sup></p>
+<p>今回は位置センサ（エンコーダ）の分解能が低いため，速度にエンコーダの差分値を使っている限り振動を完全に抑えることは難しいです．振動が発散しない程度に調整できれば十分です（一定振幅で揺れる状態）．</p>
+<p>さらに性能を上げたい場合は，エンコーダの差分を使わず別の方法で機体速度を推定してみてください．具体的にはモータへの印加電圧を使います．モータのインダクタンスを無視した簡単なモデルは次の通りです．
+$$
+\tau = \kappa \frac{v- \kappa\omega_m}{R}
+\label{eq:motor_simple_equiv}
+$$
+定常状態，すなわち速度が一定の状態では，摩擦を無視するとモータトルクはゼロになります．式<span class="arithmatex">\(\eqref{eq:motor_simple_equiv}\)</span>を見ると，モータトルクがゼロのとき印加電圧と逆起電力（速度に比例）が一致します．したがって，印加電圧からモータ回転速度（＝機体速度）を推定できるはずです． ただしこれは定常状態の話なので，速度が変動しているときには成り立ちません．しかし，そのあたりをうまく考えて使えば，エンコーダだけに頼るよりも良い制御ができるはずです． なお，このようにして速度を推定する場合，位置制御系ではなく速度制御系を構築した方が良いです（つまり，機体位置に対する PD 制御ではなく，逆起電力の平均値に対する P 制御を行います）．その場合は次節の説明を読み飛ばしてください．</p>
+<h3 id="_18">走らせよう<a class="headerlink" href="#_18" title="Permanent link">&para;</a></h3>
+<p>ほぼ一定の位置で倒立できるようになったら，走らせます．走らせる際は，制御の目標位置を少しずつ変化させます． 具体的には，モータ電圧の指令値は次の通りです．
+$$
+v_m = K_p \theta + K_d \dot{\theta} + K_x (x - x_{ref}) + K_v \dot{x}
+\label{eq:vm_run}
+$$
+式中の <span class="arithmatex">\(x_{ref}\)</span> は制御の目標位置です．位置に対して PD 制御がかかっているため，機体は目標位置とばねとダンパでつながれているのと等価な状態にあります．したがって，プログラム中でこの目標位置 <span class="arithmatex">\(x_{ref}\)</span> を少しずつ変化させると，倒立振子は目標位置に引っ張られるように移動するはずです（犬を散歩させる感覚です．ただしばねで引っ張るイメージなので，ばねによる振動が生じます．大きく動いて少し止まる，という動きになりがちです）．たとえば制御ループのたびに目標位置を <span class="arithmatex">\(0.001\)</span> ずつ増やすと，制御周波数が 2000 Hz の場合，1 秒あたりエンコーダ 2 パルス分進むはずです．</p>
+<p>なお，倒立制御を開始した直後は機体の姿勢制御がまだ十分安定していないため，倒立制御開始から約 1 秒待ってから目標値の変更を開始するようにプログラムしておくとよいでしょう．</p>
+<h3 id="_19">後は工夫次第<a class="headerlink" href="#_19" title="Permanent link">&para;</a></h3>
+<p>あとは自分でさまざまに調整しながら高性能な倒立振子を目指してください．エンコーダの改善，制御ゲインの調整（フィルタ調整も含む），またエンコーダによってモータ回転速度がわかるので，これまで無視してきたモータ逆起電力についても考えてみるとよいでしょう．</p>
+<p>調整のポイントをいくつか挙げます．</p>
+<ul>
+<li>
+<p>制御ゲインの組み合わせ，フィルタ設定，目標速度が重要です．さまざまな組み合わせを試すうちに，安定して走る設定が見つかるでしょう．部品や組み立ての個体差があるため，最適な設定は機体ごとに異なります．</p>
+</li>
+<li>
+<p>実はこのモータ（これに限らず，同タイプのモデルモータの多く）は回転方向が決まっており，正転と逆転でわずかに特性（トルク）が異なります．トルクが弱い方向に回転するとき，少し（多くても 10% 程度？）余分に電圧を加えると特性の差を小さくできるかもしれません．</p>
+</li>
+<li>
+<p>モータ自体やモータとタイヤの動力伝達部に摩擦があるため，0 V 近傍の小さな電圧ではモータが摩擦に負けて回転しません．摩擦を補償するために指令電圧にわずかなオフセットを加えるとよいかもしれません．ただし，オフセットが大きすぎると機体の応答が振動的になるので注意してください． の先頭で <code>#define</code> されている <code>VOFFSET</code> に値を設定するとオフセットが加わります（値は最大でも 0.01 程度が安全です）．</p>
+</li>
+<li>
+<p>傾斜角は床面からの反射光量で測定しているため，床面の赤外線反射率によって傾斜センサのゲインが変わります．異なる床面で走行する場合は，必要に応じて制御ゲインを微調整してください．</p>
+</li>
+</ul>
+<h2 id="sec:w2-task-c">Task C：エンコーダフィードバックを含む MATLAB シミュレーション（学生C）<a class="headerlink" href="#sec:w2-task-c" title="Permanent link">&para;</a></h2>
+<h3 id="_20">シミュレーションの役割<a class="headerlink" href="#_20" title="Permanent link">&para;</a></h3>
+<p>計算機シミュレーションは，制御アルゴリズムを設計し検証するための強力な道具です．シミュレーション環境なら，たとえ設定を誤ってもハードウェアは壊れず，不安定なコントローラでも物理的な危険はありません．不適切な制御で転倒したり激しく走ったりする倒立振子にとって，シミュレーションはモータ，電子回路，機械構造を守る安全な試験場になります．</p>
+<p>MATLAB と Simulink を使うと，コントローラ設計を高速に反復できます．毎回マイコンへ書き込み直したり，実機を組み直したりせずに，パラメータを変えて応答を観察し，複数の戦略を比較できます．また，シミュレーションは系の理論的な振る舞いを見通しやすくし，制御パラメータが安定性や性能へどう影響するかの直感も与えてくれます．シミュレーションで妥当性を確認したパラメータは，より高い確信を持って実機へ移せます．</p>
+<p>さらに，シミュレーションは現代の制御技術者にとって重要な基礎技能です．MATLAB/Simulink のような実務的ツールを用いて，制御対象をモデル化し，解析し，設計する力は，産業界でも研究でも広く使われています．</p>
+<h3 id="sec:matlab-setup">MATLAB 環境の準備<a class="headerlink" href="#sec:matlab-setup" title="Permanent link">&para;</a></h3>
+<h3 id="matlab">東京大学での MATLAB 利用<a class="headerlink" href="#matlab" title="Permanent link">&para;</a></h3>
+<p>東京大学では包括ライセンス契約により，構成員が MATLAB ライセンスを利用できます．MATLAB Online を使っても，自分の PC へインストールしても構いません．利用開始手順は次の通りです．</p>
+<ul>
+<li>
+<p>UTokyo の MATLAB 案内ページ <a href="https://utelecon.adm.u-tokyo.ac.jp/matlab/">https://utelecon.adm.u-tokyo.ac.jp/matlab/</a> を開く</p>
+</li>
+<li>
+<p>「MATLAB の利用を開始する」の案内に従う</p>
+</li>
+<li>
+<p>UTokyo メールアドレスで MathWorks Account を作成する</p>
+</li>
+<li>
+<p>UTokyo ポータル経由でサインインし，MathWorks アカウントを大学ライセンスへ紐付ける</p>
+</li>
+</ul>
+<p>ライセンス有効化で問題が起きた場合は，utelecon の案内ページまたは MathWorks サポート（<code>service@mathworks.co.jp</code>）を参照してください．</p>
+<h3 id="_21">必要なツールボックス<a class="headerlink" href="#_21" title="Permanent link">&para;</a></h3>
+<p>本演習では，少なくとも以下の MATLAB 製品が必要です．</p>
+<ul>
+<li>
+<p><strong>MATLAB</strong>（基本環境）</p>
+</li>
+<li>
+<p><strong>Simulink</strong> - ブロック線図の構築とシミュレーション</p>
+</li>
+<li>
+<p><strong>Simscape</strong> - 物理系モデリング</p>
+</li>
+<li>
+<p><strong>Simscape Multibody</strong> - 多体系の機械ダイナミクス（倒立振子，ジョイントなど）</p>
+</li>
+<li>
+<p><strong>Simulink Control Design</strong> - Simulink/Simscape モデルを線形化して PID Tuner や Model Linearizer を使う場合に必要</p>
+</li>
+<li>
+<p><strong>Control System Toolbox</strong> - LTI モデルを用いた解析・設計（LQR，周波数応答など）や，LTI プラントに対する PID Tuner で有用</p>
+</li>
+</ul>
+<p>インストール時にこれらを選択してください．すでに MATLAB を入れていて不足がある場合も，Add-On Explorer（Home タブ <span class="arithmatex">\(\rightarrow\)</span> Add-Ons <span class="arithmatex">\(\rightarrow\)</span> Get Add-Ons）から追加できます．配布モデルは，Control System Toolbox だけや手書きの状態空間ブロックではなく，Simscape / Simscape Multibody によって倒立振子の物理ダイナミクス（3D 部品を含む）を表現しています．</p>
+<h3 id="simulink">Simulink モデルの構築<a class="headerlink" href="#simulink" title="Permanent link">&para;</a></h3>
+<p>本演習では，参考用の Simulink/Simscape モデルをマイルストーン例として配布しています．この例の狙いは過度に野心的なものではなく，Simscape Multibody で物理的に意味のあるプラントモデルを作る方法と，<em>傾斜角</em> に対するフィードバックループを閉じて PID で倒立振子を安定化する流れを示すことにあります．配布モデルでは，角度安定化までは調整済みですが，位置・速度の制御は学生向け拡張課題として残してあります．</p>
+<p>Figure (<a href="#fig:simulink_overview">Fig.</a>) に，このモデル全体の Simscape Multibody 構成を示します．最上位でも実機構成を反映するよう整理されており，カート側は車輪関連部品，"body" 側は振り子本体と付属部品をまとめた剛体アセンブリになっています．これにより，どのパラメータがカート側（車輪半径，車輪慣性，カート質量）に属し，どれが振り子本体側（質量分布，長さ，重心）に属するのかを見分けやすくなっています．</p>
+<figure id="fig:simulink_overview">
+<div class="center">
+<img src="../../fig2026/Sim1.png" alt="Overall Simscape Multibody plant diagram (milestone example)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Overall Simscape Multibody plant diagram (milestone example).</figcaption>
+</figure>
+
+<h3 id="_22">プラントモデルの考え方<a class="headerlink" href="#_22" title="Permanent link">&para;</a></h3>
+<p>プラントは，3D 剛体，ジョイント，固定フレーム変換を組み合わせて Simscape Multibody 上に構築します．線形化済みの状態空間行列を直接打ち込む代わりに，形状，質量，慣性といった物理パラメータを与えると，Simscape Multibody が多体系の運動方程式を自動的に導きます．この方法は実機構造との対応が取りやすく，電池やブレッドボード，ブラケットなどの質量分布を変えたときにダイナミクスがどう変わるかを直感的に確認できるので，本演習に適しています．</p>
+<p>配布モデルでは，カート側と body 側を主に <strong>Brick Solid</strong>（直方体）と <strong>Cylindrical Solid</strong>（円柱）で構成しています．車輪，軸，スペーサは円柱で自然に表せますし，本体板，ブラケット，電子モジュールは直方体で十分近似できます．目標は写真のような形を再現することではなく，支配的な質量と慣性を捉え，シミュレーション上の設計判断が実機でも意味を持つようにすることです．</p>
+<p>Figure (<a href="#fig:simscape_body_build">Fig.</a>) は <em>body</em> サブアセンブリ，Figure (<a href="#fig:simscape_wheel_build">Fig.</a>) はカート／車輪側サブアセンブリを示しています．</p>
+<figure id="fig:simscape_subassemblies">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Body model in Simscape Multibody</th>
+<th>Wheel model in Simscape Multibody</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img id="fig:simscape_body_build" src="../../fig2026/Sim2.png" alt="Body model in Simscape Multibody" /></td>
+<td><img id="fig:simscape_wheel_build" src="../../fig2026/Sim3.png" alt="Wheel model in Simscape Multibody" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Body and wheel subassemblies used in the multibody plant model.</figcaption>
+</figure>
+
+<p>これらの剛体を一体のアセンブリとしてつなぐために，モデルでは <strong>Rigid Transform</strong> ブロックを用います．Rigid Transform は 2 つの座標系の間の固定平行移動と固定回転を定義するブロックであり，カート座標系に対する車輪配置，振り子本体とその基準座標系のオフセット，ブレッドボードや電池など補助質量の配置に広く使われます．実際に重要なのは，車輪や body の <em>質量</em> と <em>サイズ</em>，そしてブレッドボード回路や電池モジュールに割り当てた質量・寸法です．これらが慣性を決め，ひいては安定化コントローラをどれだけ "攻めた" 設定にできるかへ強く影響します．</p>
+<p>多体系モデルの利点の一つは，シミュレーション中に 3D 動作を可視化でき，ジョイント角度や位置などの信号をそのままコントローラへ結びつけられることです．もし純粋に解析的なプラントを使いたいなら，先に導いた線形化 <span class="arithmatex">\(A,B,C,D\)</span> 行列を Simulink の State-Space ブロックへ入力して表現しても構いません．どちらも有効ですが，ここでは配布された多体系モデリングの流れを理解することを主眼とします．</p>
+<h3 id="_23">コントローラ内部の構成<a class="headerlink" href="#_23" title="Permanent link">&para;</a></h3>
+<p>物理モデルの中では，剛体同士の相対運動を定義するジョイントが重要な役割を果たします．配布例では，body はカートに対してヒンジ状の回転ジョイントで接続され，カートは床面方向へ並進できるようになっています．Simscape Multibody では，この回転ジョイントが <strong>Revolute Joint</strong>，並進ジョイントが <strong>Prismatic Joint</strong> に対応します．これらは単なる拘束条件ではなく，シミュレーション中に制御へ戻すフィードバック信号の主要な取り出し口でもあります．</p>
+<p>実機では，傾斜角は床面反射光を見ている 2 個のフォトリフレクタ（フォトインタラプタ型センサ）から推定しています．また，車輪と床面の相互作用も「床面摩擦そのものを直接測る」わけではなく，モータ駆動と床反力の結果として現れます．マイルストーンモデルでは，まず制御の本質へ集中するため，これらを抽象化しています．すなわち，傾斜角は Revolute Joint の角度から直接取り出し，カートと床面の相互作用は Prismatic Joint の座標で表します．このようにすることで，機械的拘束を保ったまま素直にフィードバックループを閉じられます．</p>
+<p>Figure (<a href="#fig:simscape_joints_actuation">Fig.</a>) は，配布モデルで角度ジョイントと並進ジョイントがどのように設定されているかを示しています．Revolute Joint からは body 角度（必要なら角速度も）を取り出せます．Prismatic Joint からはカート位置と速度が得られます．さらに，マイルストーン例では Prismatic Joint を駆動点としても使っており，その運動／力を駆動することで body を安定化するカート運動を実現しています．位置制御を入れるなら当然ここからカート位置を読みますし，速度制御を入れるなら速度を直接使うか，後述する課題のようにエンコーダ相当の量子化を通して推定しても構いません．</p>
+<figure id="fig:simscape_joints_actuation">
+<div class="center">
+<img src="../../fig2026/Sim5.png" alt="Joint configuration in the provided multibody model." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Joint configuration in the provided multibody model.</figcaption>
+</figure>
+
+<p>これらの信号が取り出せるようになると，コントローラブロックで安定化ループを閉じられます．マイルストーン例では，主フィードバック信号として振り子の傾斜角だけを使っており，いわば <em>角度のみの安定化器</em> です．位置ループや速度ループは，学生が体系的に拡張できるよう，あえて初期状態では入れていません．</p>
+<p>Figure (<a href="#fig:simulink_highlevel">Fig.</a>) に，高レベルの PID コントローラサブシステムを示します．</p>
+<figure id="fig:simulink_highlevel">
+<div class="center">
+<img src="../../fig2026/Sim4.png" alt="PID controller subsystem used in the milestone example." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>PID controller subsystem used in the milestone example.</figcaption>
+</figure>
+
+<h3 id="_24">シミュレーションの実行<a class="headerlink" href="#_24" title="Permanent link">&para;</a></h3>
+<p>course materials フォルダ内の <code>.slx</code> モデルを開き，MATLAB 上で実行してください．実行前には，現実的なディジタル制御ループに合わせて設定を整えます．<strong>Simulation</strong> <span class="arithmatex">\(\rightarrow\)</span> <strong>Model Configuration Parameters</strong>（Ctrl+E）で <strong>fixed-step</strong> ソルバを選び，実機の制御周波数に対応した時間刻みを設定してください（例えば 1 kHz なら 1 ms など）．サンプリング時間を合わせることは，安定余裕に影響し，後で実機へパラメータを移したときの予測精度にも関わります．</p>
+<p>安定化を観察するには，Revolute Joint に小さな初期傾斜角（例えば <span class="arithmatex">\(\theta(0)=0.1\)</span> rad <span class="arithmatex">\(\approx 5.7^\circ\)</span>）を与えて，コントローラが打ち消すべき外乱を作っておきます．そのうえでシミュレーションを走らせ，角度スコープを開いて，角度が直立平衡点へ戻るかを確認してください．外乱入力が用意されているなら，短いインパルスやステップ外乱を与えて，どれくらいの速さで回復するかを見ても構いません．</p>
+<h3 id="pd">PD コントローラ設計とパラメータ調整<a class="headerlink" href="#pd" title="Permanent link">&para;</a></h3>
+<p>マイルストーンコントローラは倒立維持に焦点を当てているため，フィードバックとして振り子角度のみを用います．最も単純な形では，角度 <span class="arithmatex">\(\theta\)</span> と角速度 <span class="arithmatex">\(\dot{\theta}\)</span> に基づく次の PD 則になります．</p>
+<div class="arithmatex">\[
+u = K_p \theta + K_d \dot{\theta}
+\label{eq:pd}
+\]</div>
+<p>ここで <span class="arithmatex">\(u\)</span> は，モデル内でカートを動かすための駆動信号です．比例項は直立姿勢へ戻ろうとする復元力を与え，微分項は振動を抑える減衰を与えます．実際には角速度フィードバックはノイズに敏感なので，フィルタを通して使うことが多く，Simulink の PID ブロックにはそのための微分フィルタ係数が用意されています．</p>
+<h3 id="pid">PID パラメータの確認と調整<a class="headerlink" href="#pid" title="Permanent link">&para;</a></h3>
+<p>ゲインを変更するには，コントローラサブシステム（Figure (<a href="#fig:simulink_highlevel">Fig.</a>)）を開き，角度制御に対応する PID ブロックをダブルクリックします．ブロック設定画面から <span class="arithmatex">\(K_p\)</span>，<span class="arithmatex">\(K_d\)</span>，微分フィルタ係数 <span class="arithmatex">\(N\)</span> を変更できます．配布モデルには一応動く初期パラメータが入っていますが，この課題で重要なのは，質量や慣性といった物理パラメータが，制御をどれだけ強くできるかにどう効くかを理解することです．したがって，自分で意図的にゲインを変え，時間応答がどう変わるかを見てください．</p>
+<p>より系統的に調整したい場合は <strong>PID Tuner</strong> を使って構いません．PID ブロックの設定画面から PID Tuner を開き，<strong>Tune</strong> を押すと，動作点でプラントを線形化して設計方針に応じたゲイン候補を提示してくれます．この演習では，目標応答速度を実機のサンプリング時間から想定される制御帯域に合わせるのがよいでしょう．調整後は，得られたゲインを PID ブロックへ戻してシミュレーションに反映してください．</p>
+<h3 id="_25">シミュレーション結果の解析<a class="headerlink" href="#_25" title="Permanent link">&para;</a></h3>
+<p>シミュレーション実行後は，角度スコープを見て本当に安定化できているかを評価します．良い結果では，角度が適度なオーバーシュートの範囲内で 0（直立）へ戻り，平衡点へ近づくにつれて制御入力も小さくなります．もし制御入力スコープがあるなら，駆動信号が長時間飽和していないかも確認してください．飽和が続く場合は，ゲインが攻めすぎているか，あるいは質量・慣性パラメータを見直す必要がある可能性があります．</p>
+<p>Figure (<a href="#fig:simulation_result">Fig.</a>) にシミュレーション結果例を示します．</p>
+<figure id="fig:simulation_result">
+<div class="center">
+<img src="../../fig2026/Sim6.png" alt="Screenshot of the simulation result (Sim6)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Screenshot of a simulation result (Sim6).</figcaption>
+</figure>
+
+<h3 id="_26">何を見るべきか<a class="headerlink" href="#_26" title="Permanent link">&para;</a></h3>
+<p>健全な結果では，角度応答は振動しながらも減衰しつつ 0 へ戻り，時間とともに離れていくようなドリフトは生じません．発散するなら安定化ゲインが弱すぎるか符号が誤っています．ほぼ一定振幅で振動し続けるなら減衰が不足しており，微分ゲインやフィルタを見直す必要があります．極端に遅い応答ならゲインが保守的すぎます．制御入力が長時間飽和する場合は，より穏やかな設定にするか，電池やブレッドボードへ過大な質量を与えていないかなど，プラントパラメータを見直してください．</p>
+<h3 id="_27">発展課題<a class="headerlink" href="#_27" title="Permanent link">&para;</a></h3>
+<p>マイルストーンモデルで角度安定化ができたら，拡張の方向は多数あります．自然な次の一歩は，Prismatic Joint から得られる信号を使ってカート位置・速度の外側ループを追加することです．また，手動での PID 調整と，全状態フィードバックや LQR のようなより系統的な方法とを，同じ試験条件で比較して性能差を明確にするのも有益です．</p>
+<h3 id="_28">シミュレーションから実機へ<a class="headerlink" href="#_28" title="Permanent link">&para;</a></h3>
+<p>シミュレーション上の振る舞いに納得できたら，そのコントローラ概念を実機へ移せます．ただし，シミュレーションが <em>何を省略しているか</em> は常に意識してください．実機では，角度センサは 2 個のフォトリフレクタから構成されるため，ノイズ，床面反射率依存性，非線形性を含みます．同様に，実機のカート運動は理想的に駆動される Prismatic Joint ではなく，モータトルクと車輪・床面相互作用の結果として生じます．だからこそ，サンプリング時間を一致させ，制御入力を現実的な範囲へ抑えることが，シミュレーション結果を実機へ役立てるうえで重要になります．</p>
+<h3 id="_29">離散化<a class="headerlink" href="#_29" title="Permanent link">&para;</a></h3>
+<p>マイコン実装は離散時間系（サンプリング系）です．Simulink で連続時間 PID ブロックを使っていても，実機では有効サンプル時間 <span class="arithmatex">\(T_s\)</span> を持つ離散制御として動作します．倒立振子では 1--10 ms 程度が一般的です．<span class="arithmatex">\(T_s\)</span> を小さくすると一般に位相余裕や安定性は改善しますが，計算負荷は増え，量子化されたエンコーダ信号を差分して速度を求める場合はノイズも増えやすくなります．</p>
+<p>配布 mbed コード（Section <a href="#sec:inverted-experiment">[sec:inverted-experiment]</a> 参照）では，通常タイマ割り込みは 1 ms（0.001 秒）に設定してあり，これは 1000 Hz サンプリングに相当します．予測精度を上げるため，Simulink 側も同じ刻みの fixed-step 設定にしてください．</p>
+<h3 id="_30">パラメータの移し替え<a class="headerlink" href="#_30" title="Permanent link">&para;</a></h3>
+<p>Simulink 上で得た最終的な <span class="arithmatex">\(K_p\)</span> と <span class="arithmatex">\(K_d\)</span> を記録し，mbed プログラムへ直接移します．例えばシミュレーションで <span class="arithmatex">\(K_p = 50\)</span>，<span class="arithmatex">\(K_d = 5\)</span> を使ったなら，mbed コードでは</p>
+<div class="highlight"><pre><span></span><code>float Kp = 50.0;
+float Kd = 5.0;
+</code></pre></div>
+<p>のように書きます．単位の整合には注意してください．シミュレーションでは角度が rad で表現されていても，実機ではエンコーダカウントなどから rad へ換算する必要がある場合があります．</p>
+<h3 id="_31">シミュレーションと実機の差<a class="headerlink" href="#_31" title="Permanent link">&para;</a></h3>
+<p>完全なシミュレーションは存在しないので，実機との差は必ず生じます．質量・慣性パラメータ，モデル化していない摩擦やバックラッシュ，アクチュエータの飽和やデッドゾーンなど，効いてくる要因は多くあります．センサ側でも，実信号はノイズと量子化を含みます．フォトリフレクタによる角度推定は床面反射率でずれますし，エンコーダ差分で求める速度は簡単にノイジーになります．さらに計算遅れや離散化も安定余裕を削ります．したがって，シミュレーションはまず安全にアイデアを検証し，妥当な初期ゲインを得る場と考え，最終調整は実機で保守的に進めるのがよいでしょう．</p>
+<h3 id="_32">課題：エンコーダ相当の信号を用いた位置・速度ループの追加<a class="headerlink" href="#_32" title="Permanent link">&para;</a></h3>
+<p>マイルストーンモデルは傾斜角の安定化までしか行っていません．この課題では，カート運動に対する外側ループを追加し，さらにエンコーダ相当のフィードバックをモデル化することで，より現実に近い制御系へ拡張してください．典型的には，位置ループが速度指令を作り，速度ループがプラントを駆動する指令を作り，その内側で角度安定化器が働く構成になります．ただし構成は一つに限定しません．自分で選んだループ構造を明確に書き，シミュレーション結果に基づいて妥当性を説明してください．</p>
+<p>エンコーダらしさを出すには，理想的な連続位置・速度信号をそのまま使わず，まず位置を離散カウントへ量子化し，そこから差分（必要ならフィルタ付き）で速度を再構成します．こうすると，実機で直面するジッタや遅れを自然に導入できます．このエンコーダ相当の信号経路で位置・速度ループを閉じ，倒立挙動の頑健性がどれだけ保たれるかを確かめてください．</p>
+<p>最後に，意味のある指令と外乱の下で拡張コントローラを評価してください．最低限，ステップ，ランプ状の移動，2 つの位置を往復する指令（正弦波や区分一定信号など）を含む位置目標を試してください．さらに，カートや body に短いインパルス／力外乱を与え，どれくらいの速さでバランスを回復するかを記録します．レポートには，角度，カート位置，制御入力の時間応答とともに，調整方針や観察された限界（飽和，振動，量子化ノイズへの感度など）を簡潔にまとめてください．</p>
+<h2 id="_33">補足：トラブルシューティングと高速化<a class="headerlink" href="#_33" title="Permanent link">&para;</a></h2>
+<h3 id="1">補足1：あれっ？ モータが弱くなったな？ と思ったら<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<p>ブレッドボードは比較的接触抵抗が大きく，特に大電流が流れるモータドライバ周辺では，その接触抵抗に起因するトラブルが起こりがちです．モータの力が弱くなったと感じたら，モータドライバや周辺のジャンパ線を数回抜き差ししてみてください．</p>
+<p>今回のドライバは最大 1A 程度をモータへ流します（そのときの電圧は 1V 程度）．一方，ジャンパ線はブレッドボード内部の 2 枚の金属板に挟まれているだけなので，接触部分にはある程度の抵抗があります．例えば接触抵抗が 0.5<span class="arithmatex">\(\Omega\)</span> あると，1A 流したときに 0.5V もの電圧降下になり，モータ駆動電圧に対して無視できません．</p>
+<p>実際の接触抵抗はそこまで大きくないことが多いものの，端子表面の酸化によって時間とともに増えていくケースがあります．特に大電流が流れる接触部は発熱しやすく，その熱が酸化を進めてさらに接触抵抗が増えるという悪循環が起きます．ブレッドボード上では，モータとドライバにとってあまり都合のよくない状況が存在しているわけです． したがって，「プログラムは変えていないのに性能が落ちた」と感じたら，接触抵抗の増大を疑ってください．ドライバチップやジャンパ線を数回抜き差しすると，表面の酸化膜が削れて接触が回復することがあります．</p>
+<p>特に重点的に確認すべきなのは，ドライバ周辺で大電流が流れる経路です．モータ電流の経路を追うと，「電池の＋極」<span class="arithmatex">\(\rightarrow\)</span>「（ドライバの）VCC 端子」<span class="arithmatex">\(\rightarrow\)</span>「OUT1（または 2）」<span class="arithmatex">\(\rightarrow\)</span>「モータ」<span class="arithmatex">\(\rightarrow\)</span>「OUT2（または 1）」<span class="arithmatex">\(\rightarrow\)</span>「ISEN 端子」<span class="arithmatex">\(\rightarrow\)</span>「GND」<span class="arithmatex">\(\rightarrow\)</span>「電池の－極」となります．この経路を重点的に見直してください．</p>
+<h3 id="2">補足2：高速化のために<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<p>データシート（配布した簡易版ではなく，TI が発行している正式なデータシート<sup id="fnref:27"><a class="footnote-ref" href="#fn:27">8</a></sup>）によると，今回使用するモータドライバには電流が 1.3A を超えるとトリップする（回路を遮断し電流を 0A にする）保護回路が内蔵されています．実際にモータを接続して測定したところ，モータ電流が脈動しているためか，平均電流約 1.1A でトリップすることが確認されました．トリップするとモータが停止してしまうため，制御プログラムではドライバがトリップしないようにモータ電圧の上限を設定しています（ の <code>VLIMIT</code> 定義を参照）．この上限値について考えてみましょう．</p>
+<p>モータのインダクタンスを無視すると，モータドライバがモータへ印加する電圧 <span class="arithmatex">\(V\)</span> と実際に流れる電流 <span class="arithmatex">\(I\)</span> の関係は次のように表されます．
+$$
+V = (R_m + R_c) I + \kappa\omega_m
+\label{eq:motor_voltage_current}
+$$
+ここで <span class="arithmatex">\(R_m\)</span> はモータの巻線抵抗，<span class="arithmatex">\(R_c\)</span> はモータ駆動回路の抵抗，<span class="arithmatex">\(\kappa\)</span> は逆起電力定数（<span class="arithmatex">\(\approx\)</span> トルク定数），<span class="arithmatex">\(\omega_m\)</span> はモータ回転速度（rad/s）です．このモータでは，巻線抵抗 <span class="arithmatex">\(R_m\)</span>（モータ内部のブラシの当たり方＝モータ軸の角度によって変動）は平均約 0.7 <span class="arithmatex">\(\Omega\)</span>，逆起電力定数 <span class="arithmatex">\(\kappa\)</span> は約 2.7 mV s/rad と推定されます．回路抵抗 <span class="arithmatex">\(R_c\)</span> は約 0.5 <span class="arithmatex">\(\Omega\)</span>（ドライバの ON 抵抗 0.45 <span class="arithmatex">\(\Omega\)</span> + ブレッドボードの抵抗 0.05 <span class="arithmatex">\(\Omega\)</span> と仮定）です．逆起電力がなくなるモータ回転速度がゼロのとき最も電流が流れますが，このときモータ電流 <span class="arithmatex">\(I\)</span> を 1.1 A 以下に保つには，ドライバ出力電圧 <span class="arithmatex">\(V\)</span> を 1.32 V 以下に制限する必要があることがわかります．</p>
+<p>モータドライバは VSET ピンへ印加された電圧の 4 倍をモータへ出力するように設計されています．したがって VSET への印加電圧の上限は <span class="arithmatex">\(1.32/4=0.33\)</span> V です．VSET ピンは mbed の p18（AnalogOut）に接続されていますが，p18 の電圧を 0.33 V 以下に抑えるには，プログラムで p18 へ書き込む値の上限を <span class="arithmatex">\(0.33/3.3=0.1\)</span> にします（1.0 は DA コンバータの最大値 = 3.3 V に対応）．このため，制御プログラムはデフォルトで <code>VLIMIT = 0.1</code> に設定しています． （なお，ドライバやモータには個体差があるため，すぐにトリップしてしまう人はこの上限値を少し下げてみてください．）</p>
+<p>さてこれはモータが静止しているときの話ですが，モータが回転し始めると逆起電力によって電圧が下がるため，この上限では十分な電流が流れなくなります．たとえばモータが毎秒 20 回転（このとき タイヤは毎秒約 2 回転）すると，約 0.34 V の逆起電力が発生します．すると p18 に上限 0.1 を書き込んでドライバが 1.32 V を出力しても，モータには約 0.8 A しか流れません．モータトルクは流れる電流に比例するため，このままでは十分なトルクを発生できません．</p>
+<p>したがって，倒立振子の走行速度を上げたい場合は，上記の逆起電力を考慮して速度に応じた出力上限値を増やす必要があります．うまく増やせば高速でも安定した倒立を維持できます（上限を適切に設定しないとドライバがトリップして倒立振子が転倒しやすくなるので注意してください）．</p>
+<h3 id="3">補足3：ジャンパ線の不良<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>本実習では，ブレッドボード用ジャンパ線（ブレッドボードに差し込みやすいよう両端にピンが取り付けられた線）を使用します．このジャンパ線のピン部分が断線することはまれです．ジャンパ線の断線による動作不良は非常に見つけにくいですが，「回路は正しく組んでいるはずなのに全く動かない！」というときはジャンパ線の不良を疑ってください．実際にジャンパ線の不良を見つけるには，怪しい箇所のジャンパ線を抜いてテスタで導通を確認してください．</p>
+<p>このような不良は，ジャンパ線の扱いが雑な場合に起こりやすいです．ジャンパ線の（先端部分を）無理に曲げたり引っ張ったりしないよう注意してください．自分が被害を受けなくても，次のグループの人が被害を受けるかもしれません．</p>
+<h2 id="week-2">Week 2 提出物<a class="headerlink" href="#week-2" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Submission</p>
+<p>エンコーダによる位置／速度計測ができ，位置制御によって安定性が改善していることを示してください．<strong>グループで 1 本のレポート</strong> を提出します．</p>
+<hr />
+<p><strong>提出物</strong>                      <strong>満点</strong>  <strong>評価基準</strong></p>
+<hr />
+<p>位置制御デモ動画                   8      <strong>8 pts:</strong> 倒立を 10 秒以上維持し，目標位置から <span class="arithmatex">\(\pm\)</span>0.5 m 以内に収まっている．\
+                                            <strong>5 pts:</strong> 倒立は維持できたが，位置ずれが大きい．\
+                                            <strong>0 pts:</strong> 5 秒以内に倒立を失う．</p>
+<p>エンコーダ A/B 波形                7      <strong>7 pts:</strong> A/B 波形に明確なラベルがあり，回転方向反転（CW と CCW の位相差）も確認できている．\
+                                            <strong>5 pts:</strong> 波形は示されているが，回転方向確認が不十分．\
+                                            <strong>2 pts:</strong> パルス数のみで，位相解析が無い．\
+                                            <strong>0 pts:</strong> 未提出．</p>
+<p>シミュレーションと実機の比較       5      <strong>5 pts:</strong> シミュレーションと実機の両方について <span class="arithmatex">\(x(t)\)</span> と <span class="arithmatex">\(\dot{x}(t)\)</span> を示し，差の理由も説明している．\
+                                            <strong>3 pts:</strong> グラフはあるが，差異の説明が無い．\
+                                            <strong>1 pt:</strong> 定性的記述のみ（グラフなし）．</p>
+<hr />
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:20">
+<p>今回は反射型フォトインタラプタを使うので白黒パターンですが，一般的には透過型フォトインタラプタとスリットディスクを用いることも多いです&#160;<a class="footnote-backref" href="#fnref:20" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:21">
+<p>course materials repository: <a href="https://github.com/UTokyo2026/UTokyo-Control-Practice-2026">https://github.com/UTokyo2026/UTokyo-Control-Practice-2026</a>&#160;<a class="footnote-backref" href="#fnref:21" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:22">
+<p>Appendix <a href="../appendix/#app:processing">app:processing</a>: Processing オシロスコープマニュアル．&#160;<a class="footnote-backref" href="#fnref:22" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:23">
+<p>デバッグと調整の動画例は course materials repository 内の にあります．&#160;<a class="footnote-backref" href="#fnref:23" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:24">
+<p>Matlab を使う場合，freqz(b,a) または bode(tf(b,a,サンプリング時間)) でフィルタの周波数特性を確認できます．&#160;<a class="footnote-backref" href="#fnref:24" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:25">
+<p>1 次 LPF では高周波帯域で位相が 90 度遅れます．傾斜角が正弦波状に変化する場合を考えると，その微分（＝角速度）は傾斜角より 90 度位相が進んでいる必要がありますが，高周波ではフィルタで 90 度遅れるため，微分結果をフィルタに通すと元の傾斜角と同じ位相になります．これはもはや微分ではありません．したがって，高周波域では微分制御のつもりでも実際には比例制御と同じことになり，高周波帯域で実質的な比例ゲインが大きくなって振動しやすく不安定になります．\&#160;<a class="footnote-backref" href="#fnref:25" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:26">
+<p>P ゲインと D ゲインの比率は，2次遅れの標準形と比較すると理解しやすいです．ばね定数と減衰係数をそれぞれ <span class="arithmatex">\(K_p\)</span>，<span class="arithmatex">\(K_d\)</span> とすると，外力から位置への伝達関数は
+$$
+\frac{X(s)}{F(s)}=\frac{1}{ms^2+K_d s+K_p}=\frac{1/m}{s^2+(K_d/m)s+K_p/m}
+$$
+一方，標準形は
+$$
+G(s)=\frac{\omega_n^2}{s^2+2\zeta \omega_n s+\omega_n^2}
+$$
+両者を比較すると，<span class="arithmatex">\(K_d/K_p = 2\zeta/\omega_n\)</span> であることがわかります．たとえば減衰比 <span class="arithmatex">\(\zeta=0.5\)</span>（少しオーバーシュートする程度）の場合，D ゲインと P ゲインの比率は固有角振動数 <span class="arithmatex">\(\omega_n\)</span> になります．最初の振り子角度制御では固有振動が数 Hz だったので角振動数は約 20 rad/s だったはずですが，位置制御では固有振動が 0.1 Hz 程度なので角振動数は約 1 rad/s です．したがって P ゲインと D ゲインは同程度のオーダーになります．&#160;<a class="footnote-backref" href="#fnref:26" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:27">
+<p><a href="https://www.tij.co.jp/product/jp/DRV8832#tech-docs">https://www.tij.co.jp/product/jp/DRV8832#tech-docs</a>&#160;<a class="footnote-backref" href="#fnref:27" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/UTokyo2026/pendulum-lab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/lang-sync.js"></script>
+      
+        <script src="../../javascripts/figure-refs.js"></script>
+      
+        <script src="../../javascripts/mathjax-config.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

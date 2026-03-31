@@ -1,0 +1,31 @@
+/* Automatic figure numbering via CSS counters (per page). */
+
+/* Reset figure counter per page. */
+.md-content {
+  counter-reset: figure;
+}
+
+/* Increment on each figure in page content. */
+.md-content figure {
+  counter-increment: figure;
+  margin: 1.2rem 0;
+}
+
+/* Keep captions visually consistent and add "Fig. N." prefix. */
+.md-content figure > figcaption {
+  font-size: 0.9rem;
+  line-height: 1.35;
+  margin-top: 0.35rem;
+  color: var(--md-default-fg-color--light);
+}
+
+.md-content figure > figcaption::before {
+  content: "Fig. " counter(figure) ". ";
+  font-weight: 600;
+  color: var(--md-default-fg-color);
+}
+
+/* Center common figure content blocks. */
+.md-content figure .center {
+  text-align: center;
+}

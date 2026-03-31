@@ -1,0 +1,1280 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UTokyo Precision Engineering – Inverted Pendulum Fabrication Exercise 2026">
+      
+      
+        <meta name="author" content="UTokyo2026">
+      
+      
+        <link rel="canonical" href="https://utokyo2026.github.io/pendulum-lab/en/overview/">
+      
+      
+        <link rel="prev" href="../grading/">
+      
+      
+        <link rel="next" href="../week1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Control Overview - Wheeled Inverted Pendulum</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Serif";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/figure-numbering.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview-purpose" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-header__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wheeled Inverted Pendulum
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Control Overview
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      <div class="md-header__tabs" aria-label="Tabs">
+        <ul class="md-tabs__list">
+          
+            
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../intro/" class="md-tabs__link">
+          
+  
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+          
+            
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../jp/intro/" class="md-tabs__link">
+          
+  
+  
+  日本語
+
+        </a>
+      </li>
+    
+  
+
+          
+        </ul>
+      </div>
+    
+
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-nav__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Wheeled Inverted Pendulum
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/UTokyo2026/pendulum-lab" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    UTokyo2026/pendulum-lab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grading Criteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1: Assembly & Bring-up
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2: Encoder & Position Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3: Advanced Modeling & Load Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4: Final Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日本語
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    日本語
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    はじめに・日程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    制御概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1：組立と立ち上げ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2：エンコーダと位置制御
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3：高度なモデル化と負荷試験
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4：最終発表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    付録
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="overview-purpose">Purpose of the Exercise<a class="headerlink" href="#overview-purpose" title="Permanent link">&para;</a></h1>
+<figure id="fig:pendulum_image">
+<div class="center">
+<img src="../../figs/pendulum_image.png" alt="Wheeled inverted pendulum platform." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Wheeled inverted pendulum platform (example).</figcaption>
+</figure>
+
+<p>In this exercise, by building a wheeled inverted pendulum (almost) from scratch, we aim to master:</p>
+<ul>
+<li>
+<p>Basic usage of embedded microcontrollers</p>
+</li>
+<li>
+<p>Principle and structure of encoders</p>
+</li>
+<li>
+<p>Basics of sensor signal processing</p>
+</li>
+<li>
+<p>Basics of feedback control</p>
+</li>
+</ul>
+<p>An inverted pendulum is literally a pendulum that is inverted. An inverted pendulum is unstable, but it can be maintained in a stable inverted state by moving the base part according to the inclination of the pendulum. The operation of moving the base according to the inclination is a typical example of \"feedback control,\" and the inverted pendulum is widely used as an exercise material for control and mechatronics due to its clarity.</p>
+<p>There are two types of inverted pendulums: one with a pendulum attached to a linear stage, and one where the pendulum itself travels. The latter corresponds to the wheeled inverted pendulum in this exercise. The principle of the wheeled inverted pendulum is used in mobility devices represented by Segway and wheeled robots.</p>
+<p>Although wheeled inverted pendulum kits are commercially available, we will not use such kits in this exercise. Instead, we aim to <em>understand the configuration and mechanism more deeply by building the inverted pendulum ourselves using only basic parts.</em> Also, since sensors are very important in feedback control, we would like you to <em>experience the difficulty and importance of sensors</em> by making your own sensors (using more primitive sensor elements).</p>
+<div class="admonition warning">
+<p class="admonition-title">Please read before the exercise</p>
+<ul>
+<li>
+<p><strong>Pre-study of this text</strong>: Before starting the exercise, read this text to understand the overview of the work and the theoretical background. Starting work without reading the text may lead to fatal mistakes that make it difficult to continue the exercise.</p>
+</li>
+<li>
+<p><strong>Course materials</strong>: All supplementary materials (debugging tools, example programs, appendix PDFs, MATLAB models) are provided in the course materials repository<sup id="fnref:course_materials_repo"><a class="footnote-ref" href="#fn:course_materials_repo">2</a></sup>. The subfolder contains three essential tools with complete documentation (README files in both Markdown and PDF formats).</p>
+</li>
+<li>
+<p><strong>PC preparation</strong>: For this practical exercise, we will use the PCs in the design exercise room, so you do not need to prepare your own PC. However, it is possible to use your own PC. In that case, Windows or Macintosh is required. Also, a USB port (Type-A) is required to connect to the control microcontroller. If you only have a Type-C port, please prepare a hub that can connect to Type-A.</p>
+</li>
+<li>
+<p><strong>On the day</strong>: Installation of the programming environment and assembly of the mechanism will be explained on the day of the exercise.</p>
+</li>
+</ul>
+</div>
+<h1 id="overview-control">Overview of Inverted Pendulum Control<a class="headerlink" href="#overview-control" title="Permanent link">&para;</a></h1>
+<h2 id="overview-model">Model of the Inverted Pendulum<a class="headerlink" href="#overview-model" title="Permanent link">&para;</a></h2>
+<p>First, let's consider the overview of the control of the wheeled inverted pendulum. Figure (<a href="#fig:model">Fig.</a>) is a simplified model of the inverted pendulum. The pendulum (= body of the inverted pendulum, mass <span class="arithmatex">\(m_p\)</span>, moment of inertia <span class="arithmatex">\(j_p\)</span>) stands from the axis of the tires (mass <span class="arithmatex">\(m_w\)</span>, moment of inertia <span class="arithmatex">\(j_w\)</span>). There is a motor between the tire and the pendulum, and when the motor is driven, opposite torques (<span class="arithmatex">\(\pm\tau\)</span>) are generated on both. Let the horizontal center position of the tire be <span class="arithmatex">\(x\)</span>. For simplicity, assume there is no friction or loss other than the friction acting on the tire from the ground. We want to control the angle of the inverted pendulum <span class="arithmatex">\(\theta\)</span> and the tire position <span class="arithmatex">\(x\)</span> (= body position).</p>
+<figure id="fig:model">
+<div class="center">
+<img src="../../figs/model.png" alt="Simplified model of the wheeled inverted pendulum." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Simplified model of the wheeled inverted pendulum.</figcaption>
+</figure>
+
+<p>Consider the equations of motion for the pendulum and the tire separately as shown in Figure (<a href="#fig:model_disassembled">Fig.</a>). First, the equation of motion for the pendulum can be written as:</p>
+<figure id="fig:model_disassembled">
+<div class="center">
+<img src="../../figs/model_disassembled.png" alt="Forces and torques on the disassembled model." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Forces and torques (disassembled view).</figcaption>
+</figure>
+
+<p><a id="eq:pH"></a>
+$$
+\text{Horizontal:}\quad
+m_p \frac{d^2}{dt^2}(x+l\sin{\theta})
+=m_p (\ddot{x}+l\ddot{\theta}\cos{\theta}-l\dot{\theta}^2\sin{\theta})
+= H \label{eq:pH}
+$$</p>
+<p><a id="eq:pV"></a>
+$$
+\text{Vertical:}\quad
+m_p \frac{d^2}{dt^2}(l\cos{\theta})
+=-m_p(l\ddot{\theta}\sin{\theta}+l\dot{\theta}^2\cos{\theta})
+= V-m_p g \label{eq:pV}
+$$</p>
+<p><a id="eq:pR"></a>
+$$
+\text{Rotational:}\quad
+j_p\ddot{\theta}=lV\sin{\theta}-lH\cos{\theta}-\tau \label{eq:pR}
+$$</p>
+<p>Here, <span class="arithmatex">\(H\)</span> and <span class="arithmatex">\(V\)</span> are the horizontal and vertical components of the force acting between the tire and the pendulum. On the other hand, the equation of motion for the tire is:</p>
+<p><a id="eq:wH"></a>
+$$
+\text{Horizontal:}\quad
+m_w \ddot{x} = F-H \label{eq:wH}
+$$</p>
+<p><a id="eq:wR"></a>
+$$
+\text{Rotational:}\quad
+j_w\ddot{\phi}=\tau -rF \label{eq:wR}
+$$</p>
+<p>(The vertical direction is omitted because it balances with the normal force from the ground). Here, <span class="arithmatex">\(F\)</span> is the friction force received from the ground (which drives the tire), and we assume there is no slip between the tire and the ground (<span class="arithmatex">\(x=r\phi\)</span>). From this series of equations, we eliminate the internal forces <span class="arithmatex">\(H, V\)</span> and the friction force <span class="arithmatex">\(F\)</span> to find equations expressed only by the pendulum angle <span class="arithmatex">\(\theta\)</span> and position <span class="arithmatex">\(x\)</span>.</p>
+<p>First, substituting <span class="arithmatex">\(H, V\)</span> obtained from equations <span class="arithmatex">\(\eqref{eq:pH}\)</span> and <span class="arithmatex">\(\eqref{eq:pV}\)</span> into equation <span class="arithmatex">\(\eqref{eq:pR}\)</span>, we get:</p>
+<p><a id="eq:rotation0"></a>
+$$
+j_p\ddot{\theta}=m_p gl \sin{\theta} - m_p l \ddot{x}\cos{\theta} - m_p l^2 \ddot{\theta} -\tau \label{eq:rotation0}
+$$</p>
+<p>Next, eliminating <span class="arithmatex">\(F\)</span> from equations <span class="arithmatex">\(\eqref{eq:wH}\)</span> and <span class="arithmatex">\(\eqref{eq:wR}\)</span> to find <span class="arithmatex">\(H\)</span>:</p>
+<div class="arithmatex">\[
+H = \frac{\tau}{r}-\left( m_w + \frac{j_w}{r^2} \right) \ddot{x} \label{eq:H_elim}
+\]</div>
+<p>Substituting this into equation <span class="arithmatex">\(\eqref{eq:pH}\)</span>, we get:</p>
+<p><a id="eq:horizontal0"></a>
+$$
+\frac{\tau}{r} = \left( (m_p+m_w) + \frac{j_w}{r^2} \right)\ddot{x} + m_pl\cos{\theta}\ddot{\theta} - l\sin{\theta}\dot{\theta}^2
+\label{eq:horizontal0}
+$$</p>
+<p>Equations <span class="arithmatex">\(\eqref{eq:rotation0}\)</span> and <span class="arithmatex">\(\eqref{eq:horizontal0}\)</span> are the basic equations of the inverted pendulum. Since these equations contain nonlinear terms (such as <span class="arithmatex">\(\sin\)</span> and <span class="arithmatex">\(\dot{\theta}^2\)</span>) and are difficult to handle as they are, we linearly approximate them assuming that the inclination angle <span class="arithmatex">\(\theta\)</span> is minute (<span class="arithmatex">\(\sin{\theta} \simeq \theta\)</span>, <span class="arithmatex">\(\cos{\theta} \simeq 1\)</span>, <span class="arithmatex">\(\dot{\theta}^2 \simeq 0\)</span>). Then, the following pair of linear differential equations is obtained. This is the linear approximation model of the inverted pendulum.</p>
+<p><a id="eq:rot"></a>
+$$
+(j_p + m_p l^2)\ddot{\theta} = m_p gl\theta - m_pl\ddot{x}-\tau
+\label{eq:rot}
+$$</p>
+<p><a id="eq:hor"></a>
+$$
+\frac{\tau}{r} = \left( (m_p+m_w)+\frac{j_w}{r^2}\right)\ddot{x} + m_pl\ddot{\theta}
+\label{eq:hor}
+$$</p>
+<h2 id="overview-angle-control">Control of Pendulum Angle<a class="headerlink" href="#overview-angle-control" title="Permanent link">&para;</a></h2>
+<p>Ultimately, we want to control both the pendulum rotation angle <span class="arithmatex">\(\theta\)</span> and the body position <span class="arithmatex">\(x\)</span> simultaneously. However, first, we focus only on the pendulum rotation angle <span class="arithmatex">\(\theta\)</span> and consider controlling it so that <span class="arithmatex">\(\theta=0\)</span>, that is, simply inverting the pendulum. To do this, find <span class="arithmatex">\(\ddot{x}\)</span> from equation <span class="arithmatex">\(\eqref{eq:hor}\)</span>, substitute it into equation <span class="arithmatex">\(\eqref{eq:rot}\)</span>, and obtain a differential equation for <span class="arithmatex">\(\theta\)</span> only.</p>
+<div class="arithmatex">\[
+\left(j_p + m_p l^2 \left(1-\frac{m_p}{M}\right) \right)\ddot{\theta} - m_pgl\theta = -\left(1+\frac{m_pl}{Mr}\right)\tau
+\label{eq:theta_only}
+\]</div>
+<p>where <span class="arithmatex">\(M = m_p + m_w + \frac{j_w}{r^2}\)</span>. Since the coefficients are complex, we replace them simply as:</p>
+<p><a id="eq:simple"></a>
+$$
+I\ddot{\theta} - m_p gl \theta = -A \tau
+\label{eq:simple}
+$$</p>
+<p>This equation represents the same situation as a pendulum with mass <span class="arithmatex">\(m_p\)</span> and moment of inertia <span class="arithmatex">\(I\)</span> around the axis fixed on a shaft, receiving torque <span class="arithmatex">\(A\tau\)</span> from a motor, as shown in Figure (<a href="#fig:simple_pendulum">Fig.</a>).</p>
+<figure id="fig:simple_pendulum">
+<div class="center">
+<img src="../../figs/simple_pendulum.png" alt="Equivalent pendulum (angle dynamics only)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Equivalent pendulum (angle dynamics only).</figcaption>
+</figure>
+
+<p>Let's consider the behavior of the pendulum in Figure (<a href="#fig:simple_pendulum">Fig.</a>). When there is no torque from the motor (= no control), equation <span class="arithmatex">\(\eqref{eq:simple}\)</span> becomes <span class="arithmatex">\(I \ddot{\theta} = m_pgl\theta\)</span>. Formally, this is the same as the spring equation, so let's compare it with the spring-mass system in Figure (<a href="#fig:spring">Fig.</a>). The equation of motion for the spring-mass system in Figure (<a href="#fig:spring">Fig.</a>) is <span class="arithmatex">\(m\ddot{x}=-kx\)</span>. Comparing this with the previous equation, we can see that <strong>the inverted pendulum is equivalent to a spring-mass system with a spring constant of <span class="arithmatex">\(-m_pgl\)</span>.</strong> However, since the spring constant (<span class="arithmatex">\(-m_pgl\)</span>) is negative, it performs an unstable operation exactly opposite to a spring (if it moves slightly away from the equilibrium point, a force acts to move it further away).</p>
+<figure id="fig:spring">
+<div class="center">
+<img src="../../figs/spring.png" alt="Spring-mass system analogy." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Spring-mass system analogy.</figcaption>
+</figure>
+
+<p>Thus, the inverted pendulum can be interpreted as unstable because it has a negative spring constant. Therefore, let's consider attaching a spring between it and the vertical axis as shown in Figure (<a href="#fig:stabilize">Fig.</a>) so that the total combined spring constant (= original negative spring constant + newly attached positive spring constant) becomes positive. If the combined spring constant becomes positive, the pendulum should perform simple harmonic motion near the vertical axis. Furthermore, if a damper (= dashpot: produces a reaction force proportional to velocity) is also attached, the oscillation can be damped, and the inverted pendulum can be made to stand along the vertical axis. However, since we cannot attach a real spring and damper, let's realize the function equivalent to a spring and damper by feedback control.</p>
+<figure id="fig:stabilize">
+<div class="center">
+<img src="../../figs/stabilize.png" alt="Stabilization via virtual spring and damper." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Stabilization via virtual spring and damper (control interpretation).</figcaption>
+</figure>
+
+<h2 id="overview-pd-control">PD Control<a class="headerlink" href="#overview-pd-control" title="Permanent link">&para;</a></h2>
+<p>We consider a method to virtually realize a spring and damper by feedback control. Since the total force of the spring and damper can be expressed as <span class="arithmatex">\(K_p \theta + K_d \dot{\theta}\)</span>, if the pendulum angle <span class="arithmatex">\(\theta\)</span> (and its derivative <span class="arithmatex">\(\dot{\theta}\)</span>) is known, we can make the motor generate torque such that:</p>
+<p><a id="eq:pd"></a>
+$$
+A\tau = K_p \theta + K_d \dot{\theta}
+\label{eq:pd}
+$$</p>
+<p>This allows the motor to play the role of a spring + damper.</p>
+<p>As in this example, a control method that feeds back an amount <em>proportional</em> to the position or angle (error from the target) and an amount <em>proportional to the derivative</em> of the position or angle is called \"<strong>PD control</strong>\". P stands for <em>Proportional</em> and D stands for <em>Derivative</em>. When only one of them is given, they are called P control (proportional control) and D control (derivative control), respectively. As understood from the above, P control acts equivalently to a spring, and D control acts equivalently to a damper. Also, the respective coefficients (<span class="arithmatex">\(K_p\)</span>, <span class="arithmatex">\(K_d\)</span>) are called P gain (proportional gain) and D gain (derivative gain).</p>
+<p>The equation of motion of the PD-controlled pendulum can be expressed from equations <span class="arithmatex">\(\eqref{eq:simple}\)</span> and <span class="arithmatex">\(\eqref{eq:pd}\)</span> as:</p>
+<p><a id="eq:total"></a>
+$$
+I \ddot{\theta} =  - (K_p - m_pgl) \theta - K_d \dot{\theta} = -K \theta - K_d \dot{\theta}
+\label{eq:total}
+$$</p>
+<p>Here, <span class="arithmatex">\(K = K_p - m_pgl\)</span> is the spring constant of the combined spring of \"negative spring due to gravity\" and \"positive spring due to control\". From this equation, it can be seen that the PD-controlled inverted pendulum moves in the same way as a spring-mass-damper system with spring constant <span class="arithmatex">\(K\)</span> and damping coefficient <span class="arithmatex">\(K_d\)</span>. That is, if an angle deviated from the equilibrium point (<span class="arithmatex">\(\theta=0\)</span>) is given as an initial value, it converges to the equilibrium point <span class="arithmatex">\(\theta=0\)</span> while performing damped oscillation. Since it is the same as a normal spring-mass-damper system, increasing the spring constant (<span class="arithmatex">\(\approx\)</span> proportional gain) increases the oscillation frequency, and increasing the derivative gain increases damping, causing the oscillation to decay quickly.</p>
+<h2 id="overview-is-this-enough">Is this enough to invert?<a class="headerlink" href="#overview-is-this-enough" title="Permanent link">&para;</a></h2>
+<p>If you are lucky, controlling the motor torque based on equation <span class="arithmatex">\(\eqref{eq:pd}\)</span> alone will keep the inverted pendulum stable. However, in reality, there are many cases where this alone cannot invert it (it inverts for a short time but does not last). The causes are offsets in the inclination sensor that measures the inclination angle <span class="arithmatex">\(\theta\)</span>, and disturbances (forces applied from outside the system, such as wind or desk vibration).</p>
+<p>For example, if there is even a slight offset (= deviation in output value) in the inclination sensor, even if it looks like <span class="arithmatex">\(\theta=0\)</span>, the inclination corresponding to the offset actually remains, so the inverted pendulum falls due to gravity. Then, trying to pull up the inverted pendulum, the control system increases the torque of the motor (causing the inverted pendulum to start running). To prevent it from falling, it must continue to run at a constant acceleration, but the motor speed has a limit. When the motor reaches its speed limit, it can no longer accelerate, and the inverted pendulum falls.</p>
+<p>To prevent this, it is necessary not only to control by looking at the angle but also to detect the position of the inverted pendulum (<span class="arithmatex">\(\propto\)</span> amount of tire rotation) and add PD control for the positional deviation. We will discuss this point again later.</p>
+<h2 id="overview-motor-torque">Motor Torque<a class="headerlink" href="#overview-motor-torque" title="Permanent link">&para;</a></h2>
+<p>In order to perform control based on equation <span class="arithmatex">\(\eqref{eq:pd}\)</span>, there is one more thing to consider. It is about the motor torque. When we drive a motor, we do so by applying a voltage across the motor terminals. If this voltage is changed, the generated torque of the motor also changes, but what is the relationship between voltage and generated torque?</p>
+<p>An equivalent circuit model of a DC motor is shown in Figure (<a href="#fig:motor">Fig.</a>).</p>
+<figure id="fig:motor">
+<div class="center">
+<img src="../../figs/motor_model.png" alt="Equivalent circuit model of a DC motor." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Equivalent circuit model of a DC motor.</figcaption>
+</figure>
+
+<p>Inside the motor, there is a winding for generating a magnetic field, which has resistance <span class="arithmatex">\(R\)</span> and inductance <span class="arithmatex">\(L\)</span>. Also, since the motor has the same action as a generator, when the motor rotates, a voltage proportional to the rotation speed called <em>counter electromotive force</em> (counter EMF) is generated in the opposite direction to the applied voltage.</p>
+<p>Since the motor torque is proportional to the strength of the magnetic field generated by the winding, and the strength of the magnetic field is proportional to the current flowing through the winding, the generated torque is proportional to the current flowing through the winding (<span class="arithmatex">\(\tau=\kappa i\)</span>). This proportionality coefficient <span class="arithmatex">\(\kappa\)</span> is called the \"torque constant\" of the motor.</p>
+<p>In other words, while what we determine and apply to the motor is <strong>voltage</strong>, what is proportional to torque is <strong>current</strong>. If there is a proportional relationship between the two, the story is simple, but in reality, due to the influence of back EMF and coil impedance, the two are not simply proportional. So, let's find out the relationship between the two.</p>
+<p>From the equivalent circuit in Figure (<a href="#fig:motor">Fig.</a>), deriving the relationship equation between current (Laplace transformed as <span class="arithmatex">\(I(s)\)</span>) and applied voltage (similarly <span class="arithmatex">\(V(s)\)</span>), we get:</p>
+<div class="arithmatex">\[
+I(s) = \frac{V(s) - \kappa \Omega_m(s)}{R+sL}
+\label{eq:motor_current_voltage}
+\]</div>
+<p>Here, <span class="arithmatex">\(\kappa\)</span> is the torque constant (= back EMF constant)<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">1</a></sup>, <span class="arithmatex">\(\Omega_m(s)\)</span> is the Laplace transform of the motor angular velocity <span class="arithmatex">\(\omega_m\)</span>, and <span class="arithmatex">\(sL\)</span> is the impedance of inductance <span class="arithmatex">\(L\)</span> (expressed by Laplace transform).</p>
+<p>In the above equation, if <span class="arithmatex">\(sL\)</span> is sufficiently small compared to <span class="arithmatex">\(R\)</span>, the inductance can be ignored. In fact, since <span class="arithmatex">\(L\)</span> can be considered sufficiently small in the DC motor used this time, we will ignore the inductance. In this case, the motor torque can be simply expressed as (without Laplace transform since transient response does not need to be considered):</p>
+<p><a id="eq:motor_simple_equiv"></a>
+$$
+\tau = \kappa \frac{v- \kappa\omega_m}{R}
+\label{eq:motor_simple_equiv}
+$$</p>
+<p>As can be seen from this equation, to generate torque correctly, it is necessary to find the angular velocity of the motor (<span class="arithmatex">\(\omega_m\)</span>) and add the back EMF component (<span class="arithmatex">\(\kappa\omega_m\)</span>) to the applied voltage. This requires a sensor to measure the rotation speed, but until we can actually measure the rotation speed, we will proceed by ignoring the existence of back EMF. If the existence of back EMF is ignored, the applied voltage and current, and further, the motor torque will be proportional. Therefore, if the motor torque is calculated according to equation <span class="arithmatex">\(\eqref{eq:pd}\)</span> and a voltage proportional to it is applied to the motor, the inverted pendulum should stand (at least for a short time).</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:2">
+<p>The proportionality coefficient between back EMF and speed is called \"back EMF constant,\" but when units are unified to the SI system, the back EMF constant and torque constant become the same value. This can be confirmed by calculating considering energy conservation.&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:course_materials_repo">
+<p>Course materials repository: <a href="https://github.com/UTokyo2026/UTokyo-Control-Practice-2026">https://github.com/UTokyo2026/UTokyo-Control-Practice-2026</a>&#160;<a class="footnote-backref" href="#fnref:course_materials_repo" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/UTokyo2026/pendulum-lab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/lang-sync.js"></script>
+      
+        <script src="../../javascripts/figure-refs.js"></script>
+      
+        <script src="../../javascripts/mathjax-config.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

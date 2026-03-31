@@ -1,0 +1,2184 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UTokyo Precision Engineering – Inverted Pendulum Fabrication Exercise 2026">
+      
+      
+        <meta name="author" content="UTokyo2026">
+      
+      
+        <link rel="canonical" href="https://utokyo2026.github.io/pendulum-lab/en/week2/">
+      
+      
+        <link rel="prev" href="../week1/">
+      
+      
+        <link rel="next" href="../week3/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Week 2: Encoder & Position Control - Wheeled Inverted Pendulum</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Serif";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/figure-numbering.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#page:w2" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-header__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wheeled Inverted Pendulum
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Week 2: Encoder & Position Control
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      <div class="md-header__tabs" aria-label="Tabs">
+        <ul class="md-tabs__list">
+          
+            
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../intro/" class="md-tabs__link">
+          
+  
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+          
+            
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../jp/intro/" class="md-tabs__link">
+          
+  
+  
+  日本語
+
+        </a>
+      </li>
+    
+  
+
+          
+        </ul>
+      </div>
+    
+
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-nav__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Wheeled Inverted Pendulum
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/UTokyo2026/pendulum-lab" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    UTokyo2026/pendulum-lab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grading Criteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1: Assembly & Bring-up
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2: Encoder & Position Control
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2: Encoder & Position Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#w2-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Week 2 Overview &amp; Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w2-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel Tasks
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec:w2-task-a" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task A: Encoder Fabrication and Installation (Student A)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task A: Encoder Fabrication and Installation (Student A)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rotary-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rotary Encoder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fabrication-of-rotary-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fabrication of Rotary Encoder
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installation-of-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation of Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#soldering-photo-interrupter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Soldering Photo-interrupter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#adjustment-and-reading-of-photo-interrupter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Adjustment and Reading of Photo-interrupter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec:w2-task-b" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task B: Add Encoder Feedback to Code and Debug (Student B)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task B: Add Encoder Feedback to Code and Debug (Student B)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-this-relates-to-the-weekly-schedule" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How this relates to the weekly schedule
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-the-complete-control-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the Complete Control Program
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#preparation-for-communication" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preparation for Communication
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initial-settings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Initial Settings
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finally-experiment-but-before-that" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Finally Experiment. But before that
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#zeroing-the-inclination-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Zeroing the Inclination Sensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#trying-inversion-proportional-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Trying Inversion (Proportional Control)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gain-adjustment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Gain Adjustment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculation-of-angular-velocity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calculation of Angular Velocity
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inversion-adding-derivative-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inversion adding Derivative Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#summary-so-far" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary so far
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position-control" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Position Control
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculation-of-velocity-and-addition-of-derivative-gain" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Calculation of Velocity and Addition of Derivative Gain
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lets-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Let's Run
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-rest-depends-on-ingenuity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The rest depends on ingenuity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec:w2-task-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task C: MATLAB Simulation with Encoder Feedback (Student C)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task C: MATLAB Simulation with Encoder Feedback (Student C)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#role-of-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Role of Simulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec:matlab-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting Up MATLAB Environment
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-matlab-at-the-university-of-tokyo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing MATLAB at the University of Tokyo
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#required-toolboxes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Required Toolboxes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#building-the-simulink-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Building the Simulink Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-the-plant-is-built" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How the Plant is Built
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#controller-internal-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Controller Internal Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#running-the-simulation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Running the Simulation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pd-controller-design-and-parameter-tuning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PD Controller Design and Parameter Tuning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accessing-and-adjusting-pid-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Accessing and Adjusting PID Parameters
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analyzing-simulation-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Analyzing Simulation Results
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-to-look-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What to Look For
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#optional-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Optional Extensions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#from-simulation-to-real-hardware" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        From Simulation to Real Hardware
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#discretization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Discretization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-transfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameter Transfer
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-differences-between-simulation-and-reality" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Differences Between Simulation and Reality
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assignment-add-position-and-velocity-loops-with-encoder-like-feedback" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assignment: Add Position and Velocity Loops with Encoder-like Feedback
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#supplements-troubleshooting-speed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supplements: Troubleshooting &amp; Speed
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Supplements: Troubleshooting &amp; Speed">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#supplement-1-huh-motor-became-weak-if-you-think-so" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supplement 1: Huh? Motor became weak? If you think so
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supplement-2-for-speeding-up" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supplement 2: For Speeding Up
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supplement-3-defect-of-jumper-wire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supplement 3: Defect of Jumper Wire
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#week-2-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Week 2 Submission
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3: Advanced Modeling & Load Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4: Final Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日本語
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    日本語
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    はじめに・日程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    制御概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1：組立と立ち上げ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2：エンコーダと位置制御
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3：高度なモデル化と負荷試験
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4：最終発表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    付録
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="page:w2">Week 2: Encoder &amp; Position Control<a class="headerlink" href="#page:w2" title="Permanent link">&para;</a></h1>
+<h2 id="w2-overview">Week 2 Overview &amp; Objectives<a class="headerlink" href="#w2-overview" title="Permanent link">&para;</a></h2>
+<p>Week 2 focuses on measuring the cart motion using a rotary encoder and using that information for both <strong>simulation</strong> and <strong>real hardware control</strong>. You will (1) build and install your own encoder, (2) integrate encoder feedback into the control code, and (3) extend the MATLAB/Simulink simulation to include <strong>position</strong> and <strong>velocity</strong> feedback.\</p>
+<p><strong>Objectives:</strong></p>
+<ul>
+<li>
+<p>Fabricate, install, and validate a rotary encoder (clean A/B signals and correct direction)</p>
+</li>
+<li>
+<p>Add encoder-based position/velocity feedback to the control program and debug using waveform tools</p>
+</li>
+<li>
+<p>Extend the simulation to include <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(\dot{x}\)</span> feedback and compare simulation vs hardware</p>
+</li>
+<li>
+<p>Achieve stable position control (or at least bounded drift) while maintaining inversion</p>
+</li>
+</ul>
+<h2 id="w2-parallel">Parallel Tasks<a class="headerlink" href="#w2-parallel" title="Permanent link">&para;</a></h2>
+<p>Recommended parallel roles: Student A (encoder fabrication/installation), Student B (encoder feedback in code + debugging), Student C (MATLAB/Simulink simulation extension). Roles can be rotated, but all students should understand the end-to-end flow.</p>
+<ul>
+<li>
+<p><strong>Student A:</strong> Task A (encoder fabrication/installation) --- <a href="#sec:w2-task-a">see Section [4.3](#sec:w2-task-a)</a></p>
+</li>
+<li>
+<p><strong>Student B:</strong> Task B (encoder feedback in code, debugging, and position control) --- <a href="#sec:w2-task-b">see Section [4.4](#sec:w2-task-b)</a></p>
+</li>
+<li>
+<p><strong>Student C:</strong> Task C (MATLAB/Simulink simulation extension and comparison) --- <a href="#sec:w2-task-c">see Section [4.5](#sec:w2-task-c)</a></p>
+</li>
+</ul>
+<h2 id="sec:w2-task-a">Task A: Encoder Fabrication and Installation (Student A)<a class="headerlink" href="#sec:w2-task-a" title="Permanent link">&para;</a></h2>
+<p>This task focuses on fabricating and installing a rotary encoder for cart position measurement.</p>
+<h3 id="rotary-encoder">Rotary Encoder<a class="headerlink" href="#rotary-encoder" title="Permanent link">&para;</a></h3>
+<p>The inverted pendulum will not be stable unless position (or velocity) is detected and fed back in addition to the inverted angle. Therefore, let's consider the detection method of position (or velocity).</p>
+<p>The most basic position detection method is to attach a rotary encoder to the tire or motor to measure the number of rotations. Below, the mechanism of the rotary encoder is explained.</p>
+<p>A rotary encoder can be realized by reading a black and white pattern drawn on a disk with a photo-interrupter<sup id="fnref:20"><a class="footnote-ref" href="#fn:20">1</a></sup>. As shown in Figure (<a href="#fig:encoder">Fig.</a>), if a photo-interrupter is placed at a position several mm away from a pattern painted in black and white and the slit is rotated, a sine wave-like output corresponding to the change in black and white is obtained from the photo-interrupter (it becomes close to a rectangular wave if the distance is close). If binarized with an appropriate threshold and replaced with rectangular pulses, the rotation angle can be measured by counting edges (changes in value). This is the basic principle of a rotary encoder.</p>
+<figure id="fig:encoder">
+<div class="center">
+<img src="../../figs/encoder_principle.png" alt="Basic concept of rotary encoder." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Basic concept of rotary encoder.</figcaption>
+</figure>
+
+<p>Now, if the rotation direction is determined to be only one direction, this is fine, but when rotating in both directions, the above mechanism counts up regardless of the rotation direction, so it is useless. Therefore, when rotating in both directions, two photo-interrupters are used.</p>
+<p>As shown in Figure (<a href="#fig:encoderAB">Fig.</a>), two photo-interrupters are placed at positions shifted by 1/4 period of the slit pattern (or <span class="arithmatex">\((n+1/4)\)</span> period where <span class="arithmatex">\(n\)</span> is an integer). The outputs of these two interrupters are called A-phase signal and B-phase signal. A-phase signal and B-phase signal are shifted in phase by 90 degrees like the relationship of sin and cos, but the way of phase shift changes depending on the rotation direction. If B-phase leads by 90 degrees in positive rotation (Clockwise, CW rotation), B-phase lags by 90 degrees in reverse rotation (Counter-Clockwise, CCW rotation).</p>
+<figure id="fig:encoderAB">
+<div class="center">
+<img src="../../figs/encoder2phase.png" alt="CW/CCW measurement by two-phase signals (A/B)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Measurement of CW/CCW rotation by two phases (A/B).</figcaption>
+</figure>
+
+<p>Therefore, by performing calculation like Figure (<a href="#fig:counting">Fig.</a>) for A-phase and B-phase signals pulsed with appropriate threshold, rotation angle can be measured correctly including rotation direction. In Figure (<a href="#fig:counting">Fig.</a>), only edges of A-phase pulse are counted, which is called 2x counting (Counting rising edge is basic, counting falling edge too makes it 2x). Furthermore, doing similar counting for B-phase pulse doubles resolution (this is called 4x counting). Since we want to make encoder resolution as high as possible, program it to do 4x counting.</p>
+<figure id="fig:counting">
+<div class="center">
+<img src="../../figs/counting.png" alt="Counting A/B phase pulses (example of 2x counting)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Counting A/B phase pulses (example of 2x counting).</figcaption>
+</figure>
+
+<h3 id="fabrication-of-rotary-encoder">Fabrication of Rotary Encoder<a class="headerlink" href="#fabrication-of-rotary-encoder" title="Permanent link">&para;</a></h3>
+<h3 id="installation-of-scale">Installation of Scale<a class="headerlink" href="#installation-of-scale" title="Permanent link">&para;</a></h3>
+<p>When producing an encoder, first decide the installation location of the scale and the resolution of the scale. Installation locations are generally \"attach to motor shaft\" or \"attach to tire (wheel)\". When attaching to the tire, remove the tire from the shaft once (remove 1 nut in the center of the tire. Do not remove other screws), and stick paper printed with scale on the inside of the wheel with double-sided tape. However, if the paper is flimsy, the distance between the scale and photo-interrupter fluctuates, so it is better to stick the scale on a prepared plastic plate (green disk) and stick the whole plate to the wheel.</p>
+<p><em>Note that tires will be reused by the next group, so perform work within the range where original state can be restored.</em></p>
+<p>When attaching to the motor shaft, attach paper printed with scale to the shaft slightly protruding behind the motor. In this case, use double-sided tape or tape glue skillfully to stick. It is difficult to stick firmly, but since almost no force is applied, light adhesion is sufficient (instead, make the scale as light as possible). When installing on the motor side, resolution increases by the reduction ratio (= ratio of tire radius and motor tip tube radius) compared to installing on the tire. Therefore, even a scale with coarse division number (e.g., 4 divisions every 90 degrees) provides sufficient performance.</p>
+<p>The finer the pattern division number of the scale, the higher the resolution as a sensor, but fine scale requires high installation accuracy. This is because the finer the scale, the smaller the output change width of the photo-interrupter. If scale installation accuracy is low, distance between photo-interrupter and scale plate fluctuates with rotation, and baseline of photo-interrupter output also fluctuates. Therefore, with a fine scale, signal cannot be binarized well, and encoder does not work (see Figure (<a href="#fig:baseline">Fig.</a>). If baseline fluctuates, threshold set according to a specific place cannot perform binarization at other places).</p>
+<figure id="fig:baseline">
+<div class="center">
+<img src="../../figs/baseline.png" alt="Example of baseline fluctuation." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Example of baseline fluctuation.</figcaption>
+</figure>
+
+<p>If scale is made coarse, sufficient signal amplitude is obtained even if photo-interrupter is placed somewhat away (about 5mm?) from scale plate. If distance is far, slight distance fluctuation does not matter. So, making scale coarse makes it easy to make, but coarse scale makes control rough. Find a good balance. In any case, scale installation accuracy is important. Fix the scale plate firmly to the wheel (see Figure (<a href="#fig:encoder_disc">Fig.</a>)).</p>
+<p>Also, when deciding resolution of scale, keep photo-interrupter arrangement interval in mind. In the distributed kit, 2 photo-interrupters are already soldered on the board. Design the scale keeping this arrangement in mind. Design is done on a PC. You can design with Draw type software, or draw a pie chart in Excel etc. and use it as a scale. After designing, print with a printer (convenience stores can print if no printer) and cut out. If printing is absolutely impossible, draw manually. Black parts are filled with magic pen etc., but depending on the pen, even if it looks black, it may reflect infrared light easily (= not recognized as black by photo-interrupter), so be careful.</p>
+<figure id="fig:encoder_disc">
+<div class="center">
+<img src="../../figs/encoder_disc.png" alt="Example of encoder pattern." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Example of encoder pattern. Left assumes reading a common scale with two photo-interrupters arranged with a 1/4-period angular shift. Right assumes two photo-interrupters at the same angle (different radius), reading two slits shifted by 1/4 period.</figcaption>
+</figure>
+
+<h3 id="soldering-photo-interrupter">Soldering Photo-interrupter<a class="headerlink" href="#soldering-photo-interrupter" title="Permanent link">&para;</a></h3>
+<p>Reading of scale is done by photo-interrupter. Referencing the inclination angle sensor, solder a photo-interrupter to a (scrap) universal board, and attach it to the universal board with an L-bracket etc. (see Figure (<a href="#fig:baseline">Fig.</a>)). Boards will be supplied, so please ask. Points of soldering work will be explained in the exercise. Please listen to the explanation well before doing it (especially those not used to soldering work). (See Figure (<a href="#fig:encoder_setup">Fig.</a>).)</p>
+<figure id="fig:encoder_setup">
+<div class="center">
+<img src="../../figs/encoder_setup.png" alt="Photo-interrupter attachment." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Photo-interrupter attachment.</figcaption>
+</figure>
+
+<h3 id="adjustment-and-reading-of-photo-interrupter">Adjustment and Reading of Photo-interrupter<a class="headerlink" href="#adjustment-and-reading-of-photo-interrupter" title="Permanent link">&para;</a></h3>
+<p>After attachment to machine, connect wiring and resistors of photo-interrupter to breadboard. Although not drawn in distributed circuit diagram, connect in same way as inclination sensor. However, select resistor value connected to phototransistor according to your own design. (By the way, resistance value of inclination angle sensor at bottom of machine is 12k<span class="arithmatex">\(\Omega\)</span>). In many cases, distance to target will be closer than inclination angle sensor, so reflected light amount will increase. In that case, output saturates unless resistance value is reduced (when looking at output waveform, upper side is cut off and becomes flat). As a guide, around 1k<span class="arithmatex">\(\Omega\)</span> to 5k<span class="arithmatex">\(\Omega\)</span> is good.</p>
+<p>After completion of attachment and wiring, determine threshold for binarization while looking at photo-interrupter output with simple oscilloscope. After confirming that phases of two binarized signals are shifted by roughly 90 degrees, write counting program referring to Figure (<a href="#fig:counting">Fig.</a>). Phase difference does not need to be perfectly 90 degrees, but if order of edges is swapped, rotation direction will be read wrongly, so care is needed (Phase difference just needs to be larger than 0 degrees and less than 180 degrees). If desired phase difference is not obtained, adjust mounting position etc. (Make sure to rotate tire once and confirm readable at any position).</p>
+<h2 id="sec:w2-task-b">Task B: Add Encoder Feedback to Code and Debug (Student B)<a class="headerlink" href="#sec:w2-task-b" title="Permanent link">&para;</a></h2>
+<p>[]</p>
+<h4 id="how-this-relates-to-the-weekly-schedule">How this relates to the weekly schedule<a class="headerlink" href="#how-this-relates-to-the-weekly-schedule" title="Permanent link">&para;</a></h4>
+<p><strong>Week 1:</strong> your goal is to achieve a basic stand-up using <strong>P-only</strong> angle feedback (see <a href="#sec:w1-standup-pre-encoder">see Section [[sec:w1-standup-pre-encoder]](#sec:w1-standup-pre-encoder)</a>). <strong>Week 2 and beyond:</strong> continue tuning and improvements (including angular velocity, filtering, and adding D gain). This section provides the detailed procedure and safety notes.</p>
+<h3 id="using-the-complete-control-program">Using the Complete Control Program<a class="headerlink" href="#using-the-complete-control-program" title="Permanent link">&para;</a></h3>
+<p>The complete inverted pendulum control program is provided in <sup id="fnref:21"><a class="footnote-ref" href="#fn:21">2</a></sup>. This is not just a debugging tool---it is the <strong>complete example program</strong> for inverted pendulum control that implements PD control, sensor reading, motor control, and real-time data visualization.</p>
+<p><strong>Quick Start (Using Pre-compiled Binary):</strong></p>
+<ol>
+<li>
+<p>Flash to mbed by drag-and-drop</p>
+</li>
+<li>
+<p>Press reset button on mbed</p>
+</li>
+<li>
+<p>The program starts with 1 second idle period</p>
+</li>
+</ol>
+<p><strong>Understanding and Modifying the Program:</strong></p>
+<p>If you want to understand how the control works or adjust parameters, open in Keil Studio Cloud. The program structure is:</p>
+<ul>
+<li>
+<p><strong>Lines 3-11</strong>: Control parameters (<code>SAMP_FREQ</code>, <code>VLIMIT</code>, <code>VOFFSET</code>, <code>KP</code>, <code>KD</code>)</p>
+</li>
+<li>
+<p><strong>Lines 17-30</strong>: Pin definitions (LEDs, motor, sensors)</p>
+</li>
+<li>
+<p><strong>Lines 70-132</strong>: <code>int0()</code> interrupt function---the main control loop</p>
+</li>
+<li>
+<p><strong>Lines 134-161</strong>: <code>main()</code> function---initialization and startup</p>
+</li>
+</ul>
+<p>To adjust control parameters, simply modify the <code>#define</code> values at the top of the file, recompile, and flash to mbed. The initial program has only proportional control (<code>KP = 1.0</code>, <code>KD = 0.0</code>). You will add derivative control later in this section (see "Inversion adding Derivative Control").</p>
+<p>If you modify the program, click \"Save\" and \"Compile\". If there are no errors, an executable file (.bin) is downloaded, which you can then flash to mbed. However, for initial testing, you can use the pre-compiled file directly.</p>
+<h3 id="preparation-for-communication">Preparation for Communication<a class="headerlink" href="#preparation-for-communication" title="Permanent link">&para;</a></h3>
+<p>This time, a 6-channel oscilloscope is prepared to monitor the state of mbed in real time. First, install Processing according to the instruction in the appendix<sup id="fnref:22"><a class="footnote-ref" href="#fn:22">3</a></sup>. The oscilloscope tool is located in .</p>
+<p><strong>How the Oscilloscope Works:</strong> The mbed program () runs a control loop at 2000 Hz. In each iteration, it reads sensors, calculates control outputs, drives the motor, and transmits 6 data values to the PC via USB serial at 230400 baud. The data is sent using a frame-based protocol: each frame starts with two header bytes (0xAA 0x55) followed by 6 data bytes (each 0-255). The Processing program () continuously reads the serial port, searches for the header pattern to synchronize with the data stream, extracts the 6 data bytes, and plots them in real time. This protocol ensures reliable data transmission even if some bytes are corrupted or lost.</p>
+<p><strong>Using the Oscilloscope:</strong> Flash to mbed (or compile the .cpp file yourself if you want to modify control parameters). After installation is complete, open in Processing and press the triangular run button to open the oscilloscope screen. The screen is divided into top and bottom. 3 pieces of data in the upper half, 3 pieces of data in the lower half, a total of 6 pieces of data are displayed. If 6 pieces of data are sent every repetition period in the mbed program, they are displayed in the order sent (Upper screen R: Red, G: Green, B: Blue, Lower screen Red, Green, Blue order). However, immediately after launching the oscilloscope screen, it may not be in the correct order. By resetting mbed once after launching the screen, the display is also reset to the correct order (this re-synchronizes the frame alignment).</p>
+<p>An example oscilloscope screen is shown in Figure (<a href="#fig:debuger3">Fig.</a>).</p>
+<figure id="fig:debuger3">
+<div class="center">
+<img src="../../fig2026/debug_oscilloscope.png" alt="Debugging Tool 3: Six-Channel Oscilloscope." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Debugging Tool 3: Six-Channel Oscilloscope showing real-time control data (CH1–CH3: sensor/angle; CH4–CH6: angular velocity, filtered velocity, reference).</figcaption>
+</figure>
+
+<p>The program is designed to display: (CH1) output of photo-interrupter 1 (Upper screen Red), (CH2) output of photo-interrupter 2 (Upper screen Green), (CH3) the difference between both outputs = equivalent to inclination angle (Upper screen Blue), (CH4) angular velocity = derivative of inclination angle (Lower screen Red), (CH5) filtered angular velocity (Lower screen Green), and (CH6) reference line at 128 (Lower screen Blue).</p>
+<h3 id="initial-settings">Initial Settings<a class="headerlink" href="#initial-settings" title="Permanent link">&para;</a></h3>
+<h3 id="finally-experiment-but-before-that">Finally Experiment. But before that<a class="headerlink" href="#finally-experiment-but-before-that" title="Permanent link">&para;</a></h3>
+<p>It's finally the experiment, but before that, let's understand the power supply mechanism of this board.</p>
+<p>The battery box supplies power to the entire board (mbed + motor + photo-interrupter), and turning on the battery box activates the entire inverted pendulum (at this time, the LED on the board lights up). <em><strong>Since the motor continues to operate while the battery box is on, please turn off the battery box frequently</strong> except when necessary = when doing inverted experiments.</em></p>
+<p>On the other hand, even when the battery box is off, connecting mbed to a PC with a USB cable supplies power to mbed only via USB cable (Power is not supplied to the motor and photo-interrupter from USB). At this time, the red LED on the board should be off, but since the blue LED of mbed shines brightly, there are cases where experiments are done without realizing that the battery box power switch is off. If the photo-interrupter output is strange or the motor does not move, check the battery box switch.</p>
+<h3 id="zeroing-the-inclination-sensor">Zeroing the Inclination Sensor<a class="headerlink" href="#zeroing-the-inclination-sensor" title="Permanent link">&para;</a></h3>
+<p>Since it is troublesome if the motor moves in this work, <em>disconnect the connection between the motor and the motor driver</em>. With the USB cable connected to mbed, zero the sensor with the following procedure.</p>
+<ul>
+<li>
+<p>Reset with the reset switch in the center of mbed (= Program start).</p>
+</li>
+<li>
+<p>Since the program is set to be in an idle state for 1 second after start, turn on the battery box power switch during that time.</p>
+</li>
+<li>
+<p>Stand the machine vertically while supporting it by hand.</p>
+</li>
+<li>
+<p>Check the inclination angle (blue line) displayed on the upper screen of the oscilloscope and confirm that it is approximately 0 (= center of the screen. Since 128 is added and sent from the program, the oscilloscope line comes to the center of the screen when sensor output is 0) when in the vertical state. If not, fine-tune the bending angle of the L-bracket attaching the sensor (Universal board is easily broken, so adjust by holding both ends of the bracket without applying force to the board).</p>
+</li>
+</ul>
+<h3 id="trying-inversion-proportional-control">Trying Inversion (Proportional Control)<a class="headerlink" href="#trying-inversion-proportional-control" title="Permanent link">&para;</a></h3>
+<p>After sensor adjustment is finished, let's invert it<sup id="fnref:23"><a class="footnote-ref" href="#fn:23">4</a></sup>. Only P gain is set in the initial program (<code>KP = 1.0</code>, <code>KD = 0.0</code>), so proportional control is performed.</p>
+<ul>
+<li>
+<p>Turn off the battery box power and reconnect the motor and motor driver. The USB cable can remain connected.</p>
+</li>
+<li>
+<p>After connecting the motor, reset mbed, turn on the battery box power switch within 1 second, and stand the machine vertically. Control starts 1 second after reset.</p>
+</li>
+<li>
+<p>Observe the reaction of the machine while lightly supporting it by hand. Support it gently so as not to fall, and check how the inverted pendulum wants to move. If the inverted pendulum moves in the direction it fell, it is correct. If it moves opposite to the inclination (= tries to fall by itself), the motor connection is reversed, so turn off the power once and swap the 2 wires connecting the motor and driver (or 2 wires connecting mbed and motor driver).</p>
+</li>
+</ul>
+<p>Lucky people might invert perfectly with just this. If it does not invert perfectly, it will likely move like a simple harmonic oscillation. Proportional control is just a spring, so if there is no loss such as friction, the response becomes simple harmonic oscillation.</p>
+<h3 id="gain-adjustment">Gain Adjustment<a class="headerlink" href="#gain-adjustment" title="Permanent link">&para;</a></h3>
+<p>Next, let's change the P gain and see the machine response. People who can invert at this point should lower the P gain once (to about half or less for now). Check the operation of the machine while gently holding the top of the machine or the USB cable so as not to hinder the movement of the machine (and not to fall).</p>
+<ol>
+<li>
+<p>When P gain is low, relaxed (= about 1, 2Hz) simple harmonic oscillation is seen.</p>
+</li>
+<li>
+<p>Increasing P gain (= stiffening the spring) increases the oscillation frequency and decreases the oscillation amplitude.</p>
+</li>
+<li>
+<p>Raising the gain to some extent stabilizes it with almost no vibration (some tingling vibration may remain).</p>
+</li>
+<li>
+<p>If the gain is increased too much, high frequency vibration (image of about 5Hz or more in the case of this machine) like rattling appears.</p>
+</li>
+<li>
+<p>Increasing further results in violent vibration.</p>
+</li>
+</ol>
+<p>The state of 3 above is ideal, so adjust the gain to become state 3 after changing the gain from small to large. In the case of a machine with little friction, vibration may not completely disappear with P control alone. In that case, adjust to the gain where vibration is minimized.</p>
+<p>Note that relaxed vibrations seen in 1 and 2 are not particularly harmful (just low stability), but high frequency vibrations in 4 and 5 can lead to <em>heat generation and burnout of electronic parts and motors</em> due to excessive current. Also, there is a risk that screws loosen due to vibration and the machine breaks, so avoid this state as much as possible.</p>
+<p><em>If rattling vibration occurs, turn off the switch immediately.</em></p>
+<h3 id="calculation-of-angular-velocity">Calculation of Angular Velocity<a class="headerlink" href="#calculation-of-angular-velocity" title="Permanent link">&para;</a></h3>
+<p>Next, add derivative control. Derivative control feeds back the derivative of inclination angle = inclination angular velocity, so first calculate the angular velocity. Since mathematically strict differentiation cannot be performed, the difference between the previous angle and the current angle is used as an approximate value of differentiation. That is,
+$$
+\dot{\theta} \simeq \frac{\theta - \theta_1}{T_s}
+\label{eq:theta_diff}
+$$
+where <span class="arithmatex">\(\theta_1\)</span> is the inclination angle in the previous process, and <span class="arithmatex">\(T_s\)</span> is the repetition time (sampling period). This process is already implemented in the program (line 79-80 in the <code>int0()</code> function).</p>
+<p>Since differentiation (difference) has the effect of amplifying high-frequency signals, the angular velocity obtained above contains a lot of high-frequency noise. If used for feedback as it is, fine vibration occurs due to noise (makes a \"shhh\" sound). In this state, a large current flows through the motor, which is not good for the circuit, so apply a low-pass filter (LPF) within the program to remove high-frequency noise.</p>
+<p>There are two types of digital filters that can be realized by programs: IIR (Infinite Impulse Response) and FIR (Finite Impulse Response), but since phase delay is a problem in feedback control, a filter with as little phase delay as possible is preferred. Since FIR tends to introduce extra phase delay in the high frequency region, we use IIR, where phase delay is easy to grasp, to make a filter this time.</p>
+<p>The higher the order of the filter, the better the cutoff performance, but the higher the order, the more the phase delay increases. Therefore, here we use the \"first-order low-pass filter (first-order lag filter)\" which is the simplest and has the least phase delay. The pulse transfer function of the first-order low-pass filter obtained by bilinear transform is:
+$$
+F(z) = \frac{1+z^{-1}}{(1+\frac{2T}{T_s})+(1-\frac{2T}{T_s})z^{-1}}
+\label{eq:firstorder}
+$$
+where <span class="arithmatex">\(T\)</span> is the time constant of the first-order lag, and <span class="arithmatex">\(T_s\)</span> is the sampling period. The reciprocal of the time constant <span class="arithmatex">\(T\)</span> is the cutoff angular frequency (rad/s). Decide an appropriate cutoff frequency and calculate the filter coefficients (be careful about the relationship between \"Hz\" and \"rad/s\").</p>
+<p>Matlab may be used to calculate filter coefficients. In Matlab,</p>
+<div class="highlight"><pre><span></span><code>[b,a] = butter(1,0.01);
+</code></pre></div>
+<p>Typing this gives the coefficients of a 1st order low-pass filter. Here, the 1st argument of butter (function to find Butterworth filter) is \"filter order\", and the 2nd is \"cutoff frequency normalized by Nyquist frequency\" (= ratio to Nyquist frequency. Nyquist frequency is half of sampling frequency). Equation <span class="arithmatex">\(\eqref{eq:firstorder}\)</span> does not apply frequency pre-warping, so manual calculation with this equation causes a slight shift in cutoff frequency due to frequency distortion of bilinear transform, but Matlab's butter function performs frequency pre-warping, so the specified cutoff frequency is obtained.</p>
+<p>Note that in a first-order lag filter, phase starts to delay from a frequency 1/10 to 1/5 of the cutoff frequency<sup id="fnref:24"><a class="footnote-ref" href="#fn:24">5</a></sup>. The process of differentiation advances the phase of a sine wave by 90 degrees (differentiating sin becomes cos with phase advanced by 90 degrees), so if phase delays, it does not become correct differentiation processing. Considering the vibration frequency of the machine in the proportional control of the previous section (which needs to be suppressed by derivative control), set the cutoff frequency of the filter to 10 times or more (at least 5 times or more) that frequency so that correct differentiation is obtained at that frequency.</p>
+<p>For example, if vibrating at about 2Hz, set the cutoff frequency to e.g. 20Hz (= 40<span class="arithmatex">\(\pi\)</span> rad/s) or more. Afterwards, adjust as necessary while observing the state of response in actual inverted experiments.</p>
+<p>To turn the obtained pulse transfer function into a program, proceed as follows. First, make the transfer function a rational polynomial (fraction of polynomials) with respect to <span class="arithmatex">\(z^{-1}\)</span>, and divide the denominator and numerator so that the constant term of the denominator becomes <span class="arithmatex">\(1\)</span>. Let the coefficients of the polynomial obtained thereby be <span class="arithmatex">\(b_0, b_1, b_2, ...\)</span> for the numerator, and <span class="arithmatex">\(a_0 = 1, a_1, a_2, ...\)</span> for the denominator. Since it is a 1st order filter this time, the numerator is only <span class="arithmatex">\(b_0, b_1\)</span>, and the denominator is only <span class="arithmatex">\(a_0 = 1, a_1\)</span>. Note that if calculated with Matlab, these coefficients are obtained directly. At this time, the transfer function is:
+$$
+F(z) = \frac{b_0 + b_1 z^{-1}}{1 + a_1 z^{-1}} = \frac{Y(z)}{X(z)}
+\label{eq:firstorder_tf}
+$$
+where <span class="arithmatex">\(X(z)\)</span> is the signal input to the filter (Z transform), and <span class="arithmatex">\(Y(z)\)</span> is the filter output (Z transform). Recall that the transfer function is the ratio of input and output (Z transform).</p>
+<p>Rearrange this and inverse Z transform to fix into a program.
+$$
+\begin{aligned}
+(1+a_1 z^{-1})Y(z) &amp;= (b_0 + b_1 z^{-1})X(z) \
+Y(z) + a_1 z^{-1} Y(z) &amp;= b_0 X(z) + b_1 z^{-1}X(z)
+\end{aligned}
+\label{eq:firstorder_rearrange}
+$$
+Inverse Z transform:
+$$
+\begin{aligned}
+y[n] + a_1 y[n-1] &amp;= b_0 x[n] + b_1 x[n-1] \
+y[n] &amp;=  b_0 x[n] + b_1 x[n-1] - a_1 y[n-1]
+\end{aligned}
+\label{eq:firstorder_time}
+$$
+Just write this as a program. Showing only the main part (variable declaration omitted. Left side is line number for explanation):</p>
+<div class="highlight"><pre><span></span><code>1:    y = b0 * x + b1 * x1 - a1 * y1;
+2:    x1 = x;
+3:    y1 = y;
+</code></pre></div>
+<p>This completes it. Line 1 is filter calculation, and lines 2 and 3 save input and output (<span class="arithmatex">\(x[n], y[n]\)</span>) in this cycle so that they can be referenced as previous values (<span class="arithmatex">\(x[n-1]\)</span>, <span class="arithmatex">\(y[n-1]\)</span>) in the next cycle.</p>
+<p>Once the program is written, let's see how the angular velocity signal changes before and after the filter on the oscilloscope screen. Modify the program to output values before and after the filter to the oscilloscope. If the filter is working correctly, you should be able to confirm that noise is reduced. Note that it is fine if some noise remains in the filter result. If you filter so much that noise becomes completely invisible, you have over-filtered. In that case, I think there will be a large delay in the signal. Filtering always causes time delay, but if it is obviously delayed visually, it is over-filtered. <strong>Increase</strong> the cutoff frequency to weaken the filter effect.</p>
+<h3 id="inversion-adding-derivative-control">Inversion adding Derivative Control<a class="headerlink" href="#inversion-adding-derivative-control" title="Permanent link">&para;</a></h3>
+<p>Once angular velocity can be calculated, let's add D gain and perform PD control. Multiply D gain by the angular velocity passed through the filter to match equation <span class="arithmatex">\(\eqref{eq:pd}\)</span>. For a machine that is already stable with only P control, adding D gain may not look like stability has increased, but the effect of D gain should appear in response to disturbance. To give a disturbance, lightly poke the inverted machine with a finger. Without D gain, it will recover the inverted state while wobbling, but with appropriate D gain, the vibration converges quickly (depending on the machine, the effect may not be very visible).</p>
+<p>Let's actually change the magnitude of D gain and see the response. The magnitude of D gain (here) is roughly several tenths (1/20?) of P gain. Note that theoretically, the larger the D gain, the better the vibration should dampen, but in reality, if the D gain is too large, the vibration increases instead, so be careful<sup id="fnref:25"><a class="footnote-ref" href="#fn:25">6</a></sup>. If the machine is shivering, it is possible that D gain is too large, so try lowering D gain (depending on the machine, D gain 0 might be best).</p>
+<h3 id="summary-so-far">Summary so far<a class="headerlink" href="#summary-so-far" title="Permanent link">&para;</a></h3>
+<p>If it inverts without large vibration and disturbance response becomes smooth, it is tentatively complete. Since position feedback is not applied, it is inevitable that the inverted pendulum gradually runs away (and falls).</p>
+<p>Up to this point, you should arrive without problems if you make it as explained, but the real part of the exercise starts here. From here on, you will proceed with production while thinking for yourself.</p>
+<h3 id="position-control">Position Control<a class="headerlink" href="#position-control" title="Permanent link">&para;</a></h3>
+<p>Once position can be read, similarly to inclination angle control, first apply only proportional gain (<span class="arithmatex">\(K_x\)</span>) to position (and add it to manipulated variable of inclination angle control) to control. Specifically, motor voltage is
+$$
+v_m = K_p \theta + K_d \dot{\theta} + K_x x + K_v \dot{x}
+\label{eq:vm_pos}
+$$
+(At this point, position derivative gain <span class="arithmatex">\(K_v\)</span> is zero).</p>
+<p>Correct sign of gain <span class="arithmatex">\(K_x\)</span> is unknown whether positive or negative (depends on setting of each rotary encoder). Try it for now, and if machine oscillates back and forth, sign is correct. If it runs away in one direction without oscillating, sign of position gain is reverse (or rather, encoder output is reverse), so change sign and try again (fixing encoder program is also fine).</p>
+<p>Once correct sign is known, change magnitude of proportional gain and check change in response. While gently supporting machine by hand, try operating it with intention of reading movement of inverted pendulum. If gain is small, it oscillates slowly and largely, and if large, it oscillates fast and finely. In inclination angle control mentioned before, machine might have been stilled only with proportional gain, but regarding position control here, only oscillating response can be obtained with proportional gain alone (and due to signal delay and back EMF influence, oscillation amplitude gradually increases).</p>
+<p>Note that, as in inclination angle control experiment, excessive gain causes violent vibration. Violent vibration may lead to damage of parts, so <em>if violent vibration occurs, turn off power switch immediately</em>.</p>
+<p>In many cases, around where it oscillates slowly (about 0.5Hz?) is just right proportional gain, so aim there and adjust. Since this vibration will be suppressed by derivative control set next, it is important that frequency of this vibration is within range where derivative control works (about 1/10 or less of cutoff frequency of low-pass filter). People with high resolution encoder can set cutoff frequency of velocity filter high, and can dampen up to higher frequency, so it is okay to adjust to faster vibration (response of position becomes more agile that way). Perform adjustment keeping your own encoder performance and velocity low-pass filter characteristics in mind.</p>
+<p>Generally, position control of inverted pendulum performs following interesting operation. When wanting to move machine to right, position control system (control realized by <span class="arithmatex">\(K_x\)</span> and <span class="arithmatex">\(K_v\)</span>) tries to rotate tire to opposite left direction. When tire moves left, machine falls right due to inertia, so inclination angle control system (<span class="arithmatex">\(K_p\)</span> and <span class="arithmatex">\(K_d\)</span>) turns tire to right to correct this inclination, and as a result machine moves right. In other words, position control system issues command to move in direction away from target position, contrary to intuition. However, since inclination angle control system is dominant, it moves in direction opposite to direction commanded by position control system as a result. Let's check what kind of operation inverted pendulum you produced performs.</p>
+<h3 id="calculation-of-velocity-and-addition-of-derivative-gain">Calculation of Velocity and Addition of Derivative Gain<a class="headerlink" href="#calculation-of-velocity-and-addition-of-derivative-gain" title="Permanent link">&para;</a></h3>
+<p>Finally, calculate velocity and add derivative control. Calculation of velocity is done by differentiating (difference) output of encoder, but since output of encoder produced this time changes only occasionally (not counted unless tire rotates at least one scale pattern), simply taking difference from previous value results in strange velocity signal where impulse comes out only when encoder output changes. Apply low-pass filter to smooth this. Unlike angle differentiation, quite strong filter needs to be applied, so use 2nd order low-pass filter and set cutoff frequency low (design with Matlab butter function). However, setting cutoff low makes controllable motion frequency low as well. Position gain must be set low so that vibration frequency of machine position falls within controllable frequency range (consequently, spring constant of position control decreases, so machine may not stop perfectly and move unsteadily, this is unavoidable).</p>
+<p>In this case, magnitude of derivative gain (velocity gain <span class="arithmatex">\(K_v\)</span>) will be about same as proportional gain or fraction of it.<sup id="fnref:26"><a class="footnote-ref" href="#fn:26">7</a></sup></p>
+<p>Since resolution of position sensor (= encoder) is low this time, it will be difficult to completely suppress vibration as long as differential value of encoder is used as velocity. It is sufficient if adjusted to extent that vibration does not diverge (sways with constant amplitude).</p>
+<p>If you want to improve performance more, try estimating machine velocity by another means without using differential of encoder. Specifically, use applied voltage to motor. Ignoring inductance and back EMF compensation, a simple DC motor model is:
+$$
+\tau = \kappa \frac{v- \kappa\omega_m}{R}
+\label{eq:motor_simple_equiv}
+$$
+In steady state, that is, state where velocity is constant, if friction is ignored, motor torque becomes zero. Looking at equation <span class="arithmatex">\(\eqref{eq:motor_simple_equiv}\)</span>, when motor torque is zero, applied voltage and back EMF (= proportional to velocity) match. Therefore, motor rotation speed (= machine velocity) should be estimable from applied voltage. However, this is story in steady state, so it does not hold when velocity is fluctuating. But if used thinking well around there, better control should be possible than relying only on encoder. Note that when estimating velocity in this way, it is better to build velocity control system instead of position control system (that is, P control on average value of back EMF instead of PD control on machine position). In this case, ignore explanation in next section.</p>
+<h3 id="lets-run">Let's Run<a class="headerlink" href="#lets-run" title="Permanent link">&para;</a></h3>
+<p>Once it can invert at approximately constant position, run it. When running, change target position of control little by little. Specifically, command value of motor voltage is as follows.
+$$
+v_m = K_p \theta + K_d \dot{\theta} + K_x (x - x_{ref}) + K_v \dot{x}
+\label{eq:vm_run}
+$$
+<span class="arithmatex">\(x_{ref}\)</span> in formula is target position of control. Since PD control regarding position is applied, machine is in state equivalent to being connected to target position with spring and damper. Therefore, if this target position <span class="arithmatex">\(x_{ref}\)</span> is changed little by little in program, inverted pendulum should move as if pulled to target position (like walking a dog. However, since it is image of pulling with spring, vibration due to spring occurs. Tends to be like moving big and resting a little). For example, increasing target position by <span class="arithmatex">\(0.001\)</span> every time in control loop, if control frequency is 2000Hz, it should advance 2 encoder pulses per second.</p>
+<p>Note that immediately after starting inverted control, attitude control of machine is not yet sufficiently stable, so it is better to program to start changing target value after waiting about 1 second after starting inverted control.</p>
+<h3 id="the-rest-depends-on-ingenuity">The rest depends on ingenuity<a class="headerlink" href="#the-rest-depends-on-ingenuity" title="Permanent link">&para;</a></h3>
+<p>After that, aim for high performance inverted pendulum by adjusting variously by yourself. Improvement of encoder, adjustment of control gain (including filter adjustment), and since motor rotation speed is known by encoder, it is good to think about motor back EMF which has been ignored so far.</p>
+<p>Here are some adjustment points.</p>
+<ul>
+<li>
+<p>Combination of control gain, filter setting, target velocity is important. Trying various combinations will find setting that runs stably. Due to individual differences in parts and assembly, optimal setting differs for each machine.</p>
+</li>
+<li>
+<p>Actually, this motor (not limited to this, many model motors of same type) has determined rotation direction, and characteristics (torque) differ slightly between positive rotation and reverse rotation. When rotating in direction where torque is weak, adding slightly (at most about 10%?) extra voltage may reduce difference in characteristics.</p>
+</li>
+<li>
+<p>Since there is friction in motor itself and power transmission part of motor and tire, motor does not rotate losing to friction at small voltage near 0V. It might be good to add slight offset to command voltage to compensate friction. However, be careful as too large offset makes response of machine oscillatory. Setting value to <code>VOFFSET</code> <code>#define</code>d at the top of adds offset (Value is safe up to about 0.01 at most).</p>
+</li>
+<li>
+<p>Since inclination angle is measured by reflected light amount from floor surface, gain of inclination sensor changes depending on infrared reflectance of floor surface. When moving on different floor surface, fine-tune control gain as necessary.</p>
+</li>
+</ul>
+<h2 id="sec:w2-task-c">Task C: MATLAB Simulation with Encoder Feedback (Student C)<a class="headerlink" href="#sec:w2-task-c" title="Permanent link">&para;</a></h2>
+<h3 id="role-of-simulation">Role of Simulation<a class="headerlink" href="#role-of-simulation" title="Permanent link">&para;</a></h3>
+<p>Computer simulation is a powerful tool for developing and validating control algorithms. Simulation provides a safe, risk-free environment for testing control strategies: mistakes do not damage hardware, and unstable controllers do not cause physical hazards. For the inverted pendulum, which can fall or move violently with improper control, simulation protects the motor, electronics, and mechanical structure from damage.</p>
+<p>MATLAB and Simulink enable rapid iteration through controller designs. You can adjust parameters, observe system responses, and compare different strategies without repeatedly downloading code to the microcontroller or reassembling hardware. Simulation also clarifies the theoretical behavior of the system and builds intuition about how control parameters affect stability and performance. Parameters validated in simulation can then be transferred to real hardware with higher confidence.</p>
+<p>Beyond this experiment, simulation is an essential skill for modern control engineers. The ability to model, simulate, and analyze control systems using professional tools like MATLAB/Simulink is widely used in industry and research, making this a valuable learning experience in its own right.</p>
+<h3 id="sec:matlab-setup">Setting Up MATLAB Environment<a class="headerlink" href="#sec:matlab-setup" title="Permanent link">&para;</a></h3>
+<h3 id="accessing-matlab-at-the-university-of-tokyo">Accessing MATLAB at the University of Tokyo<a class="headerlink" href="#accessing-matlab-at-the-university-of-tokyo" title="Permanent link">&para;</a></h3>
+<p>The University of Tokyo provides MATLAB licenses for all members through a campus-wide license agreement. You can access MATLAB online or install it on your personal computer. Follow these steps to get started:</p>
+<ul>
+<li>
+<p>Access the UTokyo MATLAB information page: <a href="https://utelecon.adm.u-tokyo.ac.jp/matlab/">https://utelecon.adm.u-tokyo.ac.jp/matlab/</a></p>
+</li>
+<li>
+<p>Follow the instructions under \"How to start using MATLAB\"</p>
+</li>
+<li>
+<p>Create a MathWorks Account using your UTokyo email address</p>
+</li>
+<li>
+<p>Link your MathWorks account to the UTokyo campus-wide license by signing in through the UTokyo portal</p>
+</li>
+</ul>
+<p>If you encounter any issues with license activation, refer to the utelecon support page or contact MathWorks support at <code>service@mathworks.co.jp</code>.</p>
+<h3 id="required-toolboxes">Required Toolboxes<a class="headerlink" href="#required-toolboxes" title="Permanent link">&para;</a></h3>
+<p>For this experiment, you will need the following MATLAB products:</p>
+<ul>
+<li>
+<p><strong>MATLAB</strong> (base installation)</p>
+</li>
+<li>
+<p><strong>Simulink</strong> - for building block diagrams and simulation</p>
+</li>
+<li>
+<p><strong>Simscape</strong> - for physical system modeling</p>
+</li>
+<li>
+<p><strong>Simscape Multibody</strong> - for multibody mechanical dynamics (inverted pendulum, joints, etc.)</p>
+</li>
+<li>
+<p><strong>Simulink Control Design</strong> - required if you want to linearize a Simulink/Simscape model and use model-based tools such as PID Tuner / Model Linearizer on the Simulink model</p>
+</li>
+<li>
+<p><strong>Control System Toolbox</strong> - recommended for analysis/design with LTI models (e.g., LQR, frequency response) and for PID Tuner when the plant is an LTI model</p>
+</li>
+</ul>
+<p>During the MATLAB installation process, make sure to select these products. If you have already installed MATLAB without them, you can add them later through the MATLAB Add-On Explorer (Home tab <span class="arithmatex">\(\rightarrow\)</span> Add-Ons <span class="arithmatex">\(\rightarrow\)</span> Get Add-Ons). The provided model uses Simscape and Simscape Multibody to represent the physical dynamics of the inverted pendulum (e.g. 3D mechanical components) rather than Control System Toolbox or hand-written state-space blocks.</p>
+<h3 id="building-the-simulink-model">Building the Simulink Model<a class="headerlink" href="#building-the-simulink-model" title="Permanent link">&para;</a></h3>
+<p>This course provides a reference Simulink/Simscape model as a milestone example. The goal of the example is intentionally modest: it demonstrates how to build a physically meaningful plant model in Simscape Multibody, and how to stabilize an inverted pendulum by closing a feedback loop on the <em>tilt angle</em> using a PID controller. In the provided setup, the controller is tuned to balance the pendulum, while position and speed regulation are left as an extension task for students.</p>
+<p>Figure (<a href="#fig:simulink_overview">Fig.</a>) shows the overall Simscape Multibody diagram of the plant used in the example. Even at this top level, the model is organized to mirror the real hardware: the cart is represented with wheel-related components and the "body" (the pendulum and its attached parts) is represented as a separate rigid assembly. This separation makes it easy to identify what parameters belong to the cart (wheel radius, wheel inertia, cart mass) versus what belongs to the pendulum body (mass distribution, length, and center of mass).</p>
+<figure id="fig:simulink_overview">
+<div class="center">
+<img src="../../fig2026/Sim1.png" alt="Overall Simscape Multibody plant diagram (milestone example)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Overall Simscape Multibody plant diagram of the provided milestone example. The model is organized into the cart (wheel-related assembly) and the body (pendulum-related assembly), connected by joints and frame transforms.</figcaption>
+</figure>
+
+<h3 id="how-the-plant-is-built">How the Plant is Built<a class="headerlink" href="#how-the-plant-is-built" title="Permanent link">&para;</a></h3>
+<p>The plant is built in Simscape Multibody by assembling 3D rigid bodies, joints, and fixed frame transforms. Instead of typing linearized state-space matrices, you specify physical properties---geometry, mass, and inertia---and Simscape Multibody derives the multibody equations of motion automatically. This approach is particularly suitable for this experiment because it stays close to the actual machine and makes it straightforward to change mass distribution (battery, breadboard, brackets) and see how the dynamics change.</p>
+<p>In the provided model, the cart and the body are constructed primarily using two standard solid blocks: <strong>Brick Solid</strong> (rectangular block) and <strong>Cylindrical Solid</strong> (cylinder). Wheels, shafts, and spacers are naturally represented by cylindrical solids, while the body plate, brackets, and electronic modules are well approximated by brick solids. The objective is not photorealistic geometry; rather, it is to capture the dominant mass and inertia so that control design decisions made in simulation remain meaningful on hardware.</p>
+<p>Figure (<a href="#fig:simscape_body_build">Fig.</a>) shows the rigid <em>body</em> subassembly, while Figure (<a href="#fig:simscape_wheel_build">Fig.</a>) shows the <em>wheel</em> subassembly used for the cart/wheel-related part of the plant.</p>
+<figure id="fig:simscape_subassemblies">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Body model in Simscape Multibody</th>
+<th>Wheel model in Simscape Multibody</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img id="fig:simscape_body_build" src="../../fig2026/Sim2.png" alt="Body model in Simscape Multibody" /></td>
+<td><img id="fig:simscape_wheel_build" src="../../fig2026/Sim3.png" alt="Wheel model in Simscape Multibody" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Simscape Multibody subassemblies used in the milestone model (body and wheel).</figcaption>
+</figure>
+
+<p>To connect these solid parts into a coherent rigid assembly, the model uses the <strong>Rigid Transform</strong> block. Rigid Transform defines a fixed relative translation and rotation between two frames, and is used throughout the model to place wheels relative to the cart frame, to set offsets between the pendulum body and its reference frame, and to position auxiliary masses such as the breadboard and the battery. In practice, the most important parameters in these blocks are the <em>mass</em> and <em>size</em> of the wheel and body solids, and the mass/size assigned to the breadboard circuit and battery modules. These parameters shape the inertia and therefore strongly affect how "aggressive" the stabilizing controller must be.</p>
+<p>One advantage of the multibody approach is that you can visualize the 3D motion during simulation and directly connect measured signals (joint angles, positions) to the controller. If you prefer a purely analytical plant, you may also represent the dynamics using a State-Space block (Simulink <span class="arithmatex">\(\rightarrow\)</span> Continuous) by entering the linearized <span class="arithmatex">\(A,B,C,D\)</span> matrices derived earlier. Both representations are valid; this task focuses on understanding the multibody modeling workflow provided by the course.</p>
+<h3 id="controller-internal-setup">Controller Internal Setup<a class="headerlink" href="#controller-internal-setup" title="Permanent link">&para;</a></h3>
+<p>The physical model contains joints that define how bodies move relative to each other. In the provided example, the body is connected to the cart through a hinge-like rotational joint, and the cart is allowed to move along the ground direction through a translational joint. In Simscape Multibody, the hinge joint is the <strong>Revolute Joint</strong> block. The cart translation is modeled using a <strong>Prismatic Joint</strong> block. These joints are not only mechanical constraints; they are also the main source of feedback signals in the simulation.</p>
+<p>In the real hardware, the tilt angle is estimated from two photo-reflectors (photo-interrupter style sensors) that observe the reflected infrared light from the ground surface. The interaction between the wheel and ground is also not "measured" as wheel-ground friction; instead, the cart motion is the result of the motor drive and the ground reaction. To keep the milestone model focused and controllable, the simulation abstracts these realities: the tilt angle is taken directly from the Revolute Joint angle, and the cart-ground interaction is represented by the Prismatic Joint coordinate. This makes it straightforward to close a feedback loop while still reflecting the essential mechanical constraints of the system.</p>
+<p>Figure (<a href="#fig:simscape_joints_actuation">Fig.</a>) highlights how the angle joint and the translation joint are configured in the provided model. The Revolute Joint provides the body angle (and, if enabled, angular velocity). The Prismatic Joint provides the cart position (and velocity). In addition, the Prismatic Joint is used as the actuation point in the milestone example: by driving the prismatic motion/force (depending on the actuation setting), the model produces cart motion that stabilizes the body. If you later implement position control, you will naturally read cart position from the Prismatic Joint, and if you implement velocity control you will either read prismatic velocity directly or estimate it through encoder-like quantization (see the assignment at the end of this section).</p>
+<figure id="fig:simscape_joints_actuation">
+<div class="center">
+<img src="../../fig2026/Sim5.png" alt="Joint configuration in the provided multibody model." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Joint configuration in the provided multibody model. The body angle is obtained from a <strong>Revolute Joint</strong> (hinge), while cart translation along the ground direction is modeled by a <strong>Prismatic Joint</strong>. The prismatic joint can also be used as the actuation point and as a source of position/velocity signals for outer-loop control.</figcaption>
+</figure>
+
+<p>With these signals available, the controller block closes the stabilizing loop. In the milestone example, the controller uses only the pendulum tilt angle as the primary feedback signal, i.e., it is an <em>angle-only</em> stabilizer. Position and speed loops are intentionally left out of the default configuration so that students can extend the model systematically.</p>
+<p>The high-level PID controller subsystem is shown in Figure (<a href="#fig:simulink_highlevel">Fig.</a>).</p>
+<figure id="fig:simulink_highlevel">
+<div class="center">
+<img src="../../fig2026/Sim4.png" alt="PID controller subsystem used in the milestone example." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>PID controller subsystem used in the milestone example. The provided controller stabilizes the inverted pendulum by regulating the tilt angle. PID parameters can be tuned manually or with the PID Tuner workflow.</figcaption>
+</figure>
+
+<h3 id="running-the-simulation">Running the Simulation<a class="headerlink" href="#running-the-simulation" title="Permanent link">&para;</a></h3>
+<p>Locate the provided <code>.slx</code> model file in the course material folder and open it in MATLAB. Before running, configure the simulation to match a realistic digital control loop. In <strong>Simulation</strong> <span class="arithmatex">\(\rightarrow\)</span> <strong>Model Configuration Parameters</strong> (Ctrl+E), use a <strong>fixed-step</strong> solver and choose a step size consistent with your intended control frequency (for example, 1 ms to match a 1 kHz loop, or another value if your real implementation uses a different rate). Matching the sample time is important because it affects stability margins and makes simulation results more predictive when you later transfer the controller to hardware.</p>
+<p>To observe stabilization, set a small initial tilt angle in the Revolute Joint (for example, <span class="arithmatex">\(\theta(0)=0.1\)</span> rad <span class="arithmatex">\(\approx 5.7^\circ\)</span>) so the controller has a disturbance to reject. Then run the simulation and open the angle scope to check whether the angle converges back to the upright equilibrium. If the model includes a disturbance input, you can also inject a brief impulse or step disturbance and examine how quickly the controller recovers.</p>
+<h3 id="pd-controller-design-and-parameter-tuning">PD Controller Design and Parameter Tuning<a class="headerlink" href="#pd-controller-design-and-parameter-tuning" title="Permanent link">&para;</a></h3>
+<p>The milestone controller focuses on balancing and therefore uses only the pendulum angle as feedback. In its simplest form, this is a PD law based on the angle <span class="arithmatex">\(\theta\)</span> and angular velocity <span class="arithmatex">\(\dot{\theta}\)</span>:</p>
+<div class="arithmatex">\[
+u = K_p \theta + K_d \dot{\theta}
+\label{eq:pd}
+\]</div>
+<p>Here, <span class="arithmatex">\(u\)</span> represents the actuation signal that drives the cart motion in the model. The proportional term provides the restoring tendency toward upright posture, while the derivative term provides damping that suppresses oscillation. In practice, angular velocity feedback is often filtered to reduce sensitivity to measurement noise; the Simulink PID block provides an internal derivative filter parameter for this purpose.</p>
+<h3 id="accessing-and-adjusting-pid-parameters">Accessing and Adjusting PID Parameters<a class="headerlink" href="#accessing-and-adjusting-pid-parameters" title="Permanent link">&para;</a></h3>
+<p>To modify the gains, open the controller subsystem (Figure (<a href="#fig:simulink_highlevel">Fig.</a>)) and double-click the PID block responsible for angle control. The block dialog exposes <span class="arithmatex">\(K_p\)</span>, <span class="arithmatex">\(K_d\)</span>, and the derivative filter coefficient <span class="arithmatex">\(N\)</span>. The provided model contains one working parameter set as a starting point; however, you should still change gains deliberately and observe how the time response changes, because the most valuable outcome of this task is understanding the relationship between physical parameters (mass/inertia) and control aggressiveness.</p>
+<p>If you want to tune more systematically, use the <strong>PID Tuner</strong> workflow. From the PID block dialog, select the tuning method that opens PID Tuner and click <strong>Tune</strong>. PID Tuner linearizes the plant at an operating point and proposes gains based on a chosen design focus. In this experiment, it is recommended to set the target response speed to match the real control bandwidth implied by your sample time. After tuning, use the button that updates the tuned gains back to the PID block so the simulation runs with the new parameters.</p>
+<h3 id="analyzing-simulation-results">Analyzing Simulation Results<a class="headerlink" href="#analyzing-simulation-results" title="Permanent link">&para;</a></h3>
+<p>After running the simulation, use the angle scope to evaluate whether the inverted pendulum is truly stabilized. A good stabilization run shows the angle converging back to zero (upright) with bounded overshoot, and the control effort decreasing as the system approaches equilibrium. If the model contains a control input scope, check that the actuation signal does not remain saturated for long periods; persistent saturation typically indicates gains that are too aggressive or a plant configuration that requires re-checking mass/inertia parameters.</p>
+<p>An example simulation result is shown in Figure (<a href="#fig:simulation_result">Fig.</a>).</p>
+<figure id="fig:simulation_result">
+<div class="center">
+<img src="../../fig2026/Sim6.png" alt="Screenshot of the simulation result (Sim6)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Screenshot of a simulation result (Sim6).</figcaption>
+</figure>
+
+<h3 id="what-to-look-for">What to Look For<a class="headerlink" href="#what-to-look-for" title="Permanent link">&para;</a></h3>
+<p>In a healthy run, the angle response should return toward zero with a decay of oscillation, and should not drift away over time. If the response diverges, the stabilizing gains are effectively too weak or have the wrong sign. If oscillation persists with nearly constant amplitude, damping is insufficient (derivative gain/filtering may need revision). If the response is extremely slow, gains are too conservative. If the actuation saturates for long durations, reduce aggressiveness or revisit the plant parameters (for example, overly large mass assignments to battery/breadboard can easily make the plant harder to balance).</p>
+<h3 id="optional-extensions">Optional Extensions<a class="headerlink" href="#optional-extensions" title="Permanent link">&para;</a></h3>
+<p>Once you can stabilize the angle in the milestone model, there are many directions to extend the simulation. A natural next step is to add outer-loop regulation for cart position and cart velocity using the signals available from the Prismatic Joint. Another direction is to compare manual PID tuning with more systematic methods such as full-state feedback or LQR, using the same test scenarios so that performance trade-offs are clear.</p>
+<h3 id="from-simulation-to-real-hardware">From Simulation to Real Hardware<a class="headerlink" href="#from-simulation-to-real-hardware" title="Permanent link">&para;</a></h3>
+<p>Once you are satisfied with simulation behavior, you can transfer the controller concept to the real hardware. However, it is important to remember what the simulation <em>abstracts away</em>. In hardware, the angle sensor is built from two photo-reflectors and therefore includes noise, floor reflectance dependence, and nonlinearities. Similarly, in hardware the cart motion is generated by motor torque and wheel-ground interaction, not by a perfectly actuated prismatic joint. This is why matching sample time and keeping control effort within realistic limits are critical if you want simulation results to remain useful.</p>
+<h3 id="discretization">Discretization<a class="headerlink" href="#discretization" title="Permanent link">&para;</a></h3>
+<p>The microcontroller implementation is discrete-time (sampling-based). Even if you use a continuous-time PID block in Simulink, the real controller will effectively operate with a sample time <span class="arithmatex">\(T_s\)</span>. For an inverted pendulum, <span class="arithmatex">\(T_s\)</span> in the 1--10 ms range is typical. A smaller <span class="arithmatex">\(T_s\)</span> generally improves phase margin and stability, but it also increases computational load and may magnify noise if velocity is estimated by differencing a quantized encoder signal.</p>
+<p>In the provided mbed code (see Section <a href="#sec:inverted-experiment">[sec:inverted-experiment]</a>), the timer interrupt is typically set to 1 ms (0.001 seconds), which corresponds to a sampling frequency of 1000 Hz. Make sure your Simulink simulation uses a fixed-step solver with the same time step for accurate prediction.</p>
+<h3 id="parameter-transfer">Parameter Transfer<a class="headerlink" href="#parameter-transfer" title="Permanent link">&para;</a></h3>
+<p>Record the final <span class="arithmatex">\(K_p\)</span> and <span class="arithmatex">\(K_d\)</span> values from your Simulink model. These will be directly entered into your mbed program as variables. For example, if your simulation uses <span class="arithmatex">\(K_p = 50\)</span> and <span class="arithmatex">\(K_d = 5\)</span>, you will write in your mbed code:</p>
+<div class="highlight"><pre><span></span><code>float Kp = 50.0;
+float Kd = 5.0;
+</code></pre></div>
+<p>Make sure the units are consistent. In simulation, angles might be in radians, while your sensor readings might need conversion from encoder counts to radians.</p>
+<h3 id="expected-differences-between-simulation-and-reality">Expected Differences Between Simulation and Reality<a class="headerlink" href="#expected-differences-between-simulation-and-reality" title="Permanent link">&para;</a></h3>
+<p>No simulation is perfect, and you should expect gaps between simulated and actual behavior. Model parameters (mass/inertia), unmodeled friction and backlash, and actuator saturation/dead-zone effects all matter. On the sensing side, real signals are noisy and quantized: photo-reflector angle estimates drift with floor reflectance, and encoder-based velocity estimates can become very noisy if obtained by simple differencing. Finally, computational delays and discretization can reduce stability margins. Therefore, treat simulation as a safe environment to validate ideas and obtain reasonable initial gains, then tune conservatively on the real system.</p>
+<h3 id="assignment-add-position-and-velocity-loops-with-encoder-like-feedback">Assignment: Add Position and Velocity Loops with Encoder-like Feedback<a class="headerlink" href="#assignment-add-position-and-velocity-loops-with-encoder-like-feedback" title="Permanent link">&para;</a></h3>
+<p>The milestone model stabilizes only the tilt angle. Your task is to extend it toward a more realistic control system by adding outer-loop regulation for cart motion and by modeling encoder-like feedback. A typical direction is to add a position loop that generates a velocity command, then a velocity loop that generates the actuation command used by the plant, while keeping the angle stabilizer as the innermost loop. You do not need to follow a single prescribed architecture, but you should clearly describe your chosen loop structure and justify it using simulation evidence.</p>
+<p>To mimic an encoder, do not use perfect continuous position and velocity signals directly. Instead, quantize the cart position into discrete counts, then reconstruct velocity by differencing (and filtering if needed). This will naturally introduce the same kind of jitter and delay that you will face on hardware. Use this encoder-like signal path to close the position/velocity loops and examine how robust the balancing behavior remains.</p>
+<p>Finally, evaluate your extended controller under meaningful commands and disturbances. At minimum, test a set of position references that includes a step, a ramp-like motion, and a back-and-forth (reciprocating) motion such as a sine wave or a piecewise constant command that alternates between two positions. In addition, add an external disturbance input (for example, a short impulse/force applied to the cart or body) and record how quickly the system returns to balance. Your report should include time responses of angle, cart position, and control effort, together with a short discussion of tuning decisions and the observed limits (saturation, oscillation, sensitivity to quantization noise).</p>
+<h2 id="supplements-troubleshooting-speed">Supplements: Troubleshooting &amp; Speed<a class="headerlink" href="#supplements-troubleshooting-speed" title="Permanent link">&para;</a></h2>
+<h3 id="supplement-1-huh-motor-became-weak-if-you-think-so">Supplement 1: Huh? Motor became weak? If you think so<a class="headerlink" href="#supplement-1-huh-motor-became-weak-if-you-think-so" title="Permanent link">&para;</a></h3>
+<p>Breadboard has relatively large contact resistance, and especially around motor driver where large current flows, troubles caused by that contact resistance tend to occur. If you think motor power became weak, try inserting and removing motor driver and jumper wires around it several times.</p>
+<p>This driver flows maximum 1A current to motor (voltage at that time is about 1V). On the other hand, jumper wire is only in contact sandwiched by 2 metal plates inside breadboard, and there is certain contact resistance in that contact part. For example, if contact resistance is 0.5<span class="arithmatex">\(\Omega\)</span>, voltage drop when 1A flows here is 0.5V, which becomes value that cannot be ignored compared to motor drive voltage.</p>
+<p>Actually contact resistance is not that large, but it seems there are many cases where contact resistance increases over time due to oxidation of metal on terminal surface. Especially, there is a story that contact part where large current flows generates heat by contact resistance, and that heat promotes oxidation and contact resistance tends to increase. In other words, very inconvenient situation for motor and driver exists on breadboard. Therefore, if you feel \"Performance became worse though program is unchanged from before\", suspect increase in contact resistance. By inserting and removing driver chip and jumper wires several times, oxide film on surface can be removed and contact state can be restored.</p>
+<p>Pay special attention to path where large current flows around driver. Tracing current path to motor: \"Battery + pole\" <span class="arithmatex">\(\rightarrow\)</span> \"VCC terminal (of driver)\" <span class="arithmatex">\(\rightarrow\)</span> \"OUT1(or 2) terminal\" <span class="arithmatex">\(\rightarrow\)</span> \"Motor\" <span class="arithmatex">\(\rightarrow\)</span> \"OUT2(or 1) terminal\" <span class="arithmatex">\(\rightarrow\)</span> \"ISEN terminal\" <span class="arithmatex">\(\rightarrow\)</span> \"GND\" <span class="arithmatex">\(\rightarrow\)</span> \"Battery - pole\". It is good to check this path intensively.</p>
+<h3 id="supplement-2-for-speeding-up">Supplement 2: For Speeding Up<a class="headerlink" href="#supplement-2-for-speeding-up" title="Permanent link">&para;</a></h3>
+<p>According to datasheet (not simplified version distributed, but formal datasheet issued by TI<sup id="fnref:27"><a class="footnote-ref" href="#fn:27">8</a></sup>), motor driver used this time has protection circuit that works when current exceeds 1.3A and trips (cuts off circuit and makes current 0A). When actually connecting motor and measuring, it has been confirmed that it trips at around average current 1.1A probably because motor current is pulsating. Since motor stops when tripping, the control program sets upper limit of motor voltage so as not to trip driver (see <code>VLIMIT</code> definition in ). Let's consider this upper limit value.</p>
+<p>Relationship between voltage <span class="arithmatex">\(V\)</span> applied by motor driver to motor and current <span class="arithmatex">\(I\)</span> actually flowing in motor is expressed as follows if inductance of motor winding is ignored.
+$$
+V = (R_m + R_c) I + \kappa\omega_m
+\label{eq:motor_voltage_current}
+$$
+where <span class="arithmatex">\(R_m\)</span> is winding resistance of motor, <span class="arithmatex">\(R_c\)</span> is resistance of motor drive circuit, <span class="arithmatex">\(\kappa\)</span> is back EMF constant (<span class="arithmatex">\(\approx\)</span> torque constant), <span class="arithmatex">\(\omega_m\)</span> is motor rotation speed (rad/s). In this motor, winding resistance <span class="arithmatex">\(R_m\)</span> (fluctuates depending on how brush inside motor hits = angle of motor shaft) is estimated to be about 0.7<span class="arithmatex">\(\Omega\)</span> on average, and back EMF constant <span class="arithmatex">\(\kappa\)</span> about 2.7mV s/rad. Circuit resistance <span class="arithmatex">\(R_c\)</span> is about 0.5<span class="arithmatex">\(\Omega\)</span> (Assume ON resistance of driver 0.45<span class="arithmatex">\(\Omega\)</span> + resistance of breadboard 0.05<span class="arithmatex">\(\Omega\)</span>). Most current flows when motor rotation speed is zero where back EMF disappears, but to keep motor current <span class="arithmatex">\(I\)</span> at this time below 1.1A, it is understood that driver output voltage <span class="arithmatex">\(V\)</span> should be limited to 1.32V or less.</p>
+<p>Motor driver is designed to output 4 times voltage applied to VSET pin to motor. Therefore, upper limit of voltage applied to VSET is 1.32/4=0.33V. VSET pin is connected to p18 (AnalogOut) of mbed, but to suppress voltage of p18 to 0.33V, upper limit of value written to p18 in program is <span class="arithmatex">\(0.33/3.3=0.1\)</span> (1.0 corresponds to maximum value of DA converter = 3.3V). For this reason, the control program sets <code>VLIMIT = 0.1</code> by default. (Note that since there are individual differences in drivers and motors, people whose driver trips immediately should try lowering this upper limit value a little).</p>
+<p>Now, this is fine when motor is stationary, but when motor starts rotating, voltage decreases by back EMF, so sufficient current cannot flow with this upper limit. For example, if motor rotates 20 times per second (at this time, tire rotates about 2 times per second), back EMF of about 0.34V is generated. Then, even if upper limit 0.1 is written to p18 and driver generates 1.32V, only about 0.8A flows to motor. Since motor torque is proportional to flowing current, sufficient torque cannot be generated as it is.</p>
+<p>Therefore, if you want to increase running speed of inverted pendulum, it is necessary to increase output upper limit according to speed taking above back EMF into account. If increased well, stable inversion can be maintained even at high speed (Be careful as driver trips and inverted pendulum falls easily if upper limit is not set well).</p>
+<h3 id="supplement-3-defect-of-jumper-wire">Supplement 3: Defect of Jumper Wire<a class="headerlink" href="#supplement-3-defect-of-jumper-wire" title="Permanent link">&para;</a></h3>
+<p>In this practice, jumper wires for breadboard (wires with pins installed at both ends to be easily inserted into breadboard) are used. Pin part of this jumper wire rarely breaks. Operation failure due to disconnection of jumper wire is quite difficult to find, but when \"Circuit should be built correctly, but it doesn't work at all!\", suspect defect of jumper wire. To actually find defect of jumper wire, pull out jumper wire of suspicious place and check continuity with tester.</p>
+<p>Such defects are often caused by poor handling of jumper wires. Be careful not to forcibly bend or pull jumper wire (tip part). Even if you do not suffer damage, next group person might suffer damage.</p>
+<h2 id="week-2-submission">Week 2 Submission<a class="headerlink" href="#week-2-submission" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Submission</p>
+<p>Your system should demonstrate encoder-based position/velocity sensing and improved stability with position control. Submit a <strong>single group report</strong> containing:</p>
+<hr />
+<p><strong>Deliverable</strong>                <strong>Max</strong>  <strong>Scoring guide</strong></p>
+<hr />
+<p>Position-control video            8     <strong>8 pts:</strong> inversion <span class="arithmatex">\(\geq\)</span>10 s within <span class="arithmatex">\(\pm\)</span>0.5 m of set-point.\
+                                          <strong>5 pts:</strong> inversion held but position drift is large.\
+                                          <strong>0 pts:</strong> inversion lost within 5 s.</p>
+<p>Encoder A/B plots                 7     <strong>7 pts:</strong> A/B waveforms clearly labeled <em>and</em> direction reversal verified (CW vs. CCW phase shift).\
+                                          <strong>5 pts:</strong> waveforms shown but direction not verified.\
+                                          <strong>2 pts:</strong> pulse count only, no phase analysis.\
+                                          <strong>0 pts:</strong> not submitted.</p>
+<p>Sim vs. hardware comparison       5     <strong>5 pts:</strong> <span class="arithmatex">\(x(t)\)</span> and <span class="arithmatex">\(\dot{x}(t)\)</span> plots for both sim and hardware, <em>with</em> discrepancy explained.\
+                                          <strong>3 pts:</strong> plots included but no explanation of differences.\
+                                          <strong>1 pt:</strong> qualitative description only (no plots).</p>
+<hr />
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:20">
+<p>This time we use a reflective photo-interrupter so it is a black and white pattern, but generally transmissive photo-interrupters and slit disks are often used&#160;<a class="footnote-backref" href="#fnref:20" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:21">
+<p>Access the course materials repository at <a href="https://github.com/UTokyo2026/UTokyo-Control-Practice-2026">https://github.com/UTokyo2026/UTokyo-Control-Practice-2026</a>&#160;<a class="footnote-backref" href="#fnref:21" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:22">
+<p>Appendix <a href="../appendix/#app:processing">app:processing</a>: Processing Oscilloscope Manual.&#160;<a class="footnote-backref" href="#fnref:22" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:23">
+<p>A video demonstration of the debugging and tuning process is available in the course materials repository:&#160;<a class="footnote-backref" href="#fnref:23" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:24">
+<p>If using Matlab, freqz(b,a) or bode(tf(b,a,sampling time)) allows checking the frequency response of the filter.&#160;<a class="footnote-backref" href="#fnref:24" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:25">
+<p>In a 1st order LPF, phase delays by 90 degrees in high frequency band. Considering the case where inclination angle changes sinusoidally, its derivative (= angular velocity) must be advanced by 90 degrees phase relative to inclination angle, but at high frequencies, phase delays by 90 degrees due to the filter, so passing the differentiation result through the filter results in the same phase as the original inclination angle. This is no longer differentiation. Therefore, at high frequencies, even if intending to do derivative control, it is actually the same as doing proportional control. Thus, easily increasing derivative gain makes proportional gain substantially large in high frequency band, resulting in oscillatory and unstable response.\&#160;<a class="footnote-backref" href="#fnref:25" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:26">
+<p>Ratio of P gain and D gain is easy to understand when compared with standard form of 2nd order lag. If spring constant and damping coefficient are <span class="arithmatex">\(K_p\)</span> and <span class="arithmatex">\(K_d\)</span>, transfer function from external force to position is
+$$
+\frac{X(s)}{F(s)}=\frac{1}{ms^2+K_d s+K_p}=\frac{1/m}{s^2+(K_d/m)s+K_p/m}
+$$
+On the other hand, standard form is
+$$
+G(s)=\frac{\omega_n^2}{s^2+2\zeta \omega_n s+\omega_n^2}
+$$
+Comparing both, it can be seen that <span class="arithmatex">\(K_d/K_p = 2\zeta/\omega_n\)</span>.&#160;<a class="footnote-backref" href="#fnref:26" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:27">
+<p><a href="https://www.tij.co.jp/product/jp/DRV8832#tech-docs">https://www.tij.co.jp/product/jp/DRV8832#tech-docs</a>&#160;<a class="footnote-backref" href="#fnref:27" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/UTokyo2026/pendulum-lab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/lang-sync.js"></script>
+      
+        <script src="../../javascripts/figure-refs.js"></script>
+      
+        <script src="../../javascripts/mathjax-config.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

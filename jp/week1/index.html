@@ -1,0 +1,2513 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UTokyo Precision Engineering – Inverted Pendulum Fabrication Exercise 2026">
+      
+      
+        <meta name="author" content="UTokyo2026">
+      
+      
+        <link rel="canonical" href="https://utokyo2026.github.io/pendulum-lab/jp/week1/">
+      
+      
+        <link rel="prev" href="../overview/">
+      
+      
+        <link rel="next" href="../week2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Week 1：組立と立ち上げ - Wheeled Inverted Pendulum</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Serif";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/figure-numbering.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#page:w1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-header__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wheeled Inverted Pendulum
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Week 1：組立と立ち上げ
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      <div class="md-header__tabs" aria-label="Tabs">
+        <ul class="md-tabs__list">
+          
+            
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../en/intro/" class="md-tabs__link">
+          
+  
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+          
+            
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../intro/" class="md-tabs__link">
+          
+  
+  
+  日本語
+
+        </a>
+      </li>
+    
+  
+
+          
+        </ul>
+      </div>
+    
+
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-nav__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Wheeled Inverted Pendulum
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/UTokyo2026/pendulum-lab" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    UTokyo2026/pendulum-lab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/grading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grading Criteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1: Assembly & Bring-up
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2: Encoder & Position Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3: Advanced Modeling & Load Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4: Final Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日本語
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    日本語
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    はじめに・日程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    制御概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1：組立と立ち上げ
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1：組立と立ち上げ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#w1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Week 1 の概要と到達目標
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w1-electronic-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        電子部品の解説
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="電子部品の解説">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sec:passive_markings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        抵抗とコンデンサの表記（値と極性）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="抵抗とコンデンサの表記（値と極性）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-resistors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        抵抗：抵抗値の見分け方
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-capacitors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        コンデンサ：容量表示と極性の見方
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-motor-driver" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        モータドライバ（DRV8832）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-photo-interrupter-angle-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        フォトインタラプタと傾斜センサ
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="フォトインタラプタと傾斜センサ">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-photo-interrupter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        フォトインタラプタ
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-angle-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        傾斜センサ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-three-terminal-regulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三端子レギュレータ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w1-parallel-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        並列で進める組立作業
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="並列で進める組立作業">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sec:w1-mechanical-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task A：機械組立（学生A）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task A：機械組立（学生A）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-task-a-angle-sensor-attach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        傾斜センサの取り付け
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-task-a-motor-attach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DC モータの取り付け
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-task-a-breadboard-attach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ブレッドボードの取り付け
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-task-a-battery-attach" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        電池ボックスの取り付け
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec:w1-microcontroller-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task B：マイコンのセットアップ（学生B）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task B：マイコンのセットアップ（学生B）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-keil-signup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keil Studio Cloud の準備
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-compile-sample" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        サンプルプログラムのコンパイル
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-pin-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ピン機能の見方
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-control-program-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        制御プログラムの基本
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-serial-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        シリアル通信とデバッグ
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec:w1-breadboard-wiring-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task C：ブレッドボード配線設計（学生C）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task C：ブレッドボード配線設計（学生C）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-breadboard-howto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ブレッドボードの使い方
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-fritzing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fritzing による回路設計
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-sync-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        合流ポイント（全員）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec:w1-circuit-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回路組立（チーム作業）
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="回路組立（チーム作業）">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-safety" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        安全上の注意
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-assembly-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        組立方針（3段階）
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1：モータドライバとモータの確認
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 1：モータドライバとモータの確認">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-1-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目標
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-1-parts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1 で使用する部品
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-1-wiring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配線手順
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-1-debug-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        サンプルプログラムとデバッグツール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-1-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        確認チェックリスト
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2：傾斜センサの確認
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 2：傾斜センサの確認">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-2-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目標
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-2-parts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2 で追加する部品
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-2-wiring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        配線手順
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-2-debug-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        サンプルプログラムとデバッグツール
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-2-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        確認チェックリスト
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3：全体回路の統合
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 3：全体回路の統合">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-3-objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        目標
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-3-final-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        最終組立
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-stage-3-notes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        回路組立の一般的な注意事項
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#w1-integration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        統合テスト
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec:w1-standup-pre-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        チーム最終課題：倒立実験（エンコーダ追加前）
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w1-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Week 1 提出物
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2：エンコーダと位置制御
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3：高度なモデル化と負荷試験
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4：最終発表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    付録
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="page:w1">Week 1: 組立と立ち上げ<a class="headerlink" href="#page:w1" title="Permanent link">&para;</a></h1>
+<h2 id="w1-overview">Week 1 の概要と到達目標<a class="headerlink" href="#w1-overview" title="Permanent link">&para;</a></h2>
+<p>Week 1 では，倒立振子のハードウェア基盤を組み立て，立ち上げることに集中します．作業は大きく二つに分かれます． 一つ目は，異なる学生が同時に進められる 3 つの<strong>並列タスク</strong>，二つ目は，回路を段階的に組み立てて確認していく<strong>チームでの立ち上げ作業</strong>です．</p>
+<p><strong>到達目標：</strong></p>
+<ul>
+<li>
+<p>機械系の組立（センサ，モータ，ブレッドボード，電池ボックス）を完了する</p>
+</li>
+<li>
+<p>マイコン開発環境を整え，ツールチェーンとシリアルデバッグを確認する</p>
+</li>
+<li>
+<p>実際のブレッドボード配線に着手する前に，Fritzing 上で全配線を設計する</p>
+</li>
+<li>
+<p>回路を 3 段階（モータ <span class="arithmatex">\(\rightarrow\)</span> 角度センサ <span class="arithmatex">\(\rightarrow\)</span> 全体統合）で組み立て，段階ごとに確認する</p>
+</li>
+<li>
+<p>写真，Fritzing ファイル，立ち上げ結果などの提出用記録を残す</p>
+</li>
+</ul>
+<p><strong>並列タスクの推奨分担：</strong> 学生 A（機械），学生 B（マイコン），学生 C（Fritzing／配線設計）．役割は途中で入れ替えても構いませんが，段階ごとの立ち上げと確認には全員が参加してください．</p>
+<h2 id="w1-electronic-components">電子部品の解説<a class="headerlink" href="#w1-electronic-components" title="Permanent link">&para;</a></h2>
+<p>次に電子回路を組み立てますが，その前に使用する部品について説明します．具体的な回路組立作業はこの Week 1 の後半で説明しますので，まずはここを読んで部品の役割を把握しておいてください．</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>半導体部品（マイコンなどの IC，LSI）は静電気で壊れやすいので，特に乾燥した時期は端子に素手で触れないよう注意してください．</p>
+</li>
+<li>
+<p><em>人の身体は帯電しています．</em> 電子回路の組立前には，ドアや机の金属部分など，大きな導体に触れて身体の電気を逃がしてください．</p>
+</li>
+<li>
+<p>放電後も，作業中に再び帯電しないよう気をつけてください．椅子の上で体をずらしたり，セータを脱いだりするだけでも静電気が発生します．</p>
+</li>
+<li>
+<p>放電した後でも念のため，IC／LSI の端子には直接触れないでください．</p>
+</li>
+</ul>
+</div>
+<h3 id="sec:passive_markings">抵抗とコンデンサの表記（値と極性）<a class="headerlink" href="#sec:passive_markings" title="Permanent link">&para;</a></h3>
+<h4 id="w1-resistors">抵抗：抵抗値の見分け方<a class="headerlink" href="#w1-resistors" title="Permanent link">&para;</a></h4>
+<p>抵抗値は，テスタ（<span class="arithmatex">\(\Omega\)</span> レンジ）で実測するか，カラーコードを読んで確認します．正確に測りたい場合は，並列経路の影響を避けるため，<em>回路から外した状態</em>（少なくとも片側の足を浮かせた状態）で測るのが望ましいです．\
+<strong>4本帯カラーコード（最も一般的）：</strong> 1 本目＝1 桁目，2 本目＝2 桁目，3 本目＝乗数，4 本目＝許容差を表します．\
+<strong>数字に対応する色：</strong> 黒=0，茶=1，赤=2，橙=3，黄=4，緑=5，青=6，紫=7，灰=8，白=9 です．</p>
+<ul>
+<li><strong>例（100<span class="arithmatex">\(\Omega\)</span>，4 本帯）：</strong> <strong>茶--黒--茶</strong> に，許容差として <strong>金</strong>（<span class="arithmatex">\(\pm 5\%\)</span>）または <strong>茶</strong>（<span class="arithmatex">\(\pm 1\%\)</span>）が付くのが一般的です．茶=1，黒=0 なので最初の 2 本で "10"，3 本目の茶は乗数 <span class="arithmatex">\(\times 10^{1}\)</span> を表すので，<span class="arithmatex">\(10 \times 10 = 100\,\Omega\)</span> となります．</li>
+</ul>
+<p>精密抵抗では 5 本帯の場合もありますが，考え方は同じです（有効数字が増え，最後に乗数と許容差が付く）．\
+<strong>数字表記（主にチップ抵抗）：</strong> 抵抗には数字が印字されていることもあります．考え方はコンデンサの 3 桁コードと似ていますが，<strong>単位は <span class="arithmatex">\(\Omega\)</span></strong> です．一般的な 3 桁コードでは，最初の 2 桁が有効数字，3 桁目がゼロの個数（<span class="arithmatex">\(\times 10^n\)</span>）を表します．例えば <strong><code>101</code></strong> は <span class="arithmatex">\(10 \times 10^{1}=100\,\Omega\)</span>，<strong><code>102</code></strong> は <span class="arithmatex">\(10 \times 10^{2}=1\,\textrm{k}\Omega\)</span> を意味します．</p>
+<h4 id="w1-capacitors">コンデンサ：容量表示と極性の見方<a class="headerlink" href="#w1-capacitors" title="Permanent link">&para;</a></h4>
+<p>小型のバイパスコンデンサの多くは無極性（セラミック，フィルムなど）で，向きを気にせず挿せます．一方，電解コンデンサやタンタルコンデンサは有極性なので，向きを正しく入れる必要があります．</p>
+<ul>
+<li>
+<p><strong>代表的な表示：</strong> <code>0.1u</code> や <code>100n</code> のように値が直接書かれているものもあれば，小型セラミックでは pF 単位の 3 桁コードが用いられることも多いです（最初の 2 桁が有効数字，3 桁目がゼロの個数）．例えば <strong><code>104</code></strong> は <span class="arithmatex">\(10 \times 10^{4}\,\mathrm{pF}=100\,\mathrm{nF}=0.1\,\mu\mathrm{F}\)</span> を意味します．</p>
+</li>
+<li>
+<p><strong>有極性と無極性：</strong> セラミック／フィルム系は <strong>無極性</strong>，アルミ電解やタンタルは <strong>有極性</strong> です．一般的なアルミ電解では，本体の帯が <strong>負極</strong> を示し，長い足が <strong>正極</strong> であることが多いです．基板上では <code>+</code> 表示が付いていることもあります．</p>
+</li>
+</ul>
+<h3 id="w1-motor-driver">モータドライバ（DRV8832）<a class="headerlink" href="#w1-motor-driver" title="Permanent link">&para;</a></h3>
+<p>先ほどの説明では，7 行目で p18 に出力した電圧でモータを駆動することを想定していましたが，mbed の出力から取り出せる電流は小さいため，ピンに直接モータをつないでも駆動できません．そこで，大電流を流せるモータドライバ IC を介してモータを駆動します．</p>
+<p>今回用いるドライバは Texas Instruments 社の DRV8832 です．チップ単体では小さく扱いにくいため，基板実装済みのもの（AE-DRV8832：秋葉原の秋月電子で販売）を使用します． この基板には 3 本の入力ピンがあり，うち 2 本（IN1, IN2）がモータの回転方向（電圧の符号）を決め，残り 1 本（VSET）が印加電圧の大きさを決めます．回転方向を決める 2 本には mbed のデジタル出力を直接つなぎ，印加電圧を指示するピンには mbed のアナログ出力を接続します．また，電流制限用のピン（ISENSE, pin 2）もありますが，今回は電流制限を使わないので GND（0V，この回路では電池のマイナス側）へ直結します．</p>
+<p>モータから出ている 2 本の線はドライバの 1 番ピンと 3 番ピンにつなぎますが，今後の実験ではモータとドライバの接続を何度も抜き差しすることになります．ただし，モータ線は柔らかく，ブレッドボードへの抜き差しがしにくいので，モータ線をドライバに直接つなぐのではなく，別のジャンパ線を介して接続してください．抜き差ししにくいモータ線はブレッドボードに挿したままにし，ジャンパ線だけで着脱できるようにしておくと便利です．</p>
+<p>モータドライバの詳細については，回路例 <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">1</a></sup> およびデータシート <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">2</a></sup> を参照してください．</p>
+<h3 id="w1-photo-interrupter-angle-sensor">フォトインタラプタと傾斜センサ<a class="headerlink" href="#w1-photo-interrupter-angle-sensor" title="Permanent link">&para;</a></h3>
+<h4 id="w1-photo-interrupter">フォトインタラプタ<a class="headerlink" href="#w1-photo-interrupter" title="Permanent link">&para;</a></h4>
+<p>本演習の倒立振子では，すべてのセンサ（傾斜センサ，および後で説明するロータリーエンコーダ）をフォトインタラプタで実現します．フォトインタラプタは非常に安価に入手でき，今回用いるものも秋葉原で 1 個 40 円程度で購入できます．演習の都合上，フォトインタラプタを使った傾斜センサはあらかじめ用意してありますが，後述のロータリーエンコーダは各自で製作してもらいます．</p>
+<p>フォトインタラプタは，LED とフォトトランジスタを組み合わせた光学素子です．多くの場合，赤外域の光を用いるため，発光は目には見えません．Figure (<a href="#fig:interrupter">Fig.</a>) に示すように，フォトインタラプタには反射型と透過型があり，それぞれ反射光または透過光の有無によって物体の有無を検出します．特に反射型では，反射光量が対象物表面の反射率（<span class="arithmatex">\(\approx\)</span> 色）や対象物までの距離によって変化するため（データシート Fig.7 参照），白黒を見分けるセンサとしてだけでなく，色センサや距離センサとしても利用できます．今回はこの距離センサとしての性質を利用して，傾斜センサを実現しています．（後で説明するロータリーエンコーダでは，スケール表面の白黒パターンを読み取ります．）</p>
+<figure id="fig:interrupter">
+<div class="center">
+<img src="../../figs/photo_interrupters.png" alt="Photo-interrupters (reflective and transmissive types)." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Photo-interrupters (reflective and transmissive types).</figcaption>
+</figure>
+
+<p>フォトインタラプタの基本回路を Figure (<a href="#fig:pi_circuit">Fig.</a>) に示します．まず LED を点灯させる必要があります．データシート <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">3</a></sup> を見ると，順方向電圧 <span class="arithmatex">\(V_F\)</span>（1.2V）と，点灯時の代表電流値（20mA）が示されています． 順方向電圧とは，LED 動作時に LED 両端へかかる電圧降下です．今回は後述の三端子レギュレータの 3.3V を電源電圧（VCC）として使うため，順方向電圧が 1.2V なら，残りの 2.1V を直列抵抗で落とす必要があります．20mA 流したときに 2.1V 落とす抵抗値は，オームの法則より <span class="arithmatex">\(R=2.1\textrm{V}/20\textrm{mA}=105\Omega\)</span> ですが，<span class="arithmatex">\(105\Omega\)</span> は一般的でないので，近い値の <span class="arithmatex">\(100\Omega\)</span> を用います． 抵抗値の読み方（カラーコードやテスタによる測定）については第<a href="#sec:passive_markings">3.2.1</a>節を参照してください．</p>
+<figure id="fig:pi_circuit">
+<div class="center">
+<img src="../../figs/pi_circuit.png" alt="Basic photo-interrupter circuit diagram." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Basic photo-interrupter circuit diagram.</figcaption>
+</figure>
+
+<p>絶対最大定格（今回は 50mA）を超える電流が流れると，LED は一瞬で壊れます．したがって，<strong>抵抗を入れずに直接電源へ接続してはいけません</strong>．（配布済みの傾斜センサには，これを防ぐために最初から配線先端へ <span class="arithmatex">\(100\Omega\)</span> の抵抗が半田付けしてあります．）</p>
+<p>受光側のフォトトランジスタでは，エミッタ側に抵抗をつないで電圧を読み取ります（コレクタ側に抵抗を付ける構成でも構いませんが，その場合は出力電圧の極性が逆になります）．光が入るとコレクタ・エミッタ間に電流が流れ，その電流が外付け抵抗を流れることで電圧に変換されます．得られる電圧は概ね入射光量に比例します．外付け抵抗の値は，データシートと実機の状況を見ながら決めます．同じ光量なら抵抗値が大きいほど大きな電圧が得られますが，出力は電源電圧を超えられないので，飽和しないよう適切な値を選んでください．</p>
+<p>フォトインタラプタの LED は赤外光で目に見えないため，本当に点灯しているのか不安になるかもしれません．そのようなときは，スマートフォンや PC のカメラで LED を見てみましょう．紫っぽく光って見えるはずです．ただし，機種によってはカメラ部に赤外カットフィルタが入っており，赤外 LED が見えないことがあります．その場合は前面カメラも試してください．前面カメラは赤外をあまりカットしていないことが多いです．自分のスマートフォンに赤外カットフィルタがあるか調べたい場合は，テレビのリモコン送信部をカメラで見てみるとわかります．フィルタが無ければ，ボタンを押したときにかなり強く光って見えるはずです（今回のフォトインタラプタはそれよりかなり暗いです）．</p>
+<h4 id="w1-angle-sensor">傾斜センサ<a class="headerlink" href="#w1-angle-sensor" title="Permanent link">&para;</a></h4>
+<p>倒立振子の傾斜角測定にはジャイロセンサがよく使われますが，ジャイロセンサが直接測っているのは角速度であり，角度を求めるには積分が必要です（その際，ドリフトの問題があります）．今回は，より直接的に角度を得るためにフォトインタラプタを用います．</p>
+<p>倒立振子の底面には，すでに傾斜センサが取り付けられているはずです．この傾斜センサは 2 個のフォトインタラプタから構成されており，機体前後のフォトインタラプタが床面までの距離（反射光量）をそれぞれ測り，その差分を角度として出力します．</p>
+<p>したがって，測っているのは鉛直面に対する角度ではなく，床面に対する角度です．そのため，床の傾きが変わると，鉛直基準で見たときのセンサ出力には誤差が生じます．</p>
+<p>また，床面の反射率が変わるとセンサ感度も変化します．反射率の高い（明るい）床面では，傾斜が大きめに出る傾向があります．ただし，ここでいう明るさは赤外域での明るさなので，可視光で見た明るさと一致するとは限りません．</p>
+<h3 id="w1-three-terminal-regulator">三端子レギュレータ<a class="headerlink" href="#w1-three-terminal-regulator" title="Permanent link">&para;</a></h3>
+<p>今回は倒立振子全体の電源として電池を用いますが，電池から大電流を取り出すと，内部抵抗のために電圧が低下します．この回路ではモータ駆動に伴って大きな電流が流れるため，電池電圧はモータの動作に応じて大きく変動します． この変動した電圧でフォトインタラプタを駆動すると，センサ出力に大きなノイズが重畳してしまいます．そこで，フォトインタラプタ用の電圧は三端子レギュレータで安定化します．</p>
+<p>三端子レギュレータは，変動する電圧を入力し，それより低い一定電圧を出力する IC です．三端子レギュレータにはさまざまな型番がありますが，基本的には型番末尾の数字が出力電圧を表します．今回は LD33（正確には LD1117V33） <sup id="fnref:6"><a class="footnote-ref" href="#fn:6">4</a></sup> を使用します．出力電圧は 3.3V です．フォトインタラプタ関連の電圧はすべてこの三端子レギュレータの出力を用いてください．一方で，モータ用電源とフォトインタラプタ用電源は分離したいので，<em><strong>モータドライバの電源は三端子レギュレータからではなく，電池から直接</strong>取ってください．</em></p>
+<p>実は mbed 基板上にも 3.3V の三端子レギュレータ（LD33 と書かれたチップ）が載っており，右上の VOUT ピンから安定化された 3.3V が出ています（Figure (<a href="#fig:mbed_pin">Fig.</a>) 参照）．この電圧を使ってもよいのですが，今回のブレッドボード配置ではこのピンにアクセスしづらいため，別途レギュレータを取り付けることにします．</p>
+<h2 id="w1-parallel-assembly">並列で進める組立作業<a class="headerlink" href="#w1-parallel-assembly" title="Permanent link">&para;</a></h2>
+<p>以下の 3 つの作業は並列に進めることができます．各作業の成果は，後半のチームによる回路組立と立ち上げで利用します．</p>
+<h3 id="sec:w1-mechanical-assembly">Task A：機械組立（学生A）<a class="headerlink" href="#sec:w1-mechanical-assembly" title="Permanent link">&para;</a></h3>
+<p>制御の概要がつかめたところで，倒立振子の組立を見ていきます．<strong>（実際の組立は演習当日に行いますが，あらかじめ一通り目を通しておいてください．）</strong><sup id="fnref:7"><a class="footnote-ref" href="#fn:7">5</a></sup> ここで用いる部品は以下の通りです<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">6</a></sup>．（電気系部品はこの Week 1 内で別途説明するため除いてあります．）</p>
+<ol>
+<li>
+<p>ユニバーサルボード（加工済み）＋車輪</p>
+</li>
+<li>
+<p>ユニバーサルボード＋ブレッドボード＋mbed LPC1768</p>
+</li>
+<li>
+<p>DC モータ（Mabuchi Motor RE-280RA） <sup id="fnref:9"><a class="footnote-ref" href="#fn:9">7</a></sup>（先端にゴムローラ取り付け済み）</p>
+</li>
+<li>
+<p>モータブラケット</p>
+</li>
+<li>
+<p>電池ボックス（単 3 充電池 4 本）</p>
+</li>
+<li>
+<p>傾斜センサ（本演習用の専用部品）</p>
+</li>
+<li>
+<p>L 字金具</p>
+</li>
+</ol>
+<p>車輪付きユニバーサルボード（No.1）が組立の中心になります．以下，このボードに各部品を取り付けていきます．</p>
+<h4 id="w1-task-a-angle-sensor-attach">傾斜センサの取り付け<a class="headerlink" href="#w1-task-a-angle-sensor-attach" title="Permanent link">&para;</a></h4>
+<p>まず，傾斜センサ（No.6）を車輪付きユニバーサルボード（No.1）の下面に取り付けます．Figure (<a href="#fig:angle_sensor">Fig.</a>) のように，L 字金具（No.7）を用いて固定してください．</p>
+<figure id="fig:angle_sensor">
+<div class="center">
+<img src="../../figs/angle_sensor.png" alt="Inclination sensor attachment (bottom view)." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Inclination sensor attachment (bottom view).</figcaption>
+</figure>
+
+<h4 id="w1-task-a-motor-attach">DC モータの取り付け<a class="headerlink" href="#w1-task-a-motor-attach" title="Permanent link">&para;</a></h4>
+<p>次に DC モータ（No.3）を取り付けます．モータブラケット（No.4）を用いて，ユニバーサルボード（No.1）の車軸と同じ面に固定してください（Figure (<a href="#fig:motor_setup">Fig.</a>) 参照）．ブラケット固定用のねじは少し小さい M2 ねじです．頭が小さく，付属ドライバでは回しにくいことがありますが，緩まないようしっかり締めてください．</p>
+<figure id="fig:motor_setup">
+<div class="center">
+<img src="../../figs/motor_tire.png" alt="Motor bracket and motor–tire contact (example)." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Motor bracket and motor–tire contact (example).</figcaption>
+</figure>
+
+<p>DC モータを固定する際は，ゴムローラがタイヤへ「軽く触れる」ように調整してください． <strong><em>強く押し付けすぎると駆動できなくなるので，軽く接する程度が重要です．</em></strong> ただし，タイヤは完全な真円ではないため，軽すぎると回転位置によってスリップすることがあります．タイヤを一周回し，どの位置でもローラが接触していることを確認してください．</p>
+<h4 id="w1-task-a-breadboard-attach">ブレッドボードの取り付け<a class="headerlink" href="#w1-task-a-breadboard-attach" title="Permanent link">&para;</a></h4>
+<p>ブレッドボードが載った No.2 のユニバーサルボードを，No.1 のユニバーサルボードへねじ止めします．No.2 側にはあらかじめボルトが立っているはずです．後で再装着しにくいので，ボルト自体は外さないでください（取付時にナットだけ着脱します）．No.1 側にはモータ固定用のねじもあるため，それらと干渉しない位置を選んでください．無理に重なった状態で締めると基板が割れます．次に電池ボックスも載せるので，その位置も考慮して配置を決めてください．</p>
+<p>mbed はすでにブレッドボードへ挿してあるはずです．USB ポートが上側に来る向きで取り付けてください．<em>mbed をブレッドボードから無理に抜くとピンが折れるので，外さないでください．</em></p>
+<h4 id="w1-task-a-battery-attach">電池ボックスの取り付け<a class="headerlink" href="#w1-task-a-battery-attach" title="Permanent link">&para;</a></h4>
+<p>最後に，電池ボックス（No.5）を両面テープで No.1 のユニバーサルボードへ固定します． 電池ボックスは最も重い部品なので，取り付け位置によって倒立振子の特性が変わります． 空いている場所ならどこに貼っても構いませんが，前後方向には注意してください．ふた側へテープを貼ると開閉できなくなります．また，背面スイッチに手が届く向きで貼るようにしてください．</p>
+<p>両面テープは思った以上に強力です．大量に貼ると剥がせなくなるため，上下に 5cm 程度ずつ貼れば十分です．</p>
+<p>ここまでで基本的な機械構造は完成です．完成例を Figure (<a href="#fig:machine">Fig.</a>) に示します．</p>
+<figure id="fig:machine">
+<div class="center">
+<img src="../../figs/assembled.png" alt="Assembled platform example (Week 1 stage)." style="max-width: 560px; width: 100%; height: auto;" />
+</div>
+<figcaption>Assembled platform example (Week 1 stage).</figcaption>
+</figure>
+
+<h3 id="sec:w1-microcontroller-setup">Task B：マイコンのセットアップ（学生B）<a class="headerlink" href="#sec:w1-microcontroller-setup" title="Permanent link">&para;</a></h3>
+<p>今回使うマイコンは mbed<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">8</a></sup> です． mbed の特徴は，C/C++ による開発環境がクラウド上に用意されており，サインアップすればすぐに開発を始められることです．また，プログラム書き込みも USB 接続した mbed が USB ドライブとして見えるため，コンパイルしたファイルをコピーするだけで済みます． mbed シリーズには複数の基板がありますが，今回は標準的な LPC1768 を用います．</p>
+<h4 id="w1-keil-signup">Keil Studio Cloud の準備<a class="headerlink" href="#w1-keil-signup" title="Permanent link">&para;</a></h4>
+<p>まず，Keil Studio Cloud<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">9</a></sup> へアクセスし，アカウントを作成してください． サインアップ後，付属 USB ケーブルでマイコンを PC に接続します．PC からは USB ドライブとして認識されます． コンパイラ画面左上の Build Target には，<strong>mbed LPC1768</strong> が選択されていることを確認してください．</p>
+<h4 id="w1-compile-sample">サンプルプログラムのコンパイル<a class="headerlink" href="#w1-compile-sample" title="Permanent link">&para;</a></h4>
+<p>コンパイラ画面のメニューから「File」<span class="arithmatex">\(\rightarrow\)</span>「New Project」を選び，mbed_blinky をひな形にした新しいプログラムを作成します（Figure (<a href="#fig:keil_interface">Fig.</a>)）．具体的には Example Project の下部にある <strong>Mbed2-example-blink</strong> を選び，Project Name を適当に設定してください．LED を点滅させるコードが入った新規プログラムが作られるので，まずはそのままコンパイルします．コンパイルはハンマ形のアイコンから実行できます．完了すると実行ファイル（拡張子 <code>.bin</code>）がダウンロードされるので，これを mbed の USB ドライブへドラッグ＆ドロップで書き込みます．</p>
+<figure id="fig:keil_interface">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Create new project</th>
+<th>Select example template</th>
+<th>Compile button</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../fig2026/keil_new_project.png" alt="Create new project" style="max-width: 260px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/keil_editor.png" alt="Select example template" style="max-width: 260px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/keil_build.png" alt="Compile button" style="max-width: 260px; width: 100%; height: auto;" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Keil Studio Cloud workflow: create a project, pick an example template, and compile.</figcaption>
+</figure>
+
+<p>書き込み後，マイコン基板中央のボタン（リセットスイッチ）を押してください．USB ドライブ中で最後に書き込まれたファイルが実行されます．</p>
+<p>サンプルプログラムでは，mbed 基板下部に並んだ 4 個の LED のうち左端が点滅すれば成功です．うまくいったら，点滅周期を変えるなど <code>main.cpp</code> を少し書き換え，Compile <span class="arithmatex">\(\rightarrow\)</span> Run の流れに慣れてください．</p>
+<p>Mac では上記手順がうまく動かないことがあります．その場合は「Write Error and Countermeasures on macOS」を参照してください．</p>
+<h4 id="w1-pin-functions">ピン機能の見方<a class="headerlink" href="#w1-pin-functions" title="Permanent link">&para;</a></h4>
+<p>今回用いるマイコン基板には，さまざまな入出力機能があります．例えば，デジタル信号 I/O が 26 チャンネル，内蔵 DA コンバータによるアナログ出力が 1 チャンネル，AD コンバータによる電圧入力が 6 チャンネルあります．さらに PWM（Pulse Width Modulation）出力などもありますが，これらをすべて別々のピンに割り当てると，基板が巨大になってしまいます．</p>
+<p>一般にはこれらの機能を同時に全部使うわけではないので，この基板（および一般的なマイコン）では 1 本のピンに複数機能が割り当てられており，必要に応じてプログラムから切り替えて使います．この対応関係を示したのが Figure (<a href="#fig:mbed_pin">Fig.</a>) です．</p>
+<figure id="fig:mbed_pin">
+<div class="center">
+<img src="../../figs/pinout.png" alt="mbed LPC1768 pinout." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>mbed LPC1768 pinout (from mbed platform page).</figcaption>
+</figure>
+
+<p>ユーザが信号 I/O に使えるのは，左右最外列に並ぶ "pXX"（XX は数字）と書かれた 26 本のピンです．これらはすべてデジタル信号の入出力に使え，さらにプログラムで指定することでピン名の横に書かれた機能を利用できます． 例えば左下の p18 を見ると，AnalogIn と AnalogOut の機能が割り当てられています．つまり，このピンにはデジタル入力，デジタル出力，アナログ入力，アナログ出力の 4 機能が割り当てられていることになります．このうちアナログ出力を使いたい場合には，プログラム中で</p>
+<div class="highlight"><pre><span></span><code>AnalogOut aaa(p18);
+</code></pre></div>
+<p>のように宣言します．これにより p18 の機能として AnalogOut が選択されます．宣言したオブジェクト（上の例では <code>aaa</code>）は変数のように書き込みできます（AnalogIn の場合は読み取りもできます）．例えば，</p>
+<div class="highlight"><pre><span></span><code>aaa = 0.5;
+</code></pre></div>
+<p>とすると，フルスケール（3.3V）の 0.5 倍，すなわち 1.65V のアナログ電圧が p18 から出力されます． 逆に，このピンをアナログ入力として使う場合は，</p>
+<div class="highlight"><pre><span></span><code>AnalogIn aaa(p18);
+... (omitted)
+b = aaa;
+</code></pre></div>
+<p>のようにして，宣言したオブジェクト <code>aaa</code> を通して p18 に入力された電圧値（フルスケール 3.3V に対する比）を読み取れます（この例では変数 <code>b</code> に入る）．</p>
+<p>詳細は次のリファレンスマニュアルを参照してください．</p>
+<div class="highlight"><pre><span></span><code>https://os.mbed.com/handbook/Homepage
+</code></pre></div>
+<h4 id="w1-control-program-basics">制御プログラムの基本<a class="headerlink" href="#w1-control-program-basics" title="Permanent link">&para;</a></h4>
+<p>フィードバック制御プログラムでは，次の処理を繰り返します．</p>
+<ul>
+<li>
+<p>センサ信号の読み取り</p>
+</li>
+<li>
+<p>制御計算</p>
+</li>
+<li>
+<p>計算結果の出力</p>
+</li>
+</ul>
+<p>'for' ループや 'while' ループでも繰り返しは書けますが，その場合，繰り返し時間が正確にはわからず，さらに 'if' などの条件分岐があると処理内容によって周期が変わってしまいます．</p>
+<p>フィードバック制御やディジタル信号処理では，繰り返し時間（サンプリング時間）が既知で一定であることが重要です．そのため，一般にはタイマを使って時間管理を行います．タイマを使う方法には，タイマ割り込みを使う方法やスレッドを使う方法がありますが，今回はタイマ割り込みを使います． 簡単なプログラム例を以下に示します（左の数字は説明用の行番号です）．</p>
+<div class="highlight"><pre><span></span><code>------------------------------------------------------------------------
+ 1:   AnalogIn ad(p20);
+ 2:   AnalogOut da(p18);
+ 3:  
+ 4:   void int0() {
+ 5:        theta = ad;                     // Reading sensor signal
+ 6:        command = theta * Kp;           // Control calculation
+ 7:        da = command;                   // Output
+ 8:   }
+ 9:   
+10:   int main() {
+11:        t_int.attach(&amp;int0, 0.001);     // Start timer interrupt
+12:        while(1);                       // Infinite loop as nothing else to do
+13:   }
+------------------------------------------------------------------------
+</code></pre></div>
+<p>ここでは P 制御を例に，プログラム主要部を示しています．C 言語のプログラムは 10 行目の <code>main</code> 関数から実行されますが，11 行目でタイマ割り込みを設定すると（ここでは 0.001 秒ごとに <code>int0()</code> を呼ぶ設定），その後は <code>main</code> が終わらないよう 12 行目で無限ループに入ります．</p>
+<p>一方，4 行目から始まる <code>int0()</code> 関数が，タイマ割り込みで周期実行される制御本体です．この例では，5 行目で外部からのセンサ信号を読み，6 行目で P 制御を計算し，7 行目で外部へ電圧を出力しています． タイマからの割り込み信号が来るたびにこの関数が実行され，結果として（この例では）1ms 周期の繰り返し処理が実現されます．</p>
+<p>割り込み処理関数は，必ず割り込み周期内（この例では 1ms）に終わらなければなりません．周期内に終わらないと次の割り込みが入って処理が破綻します．そのため，割り込み処理内では時間のかかる処理を避けるのが鉄則です．特に注意すべきなのが関数呼び出しです．</p>
+<p>関数呼び出しはプログラム上では 1 行で書けるため，つい短時間で終わるように見えますが，中には実行時間が意外に長いものがあります．そうした関数を割り込み処理内で安易に呼ぶと，処理が間に合わなくなります．具体的には，'sprintf()' のような文字列処理，'malloc()' のようなメモリ処理，'sin()' のような数学関数は比較的重く，トラブルの原因になりやすいです．</p>
+<p>また，<em>関数呼び出し自体にも処理オーバーヘッドがあるため，自前の関数を過剰に定義・呼び出しするのは避けた方が安全です．</em>プログラムの見通しを良くするために複数の処理をひとつの関数にまとめるアイデアもありますが，そのような場合は可能ならインライン関数やマクロ定義を使う方が望ましいです（呼び出し時のオーバーヘッドがありません）．</p>
+<h4 id="w1-serial-debug">シリアル通信とデバッグ<a class="headerlink" href="#w1-serial-debug" title="Permanent link">&para;</a></h4>
+<p>シリアル通信（UART）は，マイコンプログラムの開発において最も重要なデバッグ手段のひとつです．mbed LPC1768 は USB-to-Serial 機能を内蔵しており，プログラムからデバッグメッセージを PC へ送信できます．制御プログラムのデバッグ時には，制御ループを止めることなくリアルタイムで変数値やプログラムの動作を監視できるため，特に便利です．</p>
+<p><strong>UART 通信の原理：</strong> UART（Universal Asynchronous Receiver-Transmitter）は，1 本のワイヤでデータを 1 ビットずつ送受信するハードウェア通信プロトコルです．共有クロックを必要とする同期プロトコルとは異なり，UART は非同期方式であり，送信側と受信側の両方があらかじめ通信速度（ボーレート）に合意しておく必要があります．各バイトのデータは，(1) スタートビット（ロー），(2) 8 ビットデータ（LSB ファースト），(3) オプションのパリティビット，(4) 1 本以上のストップビット（ハイ），から成るフレームとして送信されます．mbed LPC1768 は内蔵の USB-to-Serial コンバータチップを備えており，UART インタフェース（USBTX/USBRX ピン）を USB に橋渡しするため，外部ハードウェアなしに PC と通信できます．</p>
+<p>プログラムでシリアル通信を使うには，USB インタフェースに接続された USBTX ピンと USBRX ピンで Serial オブジェクトを作成します．簡単な例を示します．</p>
+<div class="highlight"><pre><span></span><code>Serial pc(USBTX, USBRX);
+
+int main() {
+    pc.baud(9600);  // Set baud rate to 9600 bps
+    pc.printf(&quot;Hello, World!\n&quot;);
+
+    while(1) {
+        pc.printf(&quot;Counter: %d\n&quot;, counter);
+        wait(1.0);
+    }
+}
+</code></pre></div>
+<p>ボーレートは通信速度を表し，ターミナルソフト側の設定と一致していなければなりません．よく使う値は 9600 bps（安定していて初心者向き）や 115200 bps（高速でデバッグによく使う）です．ほかにも 4800，19200，38400，57600 bps などの標準値があります．</p>
+<p>mbed を USB 接続すると，PC 上でシリアルポートとして認識されます（Windows では COM3 など，macOS では /dev/tty.usbmodem*，Linux では /dev/ttyACM* などが典型的です）．シリアルメッセージを表示する方法はいくつかあります．最も手軽なのは Keil Studio Cloud の内蔵シリアルモニタを使う方法で，追加ソフトなしにブラウザ上で出力を確認できます．あるいは，Windows では Tera Term や PuTTY，macOS/Linux では screen コマンドや CoolTerm などの従来のターミナルソフトも使えます．Arduino IDE のシリアルモニタも全プラットフォームで動作します．</p>
+<p><strong>専用デバッグツール：</strong> ディレクトリ<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">10</a></sup>には 3 つの専用デバッグツールが用意されており，各ツールは 3 種類のファイルで構成されています．</p>
+<ul>
+<li>
+<p><strong>.cpp ファイル</strong>: mbed マイコン用プログラム（C++ ソースコード）．コードを読んで動作を理解したり，必要に応じて変更したりできます．</p>
+</li>
+<li>
+<p><strong>.bin ファイル</strong>: mbed LPC1768 へ直接書き込める事前コンパイル済みバイナリ．mbed の USB ドライブへドラッグ＆ドロップするだけでプログラムできます（コンパイル不要）．</p>
+</li>
+<li>
+<p><strong>.pde ファイル</strong>: PC 上で動作する Processing<sup id="fnref:13"><a class="footnote-ref" href="#fn:13">11</a></sup> 可視化プログラム．mbed からシリアル通信で受信したデータをリアルタイムに表示するグラフィカルなインタフェースを提供します．</p>
+</li>
+</ul>
+<p>各ツールの使い方：(1) <code>.bin</code> ファイルを mbed の USB ドライブへコピーして書き込む，(2) mbed のリセットボタンを押す，(3) 対応する <code>.pde</code> ファイルを Processing で実行する．mbed のプログラムを変更したい場合は，Keil Studio Cloud で <code>.cpp</code> ファイルを編集し，コンパイルして新しい <code>.bin</code> ファイルを生成し，mbed に書き込みます．各ツールはフレームベースのシリアルプロトコル（ヘッダバイト 0xAA 0x55）を使用して複数の値を確実に送信し，mbed と PC 表示側の同期を保っています．各ツールの詳細な説明，ピン配置，通信プロトコル，トラブルシューティングについては， ディレクトリ内の <code>README.md</code> を参照してください．</p>
+<p>シリアル通信は制御プログラムのデバッグに非常に役立ちます．計算を検証するために変数値を出力したり，タイムスタンプを出力して制御ループのタイミングを監視したり，センサ生データを表示して読み取りを確認したり，重要な実行ポイントにメッセージを追加してプログラムフローを確認したりできます．例えば，</p>
+<div class="highlight"><pre><span></span><code>pc.printf(&quot;Angle: %f, Motor: %f\n&quot;, theta, motor_output);
+</code></pre></div>
+<p>ただし，割り込み処理関数内で printf を使う場合は注意が必要です．処理時間が長くなってタイミングの厳しい制御ループを乱す可能性があります．タイミング精度が重要なデバッグには，デジタル出力ピンをトグルしてオシロスコープで観測する方法を検討してください．シリアル通信の詳細は，mbed Serial API のドキュメントを参照してください．</p>
+<h3 id="sec:w1-breadboard-wiring-design">Task C：ブレッドボード配線設計（学生C）<a class="headerlink" href="#sec:w1-breadboard-wiring-design" title="Permanent link">&para;</a></h3>
+<h4 id="w1-breadboard-howto">ブレッドボードの使い方<a class="headerlink" href="#w1-breadboard-howto" title="Permanent link">&para;</a></h4>
+<p>ブレッドボードは電子回路の試作によく使われる基板で，半田付け不要で簡単に回路を組めます．Figure (<a href="#fig:breadboard">Fig.</a>) にブレッドボードの概略を示します．ブレッドボードでは横一列に並んだ 5 個のホールが電気的につながっており，これを利用して配線します．左右の 5 個ずつのホールは互いに独立しています．</p>
+<figure id="fig:breadboard">
+<div class="center">
+<img src="../../figs/breadboard.png" alt="Breadboard overview." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Breadboard overview.</figcaption>
+</figure>
+
+<figure id="fig:breadboard_sample">
+<div class="center">
+<img src="../../figs/breadboard_sample.png" alt="Example wiring on a breadboard." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Example wiring on a breadboard.</figcaption>
+</figure>
+
+<p>例えば，mbed はすでにブレッドボードに挿してあるはずです．mbed のピンに何かをつなぐには，そのピンのすぐ隣のホールにリード線や抵抗の足を挿すだけです（Figure (<a href="#fig:breadboard_sample">Fig.</a>) 参照）．</p>
+<p>また，ブレッドボードには電源電圧用のラインが用意されています．ボード両端の縦一列に並んだホールは，それぞれ縦方向に電気的につながっています．左右に 1 列ずつあるので，それぞれ GND と 3.3V として使ってください．そのため，三端子レギュレータの出力ピン（3.3V）を右の列の任意のホールにリード線でつないでください．同様に，左の列を GND（電池から来る黒線）につないでください．</p>
+<h4 id="w1-fritzing">Fritzing による回路設計<a class="headerlink" href="#w1-fritzing" title="Permanent link">&para;</a></h4>
+<p>ブレッドボードの配線は視覚的に複雑になりやすくミスも生じやすいため，実際のブレッドボードに着手する前に，Fritzing<sup id="fnref:14"><a class="footnote-ref" href="#fn:14">12</a></sup> で回路を設計することをお勧めします．Fritzing はブレッドボードを使ったプロトタイピング向けに設計された無料のオープンソース電子設計自動化（EDA）ツールで，<strong>Breadboard</strong>（ブレッドボード），<strong>Schematic</strong>（回路図），<strong>PCB</strong> の各ビューを連動して提供します．</p>
+<p>本演習では，<em>マイコン</em>，<em>モータドライバ</em>，<em>フォトリフレクタ</em> の各モジュール用の専用 Fritzing パーツを用意しています．これらのパーツは，<strong>まず Fritzing にインポートしてから</strong> パーツライブラリに配置してください．</p>
+<p>Figure (<a href="#fig:fritzing_setup_and_examples">Fig.</a>) に本演習の回路設計例を示します．パーツ配置と配線を始める前に，Fritzing の <em>View</em> メニューから <em>Align to Grid</em> のチェックを外してください；グリッドへのスナップは本設定での配置・配線には不便です．また，<strong>モータドライバ部分をあらかじめ配線した</strong> 設計例も用意しています（Figures (<a href="#fig:fritzing_motor_driver_schematic">Fig.</a>) and (<a href="#fig:fritzing_motor_driver_breadboard">Fig.</a>))．これを参考にし，詳細な部品一覧と手順は Week 1 の回路組立節を参照してください．Fritzing を使うかどうかに関わらず参照できる完全な回路例も付録<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">13</a></sup>に掲載しています．</p>
+<figure id="fig:fritzing_setup_and_examples">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Example in <em>Schematic View</em></th>
+<th>Corresponding <em>Breadboard View</em> wiring</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img id="fig:fritzing_motor_driver_schematic" src="../../fig2026/fz2.png" alt="Example in Schematic View" /></td>
+<td><img id="fig:fritzing_motor_driver_breadboard" src="../../fig2026/fz3.png" alt="Corresponding Breadboard View wiring" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Example Fritzing schematic and breadboard views (motor driver section pre-wired).</figcaption>
+</figure>
+
+<p>Fritzing を使う際は，まず用意されたすべての専用パーツをインポートし，新しいスケッチを作成して <strong>パネルへ搭載するすべてのモジュール</strong>（マイコン，モータドライバ，フォトリフレクタ，レギュレータ，電池コネクタなど）を配置してください．</p>
+<p>次に Schematic View を使って，<strong>どのピン同士を接続すべきか</strong> を確認し，接続漏れがないかを洗い出します．そのうえで，同じ電気的接続を Breadboard View に反映してください．物理的な配置は多少違っても構いませんが，電気的接続は一致している必要があります．配線時は見やすさを優先し，できるだけ短く，不要な交差を避け，機能ごと（電源，モータ，センサ，エンコーダ）にまとめてください．そうすると実機の配線が速くなり，デバッグ時間も減ります．</p>
+<p>実際のブレッドボードへ移る前に，Fritzing 上で <strong>電源（3.3V/GND）</strong>，<strong>モータドライバの入出力</strong>，<strong>センサ信号線</strong> に関係するすべてのネットを最終確認し，各信号が想定したマイコンピンへつながっていることを確認してください．特に，<strong>ブレッドボードへ着手する前に Fritzing 上で回路全体を完成させる</strong> ことを徹底してください．</p>
+<h3 id="w1-sync-point">合流ポイント（全員）<a class="headerlink" href="#w1-sync-point" title="Permanent link">&para;</a></h3>
+<p>チームで回路組立を始める前に，以下を確認してください．</p>
+<ul>
+<li>
+<p>機械系の組立が完了し，モータローラの接触も適切に調整されている</p>
+</li>
+<li>
+<p>マイコンへプログラムを書き込め，シリアル通信も確認できている</p>
+</li>
+<li>
+<p>Fritzing 設計に <strong>必要な全モジュール</strong> が含まれ，必要な配線がすべて確認済みである</p>
+</li>
+</ul>
+<h2 id="sec:w1-circuit-assembly">回路組立（チーム作業）<a class="headerlink" href="#sec:w1-circuit-assembly" title="Permanent link">&para;</a></h2>
+<p>この部分はチーム全員で行います．ミスのリスクを下げ，デバッグしやすくするために，回路は 3 段階で組み立て・確認します．</p>
+<h3 id="w1-safety">安全上の注意<a class="headerlink" href="#w1-safety" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>電源スイッチを入れる前に，せめて電源回りの配線に間違いがないかよく確認してください！</p>
+</li>
+<li>
+<p>電源回りの配線に間違いがあった場合（プラスとマイナスを逆につなぐ，ショートさせるなど），<em>スイッチを入れた瞬間に回路が壊れます</em>．</p>
+</li>
+<li>
+<p>スイッチを入れて様子を見るのは危険なので，当たって砕けろではなくしっかり確認してから試してください．特に，<em>マイコン・モータドライバへの電源接続</em>と<em>電解コンデンサの極性</em>に注意してください．</p>
+</li>
+<li>
+<p>配線を変更する際は必ず電源を切ってください．通電中のブレッドボードでリード線を動かすのは禁止です．</p>
+</li>
+<li>
+<p>モータ用電源（電池）とセンサ用電源（3.3V レギュレータ）は指示通りに分離してください．</p>
+</li>
+</ul>
+</div>
+<p><strong>半田付けと導通確認．</strong> 回路組立の際，半田ごてを使って抵抗やデュポンケーブル（またはリード線）を半田付けし，確実な接続を作ります．通電する前に，テスタの導通モード（ブザーモード）で確認することができます．</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>使用後は半田ごてのプラグを抜き，片付けたり作業台を離れたりする前に冷えるのを待ってください．</p>
+</li>
+<li>
+<p>通電したままの半田ごてをその場に放置しないでください．</p>
+</li>
+</ul>
+</div>
+<h3 id="w1-assembly-strategy">組立方針（3段階）<a class="headerlink" href="#w1-assembly-strategy" title="Permanent link">&para;</a></h3>
+<p>ミスのリスクを下げ，デバッグしやすくするために，3 段階に分けて回路を組み立て・確認することをお勧めします<sup id="fnref:16"><a class="footnote-ref" href="#fn:16">14</a></sup>．</p>
+<ol>
+<li>
+<p><strong>モータドライバとモータの確認</strong> --- モータ制御（正転・逆転と速度制御）を検証する</p>
+</li>
+<li>
+<p><strong>傾斜センサの確認</strong> --- センサ信号の取得と処理を検証する</p>
+</li>
+<li>
+<p><strong>全体回路の統合</strong> --- すべての部品を統合して最終的な制御系を完成させる</p>
+</li>
+</ol>
+<p>このように段階を分けることで，回路が複雑になりすぎる前に問題を見つけて修正できます．各段階には，動作確認のためのサンプルプログラムとデバッグツールが用意されています．</p>
+<h3 id="w1-stage-1">Stage 1：モータドライバとモータの確認<a class="headerlink" href="#w1-stage-1" title="Permanent link">&para;</a></h3>
+<h4 id="w1-stage-1-objective">目標<a class="headerlink" href="#w1-stage-1-objective" title="Permanent link">&para;</a></h4>
+<p>最初の段階では，電源回路，モータドライバ（DRV8832），モータを組みます．mbed の PWM 信号で，モータの回転方向（正転・逆転）と速度を制御できることを確認するのが目標です．</p>
+<h4 id="w1-stage-1-parts">Stage 1 で使用する部品<a class="headerlink" href="#w1-stage-1-parts" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>mbed LPC1768 マイコン</p>
+</li>
+<li>
+<p>電池ボックス（単 3 電池 4 本，6V）</p>
+</li>
+<li>
+<p>三端子レギュレータ（LD1117V33）3.3V 用</p>
+</li>
+<li>
+<p>モータドライバ IC（DRV8832）</p>
+</li>
+<li>
+<p>DC モータ（RE-280RA）</p>
+</li>
+<li>
+<p>バイパスコンデンサ（電源安定化用セラミックコンデンサ）</p>
+</li>
+<li>
+<p>レギュレータ用電解コンデンサ</p>
+</li>
+<li>
+<p>ジャンパ線</p>
+</li>
+</ul>
+<p><em>注：部品番号，仕様，個数の詳細は Appendix <a href="../appendix/#app:partslist">app:partslist</a> を参照してください．</em></p>
+<h4 id="w1-stage-1-wiring">配線手順<a class="headerlink" href="#w1-stage-1-wiring" title="Permanent link">&para;</a></h4>
+<p>サンプル回路図<sup id="fnref:17"><a class="footnote-ref" href="#fn:17">15</a></sup>のモータドライバ部分に従って回路を配線してください．重要なポイントは次の通りです．</p>
+<ul>
+<li>
+<p>サンプル回路図では，mbed とモータドライバの電源ピン---GND 間にコンデンサが入っています．これをバイパスコンデンサ（デカップリングコンデンサ）と呼び，抵抗成分のある配線での電圧降下による電源変動を吸収して IC の動作を安定させる役割があります．<em>バイパスコンデンサは電源ピンのすぐ隣（隣接ホール）に取り付けるのが鉄則です</em>．回路図上では同じでも，離れた位置に付けるとバイパスコンデンサの効果がなくなります．</p>
+</li>
+<li>
+<p>同様に，<em>三端子レギュレータにつなぐコンデンサも直近のホールへ取り付けてください</em>．</p>
+</li>
+<li>
+<p>三端子レギュレータの出力（3.3V）をブレッドボードの縦方向電源ラインの一方へつないでください</p>
+</li>
+<li>
+<p>GND（電池の黒線）をもう一方の縦方向電源ラインへつないでください</p>
+</li>
+<li>
+<p><em>電解コンデンサの極性</em>（帯が負極側）に十分注意してください</p>
+</li>
+<li>
+<p>コンデンサの表記（<code>0.1u</code>/<code>104</code> など）と有極性・無極性の見分け方については第<a href="#sec:passive_markings">3.2.1</a>節を参照してください．</p>
+</li>
+<li>
+<p>電源スイッチを入れる前に，すべての電源回りの接続を再確認してください</p>
+</li>
+</ul>
+<h4 id="w1-stage-1-debug-tools">サンプルプログラムとデバッグツール<a class="headerlink" href="#w1-stage-1-debug-tools" title="Permanent link">&para;</a></h4>
+<p>モータ制御確認用のサンプルプログラム（）を用意しています．このプログラムでは次の項目を試せます．</p>
+<ul>
+<li>
+<p>各速度でのモータ正転</p>
+</li>
+<li>
+<p>各速度でのモータ逆転</p>
+</li>
+<li>
+<p>モータの停止とブレーキ</p>
+</li>
+</ul>
+<p>制御信号を可視化して動作を確認するために，<strong>デバッグツール 1：Motor Controller</strong>（ に収録）を用意しています．このツールの構成は次の通りです．</p>
+<ul>
+<li>
+<p><strong>1_motor_controller.cpp</strong>: シリアル経由（115200 baud）でテキストコマンドを受信する mbed プログラム．コマンド：<code>F xx</code>（xx% デューティで正転），<code>B xx</code>（xx% で逆転），<code>S</code>（停止）．使用ピン：p13（正転），p14（逆転），p18（PWM 電圧）．</p>
+</li>
+<li>
+<p><strong>1_motor_controller.bin</strong>: 事前コンパイル済みバイナリ―mbed の USB ドライブへドラッグ＆ドロップするだけで書き込めます．</p>
+</li>
+<li>
+<p><strong>1_motor_controller.pde</strong>: スライダとボタンを備えた Processing GUI で，コードを変更せずにモータの速度と方向をインタラクティブに制御できます．</p>
+</li>
+</ul>
+<p>Processing GUI では，PWM duty，比較方向（正転／逆転），必要に応じてモータ電流などをリアルタイムで確認できます．制御アルゴリズムへ統合する前に，モータドライバ回路を十分に確認してください．</p>
+<h4 id="w1-stage-1-checklist">確認チェックリスト<a class="headerlink" href="#w1-stage-1-checklist" title="Permanent link">&para;</a></h4>
+<p>Stage 2 へ進む前に，次を確認してください．</p>
+<ul>
+<li>
+<p>指令通りにモータが正転する</p>
+</li>
+<li>
+<p>指令通りにモータが逆転する</p>
+</li>
+<li>
+<p>PWM デューティサイクルに応じてモータ速度がスムーズに変化する</p>
+</li>
+<li>
+<p>指令通りにモータが完全に停止する</p>
+</li>
+<li>
+<p>モータドライバ IC の異常な発熱がない</p>
+</li>
+<li>
+<p>電源電圧が安定している（テスタで測定）</p>
+</li>
+</ul>
+<h3 id="w1-stage-2">Stage 2：傾斜センサの確認<a class="headerlink" href="#w1-stage-2" title="Permanent link">&para;</a></h3>
+<h4 id="w1-stage-2-objective">目標<a class="headerlink" href="#w1-stage-2-objective" title="Permanent link">&para;</a></h4>
+<p>この段階では，角度センサ（フォトインタラプタ，必要に応じてロータリーエンコーダ）を回路へ追加し，振り子角度を正しく読み取れることを確認します．これは倒立振子制御において最も重要なセンサです．</p>
+<h4 id="w1-stage-2-parts">Stage 2 で追加する部品<a class="headerlink" href="#w1-stage-2-parts" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>フォトインタラプタセンサ（TPR-105F）<span class="arithmatex">\(\times\)</span> 2</p>
+</li>
+<li>
+<p>センサ出力用プルアップ抵抗</p>
+</li>
+<li>
+<p>センサ接続用の追加ジャンパ線</p>
+</li>
+</ul>
+<h4 id="w1-stage-2-wiring">配線手順<a class="headerlink" href="#w1-stage-2-wiring" title="Permanent link">&para;</a></h4>
+<p>サンプル回路図<sup id="fnref:18"><a class="footnote-ref" href="#fn:18">16</a></sup>のセンサ部分に従って，既存のモータドライバ回路へセンサ回路を追加してください．重要なポイントは次の通りです．</p>
+<ul>
+<li>
+<p>センサの電源は 3.3V ラインへつなぐ（5V 不可：mbed の入力は 3.3V ロジック）</p>
+</li>
+<li>
+<p>センサ出力ラインに適切なプルアップ抵抗を取り付ける</p>
+</li>
+<li>
+<p>ノイズを最小限にするため，センサ信号線をモータ電源線から離してまとめる</p>
+</li>
+<li>
+<p>センサをエンコーダディスクやスリットパターンと機械的に正しく位置合わせする</p>
+</li>
+</ul>
+<h4 id="w1-stage-2-debug-tools">サンプルプログラムとデバッグツール<a class="headerlink" href="#w1-stage-2-debug-tools" title="Permanent link">&para;</a></h4>
+<p>センサ信号の読み取りと処理を確認するサンプルプログラム（）を用意しています．このプログラムで確認できるのは次の項目です．</p>
+<ul>
+<li>
+<p>デジタルセンサ出力の読み取り</p>
+</li>
+<li>
+<p>センサ読み取り値からの角度計算</p>
+</li>
+<li>
+<p>微分による角速度の計算</p>
+</li>
+<li>
+<p>ノイズ低減のためのフィルタリング</p>
+</li>
+</ul>
+<p><strong>デバッグツール 2：Analog Input Visualizer</strong>（ に収録）は，4 チャンネルのアナログ入力をリアルタイム表示します．</p>
+<ul>
+<li>
+<p><strong>2_analog_input_visualizer.cpp</strong>: 約 200 Hz で 4 チャンネルのアナログ入力を読み取り，フレームベースプロトコル（ヘッダ：0xAA 0x55，続いて 4 データバイト）でシリアル（115200 baud）送信する mbed プログラム．ピン：p16（CH1），p17（CH2），p19（CH3，通常フォトインタラプタ 1），p20（CH4，通常フォトインタラプタ 2）．4 チャンネルは，傾斜センサ，エンコーダ信号，ポテンショメータなど，任意のアナログセンサに使用できます．</p>
+</li>
+<li>
+<p><strong>2_analog_input_visualizer.bin</strong>: mbed に書き込める事前コンパイル済みバイナリ．</p>
+</li>
+<li>
+<p><strong>2_analog_input_visualizer.pde</strong>: 4 チャンネルのリアルタイム波形を表示する Processing プログラム．フォトインタラプタ使用時は振り子角度と角速度の計算，ロータリーエンコーダ使用時は CH1/CH2 でエンコーダ信号の表示ができます．</p>
+</li>
+</ul>
+<p>このツールは，センサの動作確認，機械的な不具合の検出，信号品質の確認に有用です．角度センサなら振り子を手で動かしながら出力を見られますし，エンコーダなら車輪を回して 2 相波形を確認できます．ヘッダ付きフレーム形式にしているため，mbed と PC 表示側の同期も安定します．</p>
+<figure id="fig:debug_tools">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Debugging Tool 1: Motor Controller GUI</th>
+<th>Debugging Tool 2: Analog Input Visualizer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../fig2026/debug_motor_controller.png" alt="Debugging Tool 1: Motor Controller GUI" style="max-width: 360px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/debug_analog_visualizer.png" alt="Debugging Tool 2: Analog Input Visualizer" style="max-width: 360px; width: 100%; height: auto;" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Debugging GUIs for motor control and analog input visualization.</figcaption>
+</figure>
+
+<h4 id="w1-stage-2-checklist">確認チェックリスト<a class="headerlink" href="#w1-stage-2-checklist" title="Permanent link">&para;</a></h4>
+<p>Stage 3 へ進む前に，次を確認してください．</p>
+<ul>
+<li>
+<p>振り子を動かすとセンサ出力が正しく変化する</p>
+</li>
+<li>
+<p>角度計算が実際の振り子位置と対応している</p>
+</li>
+<li>
+<p>角速度が適切な値を示している（過剰なノイズがない）</p>
+</li>
+<li>
+<p>センサが振り子の動作範囲全体を検出できる</p>
+</li>
+<li>
+<p>モータ動作によるセンサ信号への干渉がない</p>
+</li>
+</ul>
+<h3 id="w1-stage-3">Stage 3：全体回路の統合<a class="headerlink" href="#w1-stage-3" title="Permanent link">&para;</a></h3>
+<h4 id="w1-stage-3-objective">目標<a class="headerlink" href="#w1-stage-3-objective" title="Permanent link">&para;</a></h4>
+<p>最後の段階では，モータ制御系とセンサ系を統合し，倒立振子を立たせるための完全なフィードバック制御系にします．</p>
+<h4 id="w1-stage-3-final-assembly">最終組立<a class="headerlink" href="#w1-stage-3-final-assembly" title="Permanent link">&para;</a></h4>
+<p>完全なサンプル回路図<sup id="fnref:19"><a class="footnote-ref" href="#fn:19">17</a></sup>に従って，すべての部品を実装してください．回路全体を見直し，次の点を確認してください．</p>
+<ul>
+<li>
+<p>すべての電源接続が正しく，しっかり固定されている</p>
+</li>
+<li>
+<p>すべてのバイパスコンデンサが IC 電源ピンの直近に取り付けられている</p>
+</li>
+<li>
+<p>配線が整頓されている（Figure (<a href="#fig:circuit_sample">Fig.</a>) 参照）</p>
+</li>
+<li>
+<p>ショートの恐れのある配線がない</p>
+</li>
+<li>
+<p>すべての部品の向きが正しい（IC，電解コンデンサ）</p>
+</li>
+</ul>
+<h4 id="w1-stage-3-notes">回路組立の一般的な注意事項<a class="headerlink" href="#w1-stage-3-notes" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><em>見た目がシンプルな回路ほどよく動きます</em>．電子回路，特にアナログ回路は，わずかな配線方法の違いで特性が変わります．きれいな回路＝シンプルな回路は特性が良くなる傾向があります．</p>
+</li>
+<li>
+<p><em>ブレッドボードは接触抵抗が大きいので，配線が少ないほど安定して動作します</em>．1 本の配線で済むところを，複数のジャンパ線をデイジーチェーンしないようにしてください．</p>
+</li>
+<li>
+<p>再度：IC／LSI のピンには触れないようにしてください（抵抗，コンデンサ，LED，三端子レギュレータは触っても構いません）．</p>
+</li>
+<li>
+<p>サンプル回路図はあくまで一例ですので，mbed の入出力ピンには別のピンを使うこともできます（ただし，AnalogOut は p18 のみなので変更不可．また，mbed の右側ピンはスペースの都合上使用できません）．使用ピンに合わせてプログラムも変更してください．</p>
+</li>
+<li>
+<p>ショートを防ぐため，抵抗の足は適切な長さに切ってください（ただし，切れた足が飛んでいかないよう注意）．</p>
+</li>
+<li>
+<p>色分けのルール：電源のプラス側には赤，GND（0V）には黒を使ってください．</p>
+</li>
+</ul>
+<p>完成した回路の実装例を Figure (<a href="#fig:circuit_sample">Fig.</a>) に示します．</p>
+<figure id="fig:circuit_sample">
+<div class="center">
+<img src="../../figs/circuit_sample.png" alt="Complete circuit implementation example." style="max-width: 900px; width: 100%; height: auto;" />
+</div>
+<figcaption>Complete circuit implementation example.</figcaption>
+</figure>
+
+<h4 id="w1-integration-testing">統合テスト<a class="headerlink" href="#w1-integration-testing" title="Permanent link">&para;</a></h4>
+<p>全体回路が完成したら，統合された制御系を試験できます．最終制御プログラムでは，モータ制御とセンサ読み取りを組み合わせてフィードバック制御を実装します．この段階では <strong>Debugging Tool 3: Six-Channel Oscilloscope</strong>（，通称 plotter6ch）を使って，各種変数を同時に観測します．</p>
+<ul>
+<li>
+<p><strong>3_six_channel_oscilloscope.cpp</strong>: サンプリング周波数 2000 Hz で PD 制御を実装した mbed 制御プログラム（完全版）．2 つのフォトインタラプタ（p19, p20）を読み取り，角度と角速度を計算し，モータ（p13, p14, p18）を制御します．また，フレームプロトコル（ヘッダ: 0xAA 0x55，続いて 6 バイトのデータ）によりシリアル通信（230400 baud）で 6 チャンネルのデータを送信します．制御パラメータ（KP, KD, VLIMIT）はファイル先頭の <code>#define</code> 値を編集することで調整できます．</p>
+</li>
+<li>
+<p><strong>3_six_channel_oscilloscope.bin</strong>: mbed へ書き込む用のコンパイル済みバイナリ．</p>
+</li>
+<li>
+<p><strong>3_six_channel_oscilloscope.pde</strong>: 6 チャンネルを上段（CH1-赤，CH2-緑，CH3-青）と下段（CH4-赤，CH5-緑，CH6-青）の 2 つの 3 チャンネルプロットで表示する Processing プログラム．6 チャンネルの内容は通常，(1) フォトインタラプタ1出力，(2) フォトインタラプタ2出力，(3) 角度（センサの差分），(4) 角速度，(5) フィルタ後の角速度，(6) 基準線，です．</p>
+</li>
+</ul>
+<p>これは，完成した倒立振子システムのデバッグとゲイン調整のための主力ツールです．詳しい使い方，通信プロトコル，プログラム変更方法は を参照してください．</p>
+<p><a id="sec:inverted-experiment"></a></p>
+<h4 id="sec:w1-standup-pre-encoder">チーム最終課題：倒立実験（エンコーダ追加前）<a class="headerlink" href="#sec:w1-standup-pre-encoder" title="Permanent link">&para;</a></h4>
+<p>Week 1 の終わり（車輪エンコーダ追加前）の目標は，<strong>角度のみのフィードバック</strong> により機体を <strong>倒立</strong> させることです（Week 1 では P 制御だけでも構いません）．plotter6ch（<strong>Debugging Tool 3</strong>）を用いてゲインを調整し，激しい振動なしに立つ状態を目指してください．</p>
+<p><strong>Week 1 での目安：</strong> 原則として，軽く支えた状態でのわずかなゲイン調整だけで基本的な倒立を達成できるはずです．まだ十分な結果が出ていなくても心配しないでください――Week 2 では，より詳しいゲイン調整手順（角速度，フィルタリング，D ゲインの追加を含む）を確認できます: <a href="#sec:w2-task-b">第[4.4](#sec:w2-task-b)節参照</a>. <strong>作業の流れ：</strong></p>
+<ol>
+<li>
+<p>を mbed へ書き込む（または <code>#define</code> のゲインを変更してから をコンパイルする）．</p>
+</li>
+<li>
+<p>Processing で を開き，オシロスコープ GUI を起動する．</p>
+</li>
+<li>
+<p>GUI 起動後に mbed を一度リセットする（チャンネルの順番がおかしい場合にフレームの同期を再調整するため）．</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>電池ボックスが ON の間，モータが回り続けることがあります．倒立実験中以外は OFF にしてください．</p>
+</li>
+<li>
+<p>USB が給電するのは <em>mbed のみ</em>です．モータが動かない，センサ出力がおかしい場合は，まず電池ボックスのスイッチを確認してください．</p>
+</li>
+<li>
+<p>高周波のビビリ振動が発生した場合は，発熱や破損を防ぐため <em>直ちに電池ボックスの電源を切ってください</em>．</p>
+</li>
+</ul>
+</div>
+<p><strong>原点合わせ（モータを接続する前に推奨）：</strong></p>
+<ul>
+<li>
+<p>モータとモータドライバの接続を外す．</p>
+</li>
+<li>
+<p>mbed をリセットする．1 秒の待機時間中に電池ボックスをON にする．</p>
+</li>
+<li>
+<p>機体を手で支えて垂直に立て，角度のトレース（通常は青線）が画面中央付近にあることを確認する．</p>
+</li>
+<li>
+<p>中央にない場合は，センサブラケットの曲げ角度を機械的に微調整して，垂直状態がゼロ角度に対応するようにする．</p>
+</li>
+</ul>
+<p><strong>最初の倒立試験（P 制御のみ）：</strong></p>
+<ul>
+<li>
+<p>モータとモータドライバを再接続する．USB は接続したままでも構わない．</p>
+</li>
+<li>
+<p>まず <code>KD=0</code> にして <code>KP</code> だけを調整する．</p>
+</li>
+<li>
+<p>モータの配線方向を確認する：機体が <em>倒れている方向へ動く</em> なら正しい．逆方向へ動く（自ら倒れようとする）なら，電源を切ってモータ線（またはmbed とモータドライバ間の 2 本の線）を入れ替える．</p>
+</li>
+<li>
+<p>試験中は，転倒しないように やさしく支えながら，機体の動きを妨げないようにする（機体上部または USB ケーブルを軽く持つ）．</p>
+</li>
+</ul>
+<p><strong>KP ゲイン調整の指針：</strong></p>
+<ol>
+<li>
+<p><code>KP</code> が低い場合，ゆったりした（約 1～2 Hz の）振動が見られる．</p>
+</li>
+<li>
+<p><code>KP</code> を増やすと振動周波数が上がり，振動振幅が小さくなる．</p>
+</li>
+<li>
+<p>ある程度上げると，振動がほぼない状態で立つようになる（わずかな振動は残ってもよい）．</p>
+</li>
+<li>
+<p><code>KP</code> が高すぎると，高周波のビビリ振動が現れる．</p>
+</li>
+<li>
+<p>さらに増やすと，激しい振動になる．</p>
+</li>
+</ol>
+<p><em>高周波のビビリ振動は避けてください．</em> 電子部品やモータの発熱・焼損につながり，ねじが緩む恐れもあります．ビビリ振動が発生したら，<em>直ちに電池ボックスの電源を切ってください</em>．</p>
+<h2 id="w1-submission">Week 1 提出物<a class="headerlink" href="#w1-submission" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Submission</p>
+<p>Week 1 の終わりまでに，機体が <strong>倒立</strong> できる状態に到達していることを目標とします．おめでとうございます，この節目に到達できました！</p>
+<hr />
+<p><strong>提出物</strong>              <strong>満点</strong>  <strong>採点基準</strong></p>
+<hr />
+<p>倒立デモ                   20     <strong>20 pts:</strong> 15 秒以上の倒立，かつ全体が画角内．\
+                                    <strong>12 pts:</strong> 倒立は達成したが 15 秒未満，または安定性が不十分．\
+                                    <strong>0 pts:</strong> 倒立未達．</p>
+<p>安全性・組立の視認性       5      <strong>5 pts:</strong> 機械構造，ブレッドボード，配線がすべて明確に確認できる．\
+                                    <strong>0 pts:</strong> 動画で組立が確認できない．</p>
+<p>動画の明瞭さ               5      <strong>5 pts:</strong> 撮影中を通じて重要部分が常に見えている．\
+                                    <strong>3 pts:</strong> 一部遮蔽はあるが重要な挙動は判別できる．\
+                                    <strong>0 pts:</strong> 映像が判読不能（主要部分が遮蔽または画角外）．</p>
+<hr />
+<p><em>任意の添付資料</em>: Fritzing ファイル（<code>.fzz</code>/画像），写真，デバッグツールのスクリーンショット/ログなど．</p>
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:3">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: 回路例．&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Appendix <a href="../appendix/#app:drv8832">app:drv8832</a>: DRV8832 データシート（Texas Instruments）．&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>Appendix <a href="../appendix/#app:tpr105f">app:tpr105f</a>: TPR-105F データシート．&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Appendix <a href="../appendix/#app:ld1117v33">app:ld1117v33</a>: LD1117V33 データシート．&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>機械組立の動画例は course materials repository 内の にあります．&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>型番，仕様，個数を含む完全な部品表は Appendix <a href="../appendix/#app:partslist">app:partslist</a> を参照してください．&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>Appendix <a href="../appendix/#app:re280ra">app:re280ra</a>: RE-280RA データシート（Mabuchi Motor）．&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>ほかにも Arduino，Raspberry PI，PIC などさまざまな系列があります．&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>Keil Studio Cloud: <a href="https://studio.keil.arm.com/">https://studio.keil.arm.com/</a>&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>Course materials repository: <a href="https://github.com/UTokyo2026/UTokyo-Control-Practice-2026">https://github.com/UTokyo2026/UTokyo-Control-Practice-2026</a>&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>Processing は視覚的プログラミング用の無料オープンソースソフトウェアです．<a href="https://processing.org/">https://processing.org/</a> からダウンロードできます．2026 年時点で最新の主要リリースは Processing 4 です．詳細は Appendix <a href="../appendix/#app:processing">app:processing</a> を参照してください．&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>Fritzing インストーラ（共有 Google Drive）: <a href="https://drive.google.com/drive/folders/1CwJ8srD090W6hOeP39BXLUZOVy883Kn2?usp=sharing">https://drive.google.com/drive/folders/1CwJ8srD090W6hOeP39BXLUZOVy883Kn2?usp=sharing</a>&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: 回路例．&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:16">
+<p>回路組立の動画例は course materials repository 内の にあります．&#160;<a class="footnote-backref" href="#fnref:16" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:17">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: 回路例．&#160;<a class="footnote-backref" href="#fnref:17" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:18">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: 回路例．&#160;<a class="footnote-backref" href="#fnref:18" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+<li id="fn:19">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: 回路例．&#160;<a class="footnote-backref" href="#fnref:19" title="Jump back to footnote 17 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/UTokyo2026/pendulum-lab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/lang-sync.js"></script>
+      
+        <script src="../../javascripts/figure-refs.js"></script>
+      
+        <script src="../../javascripts/mathjax-config.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

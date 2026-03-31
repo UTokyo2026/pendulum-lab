@@ -1,0 +1,2510 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UTokyo Precision Engineering – Inverted Pendulum Fabrication Exercise 2026">
+      
+      
+        <meta name="author" content="UTokyo2026">
+      
+      
+        <link rel="canonical" href="https://utokyo2026.github.io/pendulum-lab/en/week1/">
+      
+      
+        <link rel="prev" href="../overview/">
+      
+      
+        <link rel="next" href="../week2/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Week 1: Assembly & Bring-up - Wheeled Inverted Pendulum</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Serif";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/figure-numbering.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#page:w1" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-header__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wheeled Inverted Pendulum
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Week 1: Assembly & Bring-up
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      <div class="md-header__tabs" aria-label="Tabs">
+        <ul class="md-tabs__list">
+          
+            
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../intro/" class="md-tabs__link">
+          
+  
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+          
+            
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../jp/intro/" class="md-tabs__link">
+          
+  
+  
+  日本語
+
+        </a>
+      </li>
+    
+  
+
+          
+        </ul>
+      </div>
+    
+
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-nav__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Wheeled Inverted Pendulum
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/UTokyo2026/pendulum-lab" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    UTokyo2026/pendulum-lab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../grading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grading Criteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1: Assembly & Bring-up
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1: Assembly & Bring-up
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#w1-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Week 1 Overview &amp; Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w1-electronic-components" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Electronic Components Explanation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Electronic Components Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sec:passive_markings" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resistor and Capacitor Markings (Value &amp; Polarity)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resistor and Capacitor Markings (Value &amp; Polarity)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resistors-how-to-identify-the-resistance-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Resistors: how to identify the resistance value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capacitors-how-to-read-the-capacitance-value-and-polarity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Capacitors: how to read the capacitance value and polarity
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#motor-driver-drv8832" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Motor Driver (DRV8832)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#photo-interrupter-inclination-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photo-interrupter &amp; Inclination Sensor
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Photo-interrupter &amp; Inclination Sensor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#photo-interrupter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Photo-interrupter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#inclination-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Inclination Sensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#three-terminal-regulator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Three-terminal Regulator
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w1-parallel-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parallel Assembly Tasks
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Parallel Assembly Tasks">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sec:w1-mechanical-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task A: Mechanical Assembly (Student A)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task A: Mechanical Assembly (Student A)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attaching-the-inclination-sensor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attaching the Inclination Sensor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-the-dc-motor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attaching the DC Motor
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-the-breadboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attaching the Breadboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#attaching-the-battery-box" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Attaching the Battery Box
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec:w1-microcontroller-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task B: Microcontroller Setup (Student B)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task B: Microcontroller Setup (Student B)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#keil-studio-cloud-signup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keil Studio Cloud signup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#compile-a-sample-program" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Compile a sample program
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pin-usage-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pin usage explanation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control-program-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control program basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serial-communication-debugging" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Serial communication &amp; debugging
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec:w1-breadboard-wiring-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Task C: Breadboard Wiring Design (Student C)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Task C: Breadboard Wiring Design (Student C)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-to-use-breadboard" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to use Breadboard
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-fritzing-for-circuit-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using Fritzing for Circuit Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sync-point-all-students" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sync Point (All Students)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sec:w1-circuit-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit Assembly (Team Collaboration)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Circuit Assembly (Team Collaboration)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#safety-precautions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Safety precautions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assembly-strategy-3-stages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Assembly strategy (3 stages)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-1-motor-driver-motor-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 1: Motor Driver &amp; Motor Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 1: Motor Driver &amp; Motor Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circuit-components-for-stage-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Circuit Components for Stage 1
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wiring-instructions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wiring Instructions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-program-and-debugging-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Program and Debugging Tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification-checklist" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-2-angle-sensor-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 2: Angle Sensor Testing
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 2: Angle Sensor Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additional-components-for-stage-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Additional Components for Stage 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wiring-instructions_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Wiring Instructions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-program-and-debugging-tool_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example Program and Debugging Tool
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#verification-checklist_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Verification Checklist
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stage-3-complete-circuit-assembly-and-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Stage 3: Complete Circuit Assembly and Integration
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Stage 3: Complete Circuit Assembly and Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objective_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objective
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Assembly
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#general-notes-on-circuit-assembly" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        General Notes on Circuit Assembly
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integration Testing
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sec:w1-standup-pre-encoder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Team Final Task: Stand-up Experiment (Pre-Encoder)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#w1-submission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Week 1 Submission
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2: Encoder & Position Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3: Advanced Modeling & Load Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4: Final Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日本語
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    日本語
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    はじめに・日程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    制御概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1：組立と立ち上げ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2：エンコーダと位置制御
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3：高度なモデル化と負荷試験
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4：最終発表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../jp/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    付録
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="page:w1">Week 1: Assembly &amp; Bring-up<a class="headerlink" href="#page:w1" title="Permanent link">&para;</a></h1>
+<h2 id="w1-overview">Week 1 Overview &amp; Objectives<a class="headerlink" href="#w1-overview" title="Permanent link">&para;</a></h2>
+<p>Week 1 focuses on building and bringing up the hardware platform for the inverted pendulum. The work proceeds in two parts: (1) three <strong>parallel tasks</strong> that can be done simultaneously by different students, and (2) a <strong>team bring-up</strong> process where the circuit is assembled and verified step-by-step.</p>
+<p><strong>Objectives:</strong></p>
+<ul>
+<li>
+<p>Complete the mechanical assembly (sensor, motor, breadboard, battery box)</p>
+</li>
+<li>
+<p>Set up the microcontroller environment and verify toolchain / serial debugging</p>
+</li>
+<li>
+<p>Design the full breadboard wiring in Fritzing before touching the real breadboard</p>
+</li>
+<li>
+<p>Assemble and verify the circuit in three stages (motor <span class="arithmatex">\(\rightarrow\)</span> angle sensor <span class="arithmatex">\(\rightarrow\)</span> full integration)</p>
+</li>
+<li>
+<p>Record evidence (photos, Fritzing files, and bring-up results) for submission</p>
+</li>
+</ul>
+<p><strong>Parallel tasks (recommended roles):</strong> Student A (mechanical), Student B (microcontroller), Student C (Fritzing/wiring design). Roles can be rotated, but all students should participate in the stage-by-stage bring-up and verification.</p>
+<h2 id="w1-electronic-components">Electronic Components Explanation<a class="headerlink" href="#w1-electronic-components" title="Permanent link">&para;</a></h2>
+<p>Next, we will assemble the electronic circuit, but before that, we will explain the parts to be used. The specific circuit assembly work is described later in this Week 1 section, so please read the explanation first.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>Semiconductor parts (ICs like microcontrollers, LSIs) are easily destroyed by static electricity (especially in dry winter). Be careful not to touch the pins with bare hands.</p>
+</li>
+<li>
+<p><em>Your body is charged!</em> Before assembling the electronic circuit, touch a large conductor (such as a door or metal part of a desk) to discharge your body.</p>
+</li>
+<li>
+<p>Once discharged, be careful not to get charged during work. Moving your hips on a chair or taking off a sweater generates static electricity, so try to stay still as much as possible.</p>
+</li>
+<li>
+<p>Even if discharged, do not touch the IC/LSI terminals directly with your fingers just in case.</p>
+</li>
+</ul>
+</div>
+<h3 id="sec:passive_markings">Resistor and Capacitor Markings (Value &amp; Polarity)<a class="headerlink" href="#sec:passive_markings" title="Permanent link">&para;</a></h3>
+<h4 id="resistors-how-to-identify-the-resistance-value">Resistors: how to identify the resistance value<a class="headerlink" href="#resistors-how-to-identify-the-resistance-value" title="Permanent link">&para;</a></h4>
+<p>You can confirm a resistor value either by measuring it with a multimeter (set to the <span class="arithmatex">\(\Omega\)</span> range), or by reading the color bands. For accurate measurement, it is best to measure the resistor <em>out of circuit</em> (or at least lift one lead), because in-circuit measurements can appear lower due to parallel paths.\
+<strong>4-band color code (most common):</strong> 1st band = 1st digit, 2nd band = 2nd digit, 3rd band = multiplier, 4th band = tolerance.\
+<strong>Digit colors:</strong> Black=0, Brown=1, Red=2, Orange=3, Yellow=4, Green=5, Blue=6, Violet=7, Gray=8, White=9.</p>
+<ul>
+<li><strong>Example (100<span class="arithmatex">\(\Omega\)</span>, 4-band)</strong>: <strong>Brown--Black--Brown</strong> with a tolerance band typically <strong>Gold</strong> (<span class="arithmatex">\(\pm 5\%\)</span>) or <strong>Brown</strong> (<span class="arithmatex">\(\pm 1\%\)</span>). Here, Brown=1 and Black=0, so the first two bands give "10"; the third band Brown is the multiplier <span class="arithmatex">\(\times 10^{1}\)</span>, so <span class="arithmatex">\(10 \times 10 = 100\,\Omega\)</span>.</li>
+</ul>
+<p>Some precision resistors use a 5-band code; if you see five bands, use the same idea (more significant digits + multiplier + tolerance).\
+<strong>Numeric markings (often on SMD resistors):</strong> resistors may also be printed with digits, which is similar in spirit to the capacitor 3-digit code, but the <strong>unit is <span class="arithmatex">\(\Omega\)</span></strong>. A common 3-digit resistor code is: first two digits = significant figures, third digit = number of zeros (<span class="arithmatex">\(\times 10^n\)</span>) in <span class="arithmatex">\(\Omega\)</span>. For example, <strong><code>101</code></strong> means <span class="arithmatex">\(10 \times 10^{1}=100\,\Omega\)</span>, and <strong><code>102</code></strong> means <span class="arithmatex">\(10 \times 10^{2}=1\,\textrm{k}\Omega\)</span>.</p>
+<h4 id="capacitors-how-to-read-the-capacitance-value-and-polarity">Capacitors: how to read the capacitance value and polarity<a class="headerlink" href="#capacitors-how-to-read-the-capacitance-value-and-polarity" title="Permanent link">&para;</a></h4>
+<p>Many small bypass capacitors are non-polarized (e.g., ceramic/film) and can be inserted either way, while electrolytic/tantalum capacitors are polarized and must be oriented correctly.</p>
+<ul>
+<li>
+<p><strong>Typical markings</strong>: some capacitors print the value directly (e.g., <code>0.1u</code>, <code>100n</code>), while many small ceramic capacitors use a 3-digit code in pF (first two digits are significant figures, the third digit is the number of zeros). For example, <strong><code>104</code></strong> means <span class="arithmatex">\(10 \times 10^{4}\,\mathrm{pF}=100\,\mathrm{nF}=0.1\,\mu\mathrm{F}\)</span>.</p>
+</li>
+<li>
+<p><strong>Polarized vs. non-polarized</strong>: ceramic/film capacitors have <strong>no polarity</strong>; aluminum electrolytic and tantalum capacitors are <strong>polarized</strong>. For typical aluminum electrolytics, the stripe on the body indicates the <strong>negative</strong> side (and the longer lead is often the <strong>positive</strong> side). PCB symbols may also mark <code>+</code>.</p>
+</li>
+</ul>
+<h3 id="motor-driver-drv8832">Motor Driver (DRV8832)<a class="headerlink" href="#motor-driver-drv8832" title="Permanent link">&para;</a></h3>
+<p>In the above example, we expect to drive the motor with the voltage output to pin p18 on line 7, but unfortunately, the output from mbed can only flow a small current, so the motor cannot be driven by connecting it directly to the pin. Therefore, the motor is driven via a motor driver IC capable of flowing a large current.</p>
+<p>The driver used this time is Texas Instruments' DRV8832. Since it is a small IC and difficult to use, we use one mounted on a board (AE-DRV8832: sold at Akizuki Denshi in Akihabara). The board has 3 input pins, 2 of which determine the motor drive direction (sign of voltage) (IN1, IN2), and the remaining 1 determines the applied voltage (absolute value) (VSET). We connect 2 digital signal outputs of mbed directly to the pins determining the drive direction. On the other hand, we connect the analog signal output of mbed to the pin instructing the applied voltage. There is also a pin for current limiting (ISENSE, pin 2), but since we do not limit the current this time, connect it directly to GND (0V, reference voltage of the circuit. Minus side of the battery in this case).</p>
+<p>The two wires coming out of the motor will be connected to pins 1 and 3 of the driver, but the connection between the motor and the driver will be frequently attached and detached during future experiments. However, since the motor wires are soft and difficult to insert into and remove from the breadboard, do not connect the motor wires directly to the driver, but connect them via separate jumper wires. You can disconnect the motor and driver by inserting/removing jumper wires (leave the motor wires that are difficult to insert/remove plugged into the breadboard).</p>
+<p>For other details regarding the motor driver, refer to the circuit example <sup id="fnref:3"><a class="footnote-ref" href="#fn:3">1</a></sup> and the datasheet <sup id="fnref:4"><a class="footnote-ref" href="#fn:4">2</a></sup>.</p>
+<h3 id="photo-interrupter-inclination-sensor">Photo-interrupter &amp; Inclination Sensor<a class="headerlink" href="#photo-interrupter-inclination-sensor" title="Permanent link">&para;</a></h3>
+<h4 id="photo-interrupter">Photo-interrupter<a class="headerlink" href="#photo-interrupter" title="Permanent link">&para;</a></h4>
+<p>In the inverted pendulum of this exercise, all sensors (= inclination sensor, rotary encoder. However, the rotary encoder will be described later) are realized with photo-interrupters. Photo-interrupters can be obtained very cheaply, and the ones used this time are sold for about 40 yen each in Akihabara. For the convenience of the exercise, an inclination sensor using photo-interrupters is prepared in advance, but the rotary encoder described later will be made by each of you.</p>
+<p>A photo-interrupter is an optical element combining an LED and a phototransistor. In many cases, wavelengths in the infrared region are used, so the light cannot be seen directly. As shown in Figure (<a href="#fig:interrupter">Fig.</a>), there are reflective and transmissive types of photo-interrupters, which detect the presence of an object by the presence or absence of reflected light or transmitted light, respectively. Especially in the case of the reflective type, since the amount of reflected light changes depending on the reflectance (<span class="arithmatex">\(\approx\)</span> color) of the object surface and the distance to the object (see Fig.7 of the datasheet), it can also be used as a color sensor (discriminating gray scale) or a distance sensor. This time, we apply this function as a distance sensor to realize an inclination sensor. (In the rotary encoder described later, the photo-interrupter reads the black and white pattern on the scale surface.)</p>
+<figure id="fig:interrupter">
+<div class="center">
+<img src="../../figs/photo_interrupters.png" alt="Photo-interrupters (reflective and transmissive types)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Photo-interrupters (reflective and transmissive types).</figcaption>
+</figure>
+
+<p>The basic circuit of a photo-interrupter is shown in Figure (<a href="#fig:pi_circuit">Fig.</a>). First, the LED must be lit. Looking at the datasheet <sup id="fnref:5"><a class="footnote-ref" href="#fn:5">3</a></sup>, the forward voltage <span class="arithmatex">\(V_F\)</span> (1.2V) and the typical current value for lighting (20mA) are displayed. The forward voltage is the voltage drop across the LED during operation. This time, since the 3.3V of the three-terminal regulator described later is used as the power supply voltage (VCC), if the forward voltage is 1.2V, the difference of 2.1V must be dropped by a resistor connected in series. To drop 2.1V at a current value of 20mA, Ohm's law tells us that <span class="arithmatex">\(R=2.1\textrm{V}/20\textrm{mA}=105\Omega\)</span> is good, but since a <span class="arithmatex">\(105\Omega\)</span> resistor is not sold, we use a close value of <span class="arithmatex">\(100\Omega\)</span>. See Section <a href="#sec:passive_markings">3.2.1</a> for how to identify resistor values by color code or multimeter.</p>
+<figure id="fig:pi_circuit">
+<div class="center">
+<img src="../../figs/pi_circuit.png" alt="Basic photo-interrupter circuit diagram." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Basic photo-interrupter circuit diagram.</figcaption>
+</figure>
+
+<p>Note that if a current exceeding the absolute maximum rating (50mA this time) flows, the LED will burn out in an instant. Be careful never to <strong>connect directly to the power supply without a resistor</strong> (The distributed inclination sensor has a <span class="arithmatex">\(100\Omega\)</span> resistor soldered to the tip of the wiring from the beginning so that this does not happen).</p>
+<p>On the side of the phototransistor receiving light, connect a resistor to the emitter to read the voltage (a resistor can be attached to the collector side, but the output voltage is inverted). When light enters the phototransistor, current flows between the collector and emitter. This current is converted to voltage by flowing through the external resistor. The obtained voltage is roughly proportional to the amount of incident light. The value of the external resistor is determined while looking at the datasheet and actual situation. For the same amount of incident light, a larger resistance value yields a larger voltage, but since output cannot exceed the power supply voltage, set an appropriate resistance value so that the output does not saturate.</p>
+<p>Since the LED of the photo-interrupter is infrared light and cannot be seen visually, you may feel anxious about whether it is really working. In such a case, let's look at the LED with a smartphone or computer camera. You should see the LED glowing purple. However, some smartphones have an infrared cut filter in the camera part, so the light of the infrared LED cannot be seen. In that case, try the front camera as well. Front cameras often do not cut infrared rays. If you want to know if your smartphone camera has an infrared cut filter, look at the light emitting part of a TV remote control with the camera. If no filter is inserted, you should see a fierce brightness when pressing the remote button (compared to that, the photo-interrupter used this time is much dimmer).</p>
+<h4 id="inclination-sensor">Inclination Sensor<a class="headerlink" href="#inclination-sensor" title="Permanent link">&para;</a></h4>
+<p>Gyro sensors are often used to measure the inclination angle of inverted pendulums, but gyro sensors measure angular velocity and need to be integrated to find the angle (this involves drift problems). This time, we use photo-interrupters to measure the angle more directly.</p>
+<p>An inclination sensor should already be attached to the bottom of the inverted pendulum. This inclination sensor consists of two photo-interrupters. The photo-interrupters at the front and rear of the machine measure the distance (reflected light amount) to the floor surface, respectively, and output the difference in this distance as an angle.</p>
+<p>It measures the angle with respect to the floor surface, not the angle with respect to the vertical plane. Therefore, if the inclination of the floor changes, an error occurs in the sensor output (if considering the vertical plane as the reference).</p>
+<p>Also, if the reflectance of the floor surface changes, the sensitivity of the sensor changes. On a floor surface with high reflectance (bright), the inclination will likely be output as large. However, brightness here is brightness in the infrared region, so it does not necessarily match the visual (visible light region) brightness.</p>
+<h3 id="three-terminal-regulator">Three-terminal Regulator<a class="headerlink" href="#three-terminal-regulator" title="Permanent link">&para;</a></h3>
+<p>This time, batteries are used as the power source for the entire inverted pendulum, but if a large current is drawn from the battery, the generated voltage drops due to internal resistance. In this circuit, a large current flows along with the motor drive, so the output voltage of the battery fluctuates violently according to the motor operation. If the photo-interrupter is driven using this fluctuating voltage, large noise will be superimposed on the sensor output, so the voltage for driving the photo-interrupter is stabilized using a three-terminal regulator.</p>
+<p>A three-terminal regulator is an IC that takes a fluctuating voltage as input and outputs a constant voltage (lower than that). Various model numbers of three-terminal regulators are sold, but basically, the last two digits of the model number represent the output voltage. This time, we use a regulator with model number LD33 (precisely LD1117V33) <sup id="fnref:6"><a class="footnote-ref" href="#fn:6">4</a></sup>. The output voltage is 3.3V. All photo-interrupter related voltages should use the output of this three-terminal regulator. On the other hand, since we want to separate the power supply for the motor and the photo-interrupter, <em><strong>take the power supply for the motor driver directly from the battery</strong>, not from the three-terminal regulator.</em></p>
+<p>Actually, mbed's board is also equipped with a 3.3V three-terminal regulator (you can see a chip called LD33), and stabilized 3.3V is output from the VOUT pin on the upper right (see Figure (<a href="#fig:mbed_pin">Fig.</a>)). You can use this voltage, but due to the size of the breadboard, this pin cannot be accessed, so we will install a regulator ourselves this time.</p>
+<h2 id="w1-parallel-assembly">Parallel Assembly Tasks<a class="headerlink" href="#w1-parallel-assembly" title="Permanent link">&para;</a></h2>
+<p>The following three tasks can be performed in parallel. Each task produces outputs that will be used in the team circuit assembly and bring-up.</p>
+<h3 id="sec:w1-mechanical-assembly">Task A: Mechanical Assembly (Student A)<a class="headerlink" href="#sec:w1-mechanical-assembly" title="Permanent link">&para;</a></h3>
+<p>Now that you understand the outline of control, let's look at the assembly of the inverted pendulum <strong>(Actual assembly will be done on the day of the exercise, but please read through it in advance).</strong><sup id="fnref:7"><a class="footnote-ref" href="#fn:7">5</a></sup> The parts used here are as follows<sup id="fnref:8"><a class="footnote-ref" href="#fn:8">6</a></sup> (electrical parts are excluded as they are explained separately in this Week 1 section).</p>
+<ol>
+<li>
+<p>Universal board (Tamiya, partially processed) + Wheels (Tamiya)</p>
+</li>
+<li>
+<p>Universal board (Tamiya) + Breadboard for circuits + mbed LPC1768</p>
+</li>
+<li>
+<p>DC Motor (Mabuchi Motor RE-280RA) <sup id="fnref:9"><a class="footnote-ref" href="#fn:9">7</a></sup> (Rubber roller attached to the tip)</p>
+</li>
+<li>
+<p>Motor bracket</p>
+</li>
+<li>
+<p>Battery box (Rechargeable AA batteries x 4)</p>
+</li>
+<li>
+<p>Inclination sensor (Unique part of this exercise)</p>
+</li>
+<li>
+<p>L-bracket</p>
+</li>
+</ol>
+<p>The universal board with wheels (No. 1) will be the center of assembly. Below, parts will be attached to this board.</p>
+<h4 id="attaching-the-inclination-sensor">Attaching the Inclination Sensor<a class="headerlink" href="#attaching-the-inclination-sensor" title="Permanent link">&para;</a></h4>
+<p>First, attach the inclination sensor (No. 6) to the bottom of the universal board with wheels (No. 1). Use the L-bracket (No. 7) to attach it as shown in Figure (<a href="#fig:angle_sensor">Fig.</a>).</p>
+<figure id="fig:angle_sensor">
+<div class="center">
+<img src="../../figs/angle_sensor.png" alt="Inclination sensor attachment (bottom view)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Inclination sensor attachment (bottom view).</figcaption>
+</figure>
+
+<h4 id="attaching-the-dc-motor">Attaching the DC Motor<a class="headerlink" href="#attaching-the-dc-motor" title="Permanent link">&para;</a></h4>
+<p>Next, attach the DC motor (No. 3). Use the motor bracket (No. 4) to attach it to the universal board (No. 1) (attach it to the same surface as the axle. See Figure (<a href="#fig:motor_setup">Fig.</a>)). The screws for attaching the bracket to the board are slightly smaller M2 screws. The screw heads are small, so it might be difficult to turn them with the screwdriver included in the kit, but try to secure them.</p>
+<figure id="fig:motor_setup">
+<div class="center">
+<img src="../../figs/motor_tire.png" alt="Motor bracket and motor–tire contact (example)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Motor bracket and motor–tire contact (example).</figcaption>
+</figure>
+
+<p>When fixing the DC motor, adjust it so that the rubber roller of the DC motor touches the tire \"lightly\". <strong>The point is to adjust it so that it is <em>touching lightly</em></strong>, as driving will not be possible if pressed too strongly. However, since the tire is not a perfect circle, if adjusted too lightly, the roller may slip partially when the tire is rotated. Rotate the tire once to confirm that the roller is always in contact.</p>
+<h4 id="attaching-the-breadboard">Attaching the Breadboard<a class="headerlink" href="#attaching-the-breadboard" title="Permanent link">&para;</a></h4>
+<p>Screw the No. 2 universal board with the breadboard onto the No. 1 universal board. Bolts should be protruding from this No. 2 board. Do not remove these bolts as it is difficult to reattach them (of course, remove/attach the \"nuts\" during installation). The No. 1 board should have screws for motor attachment, so make sure they do not interfere (overlap) (if forced to screw while overlapping, the board will crack). Also, since the battery box will be attached in the next part, decide the position of the board while considering the mounting position of the battery box.</p>
+<p>The microcontroller should already be attached to the breadboard. Attach the universal board so that the microcontroller is on the upper side (USB port facing up). <em>Do not remove the microcontroller on the breadboard, as the pins may break.</em></p>
+<h4 id="attaching-the-battery-box">Attaching the Battery Box<a class="headerlink" href="#attaching-the-battery-box" title="Permanent link">&para;</a></h4>
+<p>Finally, attach the battery box (No. 5) to the universal board (No. 1) with double-sided tape. Since the battery box is the heaviest part, the characteristics of the inverted pendulum change depending on the mounting position. You can stick it anywhere there is space, but be careful about the front and back of the battery box (if you put double-sided tape on the lid side, the lid will not open). Consider how to stick it so that you can access the switch on the back of the battery box.</p>
+<p>Note that double-sided tape is surprisingly strong. If you stick a large amount, you won't be able to peel it off. Two strips of about 5 cm length on the top and bottom are sufficient.</p>
+<p>Up to this point, the basic mechanical structure is complete. A completed example is shown in Figure (<a href="#fig:machine">Fig.</a>).</p>
+<figure id="fig:machine">
+<div class="center">
+<img src="../../figs/assembled.png" alt="Assembled platform example (Week 1 stage)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Assembled platform example (Week 1 stage).</figcaption>
+</figure>
+
+<h3 id="sec:w1-microcontroller-setup">Task B: Microcontroller Setup (Student B)<a class="headerlink" href="#sec:w1-microcontroller-setup" title="Permanent link">&para;</a></h3>
+<p>The microcontroller used this time is a series called mbed<sup id="fnref:10"><a class="footnote-ref" href="#fn:10">8</a></sup>. The feature of mbed is that the development environment using C/C++ language is prepared on the cloud (online), and you can start development immediately by signing up. Also, writing a program to the microcontroller is as simple as connecting the mbed via USB (recognized as a USB drive by the computer) and copying the compiled program, making it easier to handle compared to other microcontrollers. There are various microcontroller boards in the mbed series, but this time we will use the most standard LPC1768.</p>
+<h4 id="keil-studio-cloud-signup">Keil Studio Cloud signup<a class="headerlink" href="#keil-studio-cloud-signup" title="Permanent link">&para;</a></h4>
+<p>First, access the Keil Studio Cloud<sup id="fnref:11"><a class="footnote-ref" href="#fn:11">9</a></sup> and create an account. After signing up, connect the microcontroller to your computer with the included USB cable. It will be recognized as a USB drive. In the upper left of the compiler screen, \"<strong>mbed LPC1768</strong>\" should be selected as the microcontroller board (Build Target) to be used.</p>
+<h4 id="compile-a-sample-program">Compile a sample program<a class="headerlink" href="#compile-a-sample-program" title="Permanent link">&para;</a></h4>
+<p>In the compiler screen menu, select \"File\" <span class="arithmatex">\(\rightarrow\)</span> \"New Project\" and create a new program using mbed_blinky as a template (see Figure (<a href="#fig:keil_interface">Fig.</a>)). Specifically, select \"<strong>Mbed2-example-blink</strong>\" at the bottom of Example Project, and set the Project Name as you like. A new program with code to blink an LED will be created, so \"Compile\" it as is. Compilation can be done by clicking the icon that looks like a hammer. When compilation is finished, an executable file (extension .bin) is downloaded, so write this to the USB drive (mbed). Just drag and drop it perfectly.</p>
+<figure id="fig:keil_interface">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Create new project</th>
+<th>Select example template</th>
+<th>Compile button</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../fig2026/keil_new_project.png" alt="Create new project" style="max-width: 260px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/keil_editor.png" alt="Select example template" style="max-width: 260px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/keil_build.png" alt="Compile button" style="max-width: 260px; width: 100%; height: auto;" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Keil Studio Cloud workflow: create a project, pick an example template, and compile.</figcaption>
+</figure>
+
+<p>After writing the program, press the button in the center of the microcontroller board (this is the reset switch). Then, the newest file in the USB drive (= the file written last) is executed.</p>
+<p>In the sample program, if the left LED among the 4 LEDs lined up at the bottom of the mbed board blinks, it is successful. If successful, try rewriting the program (main.cpp file) a little, such as changing the LED blinking time, and practice the flow of Compile <span class="arithmatex">\(\rightarrow\)</span> Run.</p>
+<p>* Mac users may not work well with the above. In that case, refer to the file \"Write Error and Countermeasures on macOS\" and execute.</p>
+<h4 id="pin-usage-explanation">Pin usage explanation<a class="headerlink" href="#pin-usage-explanation" title="Permanent link">&para;</a></h4>
+<p>The microcontroller board used this time has various input/output functions. For example, 26 channels of digital signal I/O, 1 channel of analog voltage output by built-in DA converter, and 6 channels of voltage input by AD converter are available. Besides this, there are 6 channels of PWM (Pulse Width Modulation) signal output, etc., but assigning all these functions to individual pins would require a huge number of pins and the board would become huge.</p>
+<p>Generally, these functions are not all used at the same time, so in this board (and microcontrollers in general), multiple functions are assigned to one pin, and the function of the pin is selected from the program as needed. This function assignment is shown in Figure (<a href="#fig:mbed_pin">Fig.</a>).</p>
+<figure id="fig:mbed_pin">
+<div class="center">
+<img src="../../figs/pinout.png" alt="Pinout of mbed LPC1768 (source: https://os.mbed.com/platforms/mbed-LPC1768/)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Pinout of mbed LPC1768 (source: https://os.mbed.com/platforms/mbed-LPC1768/).</figcaption>
+</figure>
+
+<p>The pins available for user signal I/O are the 26 pins labeled \"pXX\" (XX is a number) in the outermost columns on the left and right. All these pins can be used for digital signal input or output. Also, by specifying from the program, functions written next to the pin name can be used. For example, looking at pin p18 at the bottom left, you can see that it has AnalogIn and AnalogOut functions. That is, a total of 4 functions: digital signal input, digital signal output, analog signal input, and analog signal output are assigned to this pin. Among these 4 functions, if you want to use the analog signal output function, in the program:</p>
+<div class="highlight"><pre><span></span><code>AnalogOut aaa(p18);
+</code></pre></div>
+<p>By declaring this, AnalogOut is selected as the function of p18. The declared object (<code>aaa</code> above) can be written to (or read from in the case of AnalogIn) like a variable. For example,</p>
+<div class="highlight"><pre><span></span><code>aaa = 0.5;
+</code></pre></div>
+<p>If you do this, an analog voltage of 0.5 times the full scale (3.3V) (i.e., 1.65V) is output to p18. Conversely, when setting this pin as analog input,</p>
+<div class="highlight"><pre><span></span><code>AnalogIn aaa(p18);
+... (omitted)
+b = aaa;
+</code></pre></div>
+<p>Like this, using the declared object <code>aaa</code>, you can read the voltage value input to p18 (ratio to full scale = 3.3V) (in this example, the value enters variable <code>b</code>).</p>
+<p>For details, refer to the reference manual on the following page.</p>
+<div class="highlight"><pre><span></span><code>https://os.mbed.com/handbook/Homepage
+</code></pre></div>
+<h4 id="control-program-basics">Control program basics<a class="headerlink" href="#control-program-basics" title="Permanent link">&para;</a></h4>
+<p>In a feedback control program, the following processes are repeated.</p>
+<ul>
+<li>
+<p>Reading sensor signals</p>
+</li>
+<li>
+<p>Control calculation</p>
+</li>
+<li>
+<p>Output of calculation result</p>
+</li>
+</ul>
+<p>Although 'for' loops and 'while' loops can be used for repetition, the repetition time is not known accurately, and (if there are conditional branches such as 'if' inside the loop) the repetition cycle changes depending on the processing content.</p>
+<p>In feedback control and digital signal processing, it is important that the repetition time (sampling time) is fixed and known. Therefore, generally, a timer is used to manage time. As specific programming methods using a timer, there are methods using timer interrupts and methods using threads, but this time we use timer interrupts. A simple program example is shown below (numbers on the left are line numbers for explanation).</p>
+<div class="highlight"><pre><span></span><code>------------------------------------------------------------------------
+ 1:   AnalogIn ad(p20);
+ 2:   AnalogOut da(p18);
+ 3:  
+ 4:   void int0() {
+ 5:        theta = ad;                     // Reading sensor signal
+ 6:        command = theta * Kp;           // Control calculation
+ 7:        da = command;                   // Output
+ 8:   }
+ 9:   
+10:   int main() {
+11:        t_int.attach(&amp;int0, 0.001);     // Start timer interrupt
+12:        while(1);                       // Infinite loop as nothing else to do
+13:   }
+------------------------------------------------------------------------
+</code></pre></div>
+<p>Here, taking the case of P control as an example, the main part of the program is shown. The C language program is executed from the main function on line 10, but the main function is done after setting the timer interrupt on line 11 (setting here calls function 'int0()' every 0.001 seconds). When the main function ends, the execution of the entire program also ends, so it enters an infinite loop so as not to end (line 12).</p>
+<p>On the other hand, the function 'int0()' from line 4 specified for the timer interrupt processing is the main body of the control program. In this example, line 5 reads the sensor signal input from outside the microcontroller, line 6 calculates P control, and line 7 outputs voltage outside the microcontroller. Every time a signal comes from the timer, this function is executed, and as a result (in this example) repetitive processing with a 1ms period is realized.</p>
+<p>The interrupt processing function must definitely finish within the interrupt period (1ms in the above example). If processing does not finish within the interrupt period, the next interrupt enters, and processing breaks down. Therefore, it is an iron rule to avoid time-consuming tasks within the interrupt processing function. Especially requiring caution is function calls.</p>
+<p>Function calls can be written in one line from the perspective of writing a program, so we tend to imagine that the execution time is short, but some functions have unexpectedly long processing times. Easy calling of such functions from within an interrupt processing function causes the interrupt processing to break down. Specifically, string processing functions such as 'sprintf()', memory processing functions such as 'malloc()', and mathematical functions such as 'sin()' have long execution times and tend to cause trouble.</p>
+<p>Also, <em>since function calls themselves have large processing overhead, it is safer not to define and call functions yourself excessively.</em> Although there is an idea to group multiple processes into a function to improve program readability, in such cases, it is better to use inline functions or macro definitions if possible (these have no overhead at the time of calling).</p>
+<h4 id="serial-communication-debugging">Serial communication &amp; debugging<a class="headerlink" href="#serial-communication-debugging" title="Permanent link">&para;</a></h4>
+<p>Serial communication (UART) is one of the most important debugging tools when developing microcontroller programs. The mbed LPC1768 has built-in USB-to-Serial functionality, which allows you to send debug messages from your program to your computer. This is particularly useful when debugging control programs, as you can monitor variable values and program behavior in real time without interrupting the control loop.</p>
+<p><strong>UART Communication Principle:</strong> UART (Universal Asynchronous Receiver-Transmitter) is a hardware communication protocol that transmits data one bit at a time over a single wire. Unlike synchronous protocols that require a shared clock signal, UART is asynchronous---both the transmitter and receiver must agree on the communication speed (baud rate) beforehand. Each byte of data is transmitted as a frame consisting of: (1) a start bit (logic low), (2) 8 data bits (LSB first), (3) an optional parity bit for error checking, and (4) one or more stop bits (logic high). The mbed LPC1768 includes a built-in USB-to-Serial converter chip that bridges the UART interface (USBTX/USBRX pins) to USB, allowing seamless communication with your computer without external hardware.</p>
+<p>To use serial communication in your program, you need to create a Serial object using pins USBTX and USBRX, which are connected to the USB interface. A simple example would be:</p>
+<div class="highlight"><pre><span></span><code>Serial pc(USBTX, USBRX);
+
+int main() {
+    pc.baud(9600);  // Set baud rate to 9600 bps
+    pc.printf(&quot;Hello, World!\n&quot;);
+
+    while(1) {
+        pc.printf(&quot;Counter: %d\n&quot;, counter);
+        wait(1.0);
+    }
+}
+</code></pre></div>
+<p>The baud rate determines the communication speed and must match the setting in your terminal software. Common values are 9600 bps (recommended for beginners due to its reliability) or 115200 bps (faster, commonly used for debugging). Other standard rates include 4800, 19200, 38400, and 57600 bps.</p>
+<p>When the mbed is connected via USB, it appears as a serial port on your computer (typically COM3 or similar on Windows, /dev/tty.usbmodem* on macOS, /dev/ttyACM* on Linux). There are several ways to view these serial messages. The most convenient option is to use the built-in serial monitor in Keil Studio Cloud, which allows you to view serial output directly in the web browser without any additional software. Alternatively, you can use traditional terminal software such as Tera Term or PuTTY on Windows, or the screen command and CoolTerm on macOS/Linux. The Arduino IDE Serial Monitor also works well on all platforms.</p>
+<p><strong>Custom Debugging Tools:</strong> We provide three specialized debugging tools in the directory<sup id="fnref:12"><a class="footnote-ref" href="#fn:12">10</a></sup>, each consisting of three files:</p>
+<ul>
+<li>
+<p><strong>.cpp file</strong>: mbed microcontroller program (C++ source code). You can read and modify this code to understand how the program works or customize it for your needs.</p>
+</li>
+<li>
+<p><strong>.bin file</strong>: Pre-compiled binary executable ready to flash directly to mbed LPC1768. Simply drag-and-drop this file onto the mbed USB drive to program the microcontroller---no compilation needed.</p>
+</li>
+<li>
+<p><strong>.pde file</strong>: Processing<sup id="fnref:13"><a class="footnote-ref" href="#fn:13">11</a></sup> visualization program that runs on your computer. This provides a graphical interface to display real-time data received from mbed via serial communication.</p>
+</li>
+</ul>
+<p>To use these tools: (1) Flash the <code>.bin</code> file to mbed by copying it to the mbed USB drive, (2) Press the reset button on mbed, (3) Run the corresponding <code>.pde</code> file in Processing. If you want to modify the mbed program, you can edit the <code>.cpp</code> file in Keil Studio Cloud, compile it to generate a new <code>.bin</code> file, and flash that to mbed. The tools use frame-based serial protocols (with header bytes 0xAA 0x55) to reliably transmit multiple data values per frame, ensuring proper synchronization between mbed and the PC visualization. See the <code>README.md</code> file in the directory for detailed documentation on each tool, pin assignments, communication protocols, and troubleshooting tips.</p>
+<p>Serial communication is invaluable for debugging control programs. You can print variable values to verify calculations, monitor control loop timing by printing timestamps, check sensor readings by displaying raw data, and verify program flow by adding messages at key execution points. For example:</p>
+<div class="highlight"><pre><span></span><code>pc.printf(&quot;Angle: %f, Motor: %f\n&quot;, theta, motor_output);
+</code></pre></div>
+<p>However, be cautious when using printf inside interrupt service routines, as it can take significant time and may disrupt timing-critical control loops. For time-critical debugging, consider toggling a digital output pin and observing it with an oscilloscope instead. For more details on Serial communication, refer to the mbed Serial API documentation.</p>
+<h3 id="sec:w1-breadboard-wiring-design">Task C: Breadboard Wiring Design (Student C)<a class="headerlink" href="#sec:w1-breadboard-wiring-design" title="Permanent link">&para;</a></h3>
+<h4 id="how-to-use-breadboard">How to use Breadboard<a class="headerlink" href="#how-to-use-breadboard" title="Permanent link">&para;</a></h4>
+<p>A breadboard is a board often used for prototyping electrical circuits, allowing simple circuit construction without soldering. Figure (<a href="#fig:breadboard">Fig.</a>) shows the outline of a breadboard. In a breadboard, 5 holes lined up horizontally are electrically connected, and wiring is done utilizing this. The 5 holes on the right and left sides of the board are independent of each other.</p>
+<figure id="fig:breadboard">
+<div class="center">
+<img src="../../figs/breadboard.png" alt="Breadboard overview." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Breadboard overview.</figcaption>
+</figure>
+
+<figure id="fig:breadboard_sample">
+<div class="center">
+<img src="../../figs/breadboard_sample.png" alt="Example wiring on a breadboard." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Example wiring on a breadboard.</figcaption>
+</figure>
+
+<p>For example, mbed should already be inserted on the breadboard. If you want to connect something to a pin of mbed, just insert a wire or leg of a resistor into the hole immediately next to that pin (see Figure (<a href="#fig:breadboard_sample">Fig.</a>)).</p>
+<p>Also, lines for power supply voltage are prepared on the breadboard. The holes lined up vertically at both ends of the board are electrically connected in one vertical column respectively. There is one column on the right and left, so use them as GND and 3.3V respectively. For this purpose, connect the output pin (3.3V) of the three-terminal regulator to some hole in the right column (any is fine) with a wire. Similarly, connect the left column to GND (black wire coming from the battery).</p>
+<h4 id="using-fritzing-for-circuit-design">Using Fritzing for Circuit Design<a class="headerlink" href="#using-fritzing-for-circuit-design" title="Permanent link">&para;</a></h4>
+<p>Because breadboard wiring can become visually complex and error-prone, we recommend drafting your circuit with Fritzing<sup id="fnref:14"><a class="footnote-ref" href="#fn:14">12</a></sup> before building it on a real breadboard. Fritzing is a free and open-source electronic design automation (EDA) tool designed for breadboard-based prototyping, and it provides synchronized <strong>Breadboard</strong>, <strong>Schematic</strong>, and <strong>PCB</strong> views.</p>
+<p>For this experiment, we provide custom Fritzing parts for the <em>Microcontroller</em>, <em>Motor Driver</em>, and <em>Photo Reflector</em> modules. These parts must be <strong>imported into Fritzing first</strong> and then placed from the parts library.</p>
+<p>Figure (<a href="#fig:fritzing_setup_and_examples">Fig.</a>) shows example circuit views for this experiment. Before placing parts and routing wires, open the <em>View</em> menu in Fritzing and uncheck <em>Align to Grid</em>; grid alignment is not convenient for the component placement and wiring in this setup. We also provide an example design where the <strong>motor driver section is already wired</strong> (Figures (<a href="#fig:fritzing_motor_driver_schematic">Fig.</a>) and (<a href="#fig:fritzing_motor_driver_breadboard">Fig.</a>)). Use it as a reference, and see the Circuit Assembly subsection in Week 1 for the detailed parts list and step-by-step procedure. A full sample circuit is also given in the appendix<sup id="fnref:15"><a class="footnote-ref" href="#fn:15">13</a></sup> for reference whether you use Fritzing or not.</p>
+<figure id="fig:fritzing_setup_and_examples">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Example in <em>Schematic View</em></th>
+<th>Corresponding <em>Breadboard View</em> wiring</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img id="fig:fritzing_motor_driver_schematic" src="../../fig2026/fz2.png" alt="Example in Schematic View" /></td>
+<td><img id="fig:fritzing_motor_driver_breadboard" src="../../fig2026/fz3.png" alt="Corresponding Breadboard View wiring" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Example Fritzing schematic and breadboard views (motor driver section pre-wired).</figcaption>
+</figure>
+
+<p>When using Fritzing, start by importing all provided custom parts, then create a new sketch and place <strong>all modules that will be mounted on your panel</strong> (microcontroller, motor driver, photo reflector, regulator, battery connector, etc.).</p>
+<p>Next, use Schematic View to confirm <strong>which pins must be connected</strong> and to catch missing connections, and then implement the same connectivity in Breadboard View. The physical placement can be different, but the electrical connections must match. When routing wires, prioritize readability: keep them as short as possible, avoid unnecessary crossings, and group wires by function (power, motor, sensors, encoder). This will make the real breadboard assembly faster and reduces debugging time.</p>
+<p>Before building on the real breadboard, perform a final check on your Fritzing design by verifying every net related to <strong>power (3.3V/GND)</strong>, <strong>motor driver inputs/outputs</strong>, and <strong>sensor signal lines</strong>, and confirming that each signal is connected to the intended microcontroller pin. In particular, <strong>complete the full panel circuit design in Fritzing first</strong> (all modules placed and all connections routed and checked) <strong>before you start assembling on the breadboard</strong>.</p>
+<h3 id="sync-point-all-students">Sync Point (All Students)<a class="headerlink" href="#sync-point-all-students" title="Permanent link">&para;</a></h3>
+<p>Before starting the team circuit assembly, confirm that:</p>
+<ul>
+<li>
+<p>The mechanical platform is complete and the motor roller contact is correctly adjusted</p>
+</li>
+<li>
+<p>The microcontroller can be programmed and serial communication works</p>
+</li>
+<li>
+<p>The Fritzing design includes <strong>all modules</strong> and all required nets are routed and checked</p>
+</li>
+</ul>
+<h2 id="sec:w1-circuit-assembly">Circuit Assembly (Team Collaboration)<a class="headerlink" href="#sec:w1-circuit-assembly" title="Permanent link">&para;</a></h2>
+<p>This part is performed as a team. To minimize the risk of errors and facilitate debugging, we assemble and test the circuit in three stages.</p>
+<h3 id="safety-precautions">Safety precautions<a class="headerlink" href="#safety-precautions" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>Before turning on the power switch, check carefully that there are no mistakes in the wiring around the power supply at least!</p>
+</li>
+<li>
+<p>If there is a mistake in the wiring around the power supply (connecting plus and minus in reverse, short circuit, etc.), <em>the circuit will be destroyed at the same time as switch on</em>.</p>
+</li>
+<li>
+<p>It is dangerous to turn on the switch and see what happens, so check well in advance instead of taking a chance. Especially, pay attention to <em>power connection to microcontroller/motor driver</em> and <em>polarity of electrolytic capacitor</em>.</p>
+</li>
+<li>
+<p>Disconnect power before rewiring. Never move wires on a powered breadboard.</p>
+</li>
+<li>
+<p>Keep the motor power (battery) and sensor power (3.3V regulator) separated as instructed.</p>
+</li>
+</ul>
+</div>
+<p><strong>Soldering and continuity checks.</strong> During circuit assembly, you will use a soldering iron to solder resistors and DuPont wires (or leads) to make robust connections. Before powering the circuit, you can use a multimeter in continuity mode (buzzer) to verify.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>Unplug the soldering iron after use, and let it cool down before storing it or leaving the bench.</p>
+</li>
+<li>
+<p>Never leave a powered soldering iron unattended.</p>
+</li>
+</ul>
+</div>
+<h3 id="assembly-strategy-3-stages">Assembly strategy (3 stages)<a class="headerlink" href="#assembly-strategy-3-stages" title="Permanent link">&para;</a></h3>
+<p>To minimize the risk of errors and facilitate debugging, we recommend assembling and testing the circuit in three stages[^16]:</p>
+<ol>
+<li>
+<p><strong>Motor Driver and Motor Testing</strong> - Verify motor control (forward/reverse rotation and speed control)</p>
+</li>
+<li>
+<p><strong>Angle Sensor Testing</strong> - Verify sensor signal acquisition and processing</p>
+</li>
+<li>
+<p><strong>Complete Circuit Assembly</strong> - Integrate all components for final control system</p>
+</li>
+</ol>
+<p>This staged approach allows you to identify and fix problems early, before the circuit becomes too complex. Each stage has a dedicated example program and debugging tool to help you verify correct operation.</p>
+<h3 id="stage-1-motor-driver-motor-testing">Stage 1: Motor Driver &amp; Motor Testing<a class="headerlink" href="#stage-1-motor-driver-motor-testing" title="Permanent link">&para;</a></h3>
+<h4 id="objective">Objective<a class="headerlink" href="#objective" title="Permanent link">&para;</a></h4>
+<p>In this first stage, you will assemble the power supply circuit, motor driver (DRV8832), and motor. The goal is to verify that you can control the motor's direction (forward and reverse) and speed using PWM signals from the mbed.</p>
+<h4 id="circuit-components-for-stage-1">Circuit Components for Stage 1<a class="headerlink" href="#circuit-components-for-stage-1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>mbed LPC1768 microcontroller</p>
+</li>
+<li>
+<p>Battery box (4 AA batteries, 6V)</p>
+</li>
+<li>
+<p>Three-terminal regulator (LD1117V33) for 3.3V supply</p>
+</li>
+<li>
+<p>Motor driver IC (DRV8832)</p>
+</li>
+<li>
+<p>DC motor (RE-280RA)</p>
+</li>
+<li>
+<p>Bypass capacitors (ceramic capacitors for power stabilization)</p>
+</li>
+<li>
+<p>Electrolytic capacitor for regulator</p>
+</li>
+<li>
+<p>Jumper wires</p>
+</li>
+</ul>
+<p><em>Note: For detailed part numbers, specifications, and quantities, refer to Appendix <a href="../appendix/#app:partslist">app:partslist</a>.</em></p>
+<h4 id="wiring-instructions">Wiring Instructions<a class="headerlink" href="#wiring-instructions" title="Permanent link">&para;</a></h4>
+<p>Wire the circuit according to the motor driver section of the sample circuit diagram<sup id="fnref:17"><a class="footnote-ref" href="#fn:17">14</a></sup>. Key points to remember:</p>
+<ul>
+<li>
+<p>In the sample circuit diagram, capacitors are inserted between the power pins of mbed and motor driver and GND. This is called a bypass capacitor (bypass cap), which has the role of softening power supply voltage fluctuations due to voltage drops in wiring (which also has resistance) and stabilizing IC operation. <em>It is an iron rule to install this bypass capacitor right next to the power pin (adjacent hole)</em>. Even if it is the same on the circuit diagram, installing it far away makes the bypass capacitor meaningless.</p>
+</li>
+<li>
+<p>Similarly, <em>install the capacitor connected to the three-terminal regulator in the immediate hole</em>.</p>
+</li>
+<li>
+<p>Connect the three-terminal regulator output (3.3V) to one vertical power rail on the breadboard</p>
+</li>
+<li>
+<p>Connect GND (battery black wire) to the other vertical power rail</p>
+</li>
+<li>
+<p>Pay careful attention to <em>electrolytic capacitor polarity</em> (the stripe indicates negative side)</p>
+</li>
+<li>
+<p>See Section <a href="#sec:passive_markings">3.2.1</a> for capacitor markings (e.g., <code>0.1u</code>/<code>104</code>) and which capacitors are polarized vs. non-polarized.</p>
+</li>
+<li>
+<p>Double-check all power connections before turning on the power switch</p>
+</li>
+</ul>
+<h4 id="example-program-and-debugging-tool">Example Program and Debugging Tool<a class="headerlink" href="#example-program-and-debugging-tool" title="Permanent link">&para;</a></h4>
+<p>We provide an example program () that demonstrates motor control. This program allows you to test:</p>
+<ul>
+<li>
+<p>Motor forward rotation at various speeds</p>
+</li>
+<li>
+<p>Motor reverse rotation at various speeds</p>
+</li>
+<li>
+<p>Motor stopping and braking</p>
+</li>
+</ul>
+<p>To help you visualize the control signals and verify correct operation, we provide <strong>Debugging Tool 1: Motor Controller</strong> (located in ). This tool consists of:</p>
+<ul>
+<li>
+<p><strong>1_motor_controller.cpp</strong>: mbed program that receives text commands via serial (115200 baud). Commands: <code>F xx</code> (forward at xx% duty), <code>B xx</code> (backward at xx%), <code>S</code> (stop). Uses pins p13 (motor forward), p14 (motor reverse), and p18 (PWM voltage).</p>
+</li>
+<li>
+<p><strong>1_motor_controller.bin</strong>: Pre-compiled binary---drag and drop to mbed USB drive to program the microcontroller.</p>
+</li>
+<li>
+<p><strong>1_motor_controller.pde</strong>: Processing GUI with sliders and buttons to interactively control motor speed and direction without modifying code.</p>
+</li>
+</ul>
+<p>The Processing GUI displays real-time motor status including PWM duty cycle, direction (forward/reverse), and motor current (if current sensing is implemented). This tool allows you to test the motor driver circuit thoroughly before integrating it with control algorithms.</p>
+<h4 id="verification-checklist">Verification Checklist<a class="headerlink" href="#verification-checklist" title="Permanent link">&para;</a></h4>
+<p>Before proceeding to Stage 2, verify:</p>
+<ul>
+<li>
+<p>Motor rotates forward when commanded</p>
+</li>
+<li>
+<p>Motor rotates backward when commanded</p>
+</li>
+<li>
+<p>Motor speed changes smoothly with PWM duty cycle</p>
+</li>
+<li>
+<p>Motor stops completely when commanded</p>
+</li>
+<li>
+<p>No abnormal heating of motor driver IC</p>
+</li>
+<li>
+<p>Power supply voltage remains stable (measure with multimeter)</p>
+</li>
+</ul>
+<h3 id="stage-2-angle-sensor-testing">Stage 2: Angle Sensor Testing<a class="headerlink" href="#stage-2-angle-sensor-testing" title="Permanent link">&para;</a></h3>
+<h4 id="objective_1">Objective<a class="headerlink" href="#objective_1" title="Permanent link">&para;</a></h4>
+<p>In this stage, you will add the angle sensor (photo-interrupter or rotary encoder) to your circuit and verify that you can correctly read the pendulum angle. This is the most critical sensor for inverted pendulum control.</p>
+<h4 id="additional-components-for-stage-2">Additional Components for Stage 2<a class="headerlink" href="#additional-components-for-stage-2" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Photo-interrupter sensors (TPR-105F) <span class="arithmatex">\(\times\)</span> 2</p>
+</li>
+<li>
+<p>Pull-up resistors for sensor outputs</p>
+</li>
+<li>
+<p>Additional jumper wires for sensor connections</p>
+</li>
+</ul>
+<h4 id="wiring-instructions_1">Wiring Instructions<a class="headerlink" href="#wiring-instructions_1" title="Permanent link">&para;</a></h4>
+<p>Add the sensor circuit to your existing motor driver circuit according to the sensor section of the sample circuit diagram<sup id="fnref:18"><a class="footnote-ref" href="#fn:18">15</a></sup>. Key points:</p>
+<ul>
+<li>
+<p>Connect sensor power to 3.3V rail (not 5V, as mbed inputs are 3.3V logic)</p>
+</li>
+<li>
+<p>Install appropriate pull-up resistors on sensor output lines</p>
+</li>
+<li>
+<p>Route sensor signal wires away from motor power lines to minimize noise</p>
+</li>
+<li>
+<p>Ensure sensors are mechanically aligned with the encoder disk or slit pattern</p>
+</li>
+</ul>
+<h4 id="example-program-and-debugging-tool_1">Example Program and Debugging Tool<a class="headerlink" href="#example-program-and-debugging-tool_1" title="Permanent link">&para;</a></h4>
+<p>We provide an example program () that reads and processes sensor signals. This program demonstrates:</p>
+<ul>
+<li>
+<p>Reading digital sensor outputs</p>
+</li>
+<li>
+<p>Calculating angle from sensor readings</p>
+</li>
+<li>
+<p>Computing angular velocity by differentiation</p>
+</li>
+<li>
+<p>Applying filtering to reduce noise</p>
+</li>
+</ul>
+<p><strong>Debugging Tool 2: Analog Input Visualizer</strong> (located in ) provides real-time visualization of 4 analog input channels:</p>
+<ul>
+<li>
+<p><strong>2_analog_input_visualizer.cpp</strong>: mbed program that reads 4 analog inputs at approximately 200 Hz and transmits data via serial (115200 baud) using a frame-based protocol (header: 0xAA 0x55, followed by 4 data bytes). Pins: p16 (CH1), p17 (CH2), p19 (CH3, typically photo-interrupter 1), p20 (CH4, typically photo-interrupter 2). The 4 channels can be used for any analog sensors: angle sensors, encoder signals, potentiometers, etc.</p>
+</li>
+<li>
+<p><strong>2_analog_input_visualizer.bin</strong>: Pre-compiled binary ready to flash to mbed.</p>
+</li>
+<li>
+<p><strong>2_analog_input_visualizer.pde</strong>: Processing program that displays 4-channel real-time waveforms. Can calculate pendulum angle and angular velocity when using photo-interrupters, or display encoder signals when using rotary encoders on CH1/CH2.</p>
+</li>
+</ul>
+<p>This versatile tool is essential for verifying sensor operation, detecting mechanical issues, and confirming signal quality. For angle sensors, you can manually move the pendulum and observe the sensor readings in real time. For encoders, you can rotate the wheel and observe the quadrature signals. The frame-based protocol ensures reliable data transmission by using header bytes to synchronize the data stream between mbed and PC visualization.</p>
+<figure id="fig:debug_tools">
+<div class="center">
+<table>
+<thead>
+<tr>
+<th>Debugging Tool 1: Motor Controller GUI</th>
+<th>Debugging Tool 2: Analog Input Visualizer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="../../fig2026/debug_motor_controller.png" alt="Debugging Tool 1: Motor Controller GUI" style="max-width: 360px; width: 100%; height: auto;" /></td>
+<td><img src="../../fig2026/debug_analog_visualizer.png" alt="Debugging Tool 2: Analog Input Visualizer" style="max-width: 360px; width: 100%; height: auto;" /></td>
+</tr>
+</tbody>
+</table>
+</div>
+<figcaption>Debugging GUIs for motor control and analog input visualization.</figcaption>
+</figure>
+
+<h4 id="verification-checklist_1">Verification Checklist<a class="headerlink" href="#verification-checklist_1" title="Permanent link">&para;</a></h4>
+<p>Before proceeding to Stage 3, verify:</p>
+<ul>
+<li>
+<p>Sensor outputs change correctly as pendulum moves</p>
+</li>
+<li>
+<p>Angle calculation corresponds to actual pendulum position</p>
+</li>
+<li>
+<p>Angular velocity shows reasonable values (not excessively noisy)</p>
+</li>
+<li>
+<p>Sensors detect full range of pendulum motion</p>
+</li>
+<li>
+<p>No sensor signal interference from motor operation</p>
+</li>
+</ul>
+<h3 id="stage-3-complete-circuit-assembly-and-integration">Stage 3: Complete Circuit Assembly and Integration<a class="headerlink" href="#stage-3-complete-circuit-assembly-and-integration" title="Permanent link">&para;</a></h3>
+<h4 id="objective_2">Objective<a class="headerlink" href="#objective_2" title="Permanent link">&para;</a></h4>
+<p>In this final stage, you will integrate the motor control and sensor systems into a complete feedback control system capable of balancing the inverted pendulum.</p>
+<h4 id="final-assembly">Final Assembly<a class="headerlink" href="#final-assembly" title="Permanent link">&para;</a></h4>
+<p>Your circuit should now include all components according to the complete sample circuit diagram<sup id="fnref:19"><a class="footnote-ref" href="#fn:19">16</a></sup>. Review the entire circuit and verify:</p>
+<ul>
+<li>
+<p>All power connections are correct and secure</p>
+</li>
+<li>
+<p>All bypass capacitors are installed adjacent to IC power pins</p>
+</li>
+<li>
+<p>Wire routing is neat and organized (example shown below)</p>
+</li>
+<li>
+<p>No wires are at risk of short circuits</p>
+</li>
+<li>
+<p>All component orientations are correct (ICs, electrolytic capacitors)</p>
+</li>
+</ul>
+<h4 id="general-notes-on-circuit-assembly">General Notes on Circuit Assembly<a class="headerlink" href="#general-notes-on-circuit-assembly" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p><em>The simpler the circuit looks, the better it works</em>. Electronic circuits, especially analog circuits, change characteristics with slight wiring methods. Circuits that look beautiful = simple circuits tend to have better characteristics.</p>
+</li>
+<li>
+<p><em>Since breadboards have large contact resistance, fewer wires allow more stable operation</em>. Avoid daisy-chaining multiple jumper wires when a single wire would suffice.</p>
+</li>
+<li>
+<p>Again, try not to touch the pins of IC/LSI (Resistors, capacitors, LEDs, three-terminal regulators are fine to touch).</p>
+</li>
+<li>
+<p>The sample circuit diagram is just one wiring example, so you can use different pins for mbed input/output (However, AnalogOut is only available on p18, so it cannot be changed. Also, pins on the right side of mbed cannot be used due to space limitations). Rewrite the program according to the pins used.</p>
+</li>
+<li>
+<p>Cut resistor legs to appropriate length to avoid short circuits (However, do not let the cut legs fly away).</p>
+</li>
+<li>
+<p>Follow color conventions: red for positive power, black for GND (0V).</p>
+</li>
+</ul>
+<p>An implementation example of the complete circuit is shown in Figure (<a href="#fig:circuit_sample">Fig.</a>).</p>
+<figure id="fig:circuit_sample">
+<div class="center">
+<img src="../../figs/circuit_sample.png" alt="Complete circuit implementation example." style="max-width: 900px; width: 100%; height: auto;" />
+</div>
+<figcaption>Complete circuit implementation example.</figcaption>
+</figure>
+
+<h4 id="integration-testing">Integration Testing<a class="headerlink" href="#integration-testing" title="Permanent link">&para;</a></h4>
+<p>With the complete circuit assembled, you can now test the integrated control system. The final control program combines motor control and sensor reading to implement feedback control. At this stage, you can use the comprehensive <strong>Debugging Tool 3: Six-Channel Oscilloscope</strong> (located in , also referred to as plotter6ch) to monitor all system variables simultaneously. This tool consists of:</p>
+<ul>
+<li>
+<p><strong>3_six_channel_oscilloscope.cpp</strong>: Complete mbed control program implementing PD control at 2000 Hz sampling frequency. Reads two photo-interrupters (p19, p20), calculates angle and angular velocity, controls motor (p13, p14, p18), and transmits 6 data channels via serial (230400 baud) using frame protocol (header: 0xAA 0x55, followed by 6 data bytes). Control parameters (KP, KD, VLIMIT) can be adjusted by editing the <code>#define</code> values at the top of the file.</p>
+</li>
+<li>
+<p><strong>3_six_channel_oscilloscope.bin</strong>: Pre-compiled binary ready to flash to mbed.</p>
+</li>
+<li>
+<p><strong>3_six_channel_oscilloscope.pde</strong>: Processing program that displays 6 channels in two 3-channel plots (upper: CH1-Red, CH2-Green, CH3-Blue; lower: CH4-Red, CH5-Green, CH6-Blue). The 6 channels typically show: (1) photo-interrupter 1 output, (2) photo-interrupter 2 output, (3) angle (difference of sensors), (4) angular velocity, (5) filtered angular velocity, (6) reference line.</p>
+</li>
+</ul>
+<p>This is the primary tool for tuning control parameters and debugging the complete inverted pendulum system. See the file for detailed usage instructions, communication protocol, and how to modify the programs.</p>
+<p><a id="sec:inverted-experiment"></a></p>
+<h4 id="sec:w1-standup-pre-encoder">Team Final Task: Stand-up Experiment (Pre-Encoder)<a class="headerlink" href="#sec:w1-standup-pre-encoder" title="Permanent link">&para;</a></h4>
+<p>At the end of Week 1 (before adding wheel encoders), your goal is to make the cart <strong>stand</strong> (balance upright) using <strong>angle-only feedback</strong> (P-only is sufficient for Week 1). You will use plotter6ch (<strong>Debugging Tool 3</strong>) and tune gains so the system can stand without violent vibration.</p>
+<p><strong>Expectation (Week 1):</strong> In principle, you should be able to achieve a basic stand-up with only a gentle nudge and small gain adjustments. If the result is not good enough yet, do not worry---you can preview the more detailed tuning procedure in Week 2 (including angular velocity, filtering, and adding D gain): <a href="#sec:w2-task-b">see Section [4.4](#sec:w2-task-b)</a>. <strong>Quick workflow:</strong></p>
+<ol>
+<li>
+<p>Flash to mbed (or compile after changing <code>#define</code> gains).</p>
+</li>
+<li>
+<p>Open in Processing and run the oscilloscope GUI.</p>
+</li>
+<li>
+<p>Press reset on mbed once after the GUI starts (to re-synchronize the frame alignment if the channel order looks wrong).</p>
+</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul>
+<li>
+<p>While the battery box is ON, the motor may keep running. Turn it OFF when not actively testing.</p>
+</li>
+<li>
+<p>USB powers <em>mbed only</em>. If the motor does not move or sensor outputs look strange, double-check the battery box switch.</p>
+</li>
+<li>
+<p>If high-frequency rattling/shivering occurs, <em>turn off the battery box immediately</em> to avoid overheating and damage.</p>
+</li>
+</ul>
+</div>
+<p><strong>Zeroing (recommended before connecting the motor):</strong></p>
+<ul>
+<li>
+<p>Disconnect the motor from the motor driver.</p>
+</li>
+<li>
+<p>Reset mbed. During the 1 second idle period, turn on the battery box.</p>
+</li>
+<li>
+<p>Hold the system vertically and confirm the angle trace (typically the blue line) is near the screen center.</p>
+</li>
+<li>
+<p>If not, mechanically fine-tune the sensor bracket so the vertical state corresponds to zero angle.</p>
+</li>
+</ul>
+<p><strong>First stand-up attempt (P-only):</strong></p>
+<ul>
+<li>
+<p>Reconnect the motor and motor driver. Keep the USB connected if you want.</p>
+</li>
+<li>
+<p>Start with <code>KD=0</code> and tune <code>KP</code> first.</p>
+</li>
+<li>
+<p>Verify motor wiring direction: if the cart moves <em>in the direction it is falling</em>, it is correct. If it moves the opposite way (tries to fall by itself), turn off power and swap the motor wires (or the two wires between mbed and motor driver).</p>
+</li>
+<li>
+<p>While testing, gently support the top of the machine (or the USB cable) so it does not fall, but do not hinder its motion.</p>
+</li>
+</ul>
+<p><strong>KP gain adjustment guideline:</strong></p>
+<ol>
+<li>
+<p>When <code>KP</code> is low, relaxed (about 1--2 Hz) oscillation is seen.</p>
+</li>
+<li>
+<p>Increasing <code>KP</code> increases oscillation frequency and decreases oscillation amplitude.</p>
+</li>
+<li>
+<p>A good region is where it stands with minimal vibration (some small vibration may remain).</p>
+</li>
+<li>
+<p>If <code>KP</code> is too high, high-frequency rattling appears.</p>
+</li>
+<li>
+<p>Increasing further results in violent vibration.</p>
+</li>
+</ol>
+<p><em>Avoid high-frequency rattling.</em> It can cause overheating and burnout of electronic parts and motors, and may loosen screws. If rattling occurs, <em>turn off the battery box immediately</em>.</p>
+<h2 id="w1-submission">Week 1 Submission<a class="headerlink" href="#w1-submission" title="Permanent link">&para;</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Submission</p>
+<p>By the end of Week 1, your cart should be able to <strong>stand</strong> (balance upright)---congratulations on reaching this milestone!</p>
+<hr />
+<p><strong>Deliverable</strong>                 <strong>Max</strong>  <strong>Scoring guide</strong></p>
+<hr />
+<p>Standing demonstration            20     <strong>20 pts:</strong> upright <span class="arithmatex">\(\geq\)</span>15 s, full system in frame.\
+                                           <strong>12 pts:</strong> upright achieved but <span class="arithmatex">\(&lt;\)</span>15 s or marginal stability.\
+                                           <strong>0 pts:</strong> upright not achieved.</p>
+<p>Safety &amp; assembly visibility       5     <strong>5 pts:</strong> complete assembly clearly visible---mechanical structure, breadboard, and wiring all shown.\
+                                           <strong>0 pts:</strong> assembly not visible in the video.</p>
+<p>Video clarity                      5     <strong>5 pts:</strong> all key parts unobscured throughout the recording.\
+                                           <strong>3 pts:</strong> key behavior still identifiable despite partial obstruction.\
+                                           <strong>0 pts:</strong> footage unusable (major parts obscured or out of frame).</p>
+<hr />
+<p><em>Optional attachments</em>: Fritzing (<code>.fzz</code>/images), photos, or debugging tool screenshots/logs.</p>
+</div>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:3">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: Circuit example.&#160;<a class="footnote-backref" href="#fnref:3" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:4">
+<p>Appendix <a href="../appendix/#app:drv8832">app:drv8832</a>: DRV8832 datasheet (Texas Instruments).&#160;<a class="footnote-backref" href="#fnref:4" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:5">
+<p>Appendix <a href="../appendix/#app:tpr105f">app:tpr105f</a>: TPR-105F datasheet.&#160;<a class="footnote-backref" href="#fnref:5" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:6">
+<p>Appendix <a href="../appendix/#app:ld1117v33">app:ld1117v33</a>: LD1117V33 datasheet.&#160;<a class="footnote-backref" href="#fnref:6" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:7">
+<p>A video demonstration of the mechanical assembly process is available in the course materials repository:&#160;<a class="footnote-backref" href="#fnref:7" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:8">
+<p>For a complete parts list with detailed specifications and quantities, see Appendix <a href="../appendix/#app:partslist">app:partslist</a>.&#160;<a class="footnote-backref" href="#fnref:8" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:9">
+<p>Appendix <a href="../appendix/#app:re280ra">app:re280ra</a>: RE-280RA datasheet (Mabuchi Motor).&#160;<a class="footnote-backref" href="#fnref:9" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:10">
+<p>There are various other microcontroller series such as Arduino, Raspberry PI, PIC, etc.&#160;<a class="footnote-backref" href="#fnref:10" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:11">
+<p>Keil Studio Cloud: <a href="https://studio.keil.arm.com/">https://studio.keil.arm.com/</a>&#160;<a class="footnote-backref" href="#fnref:11" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+<li id="fn:12">
+<p>Access the course materials repository at <a href="https://github.com/UTokyo2026/UTokyo-Control-Practice-2026">https://github.com/UTokyo2026/UTokyo-Control-Practice-2026</a>&#160;<a class="footnote-backref" href="#fnref:12" title="Jump back to footnote 10 in the text">&#8617;</a></p>
+</li>
+<li id="fn:13">
+<p>Processing is a free, open-source software for visual programming. You can download it from <a href="https://processing.org/">https://processing.org/</a>. As of 2026, the currently available major release is Processing 4. For more instructions, see Appendix <a href="../appendix/#app:processing">app:processing</a>.&#160;<a class="footnote-backref" href="#fnref:13" title="Jump back to footnote 11 in the text">&#8617;</a></p>
+</li>
+<li id="fn:14">
+<p>Fritzing installers (shared Google Drive): <a href="https://drive.google.com/drive/folders/1CwJ8srD090W6hOeP39BXLUZOVy883Kn2?usp=sharing">https://drive.google.com/drive/folders/1CwJ8srD090W6hOeP39BXLUZOVy883Kn2?usp=sharing</a>&#160;<a class="footnote-backref" href="#fnref:14" title="Jump back to footnote 12 in the text">&#8617;</a></p>
+</li>
+<li id="fn:15">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: Circuit example.&#160;<a class="footnote-backref" href="#fnref:15" title="Jump back to footnote 13 in the text">&#8617;</a></p>
+</li>
+<li id="fn:17">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: Circuit example.&#160;<a class="footnote-backref" href="#fnref:17" title="Jump back to footnote 14 in the text">&#8617;</a></p>
+</li>
+<li id="fn:18">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: Circuit example.&#160;<a class="footnote-backref" href="#fnref:18" title="Jump back to footnote 15 in the text">&#8617;</a></p>
+</li>
+<li id="fn:19">
+<p>Appendix <a href="../appendix/#app:circuit">app:circuit</a>: Circuit example.&#160;<a class="footnote-backref" href="#fnref:19" title="Jump back to footnote 16 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/UTokyo2026/pendulum-lab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/lang-sync.js"></script>
+      
+        <script src="../../javascripts/figure-refs.js"></script>
+      
+        <script src="../../javascripts/mathjax-config.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

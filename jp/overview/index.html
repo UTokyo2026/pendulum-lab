@@ -1,0 +1,1258 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="UTokyo Precision Engineering – Inverted Pendulum Fabrication Exercise 2026">
+      
+      
+        <meta name="author" content="UTokyo2026">
+      
+      
+        <link rel="canonical" href="https://utokyo2026.github.io/pendulum-lab/jp/overview/">
+      
+      
+        <link rel="prev" href="../intro/">
+      
+      
+        <link rel="next" href="../week1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>制御概要 - Wheeled Inverted Pendulum</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Noto Serif";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../../stylesheets/figure-numbering.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#overview-purpose" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-header__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wheeled Inverted Pendulum
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              制御概要
+            
+          </span>
+        </div>
+      </div>
+    </div>
+
+    
+    
+      <div class="md-header__tabs" aria-label="Tabs">
+        <ul class="md-tabs__list">
+          
+            
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../en/intro/" class="md-tabs__link">
+          
+  
+  
+  English
+
+        </a>
+      </li>
+    
+  
+
+          
+            
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../intro/" class="md-tabs__link">
+          
+  
+  
+  日本語
+
+        </a>
+      </li>
+    
+  
+
+          
+        </ul>
+      </div>
+    
+
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Wheeled Inverted Pendulum" class="md-nav__button md-logo" aria-label="Wheeled Inverted Pendulum" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Wheeled Inverted Pendulum
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/UTokyo2026/pendulum-lab" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    UTokyo2026/pendulum-lab
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    English
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    English
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/calendar/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calendar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/course_schedule/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Course Schedule
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/grading/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Grading Criteria
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Control Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1: Assembly & Bring-up
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2: Encoder & Position Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3: Advanced Modeling & Load Testing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4: Final Presentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../en/appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Appendix
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    日本語
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    日本語
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    はじめに・日程
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    制御概要
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 1：組立と立ち上げ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 2：エンコーダと位置制御
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 3：高度なモデル化と負荷試験
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../week4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Week 4：最終発表
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../appendix/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    付録
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="overview-purpose">演習の目的<a class="headerlink" href="#overview-purpose" title="Permanent link">&para;</a></h1>
+<figure id="fig:pendulum_image">
+<div class="center">
+<img src="../../figs/pendulum_image.png" alt="Wheeled inverted pendulum platform." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Wheeled inverted pendulum platform (example).</figcaption>
+</figure>
+
+<p>本演習では，自走式倒立振子を（ほぼ）一から製作することを通じて，</p>
+<ul>
+<li>
+<p>組み込みマイコンの基本的な使い方</p>
+</li>
+<li>
+<p>エンコーダの原理と構造</p>
+</li>
+<li>
+<p>センサ信号処理の基礎</p>
+</li>
+<li>
+<p>フィードバック制御の基礎</p>
+</li>
+</ul>
+<p>を習得することを目的とします．\
+倒立振子（とうりつしんし，inverted pendulum）とは，文字通り「振り子」を倒立させたシステムです．倒立した振り子は不安定ですが，振り子の傾斜に応じてベース部分を動かすことで安定な倒立状態を保つことができます．傾斜に応じてベース部分を動かす，という操作は「フィードバック制御」の典型的な事例であり，倒立振子はそのわかりやすさから制御やメカトロニクスの演習教材として広く用いられています．</p>
+<p>倒立振子には，リニアステージ上に振り子を取り付けたタイプと，振り子自体が自走するタイプとがあり，後者が本演習の自走式倒立振子にあたります．自走式倒立振子の原理は，セグウェイに代表される移動装置や，自走式ロボットなどに利用されています．</p>
+<p>自走式倒立振子は演習教材キットなども市販されていますが，本演習ではあえてそうしたキットは用いず，<em>基礎的なパーツのみを用いて自ら倒立振子を組み上げていくことで，その構成や仕組みをより深く理解することをめざします．</em>また，フィードバック制御においてはセンサがとても重要になりますが，センサを（よりプリミティブなセンサ素子を使って）自作することにより，<em>センサの難しさや重要性を体感してもらいたいと思います</em>．</p>
+<h1 id="overview-control">倒立振子制御の概要<a class="headerlink" href="#overview-control" title="Permanent link">&para;</a></h1>
+<h2 id="overview-model">倒立振子のモデル<a class="headerlink" href="#overview-model" title="Permanent link">&para;</a></h2>
+<p>はじめに，自走式倒立振子の制御の概要について考えます．Figure (<a href="#fig:model">Fig.</a>) は簡略化した倒立振子のモデルです．タイヤ（質量<span class="arithmatex">\(m_w\)</span>，慣性モーメント<span class="arithmatex">\(j_w\)</span>）の軸から振り子（＝倒立振子の本体，質量<span class="arithmatex">\(m_p\)</span>，慣性モーメント<span class="arithmatex">\(j_p\)</span>）が立っています．タイヤと振り子の間にはモータがあり，モータを駆動すると両者に互いに逆向きのトルク（<span class="arithmatex">\(\pm\tau\)</span>）が生じます．水平方向のタイヤ中心位置を<span class="arithmatex">\(x\)</span>とします．簡単のため地面からタイヤに働く摩擦以外には，摩擦・損失は無いものとします．我々が制御したいのは，倒立振子の角度<span class="arithmatex">\(\theta\)</span>とタイヤ位置<span class="arithmatex">\(x\)</span>（＝本体位置）です．</p>
+<figure id="fig:model">
+<div class="center">
+<img src="../../figs/model.png" alt="Simplified model of the wheeled inverted pendulum." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Simplified model of the wheeled inverted pendulum.</figcaption>
+</figure>
+
+<p>Figure (<a href="#fig:model_disassembled">Fig.</a>) のように，振り子とタイヤに分けて，それぞれの運動方程式を考えます．まず，振り子の運動方程式は次のように書けます（<span class="arithmatex">\(H\)</span>と<span class="arithmatex">\(V\)</span>はタイヤと振り子の間に働く力の水平成分と鉛直成分）．</p>
+<figure id="fig:model_disassembled">
+<div class="center">
+<img src="../../figs/model_disassembled.png" alt="Forces and torques on the disassembled model." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Forces and torques (disassembled view).</figcaption>
+</figure>
+
+<p><a id="eq:pH"></a>
+$$
+\text{水平方向:}\quad
+m_p \frac{d^2}{dt^2}(x+l\sin{\theta})
+=m_p (\ddot{x}+l\ddot{\theta}\cos{\theta}-l\dot{\theta}^2\sin{\theta})
+= H \label{eq:pH}
+$$</p>
+<p><a id="eq:pV"></a>
+$$
+\text{鉛直方向:}\quad
+m_p \frac{d^2}{dt^2}(l\cos{\theta})
+=-m_p(l\ddot{\theta}\sin{\theta}+l\dot{\theta}^2\cos{\theta})
+=V-m_p g \label{eq:pV}
+$$</p>
+<p><a id="eq:pR"></a>
+$$
+\text{回転方向:}\quad
+j_p\ddot{\theta}
+=lV\sin{\theta}-lH\cos{\theta}-\tau \label{eq:pR}
+$$</p>
+<p>一方，タイヤの運動方程式は（鉛直方向は地面からの抗力と釣り合うだけなので省きます），</p>
+<p><a id="eq:wH"></a>
+$$
+\text{水平方向:}\quad
+m_w \ddot{x} = F-H \label{eq:wH}
+$$</p>
+<p><a id="eq:wR"></a>
+$$
+\text{回転方向:}\quad
+j_w\ddot{\phi}=\tau -rF \label{eq:wR}
+$$</p>
+<p>となります．ただし，<span class="arithmatex">\(F\)</span>は地面から受ける摩擦力（これによってタイヤが進む）であり，タイヤと地面の間の滑りはない（<span class="arithmatex">\(x=r\phi\)</span>）ものとします．これら一連の式から，内力<span class="arithmatex">\(H, V\)</span>と摩擦力<span class="arithmatex">\(F\)</span>を消去して，振り子角度<span class="arithmatex">\(\theta\)</span>と位置<span class="arithmatex">\(x\)</span>だけで表した式を求めます．</p>
+<p>まず，式<span class="arithmatex">\(\eqref{eq:pH}\)</span>，<span class="arithmatex">\(\eqref{eq:pV}\)</span>から得られる<span class="arithmatex">\(H,V\)</span>を式<span class="arithmatex">\(\eqref{eq:pR}\)</span>に代入すると次式が得られます．</p>
+<p><a id="eq:rotation0"></a>
+$$
+j_p\ddot{\theta}=m_p gl \sin{\theta} - m_p l \ddot{x}\cos{\theta} - m_p l^2 \ddot{\theta} -\tau
+\label{eq:rotation0}
+$$</p>
+<p>次に，式<span class="arithmatex">\(\eqref{eq:wH}\)</span>，<span class="arithmatex">\(\eqref{eq:wR}\)</span>より<span class="arithmatex">\(F\)</span>を消去し，<span class="arithmatex">\(H\)</span>を求めると，
+$$
+H = \frac{\tau}{r}-\left( m_w + \frac{j_w}{r^2} \right) \ddot{x}
+$$
+となりますので，これを式<span class="arithmatex">\(\eqref{eq:pH}\)</span>に代入すると，</p>
+<p><a id="eq:horizontal0"></a>
+$$
+\frac{\tau}{r} = \left( (m_p+m_w) + \frac{j_w}{r^2} \right)\ddot{x} + m_pl\cos{\theta}\ddot{\theta} - l\sin{\theta}\dot{\theta}^2
+\label{eq:horizontal0}
+$$</p>
+<p>式<span class="arithmatex">\(\eqref{eq:rotation0}\)</span>，<span class="arithmatex">\(\eqref{eq:horizontal0}\)</span>が倒立振子の基本式となりますが，これらの式は非線形項（<span class="arithmatex">\(\sin\)</span>や<span class="arithmatex">\(\dot{\theta}^2\)</span>など）を含んでおり，このままでは扱いにくいため，傾斜角<span class="arithmatex">\(\theta\)</span>が微小であると仮定して線形近似（<span class="arithmatex">\(\sin{\theta} \simeq \theta\)</span>，<span class="arithmatex">\(\cos{\theta} \simeq 1\)</span>, <span class="arithmatex">\(\dot{\theta}^2 \simeq 0\)</span>）します．すると，次の線形微分方程式のペアが得られます．これが倒立振子の線形近似モデルです．</p>
+<p><a id="eq:rot"></a>
+$$
+(j_p + m_p l^2)\ddot{\theta} = m_p gl\theta - m_pl\ddot{x}-\tau \label{eq:rot}
+$$</p>
+<p><a id="eq:hor"></a>
+$$
+\frac{\tau}{r} = \left( (m_p+m_w)+\frac{j_w}{r^2}\right)\ddot{x} + m_pl\ddot{\theta} \label{eq:hor}
+$$</p>
+<h2 id="overview-angle-control">振り子角度の制御<a class="headerlink" href="#overview-angle-control" title="Permanent link">&para;</a></h2>
+<p>最終的には振り子の回転角<span class="arithmatex">\(\theta\)</span>と本体位置<span class="arithmatex">\(x\)</span>の両者を同時に制御したいのですが，まずは振り子の回転角<span class="arithmatex">\(\theta\)</span>のみに注目し，<span class="arithmatex">\(\theta=0\)</span>となるように制御する，すなわち，振り子を倒立させることだけを考えます．そのために，式<span class="arithmatex">\(\eqref{eq:hor}\)</span>から<span class="arithmatex">\(\ddot{x}\)</span>を求めて式<span class="arithmatex">\(\eqref{eq:rot}\)</span>に代入し，<span class="arithmatex">\(\theta\)</span>のみの微分方程式を得ます．
+$$
+\left(j_p + m_p l^2 \left(1-\frac{m_p}{M}\right) \right)\ddot{\theta} - m_pgl\theta = -\left(1+\frac{m_pl}{Mr}\right)\tau
+$$
+ただし，<span class="arithmatex">\(M = m_p + m_w + \frac{j_w}{r^2}\)</span>です．係数が複雑なので簡単に置き換えると，</p>
+<p><a id="eq:simple"></a>
+$$
+I\ddot{\theta} - m_p gl \theta = -A \tau
+\label{eq:simple}
+$$</p>
+<p>となります．この式が表すものは，Figure (<a href="#fig:simple_pendulum">Fig.</a>) のように，質量<span class="arithmatex">\(m_p\)</span>，軸周りの慣性モーメント<span class="arithmatex">\(I\)</span>の振り子が固定された軸上に設置され，モータから<span class="arithmatex">\(A\tau\)</span>のトルクを受けている状況と同じです．</p>
+<figure id="fig:simple_pendulum">
+<div class="center">
+<img src="../../figs/simple_pendulum.png" alt="Equivalent pendulum (angle dynamics only)." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Equivalent pendulum (angle dynamics only).</figcaption>
+</figure>
+
+<p>Figure (<a href="#fig:simple_pendulum">Fig.</a>) の振り子の振る舞いについて考えてみます．モータからのトルクが無い（＝制御しない）状態では，上の式<span class="arithmatex">\(\eqref{eq:simple}\)</span>は<span class="arithmatex">\(I \ddot{\theta} = m_pgl\theta\)</span>となります．これは，形式的にはバネの式と同じですので，Figure (<a href="#fig:spring">Fig.</a>) のバネ・質点系と比べてみましょう．Figure (<a href="#fig:spring">Fig.</a>) のバネ・質点系の運動方程式は<span class="arithmatex">\(m\ddot{x}=-kx\)</span>となりますが，この式と比較すると，<strong>倒立振子はバネ係数が<span class="arithmatex">\(-m_pgl\)</span>のバネ・質点系と等価</strong>であることがわかります．ただし，バネ係数（<span class="arithmatex">\(-m_pgl\)</span>）が負であるため，バネとは真逆の不安定な動作をします（つりあい点から少しでも離れると，さらに離れるように力が働く）．</p>
+<figure id="fig:spring">
+<div class="center">
+<img src="../../figs/spring.png" alt="Spring-mass system analogy." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Spring-mass system analogy.</figcaption>
+</figure>
+
+<p>このように，倒立振子は負のバネ係数を持つために不安定であると解釈できます．そこで，Figure (<a href="#fig:stabilize">Fig.</a>) のように鉛直軸との間にバネをつけてトータルの合成バネ係数（＝もともとの負のバネ係数＋新たにつけた正のバネ係数）を正にすることを考えてみます．合成バネ係数が正になれば，振り子は鉛直軸付近で単振動をするようになるはずです．さらに，ダンパ（＝ダッシュポッド：速度に比例する反力を生じる）もつければ，振動を減衰させて鉛直軸に沿って倒立振子を倒立させることができるはずです．とはいえ，本物のバネとダンパをつける訳には行かないので，バネおよびダンパと等価な働きをフィードバック制御により実現してみましょう．</p>
+<figure id="fig:stabilize">
+<div class="center">
+<img src="../../figs/stabilize.png" alt="Stabilization via virtual spring and damper." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Stabilization via virtual spring and damper (control interpretation).</figcaption>
+</figure>
+
+<h2 id="overview-pd-control">PD制御<a class="headerlink" href="#overview-pd-control" title="Permanent link">&para;</a></h2>
+<p>フィードバック制御により，バネとダンパを仮想的に実現する方法を考えます． バネとダンパが生み出す合力は <span class="arithmatex">\(K_p \theta + K_d \dot{\theta}\)</span> と書けますので，振り子角度 <span class="arithmatex">\(\theta\)</span>（およびその微分 <span class="arithmatex">\(\dot{\theta}\)</span>）がわかれば，モータが次のようなトルクを発生するようにすればよいことになります．</p>
+<p><a id="eq:pd"></a>
+$$
+A\tau = K_p \theta + K_d \dot{\theta}
+\label{eq:pd}
+$$</p>
+<p>これにより，モータがバネ＋ダンパの役割を果たします．</p>
+<p>このように，位置や角度（目標値からのずれ）に<em>比例</em>した量と，その微分に<em>比例</em>した量をフィードバックする制御法を，<strong>PD制御</strong>と呼びます．P は <em>Proportional</em>，D は <em>Derivative</em> の略です．どちらか一方だけを用いる場合には，それぞれ P 制御（比例制御），D 制御（微分制御）と呼びます．上の説明からわかるように，P 制御はバネに，D 制御はダンパに相当する働きをします．また，それぞれの係数 <span class="arithmatex">\(K_p, K_d\)</span> は，P ゲイン（比例ゲイン），D ゲイン（微分ゲイン）と呼ばれます．</p>
+<p>PD 制御した振り子の運動方程式は，式<span class="arithmatex">\(\eqref{eq:simple}\)</span> と式<span class="arithmatex">\(\eqref{eq:pd}\)</span> より，</p>
+<p><a id="eq:total"></a>
+$$
+I \ddot{\theta} =  - (K_p - m_pgl) \theta - K_d \dot{\theta} = -K \theta - K_d \dot{\theta}
+\label{eq:total}
+$$</p>
+<p>と表せます．ここで，<span class="arithmatex">\(K = K_p - m_pgl\)</span> は，「重力による負のバネ」と「制御による正のバネ」を合成したときのバネ係数です．この式から，PD 制御された倒立振子は，バネ係数 <span class="arithmatex">\(K\)</span>，減衰係数 <span class="arithmatex">\(K_d\)</span> のバネ・質点・ダンパ系と同じように運動することがわかります．すなわち，平衡点（<span class="arithmatex">\(\theta=0\)</span>）からずれた角度を初期値として与えると，減衰振動しながら平衡点 <span class="arithmatex">\(\theta=0\)</span> へ収束します．通常のバネ・質点・ダンパ系と同様に，バネ係数（<span class="arithmatex">\(\approx\)</span> 比例ゲイン）を大きくすると振動数が上がり，微分ゲインを大きくすると減衰が強くなって振動が速く収まります．</p>
+<h2 id="overview-is-this-enough">これだけで倒立できるか？<a class="headerlink" href="#overview-is-this-enough" title="Permanent link">&para;</a></h2>
+<p>運がよければ，式<span class="arithmatex">\(\eqref{eq:pd}\)</span> に基づいてモータトルクを制御するだけで倒立を保てるかもしれません．しかし実際には，これだけでは倒立しないことが多くあります（短時間は立っても持続しない）． その主な原因は，傾斜角 <span class="arithmatex">\(\theta\)</span> を測る傾斜センサのオフセット，および外乱（風や机の振動など，系の外から加わる力）です．</p>
+<p>例えば，傾斜センサにわずかなオフセット（出力値のずれ）があると，一見 <span class="arithmatex">\(\theta=0\)</span> に見えていても，実際にはそのオフセット分だけ傾きが残っています．すると重力により倒立振子は倒れます．これを引き起こして立て直そうとして制御系はモータトルクを増やし，倒立振子は走り始めます．倒れないためには一定加速度で走り続ける必要がありますが，モータ速度には限界があります．モータが速度限界に達するとそれ以上加速できず，結局倒れてしまいます．</p>
+<p>これを防ぐには，角度だけを見て制御するのではなく，倒立振子の位置（<span class="arithmatex">\(\propto\)</span> タイヤの回転量）も検出し，その位置ずれに対する PD 制御を加える必要があります．この点については後であらためて説明します．</p>
+<h2 id="overview-motor-torque">モータのトルク<a class="headerlink" href="#overview-motor-torque" title="Permanent link">&para;</a></h2>
+<p>式<span class="arithmatex">\(\eqref{eq:pd}\)</span> に基づく制御を行うためには，もうひとつ考えておくべきことがあります．それがモータのトルクです．モータを駆動するとき，我々はモータ端子間に電圧を加えます．この電圧を変えればモータの発生トルクも変わりますが，電圧と発生トルクはどのような関係になっているのでしょうか．</p>
+<p>Figure (<a href="#fig:motor">Fig.</a>) は DC モータの等価回路モデルです．モータ内部には磁場を作るための巻線があり，そこには抵抗 <span class="arithmatex">\(R\)</span> とインダクタンス <span class="arithmatex">\(L\)</span> があります．また，モータには発電機と同じ作用もあるため，回転すると回転速度に比例した電圧が発生し，これを<em>逆起電力</em>と呼びます．逆起電力は印加電圧とは逆向きに生じます．</p>
+<figure id="fig:motor">
+<div class="center">
+<img src="../../figs/motor_model.png" alt="Equivalent circuit model of a DC motor." style="max-width: 720px; width: 100%; height: auto;" />
+</div>
+<figcaption>Equivalent circuit model of a DC motor.</figcaption>
+</figure>
+
+<p>モータトルクは巻線が作る磁場の強さに比例し，磁場の強さは巻線に流れる電流に比例します．したがって，発生トルクは巻線電流に比例します（<span class="arithmatex">\(\tau=\kappa i\)</span>）．この比例係数 <span class="arithmatex">\(\kappa\)</span> をモータの「トルク定数」と呼びます．</p>
+<p>つまり，我々が決めてモータに与えるのは <strong>電圧</strong> ですが，トルクに比例するのは <strong>電流</strong> です．両者が単純に比例していれば話は簡単ですが，実際には逆起電力やコイルのインピーダンスの影響があるため，単純比例にはなりません．そこで両者の関係を求めてみましょう．</p>
+<p>Figure (<a href="#fig:motor">Fig.</a>) の等価回路から，電流（ラプラス変換して <span class="arithmatex">\(I(s)\)</span>）と印加電圧（同様に <span class="arithmatex">\(V(s)\)</span>）の関係式を導くと，
+$$
+I(s) = \frac{V(s) - \kappa \Omega_m(s)}{R+sL}
+$$
+となります．ここで <span class="arithmatex">\(\kappa\)</span> はトルク定数（＝逆起電力定数）<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">1</a></sup>，<span class="arithmatex">\(\Omega_m(s)\)</span> はモータ角速度 <span class="arithmatex">\(\omega_m\)</span> のラプラス変換，<span class="arithmatex">\(sL\)</span> はインダクタンス <span class="arithmatex">\(L\)</span> のインピーダンスです．</p>
+<p>上式で <span class="arithmatex">\(sL\)</span> が <span class="arithmatex">\(R\)</span> に比べて十分小さければ，インダクタンスは無視できます．実際，今回用いる DC モータでは <span class="arithmatex">\(L\)</span> は十分小さいとみなせるため，ここではインダクタンスを無視します．その場合，モータトルクは（過渡応答を考えないのでラプラス変換を外して）</p>
+<p><a id="eq:motor_simple_equiv"></a>
+$$
+\tau = \kappa \frac{v- \kappa\omega_m}{R}
+\label{eq:motor_simple_equiv}
+$$</p>
+<p>と簡単に書けます．この式からわかるように，トルクを正しく発生させるには，モータの角速度 <span class="arithmatex">\(\omega_m\)</span> を求めて，逆起電力成分 <span class="arithmatex">\(\kappa \omega_m\)</span> を印加電圧に加えてやる必要があります．そのためには回転速度を測るセンサが必要ですが，まだ実際には回転速度を測れないので，当面は逆起電力の存在を無視して進めます．逆起電力を無視すれば，印加電圧と電流，さらにモータトルクは比例関係になります．したがって，式<span class="arithmatex">\(\eqref{eq:pd}\)</span> に従ってモータトルクを計算し，それに比例した電圧をモータに与えれば，少なくとも短時間は倒立できるはずです．</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:2">
+<p>逆起電力と速度の比例係数は通常「逆起電力定数」と呼ばれますが，SI 単位系で揃えると逆起電力定数とトルク定数は同じ値になります．これはエネルギー保存を考えて計算すると確認できます．&#160;<a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/UTokyo2026/pendulum-lab" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.expand", "navigation.top", "toc.integrate", "search.highlight", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../javascripts/lang-sync.js"></script>
+      
+        <script src="../../javascripts/figure-refs.js"></script>
+      
+        <script src="../../javascripts/mathjax-config.js"></script>
+      
+        <script src="https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
