@@ -21,15 +21,5 @@ jobs:
       - name: Install dependencies
         run: pip install mkdocs-material
 
-      - name: Convert EPS figures to PNG
-        run: |
-          sudo apt-get install -y ghostscript
-          shopt -s nullglob
-          for f in docs/figs/*.eps; do
-            out="${f%.eps}.png"
-            gs -dNOPAUSE -dBATCH -sDEVICE=pngalpha -r150 -sOutputFile="$out" "$f"
-            echo "Converted: $f → $out"
-          done
-
       - name: Deploy
         run: mkdocs gh-deploy --force
