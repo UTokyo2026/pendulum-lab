@@ -72,7 +72,7 @@ A photo-interrupter is an optical element combining an LED and a phototransistor
 
 <figure id="fig:interrupter">
 <div class="center">
-<img src="../../figs/photo_interrupters.png" alt="Photo-interrupters (reflective and transmissive types)." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/photo_interrupters.png" alt="Photo-interrupters (reflective and transmissive types)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Photo-interrupters (reflective and transmissive types).</figcaption>
 </figure>
@@ -81,7 +81,7 @@ The basic circuit of a photo-interrupter is shown in Figure ([Fig.](#fig:pi_circ
 
 <figure id="fig:pi_circuit">
 <div class="center">
-<img src="../../figs/pi_circuit.png" alt="Basic photo-interrupter circuit diagram." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/pi_circuit.png" alt="Basic photo-interrupter circuit diagram." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Basic photo-interrupter circuit diagram.</figcaption>
 </figure>
@@ -140,7 +140,7 @@ First, attach the inclination sensor (No. 6) to the bottom of the universal boar
 
 <figure id="fig:angle_sensor">
 <div class="center">
-<img src="../../figs/angle_sensor.png" alt="Inclination sensor attachment (bottom view)." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/angle_sensor.png" alt="Inclination sensor attachment (bottom view)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Inclination sensor attachment (bottom view).</figcaption>
 </figure>
@@ -151,7 +151,7 @@ Next, attach the DC motor (No. 3). Use the motor bracket (No. 4) to attach it to
 
 <figure id="fig:motor_setup">
 <div class="center">
-<img src="../../figs/motor_tire.png" alt="Motor bracket and motor–tire contact (example)." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/motor_tire.png" alt="Motor bracket and motor–tire contact (example)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Motor bracket and motor–tire contact (example).</figcaption>
 </figure>
@@ -174,7 +174,7 @@ Up to this point, the basic mechanical structure is complete. A completed exampl
 
 <figure id="fig:machine">
 <div class="center">
-<img src="../../figs/assembled.png" alt="Assembled platform example (Week 1 stage)." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/assembled.png" alt="Assembled platform example (Week 1 stage)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Assembled platform example (Week 1 stage).</figcaption>
 </figure>

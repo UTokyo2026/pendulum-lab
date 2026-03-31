@@ -38,7 +38,7 @@ A rotary encoder can be realized by reading a black and white pattern drawn on a
 
 <figure id="fig:encoder">
 <div class="center">
-<img src="../../figs/encoder_principle.png" alt="Basic concept of rotary encoder." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/encoder_principle.png" alt="Basic concept of rotary encoder." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Basic concept of rotary encoder.</figcaption>
 </figure>
@@ -49,7 +49,7 @@ As shown in Figure ([Fig.](#fig:encoderAB)), two photo-interrupters are placed a
 
 <figure id="fig:encoderAB">
 <div class="center">
-<img src="../../figs/encoder2phase.png" alt="CW/CCW measurement by two-phase signals (A/B)." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/encoder2phase.png" alt="CW/CCW measurement by two-phase signals (A/B)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Measurement of CW/CCW rotation by two phases (A/B).</figcaption>
 </figure>
@@ -58,7 +58,7 @@ Therefore, by performing calculation like Figure ([Fig.](#fig:counting)) for A-p
 
 <figure id="fig:counting">
 <div class="center">
-<img src="../../figs/counting.png" alt="Counting A/B phase pulses (example of 2x counting)." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/counting.png" alt="Counting A/B phase pulses (example of 2x counting)." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Counting A/B phase pulses (example of 2x counting).</figcaption>
 </figure>
@@ -77,7 +77,7 @@ The finer the pattern division number of the scale, the higher the resolution as
 
 <figure id="fig:baseline">
 <div class="center">
-<img src="../../figs/baseline.png" alt="Example of baseline fluctuation." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/baseline.png" alt="Example of baseline fluctuation." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Example of baseline fluctuation.</figcaption>
 </figure>
@@ -88,7 +88,7 @@ Also, when deciding resolution of scale, keep photo-interrupter arrangement inte
 
 <figure id="fig:encoder_disc">
 <div class="center">
-<img src="../../figs/encoder_disc.png" alt="Example of encoder pattern." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/encoder_disc.png" alt="Example of encoder pattern." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Example of encoder pattern. Left assumes reading a common scale with two photo-interrupters arranged with a 1/4-period angular shift. Right assumes two photo-interrupters at the same angle (different radius), reading two slits shifted by 1/4 period.</figcaption>
 </figure>
@@ -99,7 +99,7 @@ Reading of scale is done by photo-interrupter. Referencing the inclination angle
 
 <figure id="fig:encoder_setup">
 <div class="center">
-<img src="../../figs/encoder_setup.png" alt="Photo-interrupter attachment." style="max-width: 560px; width: 100%; height: auto;" />
+<img src="../../figs/encoder_setup.png" alt="Photo-interrupter attachment." style="max-width: 720px; width: 100%; height: auto;" />
 </div>
 <figcaption>Photo-interrupter attachment.</figcaption>
 </figure>
